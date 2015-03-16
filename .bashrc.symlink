@@ -252,9 +252,6 @@ export PATH=$PATH:$MPJ_HOME/bin
 
 export export HADOOP_CONF_DIR=/etc/hadoop/hadoop
 
-# for various utilities scripts: bash, python, ...
-export PATH=$PATH:~/Dropbox/dev/scripts/
-
 
 # For Java
 # export JAVA_HOME=/usr/lib/jvm/java-7-openjdk
