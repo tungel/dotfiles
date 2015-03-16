@@ -1,0 +1,970 @@
+"===============================================================================
+" https://github.com/everbot/dotfiles
+"
+" My own note of using VIM:
+"   * use gvim as it has better font rendering
+"   * gvim can auto-reload a file if it's changed externally
+"     vim can't do that (???!!!)
+"   * use Monospace font
+"   * font size is 10
+"===============================================================================
+"
+" Rebind <Leader> key. when you pressed the Leader key, the cursor
+" will wait for 1s for user to press another key
+let mapleader = ","
+
+" set font for gvim
+if has('gui_running')
+    " use Powerline font for vim-airline
+    set guifont=Dejavu\ Sans\ Mono\ for\ Powerline\ 9
+    " set guifont=Dejavu\ Sans\ Mono\ 12
+    " set guifont=Droid\ Sans\ Mono\ 16
+    " set guifont=Consolas\ 11
+    " set guifont=Inconsolata-g\ for\ Powerline\ 9
+    " set guifont=PragmataPro\ 10
+    " set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+endif
+
+
+" only display file name on the tab instead of full path, this helps making vim
+" look neater when switching from tab to tab
+set guitablabel=%t
+
+"===============================================================================
+"---begin pathogen plugin
+execute pathogen#infect()
+
+" If you want to be able to access the documentation from within vim, you'll
+" also need to generate helptags
+call pathogen#helptags()
+
+"---end pathogen plugin
+"===============================================================================
+
+
+"===============================================================================
+"---begin easy-motion
+
+
+"let g:EasyMotion_do_mapping = 0 " Disable default mappings
+"map <Leader> <Plug>(easymotion-prefix)
+
+let g:EasyMotion_smartcase = 0
+
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to
+" EasyMotion.  " Without these mappings, 'n' & 'N' works fine. (These mappings
+" just provide " different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+
+
+"map <Leader>l <Plug>(easymotion-lineforward) "comment this out, interfere with
+"latex
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+
+"---end easy-motion
+"===============================================================================
+
+
+"===============================================================================
+"---begin nerdtree
+"autocmd vimenter * NERDTree "auto open nerdtree upon vim launch
+" use Ctrl+n to open nerdtree
+map <C-n> :NERDTreeToggle<CR>
+
+" fix can't navigate to directory using enter key, due to odd symbols infront
+" of directory name
+let NERDTreeDirArrows=0
+
+"open nerdtree based on the directory of the current buffer, the cursor will be
+"placed at the current opened file
+map <silent> <Leader>r :NERDTreeFind<cr>
+"---end nerdtree
+"===============================================================================
+
+" enable suggestion of available of commands in commands mode, so that we can
+" use arrow keys (or Ctrl+n and Ctrl+p) to choose a desire command form the list
+" Active the wildmenu by entering command mode (:) then type in the first few
+" character and then press Tab
+set wildmenu
+
+
+" set line number
+set nu
+
+"match Todo /^ \+/
+
+set tabstop=4 expandtab
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+
+"display status bar at the bottom which shows file name and cursor position
+set laststatus=2
+
+"display title bar of the current vim window
+set title
+
+syntax on
+"highlight current line
+color molokai
+"color Monokai-Refined
+
+
+
+
+" set autoindent
+set ai
+
+
+"set linespace=2
+
+"===============================================================================
+" for solarized theme
+"
+"syntax enable
+"if has('gui_running')
+"    set background=light
+"else
+"    set background=dark
+"endif
+"colorscheme solarized
+"===============================================================================
+
+
+
+imap jk <ESC>
+cmap w!! w !sudo tee %
+
+"let g:molokai_original = 1
+"let g:rehash256 = 1
+"set background=dark
+
+" ----------- The section below is adapted from Vim as a Python IDE
+"------------ Martin Brochhaus , YouTube
+
+"command to create new tab: :tabnew
+" command to split: :split filename
+
+" automatic reloading of .vimrc, so we don't need to close the .vimrc
+" for vim to apply new settings in that file
+" currently, this interfeer with identLine and vim-airline (after save the
+" .vimrc file, those plugin lost their visual.
+"autocmd! bufwritepost .vimrc source %
+
+
+" make search case insensitive
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+
+" easier moving between tabs
+"map <Leader>n <esc>:tabprevious<CR>
+"map <Leader>m <esc>:tabnext<CR>
+"
+
+"===============================================================================
+"---begin unite.vim
+"usage:
+" :Unite line
+" :Unite tab
+
+nnoremap <C-Space> :Unite -start-insert<CR>
+
+" custom profile:
+" \   'direction': 'botright',
+" 'direction': 'botright', 'topleft'
+" 'prompt_direction': 'top', 'below'
+call unite#custom#profile('default', 'context', {
+\   'startinsert': 1,
+\   'prompt': '» ',
+\   'prompt_direction': 'top',
+\   'direction': 'topleft',
+\ })
+"
+" Set "-no-quit" automatically in grep unite source.
+call unite#custom#profile('source/grep', 'context', {
+\   'no_quit' : 1
+\ })
+
+
+" call unite#util#set_default(
+" \ 'g:unite_source_grep_command', 'grep')
+" call unite#util#set_default(
+" \ 'g:unite_source_grep_default_opts', '-inH')
+" " \ 'g:unite_source_grep_default_opts', '-inH --directories=recurse')
+" call unite#util#set_default('g:unite_source_grep_recursive_opt', '-r')
+" call unite#util#set_default('g:unite_source_grep_max_candidates', 100)
+" call unite#util#set_default('g:unite_source_grep_search_word_highlight', 'Search')
+" call unite#util#set_default('g:unite_source_grep_encoding', 'char')
+"
+let g:unite_source_grep_command = "grep"
+let g:unite_source_grep_recursive_opt = "-R"
+let g:unite_source_grep_default_opts = '-inH'
+" let g:unite_source_grep_default_opts = '-ir'
+" nnoremap <space>/ :Unite grep:.:-iR:tung<cr>
+" nnoremap <space>/ :Unite grep:.::tung<cr>
+nnoremap <space>/ :Unite grep:.<cr>
+" For ack.
+" Using ack-grep as recursive command.
+let g:unite_source_rec_async_command = 'find .'
+
+
+
+
+" access recently edited files
+nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 -start-insert file_mru<cr>
+
+" navigates current open buffers
+nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 -start-insert buffer<cr>
+
+" open Unite file browser
+nnoremap <Leader>f :Unite file -start-insert<cr>
+
+" open bookmark
+nnoremap <Leader>t :Unite bookmark -start-insert<cr>
+
+" yank history
+nnoremap <Leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
+
+" Unite outline (support markdown quite well!)
+nnoremap <Leader>o :Unite outline -start-insert<cr>
+
+
+
+" control where the unite buffer will appear
+"let g:unite_split_rule = "botright"
+" let g:unite_split_rule = "top"
+" let g:unite_split_rule = "right"
+
+" open a buffer in new tab or switch to existing tab by default
+" call unite#custom_default_action('file', 'tabopen')
+call unite#custom_default_action('file', 'tabswitch')
+call unite#custom_default_action('buffer', 'tabswitch')
+
+
+"fuzzy search within a file using <Leader>q
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+" call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
+call unite#custom#source('file,file/new,buffer,file_rec', 'matchers', 'matcher_fuzzy')
+" call unite#custom#source('line', 'matchers', 'matcher_default')
+call unite#custom#source('line', 'matchers', 'matcher_glob')
+" nnoremap <C-k> :<C-u>Unite -buffer-name=search -start-insert line<cr>
+nnoremap <Leader>q :<C-u>Unite -buffer-name=search -start-insert line -auto-preview<cr>
+" nnoremap <Leader>q :<C-u>Unite -buffer-name=search -start-insert line -auto-preview -vertical-preview<cr>
+
+" Use Ctrl+l to refresh the directory listing in file in Unite candidate window
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()"{{{
+  " Overwrite settings.
+  nmap <buffer> <C-l>      <Plug>(unite_redraw)
+
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction"}}}
+
+
+
+
+let g:unite_source_menu_menus = {}
+let g:unite_source_menu_menus.git = {
+    \ 'description' : '            gestionar repositorios git
+        \                            ⌘ [espacio]g',
+    \}
+let g:unite_source_menu_menus.git.command_candidates = [
+    \['▷ tig                                                        ⌘ ,gt',
+        \'normal ,gt'],
+    \['▷ git status       (Fugitive)                                ⌘ ,gs',
+        \'Gstatus'],
+    \['▷ git diff         (Fugitive)                                ⌘ ,gd',
+        \'Gdiff'],
+    \['▷ git commit       (Fugitive)                                ⌘ ,gc',
+        \'Gcommit'],
+    \['▷ git log          (Fugitive)                                ⌘ ,gl',
+        \'exe "silent Glog | Unite quickfix"'],
+    \['▷ git blame        (Fugitive)                                ⌘ ,gb',
+        \'Gblame'],
+    \['▷ git stage        (Fugitive)                                ⌘ ,gw',
+        \'Gwrite'],
+    \['▷ git checkout     (Fugitive)                                ⌘ ,go',
+        \'Gread'],
+    \['▷ git rm           (Fugitive)                                ⌘ ,gr',
+        \'Gremove'],
+    \['▷ git mv           (Fugitive)                                ⌘ ,gm',
+        \'exe "Gmove " input("destino: ")'],
+    \['▷ git push         (Fugitive, salida por buffer)             ⌘ ,gp',
+        \'Git! push'],
+    \['▷ git pull         (Fugitive, salida por buffer)             ⌘ ,gP',
+        \'Git! pull'],
+    \['▷ git prompt       (Fugitive, salida por buffer)             ⌘ ,gi',
+        \'exe "Git! " input("comando git: ")'],
+    \['▷ git cd           (Fugitive)',
+        \'Gcd'],
+    \]
+nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
+
+
+
+"---end unite.vim
+"===============================================================================
+
+
+" Use Ctrl+Backspace to change the current directory globaly to the current file
+" To change localy use :lcd %:p:h
+" In these commands, % gives the name of the current file, %:p gives its full
+" path, and %:p:h gives its directory (the "head" of the full path)
+" nnoremap <c-d> :cd %:p:h<CR>
+nnoremap <c-BS> :cd %:p:h<CR>
+
+"===============================================================================
+" begin vim-airline
+
+set laststatus=2
+
+" use Powerline font to enable the nice arrow icons
+set encoding=utf-8 " to use the Powerline font
+let g:airline_powerline_fonts = 1
+
+" display nice icon ontop
+" currently having problem messing up the top tabs indicator after a buffer
+" is closed
+let g:airline#extensions#tabline#enabled = 1
+
+" Just show the filename (no path) in the tab
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" show number of buffer in the current tab in tabline status
+" let g:airline#extensions#tabline#tab_nr_type = 0
+
+" show tab number in tabline status
+let g:airline#extensions#tabline#tab_nr_type = 1
+
+" let g:airline#extensions#tabline#buffer_nr_show = 1
+
+let g:Powerline_symbols="fancy"
+
+" make tabline separator straight instead of the nice arrow icon
+" let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" when there is only 1 tab open, vim-airline will display all buffers in the
+" tabline, we can switch to a buffer by :bn or :bp
+" end vim-airline
+"===============================================================================
+
+
+"===============================================================================
+"begin indentLine
+
+if has('gui_running')
+    "let g:indentLine_color_gui = '#353833'
+    let g:indentLine_color_gui = '#2E322D'
+else
+    let g:indentLine_color_term = 239
+endif
+
+let g:indentLine_char = '┊'
+
+"end indentLine
+"===============================================================================
+
+
+
+"bind Ctrl + <movement> keys to move around the windows
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+" map sort function to a key
+vnoremap <Leaders>z :sort<CR>
+
+"easier moving of code blocks
+vnoremap < <gv " better indentation
+vnoremap > >gv " better indentation
+
+
+"===============================================================================
+"---begin vim-latex plugin
+filetype plugin indent on "REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = "latex"
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_MultipleCompileFormats='pdf, aux'
+
+" use synctex
+let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode -synctex=1 $*'
+
+" to ignore quickfix window automatically open when there is warning, it's
+" really annoying!
+let g:Tex_IgnoredWarnings =
+    \'Underfull'."\n".
+    \'Overfull'."\n".
+    \'specifier changed to'."\n".
+    \'You have requested'."\n".
+    \'Missing number, treated as zero.'."\n".
+    \'There were undefined references'."\n".
+    \'Citation %.%# undefined'."\n".
+    \'Double space found.'."\n".
+    \'LaTex Warning'."\n"
+let g:Tex_IgnoreLevel = 9
+
+" which program to use to open pdf file
+" let g:Tex_ViewRule_pdf = 'zathura'
+" let g:Tex_ViewRule_pdf = "zathura -s -x 'gvim --servername SYNCTEX --remote +%{line} %{input}'".expand("%:p:r").".pdf"
+let g:Tex_ViewRule_pdf = "zathura"
+
+" let g:Tex_ViewRule_ps = 'okular'
+" let g:Tex_ViewRule_pdf = 'okular'
+" let g:Tex_ViewRule_dvi = 'okular'
+
+" In short you should be able to change three global variables to get rid of all folding
+"let Tex_FoldedSections=""
+"let Tex_FoldedEnvironments=""
+"let Tex_FoldedMisc=""
+
+"to disable display inline math notation
+let g:tex_conceal = ""
+
+function! SyncTexForward()
+     " let execstr = "silent !okular --unique %:p:r.pdf\\#src:".line(".")."%:p &"
+     " let execstr = "silent !zathura --synctex-forward 200:1:thesis.tex thesis.pdf"
+     let execstr = "silent !zathura --synctex-forward ".line(".").":1:".expand("%:p:r").".tex ".expand("%:p:r").".pdf"
+     exec execstr
+endfunction
+nmap <Leader>1 :call SyncTexForward()<CR>
+
+"---end vim-latex
+"===============================================================================
+
+
+"===============================================================================
+"---begin supertab plugin
+"currently not using supertab
+"TODO: try out YouCompleteMe plugin
+"
+"let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+
+"---end supertab
+"===============================================================================
+
+
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+
+" auto unfold everything when open a file
+autocmd BufWinEnter * silent! :%foldopen!
+
+" use Shift+q to format a paragraph to do wrapping at 80 chars
+set formatoptions+=w
+set tw=80
+set colorcolumn=+1 "set color for column at 81
+"hi ColorColumn guibg=#3E3F36 ctermbg=236
+hi ColorColumn ctermbg=236
+nnoremap Q gqip
+
+" use Ctrl + l to redraw the screen and remove any search highlighs
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+
+
+" auto reload the file if it's changed
+set autoread
+
+" toggling cursorline highlight when switching on/off insert mode
+autocmd InsertEnter,InsertLeave * set cul!
+" or:
+" autocmd InsertEnter * set cul
+" autocmd InsertLeave * set nocul
+
+
+" highlight tab and trailing space
+set listchars=tab:>-,trail:-
+set list
+" use F11 to toggle between displaying white space or not
+noremap <F11> :set list!<CR>
+
+"match the tab, so it will make the cursorline doesn't change the color of
+"specialkey foreground color when the cursor goes to that line (this happens
+"when highligh tab and trailing space is enabled
+match NonText '^\s\+' "
+
+" copy: Ctrl+c
+" cut: Ctrl+x
+" paste: Ctrl+v
+" Paste only works in Visual and insert mode, so you don't have to worry about
+" the conflict with Ctrl-V and blockwise Visual Mode. This isn't a problem,
+" because Copy and Cut put you into insert mode, so you can immediately paste
+" afterwards. If you try it out you'll find that it feels completely natural.
+" http://superuser.com/questions/10588/how-to-make-cut-copy-paste-in-gvim-on-
+" ubuntu-work-with-ctrlx-ctrlc-ctrlv
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <C-r><C-o>+
+
+
+" reload the updated .vimrc profile
+nmap <Leader>rr :source $MYVIMRC
+
+" quickly open to edit .vimrc file
+nmap <Leader>v :tabe $MYVIMRC
+
+
+" remove unwanted stuffs in gvim
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
+
+
+" vim-indent guide:
+" usage: <leader>ig to toggle/untoggle displaying the ident guide
+"let g:indent_guides_auto_colors = 0
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=blue ctermbg=4
+
+" allowing auto remove trailing white space characters
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+" remove trailing whitespace upon save
+"autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+
+
+"===============================================================================
+"---begin cursor highlight
+" make the cursor at the current line different, highlight current line
+if has('gui_running')
+    "set cursorline "this make movement quite slow on low spec computer
+endif
+
+"should not set color explicitly, leave it to the theme configuration
+"hi CursorLine term=bold cterm=bold guibg=Grey40
+
+
+"------------------
+"let g:boostmove=0
+"set updatetime=50
+"au CursorMoved * call BoostMoveON()
+"au CursorMovedI * call BoostMoveON()
+"au CursorHold * call BoostMoveOFF()
+"au CursorHoldI * call BoostMoveOFF()
+"
+"function BoostMoveON()
+"    if (g:boostmove == 0)
+"        let g:boostmove=1
+"        setlocal nocursorline
+"    endif
+"endfunction
+"
+"function BoostMoveOFF()
+"    if g:boostmove==1
+"        let g:boostmove=0
+"        setlocal cursorline
+"    endif
+"endfunction
+
+
+"use Ctrl+spacebar to temporary display the crosshair cursor for awhile and
+"disappear
+"http://briancarper.net/blog/590/cursorcolumn--cursorline-slowdown
+function! CursorPing()
+    set cursorline cursorcolumn
+    redraw
+    sleep 50m
+    set nocursorline nocursorcolumn
+endfunction
+
+" seldom use this, so use C-Space for Unite because it's more useful!
+" nmap <C-Space> :call CursorPing()<CR>
+"---end cursor highlight
+"===============================================================================
+
+"===============================================================================
+"---begin tcomment-vim
+
+" use Ctrl+m to toggle comment/uncomment a block of code
+"vmap <C-m> gc
+
+" Disable tComment to escape some entities
+"let g:tcomment#replacements_xml={}
+
+"---end tcomment-vim
+"===============================================================================
+
+
+" quickly comment out block of code
+map ,- :s/^/--/<CR>
+map ,# :s/^/#/<CR>
+map ,% :s/^/%/<CR>
+map ,/ :s/^/\/\//<CR>
+"cancel the comment
+map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>
+
+
+"===============================================================================
+"---begin neocomplete
+
+"disable AutoComplPop
+let g:acp_enableAtStartup = 0
+
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_fuzzy_completion = 1
+let g:neocomplete#enable_ignore_case = 1
+
+let g:neocomplete#max_list = 15
+let g:neocomplete#enable_auto_select = 1
+
+" comment out the below line because it interfere with delimitMate of auto
+" insert matching brace - 2015-03-12
+" let g:neocomplete#enable_auto_delimiter = 1
+
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown,md setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
+let g:neocomplete#force_overwrite_completefunc = 1
+
+" use <Leader>s to go to symbol with Unite. This is to replace CtrlP
+nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
+            \ -silent tag/include -start-insert<CR>
+
+"---end neocomplete
+"===============================================================================
+
+
+"===============================================================================
+"---begin neosnippet
+"usage:
+" C-n or C-p to move around the suggested snippets
+" C-k to expand the chosen suggested snippets
+" C-k in insert mode to move to next field in the snippets (using Tab is fine
+" too)
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+"---end neosnippet
+"===============================================================================
+
+
+" resize current buffer by +/- 5
+nnoremap <C-left> :vertical resize -5<cr>
+nnoremap <C-down> :resize +5<cr>
+nnoremap <C-up> :resize -5<cr>
+nnoremap <C-right> :vertical resize +5<cr>
+
+
+
+"===============================================================================
+"---begin ctrlp
+"Usage:
+"  Once ctrlp appeared: press <c-f> and <c-b> to cycle between modes.
+
+""mimic Ctrl+r go to symbol as in Sublime Text
+"ref: https://github.com/subvim/subvim/blob/master/vim/base/vimrc
+"use C-j and C-k or arrow keys to navigate through the result list
+"<c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+
+" Open goto symbol on current buffer
+" update 2014-09-17: use Unite instead of this
+" nmap <Leader>s :MyCtrlPTag<cr>
+
+"imap <Leader>s<esc>:MyCtrlPTag<cr>
+
+
+" function MyCtrlPTag()
+"     let g:ctrlp_prompt_mappings = {
+"     \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+"     \ 'AcceptSelection("t")': ['<c-t>'],
+"     \ }
+"     CtrlPBufTag
+" endfunc
+" com! MyCtrlPTag call MyCtrlPTag()
+
+
+" Open goto symbol on all buffers
+nmap <Leader>S :CtrlPBufTagAll<cr>
+"imap <Leader>S<esc>:CtrlPBufTagAll<cr>
+
+" Exclude files and directories using Vim's wildignore and CtrlP's own
+" g:ctrlp_custom_ignore:
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" let g:ctrlp_custom_ignore = {
+"    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"    \ 'file': '\v\.(exe|so|dll)$',
+"    \ 'link': 'some_bad_symbolic_links',
+"    \ }
+"---end ctrlp
+"===============================================================================
+
+"===============================================================================
+"---begin tagbar
+noremap <F2> :TagbarToggle<CR>
+inoremap <F2> <ESC> :TagbarToggle<CR>
+"---end tagbr
+"===============================================================================
+
+
+" map shortcut key for spelling
+noremap <F6> :setlocal spell! spelllang=en_us<CR>
+
+
+
+"===============================================================================
+"---begin commentary
+"usage:
+" gc{motion} comment/uncomment lines that {motion} moves over
+" gcc : comment/uncomment the whole line
+" gcgc/gcu : uncomment all the current and adjacent commented lines
+
+" default comment style for cpp
+"autocmd FileType cpp set commentstring="/*%s*/"
+
+" now use // instead of /*   */
+autocmd FileType cpp set commentstring=//\ %s
+
+" for matlab file:
+autocmd FileType matlab set commentstring=\%\ %s
+
+" autocmd FileType py set commentstring=#\ %s
+"---end commentary
+"===============================================================================
+
+
+"===============================================================================
+"---begin syntastic
+"use Ctrl+w E to check error
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+
+" disable checking for cpp file type
+let g:syntastic_cpp_checkers=['']
+"---end syntastic
+"===============================================================================
+
+"===============================================================================
+"---begin abolish
+"Usage:
+"   search and replace "tung le" to "squallltt"
+"       :%S/tung le/squallltt/gc
+"   other usage:
+"       :%Subvert/facilit{y,ies}/building{,s}/g
+"       :%Subvert/address{,es}/reference{,s}/g
+"
+"       Want to turn fooBar into foo_bar? Press crs (coerce to snake_case).
+"       MixedCase (crm), camelCase (crc), snake_case (crs), and UPPER_CASE (cru)
+"       are all just 3 keystrokes away.
+
+"---end abolish
+"===============================================================================
+
+"===============================================================================
+"---begin delimitMate
+"create line break when pressing enter
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+
+let delimitMate_jump_expansion = 1
+"---end delimitMate
+"===============================================================================
+
+"===============================================================================
+"---begin vim-session
+let g:session_directory='~/.vim/data/sessions'
+let g:session_autosave = 'yes'
+let g:session_autoload = 'yes'
+let g:session_default_to_last = 1
+"---end vim-session
+"===============================================================================
+
+"===============================================================================
+"---begin vim-notes
+"let g:notes_directories = ['~/Dropbox', '~/Dropbox/shared']
+"---end vim-notes
+"===============================================================================
+
+
+"===============================================================================
+"---begin VimOrganizer
+" let g:ft_ignore_pat = '\.org'
+" au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
+" au BufEnter *.org    call org#SetOrgFileType()
+" command! OrgCapture :call org#CaptureBuffer()
+" command! OrgCaptureFile :call org#OpenCaptureFile()
+"---end VimOrganizer
+"===============================================================================
+
+
+
+"===============================================================================
+"---begin vimwiki
+" use <leader>ww to open the default wiki file
+let g:vimwiki_list = [{'path': '~/Dropbox/'}]
+"---end vimwiki
+"===============================================================================
+
+" map F5 to quickly ROT13 the whole buffer, juz for fun
+" map <F5> ggg?G``
+
+
+" Use Alt+number to go to a specific tab number
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+nnoremap <A-6> 6gt
+nnoremap <A-7> 7gt
+nnoremap <A-8> 8gt
+nnoremap <A-9> 9gt
+nnoremap <A-0> 10gt
+
+" use single z to move the current line to the center view.
+" by doing this mapping, the zt and zb doesn't work. But I don't use zt and zb
+" anyway, so this is not a big deal!
+" nnoremap z zz
+
+" use Ctrl+d to move the cursor to bottom, then bring that bottom line to middle
+" of screen
+noremap <silent> <C-d> <S-l>zz
+
+" use Ctrl+u to move the cursor to top of the page, then bring that top line
+" to middle of screen
+noremap <silent> <C-u> <S-h>zz
+
+" set folding method for C code
+" :setlocal foldmethod=syntax
+autocmd FileType c setlocal foldmethod=syntax
+
+
+"===============================================================================
+"---begin vim-simple-todo
+let g:simple_todo_map_keys = 0
+nmap <Space>i <Plug>(simple-todo-new)
+" imap <Space>i <Plug>(simple-todo-new)
+
+nmap <Space>o <Plug>(simple-todo-below)
+" imap <Space>o <Plug>(simple-todo-below)
+
+nmap <Space>O <Plug>(simple-todo-above)
+" imap <Space>O <Plug>(simple-todo-above)
+
+nmap <Space>x <Plug>(simple-todo-mark-as-done) :nohl<CR>
+" imap <Space>x <Plug>(simple-todo-mark-as-done)
+
+nmap <Space>X <Plug>(simple-todo-mark-as-undone) :nohl<CR>
+" imap <Space>X <Plug>(simple-todo-mark-as-undone)
+"---end vim-simple-todo
+"===============================================================================
+
+"===============================================================================
+nmap <silent> <RIGHT> :cnext<CR>
+nmap <silent> <RIGHT><RIGHT> :cnfile<CR><C-G>
+nmap <silent> <LEFT> :cprev<CR>
+nmap <silent> <LEFT><LEFT> :cpfile<CR><C-G>
+"===============================================================================
+
+
+"===============================================================================
+"---begin markdown
+" below section need to be at the bottom of the file, or else the auto bullet in
+" markdown will not work
+
+" Set *.md file to be markdown filetype instead of modula2 as default
+" au BufNewFile,BufRead *.md  setf markdown
+autocmd BufRead,BufNew,BufNewFile *.md set filetype=markdown
+
+" http://stackoverflow.com/questions/19211839/markdown-lists-in-vim
+autocmd Filetype markdown setlocal com=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,b:-,b:+ | set formatoptions+=tcroqln
+" autocmd Filetype markdown set com=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,b:-,b:+ | set formatoptions+=tcroqln
+" make markdown auto insert list with 1. when possible
+autocmd Filetype markdown setlocal com+=b:1.
+" autocmd Filetype markdown set com+=b:1.
+"---end markdown
+"===============================================================================
+
+" run the current buffer python code
+" nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+nnoremap <F9> :exec '!python' shellescape(@%, 1)<cr>
+
+" Use F8 to compile and run C program
+map <F8> :exec ':!gcc % -o a.cout && ./a.cout'<cr>
+
+" Use F7 to compile and run Cpp program
+map <F7> :exec ':!g++ % -o a.cout && ./a.cout'<cr>
+
