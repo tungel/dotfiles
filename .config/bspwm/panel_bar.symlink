@@ -1,0 +1,205 @@
+#! /bin/sh
+#
+# Example panel for dzen2
+
+font_family='Dejavu'
+font_size=11
+
+. ~/.config/bspwm/panel_colors_dzen2
+
+adaptive_centering=0
+# screen_width=$(sres -W)
+NORMIFS=$IFS
+FIELDIFS=':'
+PADDING=' '
+num_mon=$(bspc query -M | wc -l)
+
+# printf "%s\n" "tung"
+# exit 1
+
+
+
+while read -r line ; do
+    case $line in
+        D*)
+            # date informations
+            # sys_infos="${PADDING}${line#?}${PADDING}"
+           date_infos="^fg($COLOR_CLOCK_FG)${line#?}"
+
+            # clock output
+            #sys_infos="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
+            # sys_infos="%{Fyellowgreen}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
+            ;;
+        S*)
+            # system info
+            sys_infos="^fg($COLOR_SYSTEMINFO_FG)${line#?}"
+            ;;
+        V*)
+            # volume info
+            volume_info="^fg($COLOR_STATUS_FG)${line#?}"
+            ;;
+        B*)
+            # battery info
+            battery_info="^fg($COLOR_BATTERY_FG)${line#?}"
+            ;;
+        T*)
+            # focused window title
+            title="^fg($COLOR_TITLE_FG)^bg($COLOR_STATUS_BG)${line#?}"
+            ;;
+        W*)
+            # window manager informations
+            # wm_infos="$PADDING"
+            wm_infos=""
+            # IFS=$FIELDIFS
+            IFS=':'
+            set -- ${line#?}
+            while [ $# -gt 0 ] ; do
+                # item=$1
+                # case $item in
+                #     [OoFfUu]*)
+                #         # desktops
+                #         name=${item#?}
+                #         case $item in
+                #             [OFU]*)
+                #                 # active desktop
+                #                 FG=$COLOR_ACTIVE_FG
+                #                 BG=$COLOR_ACTIVE_BG
+                #                 ;;
+                #             o*)
+                #                 # inactive desktop
+                #                 FG=$COLOR_INACTIVE_FG
+                #                 BG=$COLOR_INACTIVE_BG
+                #                 ;;
+                #             f*)
+                #                 # empty desktop
+                #                 FG=$COLOR_EMPTY_FG
+                #                 BG=$COLOR_EMPTY_BG
+                #                 ;;
+                #             u*)
+                #                 # urgent (inactive) desktop
+                #                 FG=$COLOR_URGENT_FG
+                #                 BG=$COLOR_URGENT_BG
+                #                 ;;
+                #         esac
+                #         wm_infos="${wm_infos}^fg(${FG})^bg(${BG})^ca(1, bspc desktop -f ${name})^ca(2, bspc window -d ${name})^ca(3, bspc window -d ${name} -f)${PADDING}${name}${PADDING}^ca()^ca()^ca()"
+                #         ;;
+                #     L*)
+                #         # layout
+                #         layout=$(printf "%s" "${item#?}" | sed 's/^\(.\).*/\U\1/')
+                #         wm_infos="${wm_infos}^fg()^bg()${PADDING}${PADDING}^fg($COLOR_LAYOUT_FG)^bg($COLOR_LAYOUT_BG)^ca(1, bspc desktop -l next)^ca(2, bspc desktop -B)${PADDING}$layout${PADDING}^ca()^ca()"
+                #         ;;
+
+                item=$1
+                name=${item#?}
+                case $item in
+                    M*)
+                        # active monitor
+                        if [ $num_mon -gt 1 ] ; then
+                            # wm_infos="$wm_infos %{F$COLOR_ACTIVE_MONITOR_FG}%{B$COLOR_ACTIVE_MONITOR_BG} ${name} %{B-}%{F-}  "
+                            FG=$COLOR_ACTIVE_MONITOR_FG
+                            BG=$COLOR_ACTIVE_MONITOR_BG
+                        fi
+
+                        wm_infos="${wm_infos}^fg(${FG})^bg(${BG}) ${name}"
+                        ;;
+                    m*)
+                        # inactive monitor
+                        if [ $num_mon -gt 1 ] ; then
+                            # wm_infos="$wm_infos %{F$COLOR_INACTIVE_MONITOR_FG}%{B$COLOR_INACTIVE_MONITOR_BG} ${name} %{B-}%{F-}  "
+                            FG=$COLOR_INACTIVE_MONITOR_FG
+                            BG=$COLOR_INACTIVE_MONITOR_BG
+                        fi
+
+                        wm_infos="${wm_infos}^fg(${FG})^bg(${BG}) ${name}"
+                        ;;
+                    O*)
+                        # focused occupied desktop
+                        # wm_infos="${wm_infos}%{F$COLOR_FOCUSED_OCCUPIED_FG}%{B$COLOR_FOCUSED_OCCUPIED_BG}%{U$COLOR_FOREGROUND}%{+u} ${name} %{-u}%{B-}%{F-}"
+                        FG=$COLOR_FOCUSED_OCCUPIED_FG
+                        BG=$COLOR_FOCUSED_OCCUPIED_BG
+
+                        wm_infos="${wm_infos}^fg(${FG})^bg(${BG}) ${name}"
+                        ;;
+                    F*)
+                        # focused free desktop
+                        # wm_infos="${wm_infos}%{F$COLOR_FOCUSED_FREE_FG}%{B$COLOR_FOCUSED_FREE_BG}%{U$COLOR_FOREGROUND}%{+u} ${name} %{-u}%{B-}%{F-}"
+                        FG=$COLOR_FOCUSED_FREE_FG
+                        BG=$COLOR_FOCUSED_FREE_BG
+
+                        # it's an empty desktop (without any windows) but user
+                        # has selected it, so we just show it temporarily
+                        wm_infos="${wm_infos}^fg(${FG})^bg(${BG}) ${name}"
+                        ;;
+                    U*)
+                        # focused urgent desktop
+                        # wm_infos="${wm_infos}%{F$COLOR_FOCUSED_URGENT_FG}%{B$COLOR_FOCUSED_URGENT_BG}%{U$COLOR_FOREGROUND}%{+u} ${name} %{-u}%{B-}%{F-}"
+                        FG=$COLOR_FOCUSED_URGENT_FG
+                        BG=$COLOR_FOCUSED_URGENT_BG
+
+                        wm_infos="${wm_infos}^fg(${FG})^bg(${BG}) ${name}"
+                        ;;
+                    o*)
+                        # occupied desktop, which desktop is having windows
+                        # right now
+                        # wm_infos="${wm_infos}%{F$COLOR_OCCUPIED_FG}%{B$COLOR_OCCUPIED_BG} ${name} %{B-}%{F-}"
+                        FG=$COLOR_OCCUPIED_FG
+                        BG=$COLOR_OCCUPIED_BG
+
+                        wm_infos="${wm_infos}^fg(${FG})^bg(${BG}) ${name}"
+                        ;;
+                    f*)
+                        # free desktop: desktop doesn't contain any window
+                        # wm_infos="${wm_infos}%{F$COLOR_FREE_FG}%{B$COLOR_FREE_BG} ${name} %{B-}%{F-}"
+                        FG=$COLOR_FREE_FG
+                        BG=$COLOR_FREE_BG
+
+                        # we don't want to show empty desktop here
+                        ;;
+                    u*)
+                        # urgent desktop
+                        # wm_infos="${wm_infos}%{F$COLOR_URGENT_FG}%{B$COLOR_URGENT_BG} ${name} %{B-}%{F-}"
+                        FG=$COLOR_URGENT_FG
+                        BG=$COLOR_URGENT_BG
+
+                        wm_infos="${wm_infos}^fg(${FG})^bg(${BG}) ${name}"
+                        ;;
+                    L*)
+                        # layout
+                        # wm_infos="$wm_infos  %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG} ${name} %{B-}%{F-}"
+                        FG=$COLOR_LAYOUT_FG
+                        BG=$COLOR_LAYOUT_BG
+
+                        wm_infos="${wm_infos}^fg(${FG})^bg(${BG}) ${name}"
+                        ;;
+                esac
+                # commented the below line out to handle each window one by one
+                # so that we don't print out the desktop which doesn't contain
+                # any window by default
+                # wm_infos="${wm_infos}^fg(${FG})^bg(${BG}) ${name}"
+                shift
+            done
+            # IFS=$NORMIFS
+            ;;
+    esac
+    # set -- $(printf '%s\0%s\0%s' "$wm_infos" "$title" "$sys_infos" | sed 's/\^[a-z]\+([^)]*)//g' | xargs -0 txtw -f "$font_family" -s "$font_size")
+    # left_width=$1
+    # center_width=$2
+    # right_width=$3
+    # left_indent=0
+    # right_indent=$(((screen_width - right_width) - 140))
+    # available_center=$((screen_width - (left_width + right_width)))
+    # if [ $available_center -lt $center_width ] ; then
+    #     center_indent=$((left_indent + left_width))
+    # else
+    #     if [ $adaptive_centering -eq 1 ] ; then
+    #         center_indent=$((left_width + (available_center - center_width) / 2))
+    #     else
+    #         center_indent=$(( (screen_width - center_width) / 2 ))
+    #     fi
+    # fi
+    # printf "%s\n" "^pa($center_indent)$title^pa($left_indent)$wm_infos^pa($right_indent)$sys_infos"
+
+    # printf "%s\n" "^pa(_LEFT)^p() ${wm_infos}${sys_infos}${battery_info}${volume_info} ${title}"
+    printf "%s\n" "${wm_infos}${date_infos}${sys_infos}${battery_info}${volume_info}   ${title}"
+done
+
