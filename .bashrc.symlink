@@ -1,0 +1,282 @@
+# https://github.com/everbot/dotfiles
+#
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+    else
+    color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alht'
+alias la='ls -A'
+alias l='ls -CF'
+
+# for WiFi
+alias wifiup='sudo ip link set wlo1 up'
+#alias wifiup='sudo ip link set wlp0s29f7u1 up'
+alias wificonnect='sudo wpa_supplicant -i wlo1 -c /etc/wpa_supplicant.conf -B'
+#alias wificonnect='sudo wpa_supplicant -i wlp0s29f7u1 -c /etc/wpa_supplicant.conf -B'
+alias wifiwep='sudo iwconfig wlo1 essid "wifi-id" key s:password'
+alias wifiip='sudo dhcpcd wlo1'
+#alias wifiip='sudo dhcpcd wlp0s29f7u1'
+
+# for LAN network
+alias lanup='sudo ip link set enp3s0 up'
+alias lanip='sudo dhcpcd enp3s0'
+#alias phoneup='sudo ip link set enp0s29f7u4u4u1 up'
+#alias phoneip='sudo dhcpcd enp0s29f7u4u4u1'
+
+# for Android USB tethering: connect to the usb port beside the HDMI
+alias phoneip='sudo dhcpcd enp0s29f7u2'
+
+#fix the DNS problem of the new router
+alias jurong='echo "nameserver 165.21.100.88" | sudo tee /etc/resolv.conf'
+
+
+# adjust keyboard spped
+alias setkb='xset r rate 200 30'
+
+# disable synaptics mouse/touch pad mouse
+alias paddis='synclient TouchpadOff=1'
+# enable synaptics mouse/touch pad mouse
+alias paden='synclient TouchpadOff=0'
+
+#for bluetooth
+alias onbt='sudo systemctl start bluetooth.service'
+
+#for argouml
+alias argouml="bash ~/softwares/argouml/argouml.sh &"
+
+#for mpd music
+alias music="bash ~/startmusic.sh &"
+
+#for matlab
+# export MATLAB_JAVA=/usr/local/MATLAB/R2014a/sys/java/jre/glnxa64/jre
+export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
+# Matlab can also be run with:
+# MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre matlab -desktop
+# to test which java version is used, in Matlab, type: version -java
+# alias matlab="/usr/local/MATLAB/R2011b/bin/matlab -nodesktop -nosplash"
+# Allow Matlab2011b run with -nodesktop but with splash so that it will not hang
+# when plotting
+# alias matlab="/usr/local/MATLAB/R2011b/bin/matlab -nodesktop"
+alias matlab="/usr/local/MATLAB/R2014a/bin/matlab -nodesktop -nosplash"
+
+#for git:
+alias gitp="git push origin master"
+alias gits="git status -sb"
+alias gitc="git commit -am"
+
+# for gvim to load back the session
+alias gvim="gvim -S ~/session.gvim"
+
+# make Acer laptop brighter:
+alias brighter="sudo tee /sys/class/backlight/intel_backlight/brightness <<< 1200"
+
+# sudo make install/uninstall
+alias smi="sudo make install"
+alias smu="sudo make uninstall"
+
+# sublime
+alias sublime="LANG=en_US.UTF-8 ~/Dropbox/shared/sublime3/sublime_text_Linux_64"
+
+
+# project to external HDMI screen/monitor
+alias hdmi="xrandr --output HDMI1 --mode 1920x1080"
+
+# project to external VGA monitor
+alias vga="xrandr --output VGA1 --mode 1920x1080"
+alias vga2="xrandr --output VGA2 --mode 1920x1080"
+
+# delete lock vim's session
+alias rmvim="rm ~/.vim/data/sessions/default.vim.lock"
+
+
+alias foxit="wine 'C:\\windows\\command\\start.exe' /Unix ~/.wine/dosdevices/c:/users/Public/Desktop/FoxitReader.lnk &"
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+#for NXJBROWSER
+alias nxjexplore='~/Downloads/lego/leJOS_NXJ_0.9.1beta-3/bin/nxjbrowse'
+alias cdlejos='cd ~/Downloads/lego/leJOS_NXJ_0.9.1beta-3'
+
+alias mybspwm="~/.config/bspwm/bspwmrc"
+alias mybspwm2="~/.config/bspwm/bspwmrc2"
+
+# for zathura and vim for latex
+# zathura -s -x 'gvim --servername SYNCTEX --remote +%{line} %{input}' thesis.pdf
+alias zavim="zathura -s -x 'gvim --servername SYNCTEX --remote +%{line} %{input}'"
+
+
+# for Jekyll
+alias jekyllstart="cd ~/Dropbox/dev/everbot.github.io && bundle exec jekyll serve"
+
+# for Ruby gem
+export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+PROMPT_HOSTNAME='ltt'
+PROMPT_COLOR='1;37m'
+PROMPT_COLOR2='1;32m'
+USER_NAME='111'
+
+# the old PROMPT...
+# PS1='\[\e]1;${PROMPT_HOSTNAME}\a\e]2;${PROMPT_HOSTNAME}:\w\a\
+# \e[${PROMPT_COLOR}\]\
+# <${USER_NAME}@${PROMPT_HOSTNAME}:${PWD}>\n \#♡ \
+# \[\e[m\]'
+
+
+
+
+#the new PROMPT original
+# PS1="\[\033[0;37m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0;31m\]\342\234\227\[\033[0;37m\]]\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then
+# echo '\[\033[0;31m\]\u\[\033[0;37m\]@\[\033[0;96m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]@\[\033[0;96m\]\h';
+# fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]]\n\[\033[0;37m\]\342\224\224\342\224\200\342\224\200\076 \[\033[0m\]"
+
+
+
+
+#new PROMPT...
+PS1="\[\e]1;${PROMPT_HOSTNAME}\a\e]2;${PROMPT_HOSTNAME}:\w\a\]\[\033[0;37m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0;31m\]\342\234\227\[\033[0;37m\]]\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then
+echo '\[\033[0;31m\]\u\[\033[0;37m\]@\[\033[0;96m\]\h'; else echo '\[\033[0;33m\]${USER_NAME}\[\033[0;37m\]@\[\033[0;96m\]${PROMPT_HOSTNAME}';
+# \342\224\200 : 1 dash
+# printint second line
+# fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]${PWD}\[\033[0;37m\]]\n\[\033[0;37m\]\342\224\224\342\224\200\076 \[\033[0m\]\#\$ "
+fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]]\n\[\033[0;37m\]\342\224\224\342\224\200\076 \[\033[0m\]\#\$ "
+
+
+
+#set the umask so that the default permission for new file is 600
+umask 077
+
+
+
+# For MPJ Express library
+export MPJ_HOME=~/mpj-dist/mpj/
+export PATH=$PATH:$MPJ_HOME/bin
+
+export export HADOOP_CONF_DIR=/etc/hadoop/hadoop
+
+# for various utilities scripts: bash, python, ...
+export PATH=$PATH:~/Dropbox/dev/scripts/
+
+
+# For Java
+# export JAVA_HOME=/usr/lib/jvm/java-7-openjdk
+# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/jre # jre only
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+# export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+
+
+# change system-wide editor
+#export VISUAL="/usr/bin/vim -p -X"
+export VISUAL="/usr/bin/vim"
+export EDITOR="/usr/bin/vim"
+
+# for dmenu font
+export DMENUFONT="Consolas-11"
+
+#for matlab
+#export AWT_TOOLKIT=MToolkit
+
+# only allow 1 gvim instance:
+# gvim () { command gvim --remote-silent "$@" || command gvim "$@"; }
+
+# some more aliases for personal usage
+source ~/Dropbox/morealiases.sh
+
