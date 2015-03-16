@@ -44,7 +44,7 @@ xset fp rehash
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 eval `/usr/bin/ssh-agent -s`
-sh ~/.xmonad/autostart &
+sh ~/.autostart &
 
 sxhkd &
 exec bspwm
