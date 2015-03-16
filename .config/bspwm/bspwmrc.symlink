@@ -1,0 +1,188 @@
+#!/bin/bash
+
+# kill all the bspc process first
+kill -9 $(ps aux | grep bspc | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_FIFO_SECOND=/tmp/panel-fifo-second
+PANEL_HEIGHT=18
+#PANEL_FONT_FAMILY="-*-Dejavu Sans Mono for Powerline-r-normal-*-14-*-*-*-c-*-*-1"
+#PANEL_FONT_FAMILY="-*-dejavu sans mono-medium-r-normal--12-*-*-*-*-*-iso10646-1"
+#PANEL_FONT_FAMILY="-*-dejavu sans mono-medium-r-normal--11-*-*-*-*-*-iso10646-1"
+# PANEL_FONT_FAMILY="-misc-roboto-medium-r-normal--12-*-*-*-*-*-iso10646-1"
+# PANEL_FONT_FAMILY="-misc-roboto light-light-r-normal--13-*-*-*-*-*-iso10646-1"
+#PANEL_FONT_FAMILY="-misc-roboto black-black-r-normal--13-*-*-*-*-*-iso10646-1"
+# PANEL_FONT_FAMILY="-microsoft-consolas-medium-r-normal-*-17-*-*-*-*-*-microsoft-*"
+PANEL_FONT_FAMILY="Roboto-10"
+# PANEL_FONT_FAMILY="Ubuntu-8"
+# PANEL_FONT_FAMILY="Dejavu-9"
+# PANEL_FONT_FAMILY="Droid Sans Mono-9"
+
+export PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY
+#export PANEL_FIFO PANEL_FIFO_SECOND PANEL_HEIGHT
+
+# source $(dirname $0)/panel/panel_colors
+
+# Visual options
+#bspc monitor -d Main Web Media Games Steam Skype Other
+# bspc monitor --reset-desktops 1 2 3 4 5 6 7 8 9
+# bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+
+#-d $i/{i,ii,iii,iv,v,vi,vii,viii,ix,x}
+        #-d 1 2 3 4 5 6 7 8 9 10
+# i=1
+# for monitor in $(bspc query -M); do
+#     bspc monitor $monitor \
+#         -n "$i" \
+#         -d $i/{1,2,3,4,5,6,7,8,9,10}
+#     let i++
+# done
+# NMON=$i
+# unset i
+
+# Take note:
+# If the computer is already running with just its default monitor, then you
+# wanna plug in an external monitor to use with bspwm, you must first use xrandr
+# to output to that external monitor first. For example we plugin a HDMI
+# monitor. First:
+#   xrandr --output HDMI1 --mode 1920x1080
+# then run:
+#   ~/.config/bspwm/bspwmrc
+num_mon=$(bspc query -M | wc -l)
+if [ $num_mon -gt 1 ] ; then
+
+    # for Acer Aspire V11 Touch
+    # xrandr --output eDP1 --primary
+    # xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1
+
+
+    # for HP Pavilion dm3 laptop
+    xrandr --output LVDS1 --primary
+    xrandr --output VGA1 --mode 1920x1080 --left-of LVDS1
+
+    # first native monitor
+    bspc monitor ^1 --reset-desktops 1
+    bspc config -m ^1 top_padding 10
+
+    # external monitor exists, so we prefer to use it instead of the native
+    # small size monitor
+    bspc monitor ^2 --reset-desktops 2 web 4 5 6 7 8 9 10
+    bspc config -m ^2 top_padding 10
+else
+    bspc monitor ^1 --reset-desktops 1 2 web 4 5 6 7 8 9 10
+    bspc config -m ^1 top_padding 10
+fi
+
+#xrandr --output HDMI1 --primary
+#xrandr --output eDP1 --left-of HDMI1
+
+
+# move the focus to the main monitor
+bspc monitor -f primary
+
+# You will need to change this line and add one for each monitor, similar to this:
+# bspc monitor DVI-I-1 -d I II III IV
+# bspc monitor DVI-I-2 -d V VI VII
+# bspc monitor DP-1 -d VIII IX X
+
+
+bspc config split_ratio             0.50
+bspc config border_width            1
+bspc config top_padding             10
+bspc config borderless_monocle      true
+bspc config gapless_monocle         true
+bspc config focus_follows_pointer   true
+bspc config auto_cancel             true
+bspc config normal_border_color     none
+bspc config active_border_color     "#504339"
+bspc config focused_border_color    "#ff8000"
+bspc config presel_border_color     none
+bspc config urgent_border_color     "#504339"
+
+#*******************************************************************************
+# Rules
+#*******************************************************************************
+bspc rule -a Thunderbird desktop=^1
+
+bspc rule -a Firefox desktop=^3
+
+bspc rule -a "Foxit Reader" desktop=^4
+bspc rule -a "PDFXCview.exe" desktop=^4
+
+# move gvim to window 9
+bspc rule -a gvim desktop=^9
+
+# for matlab figure: make the figure window floating by default
+# use: xprop | grep WM_CLASS to get the class title
+bspc rule -a sun-awt-X11-XFramePeer floating=on
+
+#bspc rule -a Wine desktop=^4
+
+bspc rule -a Python2.7 desktop=^4
+bspc rule -a Battle.net.exe desktop=^4 floating=on
+bspc rule -a Hearthstone.exe desktop=^4 floating=on
+bspc rule -a Diablo\ III.exe desktop=^4 floating=on
+bspc rule -a Steam desktop=^5 floating=on
+bspc rule -a hl2_linux desktop=^5
+bspc rule -a Skype desktop=^6 floating=on
+bspc rule -a MPlayer desktop=^3 floating=on
+# bspc rule -a Vlc desktop=^5 floating=on
+# bspc rule -a Pcmanfm floating=on
+#*******************************************************************************
+
+# Autostart applications
+
+
+
+# # check and kill if panel is already run before
+# if [ $(pgrep -cx panel.sh) -gt 0 ] ; then
+#     # printf "%s\n" "The panel is already running." >&2
+#     # killall panel.sh
+#     # killall panel_bar
+
+#     ps aux | grep panel | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs
+#     kill -9 $(ps aux | grep panel | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+
+#     sleep 1
+# fi
+
+# if [ $(pgrep -cx dzen2) -gt 0 ] ; then
+#     kill -9 $(ps aux | grep dzen2 | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+#     sleep 1
+# fi
+
+kill -9 $(ps aux | grep panel | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+kill -9 $(ps aux | grep dzen2 | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+
+kill -9 $(ps aux | grep xtitle | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+
+# cd ~/.config/bspwm
+~/.config/bspwm/panel.sh &
+sleep 2; # wait for panel to show up first (bar or dzen2)
+
+
+if [ $(pgrep -cx trayer) -gt 0 ] ; then
+    # echo "Trayer already running!"
+    # pkill trayer
+    # killall trayer
+
+    kill -9 $(ps aux | grep trayer | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+fi
+#`which trayer` --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --height 16 &
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --height 16 &
+
+
+if [ $(pgrep -cx dropbox) -lt 1 ] ; then
+    dropboxd &
+fi
+
+
+if [ $(pgrep -cx nm-applet) -gt 0 ] ; then
+    kill -9 $(ps aux | grep nm-applet | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+fi
+# `which nm-applet` &
+nm-applet &
+
+
+
+
