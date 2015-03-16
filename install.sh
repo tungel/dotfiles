@@ -114,39 +114,72 @@ link_file () {
   fi
 }
 
-install_dotfiles () {
-  info 'installing dotfiles\n'
 
-  local overwrite_all=false backup_all=false skip_all=false
 
-  for src in $(find "$DOTFILES_ROOT/" -maxdepth 3 -name '*.symlink')
-  do
-    # echo "Processing file: $src"
+# The file which defines which dotfiles are to be symlinked
+CONFIG_FILE=$DOTFILES_ROOT/config
 
-    # repace a substring in a string
-    # Example:
-    # var="/home/everbot/.vimrc"
-    # echo ${var/everbot/ttt}
-    # /home/ttt/.vimrc
-    tmp=${src/$DOTFILES_ROOT\//} # replace the current root path by empty string
-
-    # echo "tmp=$tmp" # debug only
-
-    # if the current dotfile belong to the direct child of ~ directory
-    if [ "$(dirname $tmp)" == "." ]
-    then
-        dst="$HOME/$(basename "${src%.*}")"
-    else # now, the dotfile belong to some further sub-directory under ~
-        tmp=${tmp%/*} # remove the basename of the file
-        dst="$HOME/$tmp/$(basename "${src%.*}")"
+# Get the list of dotfiles to be symlinked (those without # character at the
+# front
+getDotFilesList()
+{
+    if [[ ! -s $CONFIG_FILE ]]; then
+        fail "Config file doesn't exist!"
+        exit 1
     fi
 
-    # echo "dst = $dst" # debug only
+    # Get the list of predefined dotfiles which are supposed to be symlinked
+    # These files are defined by those lines without the # character at the
+    # front
+    DOTFILESLIST=$(sed -n '/\<symlink\>/,/\<\/symlink\>/p' $CONFIG_FILE | grep -v '^\[.*files]'|grep -v ^#)
 
-    # dst="$HOME/.$(basename "${src%.*}")" # original, which is kind of useless
+    # echo "Dotfiles list = $DOTFILESLIST"
+}
 
-    link_file "$src" "$dst"
-  done
+install_dotfiles () {
+    info "Reading config file...\n"
+
+    getDotFilesList
+
+    info 'Installing dotfiles\n'
+
+    local overwrite_all=false backup_all=false skip_all=false
+
+    # for each file/directory with the posfix ".symlink"
+    for src in $(find "$DOTFILES_ROOT/" -maxdepth 3 -name '*.symlink')
+    do
+        baseName=$(basename "${src%.*}") # the filename itself without path nor .symlink
+
+        # check to see if it is in the list of files which are supposed to be
+        # symlinked
+        if [ $(echo $DOTFILESLIST | grep $baseName | wc -l) -le 0 ]; then
+            continue
+        fi
+
+        # echo "Processing file: $src"
+
+        # repace a substring in a string
+        # Example:
+        # var="/home/everbot/.vimrc"
+        # echo ${var/everbot/ttt}
+        # /home/ttt/.vimrc
+        tmp=${src/$DOTFILES_ROOT\//} # replace the current root path by empty string
+
+        # echo "tmp=$tmp" # debug only
+
+        # if the current dotfile belong to the direct child of ~ directory
+        if [ "$(dirname $tmp)" == "." ]
+        then
+            dst="$HOME/$baseName"
+        else # now, the dotfile belong to some further sub-directory under ~
+            tmp=${tmp%/*} # remove the basename of the file
+            dst="$HOME/$tmp/$baseName"
+        fi
+
+        # echo "dst = $dst" # debug only
+
+        link_file "$src" "$dst"
+    done
 }
 
 install_dotfiles

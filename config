@@ -1,0 +1,17 @@
+#
+# https://github.com/everbot/dotfiles
+#
+# Define which dotfiles to be symlinked
+#
+
+<symlink>
+# the most common dot files
+.vimrc
+.bashrc
+
+# other misc dotfiles
+# bspwm
+# sxhkd
+
+</symlink>
+
