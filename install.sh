@@ -121,7 +121,7 @@ install_dotfiles () {
 
   for src in $(find "$DOTFILES_ROOT/" -maxdepth 2 -name '*.symlink')
   do
-    echo "Processing file: $src"
+    # echo "Processing file: $src"
 
     # repace a substring in a string
     # Example:
