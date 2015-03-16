@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# ~/.xinitrc
+#
+# Executed by startx (run your window manager from here)
+
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
+#exec startxfce4
+
+# for openbox settings
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+#exec openbox-session
+
+#set keyboard speed
+#xset r rate 200 30
+
+#synclient TouchpadOff=1
+
+#xsetroot -cursor_name left_ptr
+#setxkbmap -layout en
+#exec ck-launch-session xmonad
+
+#source /etc/X11/xinit/xinitrc.d/30-dbus
+#eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
+#export GPG_AGENT_INFO SSH_AUTH_SOCK
+
+# for personal fonts
+xset fp+ ~/.fonts/gohufont
+xset fp+ ~/.fonts
+xset fp rehash
+
+
+# Fix java application run a blank window GUI (including Matlab)
+# sudo pacman -S wmname
+# wmname LG3D
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+eval `/usr/bin/ssh-agent -s`
+sh ~/.xmonad/autostart &
+
+sxhkd &
+exec bspwm
+
+#exec xmonad
+
+#gnome-encfs-manager
+
+
+# exec gnome-session
+# exec startkde
+# exec startxfce4
+# ...or the Window Manager of your choice
+
