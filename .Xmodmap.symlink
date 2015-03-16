@@ -1,0 +1,10 @@
+!pointer = 1 2 3 4 5 7 6 8 9 10 11 12
+
+!map capslock key to escape key
+clear Lock
+!keycode 0x42 = Escape
+
+!map capslock key to the left control key
+keycode 0x42 = Control_L
+add Control = Control_L
+

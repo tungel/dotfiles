@@ -1,0 +1,11 @@
+! font stuffs
+Xft.autohint: true
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: true
+Xft.antialias: true
+Xft.rgba: rgb
+
+Xcursor.theme: Pulse-Glass
+Xcursor.size:  22
+
