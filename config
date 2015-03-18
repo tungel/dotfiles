@@ -8,10 +8,18 @@
 # the most common dot files
 .vimrc
 .bashrc
+.bash_profile
 
 # other misc dotfiles
-# bspwm
-# sxhkd
+bspwm
+sxhkd
+.xinitrc
+.gtkrc-2.0
+.gtkrc-2.0.mine
+.Xdefaults
+.Xmodmap
+.Xresources
+.xsession
 
 </symlink>
 
