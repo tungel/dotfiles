@@ -963,7 +963,7 @@ autocmd Filetype markdown setlocal com+=b:1.
 nnoremap <F9> :exec '!python' shellescape(@%, 1)<cr>
 
 " Use F8 to compile and run C program
-map <F8> :exec ':!gcc % -o a.cout && ./a.cout'<cr>
+map <F8> :exec ':!gcc -std=c99 % -o  a.cout && ./a.cout'<cr>
 
 " Use F7 to compile and run Cpp program
 map <F7> :exec ':!g++ % -o a.cout && ./a.cout'<cr>

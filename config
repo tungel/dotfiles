@@ -11,8 +11,6 @@
 .bash_profile
 
 # other misc dotfiles
-bspwm
-sxhkd
 .xinitrc
 .gtkrc-2.0
 .gtkrc-2.0.mine
@@ -20,6 +18,12 @@ sxhkd
 .Xmodmap
 .Xresources
 .xsession
+
+# whole directory
+bspwm
+sxhkd
+fontconfig
+
 
 </symlink>
 
