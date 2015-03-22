@@ -388,11 +388,12 @@ let g:indentLine_char = '┊'
 
 
 
-"bind Ctrl + <movement> keys to move around the windows
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+" bind Ctrl + <movement> keys to move around the windows
+" commented out because some Ctrl+<movement> keybinding are already in used
+" map <c-j> <c-w>j
+" map <c-k> <c-w>k
+" map <c-l> <c-w>l
+" map <c-h> <c-w>h
 
 " map sort function to a key
 vnoremap <Leaders>z :sort<CR>
