@@ -1,0 +1,46 @@
+#
+# These things are run when an Openbox X Session is started.
+# You may place a similar script in $HOME/.config/openbox/autostart
+# to run user-specific things.
+#
+
+# If you want to use GNOME config tools...
+#
+#if test -x /usr/lib/openbox/gnome-settings-daemon >/dev/null; then
+#  /usr/lib/openbox/gnome-settings-daemon &
+#elif which gnome-settings-daemon >/dev/null 2>&1; then
+#  gnome-settings-daemon &
+#fi
+
+# If you want to use XFCE config tools...
+#
+# xfce-mcs-manager &
+
+#turn off the laptop LCD panel
+#xrandr --output LVDS1 --off
+#xrdb ~/.Xresources &
+xrandr --output VGA1 --mode 1920x1080
+
+# adjusting keyboard speed
+xset r rate 200 30
+
+xcompmgr &
+
+#disable synaptics mouse
+synclient TouchpadOff=1
+
+# for transparency
+devilspie -a &
+
+sh ~/.fehbg &
+tint2 &
+
+# auto open xfce4-terminal
+#xfce4-terminal &
+terminology &
+
+
+# for VirtualBox, currently having issue by runnign the below command
+# it will make the terminal hang when close..
+# sudo modprobe vboxdrv
+
