@@ -1,0 +1,199 @@
+"===============================================================================
+" https://github.com/everbot/dotfiles
+"
+" Mini .vimrc setting for Vim and GVim
+"
+" The purpose of this file is to provide some basic functionalities to edit text
+" with Vim without any plugin dependent. This is best suited for light-editing
+" works.
+"===============================================================================
+
+" set font for gvim
+if has('gui_running')
+    " use Powerline font for vim-airline
+    " set guifont=Dejavu\ Sans\ Mono\ for\ Powerline\ 9
+    " set guifont=Dejavu\ Sans\ Mono\ 12
+    " set guifont=Droid\ Sans\ Mono\ 16
+    " set guifont=Inconsolata-g\ for\ Powerline\ 9
+    " set guifont=PragmataPro\ 10
+    " set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+
+    if has("gui_gtk2")
+        set guifont=Dejavu\ Sans\ Mono\ for\ Powerline\ 9
+    elseif has("gui_macvim")
+        set guifont=Menlo\ Regular:h14
+    elseif has("gui_win32")
+        " set font for GVim in Windows
+        set guifont=Consolas:h10:cANSI
+    endif
+endif
+
+" Set tab label to show tab number, filename, if modified ('+' is shown if the
+" current window in the tab has been modified)
+set guitablabel=%N)\ %t\ %M
+
+imap jk <ESC>
+
+" set line number
+set nu
+
+set tabstop=4 expandtab
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+
+"display status bar at the bottom which shows file name and cursor position
+set laststatus=2
+
+"display title bar of the current vim window
+set title
+
+syntax on
+
+" set autoindent
+set ai
+
+" make search case insensitive
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Use Alt+number to go to a specific tab number
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+nnoremap <A-6> 6gt
+nnoremap <A-7> 7gt
+nnoremap <A-8> 8gt
+nnoremap <A-9> 9gt
+nnoremap <A-0> 10gt
+
+" use Shift+q to format a paragraph to do wrapping at 80 chars
+set formatoptions+=w
+set tw=80
+set colorcolumn=+1 "set color for column at 81
+"hi ColorColumn guibg=#3E3F36 ctermbg=236
+hi ColorColumn ctermbg=236
+nnoremap Q gqip
+
+" auto reload the file if it's changed
+set autoread
+
+" use Ctrl + l to redraw the screen and remove any search highlighs
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+
+" use Ctrl+d to move the cursor to bottom, then bring that bottom line to middle
+" of screen
+noremap <silent> <C-d> <S-l>zz
+
+" use Ctrl+u to move the cursor to top of the page, then bring that top line
+" to middle of screen
+noremap <silent> <C-u> <S-h>zz
+
+
+" enable suggestion of available of commands in commands mode, so that we can
+" use arrow keys (or Ctrl+n and Ctrl+p) to choose a desire command form the list
+" Active the wildmenu by entering command mode (:) then type in the first few
+" character and then press Tab
+set wildmenu
+
+" Use Ctrl+Backspace to change the current directory globaly to the current file
+" To change localy use :lcd %:p:h
+" In these commands, % gives the name of the current file, %:p gives its full
+" path, and %:p:h gives its directory (the "head" of the full path)
+" nnoremap <c-d> :cd %:p:h<CR>
+nnoremap <c-BS> :cd %:p:h<CR>
+
+"easier moving of code blocks
+vnoremap < <gv " better indentation
+vnoremap > >gv " better indentation
+
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" auto unfold everything when open a file
+autocmd BufWinEnter * silent! :%foldopen!
+
+" copy: Ctrl+c
+" cut: Ctrl+x
+" paste: Ctrl+v
+" Paste only works in Visual and insert mode, so you don't have to worry about
+" the conflict with Ctrl-V and blockwise Visual Mode. This isn't a problem,
+" because Copy and Cut put you into insert mode, so you can immediately paste
+" afterwards. If you try it out you'll find that it feels completely natural.
+" http://superuser.com/questions/10588/how-to-make-cut-copy-paste-in-gvim-on-
+" ubuntu-work-with-ctrlx-ctrlc-ctrlv
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <C-r><C-o>+
+
+" allowing auto remove trailing white space characters
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+" remove trailing whitespace upon save
+"autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" resize current buffer by +/- 5
+nnoremap <C-left> :vertical resize -5<cr>
+nnoremap <C-down> :resize +5<cr>
+nnoremap <C-up> :resize -5<cr>
+nnoremap <C-right> :vertical resize +5<cr>
+
+" map shortcut key for spelling
+noremap <F6> :setlocal spell! spelllang=en_us<CR>
+
+" set folding method for C code
+" :setlocal foldmethod=syntax
+autocmd FileType c setlocal foldmethod=syntax
+
+nmap <silent> <RIGHT> :cnext<CR>
+nmap <silent> <RIGHT><RIGHT> :cnfile<CR><C-G>
+nmap <silent> <LEFT> :cprev<CR>
+nmap <silent> <LEFT><LEFT> :cpfile<CR><C-G>
+
+
+" Below is from Windows' GVIM example setting
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
+
