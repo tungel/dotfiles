@@ -984,6 +984,9 @@ autocmd Filetype markdown setlocal com+=b:1.
 
 
 function! CompileCode()
+    " first change dir to the place where the current file is located
+    exec 'cd %:p:h'
+
     if (&filetype == 'cpp')
         exec ':!g++ % -o a.cout && ./a.cout'
     elseif (&filetype == 'c')
