@@ -934,7 +934,7 @@ autocmd FileType c,java,cpp,python setlocal foldmethod=syntax
 " Comment out to use <Space> for folding/unfolding because it's more useful than
 " this plugin
 
-" let g:simple_todo_map_keys = 0
+let g:simple_todo_map_keys = 0
 " nmap <Space>i <Plug>(simple-todo-new)
 " " imap <Space>i <Plug>(simple-todo-new)
 
