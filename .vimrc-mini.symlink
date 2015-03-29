@@ -233,7 +233,7 @@ nmap <silent> <LEFT><LEFT> :cpfile<CR><C-G>
 " map <c-h> <c-w>h
 
 " map sort function to a key
-vnoremap <Leaders>z :sort<CR>
+vnoremap <Leader>z :sort<CR>
 
 
 " ==============================================================================
