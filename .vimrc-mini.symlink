@@ -6,6 +6,8 @@
 " The purpose of this file is to provide some basic functionalities to edit text
 " with Vim without any plugin dependent. This is best suited for light-editing
 " works.
+"
+" This file can also be used as a stand-alone .vimrc file
 "===============================================================================
 
 " set font for gvim
@@ -27,6 +29,10 @@ if has('gui_running')
         set guifont=Consolas:h10:cANSI
     endif
 endif
+
+" Rebind <Leader> key. when you pressed the Leader key, the cursor
+" will wait for 1s for user to press another key
+let mapleader = ","
 
 " Set tab label to show tab number, filename, if modified ('+' is shown if the
 " current window in the tab has been modified)
@@ -91,6 +97,47 @@ set autoread
 " use Ctrl + l to redraw the screen and remove any search highlighs
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
+
+" toggling cursorline highlight when switching on/off insert mode
+autocmd InsertEnter,InsertLeave * set cul!
+" or:
+" autocmd InsertEnter * set cul
+" autocmd InsertLeave * set nocul
+
+
+" highlight tab and trailing space
+set listchars=tab:>-,trail:-
+set list
+" use F11 to toggle between displaying white space or not
+noremap <F11> :set list!<CR>
+
+
+"match the tab, so it will make the cursorline doesn't change the color of
+"specialkey foreground color when the cursor goes to that line (this happens
+"when highligh tab and trailing space is enabled
+match NonText '^\s\+' "
+
+" reload the updated .vimrc profile
+nmap <Leader>rr :source $MYVIMRC
+
+" quickly open to edit .vimrc file
+nmap <Leader>v :tabe $MYVIMRC
+
+
+" quickly comment out block of code
+map ,- :s/^/--/<CR>
+map ,# :s/^/#/<CR>
+map ,% :s/^/%/<CR>
+map ,/ :s/^/\/\//<CR>
+"cancel the comment
+map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>
+
+
+" use single z to move the current line to the center view.
+" by doing this mapping, the zt and zb doesn't work. But I don't use zt and zb
+" anyway, so this is not a big deal!
+" nnoremap z zz
+
 " use Ctrl+d to move the cursor to bottom, then bring that bottom line to middle
 " of screen
 noremap <silent> <C-d> <S-l>zz
@@ -122,6 +169,10 @@ vnoremap > >gv " better indentation
 if has("autocmd")
    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+
+" map F5 to quickly ROT13 the whole buffer, juz for fun
+" map <F5> ggg?G``
 
 " auto unfold everything when open a file
 autocmd BufWinEnter * silent! :%foldopen!
@@ -163,12 +214,23 @@ noremap <F6> :setlocal spell! spelllang=en_us<CR>
 
 " set folding method for C code
 " :setlocal foldmethod=syntax
-autocmd FileType c setlocal foldmethod=syntax
+autocmd FileType c,java,cpp,python setlocal foldmethod=syntax
 
 nmap <silent> <RIGHT> :cnext<CR>
 nmap <silent> <RIGHT><RIGHT> :cnfile<CR><C-G>
 nmap <silent> <LEFT> :cprev<CR>
 nmap <silent> <LEFT><LEFT> :cpfile<CR><C-G>
+
+
+" bind Ctrl + <movement> keys to move around the windows
+" commented out because some Ctrl+<movement> keybinding are already in used
+" map <c-j> <c-w>j
+" map <c-k> <c-w>k
+" map <c-l> <c-w>l
+" map <c-h> <c-w>h
+
+" map sort function to a key
+vnoremap <Leaders>z :sort<CR>
 
 
 " Below is from Windows' GVIM example setting
