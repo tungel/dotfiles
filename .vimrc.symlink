@@ -859,7 +859,8 @@ let delimitMate_jump_expansion = 1
 
 "===============================================================================
 "---begin vim-session
-let g:session_directory='~/.vim/data/sessions'
+" let g:session_directory='~/.vim/data/sessions'
+let g:session_directory='~/Dropbox/dev/nogit/vimdata/sessions'
 let g:session_autosave = 'yes'
 let g:session_autoload = 'yes'
 let g:session_default_to_last = 1
@@ -985,7 +986,18 @@ autocmd Filetype markdown setlocal com+=b:1.
 
 function! CompileCode()
     " first change dir to the place where the current file is located
-    exec 'cd %:p:h'
+    " let curDir = system('pwd') " the result has @ at the end
+    let curDir = getcwd() " get current working directory
+    let targetDir = expand('%:p:h') " get the dir contains the current buffer
+    echom "curDir = " . curDir
+    if (curDir != targetDir)
+        echom "Changing dir to " . targetDir
+        exec 'cd %:p:h'
+    else
+        echom "Already at the " . curDir
+    endif
+
+    echom '-------'
 
     if (&filetype == 'cpp')
         exec ':!g++ % -o a.cout && ./a.cout'
