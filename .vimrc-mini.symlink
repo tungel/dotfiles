@@ -40,6 +40,9 @@ set guitablabel=%N)\ %t\ %M
 
 imap jk <ESC>
 
+" write file with super user permission
+cmap w!! w !sudo tee %
+
 " set line number
 set nu
 
