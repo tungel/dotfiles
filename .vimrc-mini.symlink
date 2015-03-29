@@ -233,6 +233,56 @@ nmap <silent> <LEFT><LEFT> :cpfile<CR><C-G>
 vnoremap <Leaders>z :sort<CR>
 
 
+" ==============================================================================
+" run the current buffer python code
+" nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+" nnoremap <F9> :exec '!python' shellescape(@%, 1)<cr>
+
+" Use F8 to compile and run C program
+" map <F8> :exec ':!gcc -std=c99 % -o  a.cout && ./a.cout'<cr>
+
+" Use F7 to compile and run Cpp program
+" map <F7> :exec ':!g++ % -o a.cout && ./a.cout'<cr>
+
+
+function! CompileCode()
+    " first change dir to the place where the current file is located
+    " let curDir = system('pwd') " the result has @ at the end
+    let curDir = getcwd() " get current working directory
+    let targetDir = expand('%:p:h') " get the dir contains the current buffer
+    echom "curDir = " . curDir
+    if (curDir != targetDir)
+        echom "Changing dir to " . targetDir
+        exec 'cd %:p:h'
+    else
+        echom "Already at the " . curDir
+    endif
+
+    echom '-------'
+
+    if (&filetype == 'cpp')
+        exec ':!g++ % -o a.cout && ./a.cout'
+    elseif (&filetype == 'c')
+        exec ':!gcc -std=c99 % -o  a.cout && ./a.cout'
+    elseif (&filetype == 'python')
+        exec '!python' shellescape(@%, 1)
+    elseif (&filetype == 'java')
+        exec ':!javac % && java -cp %:p:h %:t:r'
+    elseif (&ft == 'html')
+        exec '!firefox % &'
+    endif
+endfunction
+
+" Use F9 to compile and run the code in the current buffer
+nmap <F9> :call CompileCode()<CR>
+" ==============================================================================
+
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+
+
+
 " Below is from Windows' GVIM example setting
 set diffexpr=MyDiff()
 function MyDiff()
