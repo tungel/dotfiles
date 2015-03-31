@@ -744,6 +744,15 @@ let g:simple_todo_map_keys = 0
 "---end vim-simple-todo
 "===============================================================================
 
+"===============================================================================
+"---begin rainbow_parentheses
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+"---end rainbow_parentheses
+"===============================================================================
+
 
 
 "===============================================================================
