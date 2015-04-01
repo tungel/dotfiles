@@ -10,6 +10,10 @@
 " This file can also be used as a stand-alone .vimrc file
 "===============================================================================
 
+" disable compatibility to vi because it's annoying.
+" compatibility with vi make `imap jk <ESC>` doesn't work
+set nocompatible
+
 " set font for gvim
 if has('gui_running')
     " use Powerline font for vim-airline
