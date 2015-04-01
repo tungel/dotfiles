@@ -144,8 +144,10 @@ map ,- :s/^/--/<CR>
 map ,# :s/^/#/<CR>
 map ,% :s/^/%/<CR>
 map ,/ :s/^/\/\//<CR>
+
 "cancel the comment
-map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>
+" comment out 2015-04-02 because of parsing error when vim is starting
+" map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>
 
 
 " use single z to move the current line to the center view.
