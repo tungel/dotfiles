@@ -474,6 +474,10 @@ endfunction
 "disable AutoComplPop
 let g:acp_enableAtStartup = 0
 
+" completefunc of vim-clojure-static interferes with neocomplcache
+" https://github.com/guns/vim-clojure-static/issues/32
+let g:neocomplcache_force_overwrite_completefunc = 1
+
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_fuzzy_completion = 1
 let g:neocomplete#enable_ignore_case = 1
@@ -514,9 +518,10 @@ endif
 nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
             \ -silent tag/include -start-insert<CR>
 
-" completefunc of vim-clojure-static interferes with neocomplcache
-" https://github.com/guns/vim-clojure-static/issues/32
-let g:neocomplcache_force_overwrite_completefunc = 1
+" disable annoying preview window of the current item in the completion list
+" especially in clojure file
+set completeopt-=preview
+
 
 "---end neocomplete
 "===============================================================================
