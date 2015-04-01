@@ -521,7 +521,8 @@ nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
 
 " completefunc of vim-clojure-static interferes with neocomplcache
 " https://github.com/guns/vim-clojure-static/issues/32
-let g:neocomplcache_force_overwrite_completefunc = 1
+" let g:neocomplcache_force_overwrite_completefunc = 1
+let g:neocomplete#force_overwrite_completefunc = 1
 
 
 "---end neocomplete
