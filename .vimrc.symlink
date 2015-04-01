@@ -486,12 +486,17 @@ let g:neocomplete#enable_ignore_case = 1
 let g:neocomplete#max_list = 15
 let g:neocomplete#enable_auto_select = 1
 
+" Fix keyword length violate min and max value
+" https://github.com/Shougo/neocomplete.vim/issues/359
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
+
 " comment out the below line because it interfere with delimitMate of auto
 " insert matching brace - 2015-03-12
 " let g:neocomplete#enable_auto_delimiter = 1
 
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#sources#syntax#min_keyword_length = 4
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define keyword.
