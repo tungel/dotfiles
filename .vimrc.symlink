@@ -510,8 +510,6 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
-let g:neocomplete#force_overwrite_completefunc = 1
-
 " use <Leader>s to go to symbol with Unite. This is to replace CtrlP
 nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
             \ -silent tag/include -start-insert<CR>
