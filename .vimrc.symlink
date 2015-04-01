@@ -491,6 +491,13 @@ let g:neocomplete#enable_auto_select = 1
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
 
+
+" disable omni completion for Clojure because it's so slow!
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.clojure = ''
+
 " comment out the below line because it interfere with delimitMate of auto
 " insert matching brace - 2015-03-12
 " let g:neocomplete#enable_auto_delimiter = 1
