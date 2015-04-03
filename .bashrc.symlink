@@ -209,10 +209,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-PROMPT_HOSTNAME='ltt'
+PROMPT_HOSTNAME=''
 PROMPT_COLOR='1;37m'
 PROMPT_COLOR2='1;32m'
-USER_NAME='111'
+USER_NAME='ltt'
 
 # the old PROMPT...
 # PS1='\[\e]1;${PROMPT_HOSTNAME}\a\e]2;${PROMPT_HOSTNAME}:\w\a\
@@ -233,18 +233,17 @@ USER_NAME='111'
 
 #new PROMPT...
 PS1="\[\e]1;${PROMPT_HOSTNAME}\a\e]2;${PROMPT_HOSTNAME}:\w\a\]\[\033[0;37m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0;31m\]\342\234\227\[\033[0;37m\]]\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then
-echo '\[\033[0;31m\]\u\[\033[0;37m\]@\[\033[0;96m\]\h'; else echo '\[\033[0;33m\]${USER_NAME}\[\033[0;37m\]@\[\033[0;96m\]${PROMPT_HOSTNAME}';
+# ${USER_NAME}\[\033[0;37m\]@\[\033[0;96m\]${PROMPT_HOSTNAME} <- username@hotstname
+echo '\[\033[0;31m\]\u\[\033[0;37m\]@\[\033[0;96m\]\h'; else echo '\[\033[0;33m\]${USER_NAME}\[\033[0;37m\]\[\033[0;96m\]${PROMPT_HOSTNAME}';
 # \342\224\200 : 1 dash
 # printint second line
-# fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]${PWD}\[\033[0;37m\]]\n\[\033[0;37m\]\342\224\224\342\224\200\076 \[\033[0m\]\#\$ "
+# fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]${PWD}\[\033[0;37m\]]\n\[\033[0;37m\]\342\224\224\342\224\200\076 \[\033[0m\]\#\$ <- need a double quote at the end here
 fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]]\n\[\033[0;37m\]\342\224\224\342\224\200\076 \[\033[0m\]\#\$ "
 
 
 
 #set the umask so that the default permission for new file is 600
 umask 077
-
-
 
 # For MPJ Express library
 export MPJ_HOME=~/mpj-dist/mpj/
@@ -275,5 +274,7 @@ export DMENUFONT="Consolas-11"
 # gvim () { command gvim --remote-silent "$@" || command gvim "$@"; }
 
 # some more aliases for personal usage
-source ~/Dropbox/morealiases.sh
+if [[ -a ~/Dopbox/morealiases.sh ]]; then
+    source ~/Dropbox/morealiases.sh
+fi
 
