@@ -14,6 +14,9 @@
 " compatibility with vi make `imap jk <ESC>` doesn't work
 set nocompatible
 
+" use system clipboard for normal yank/paste
+" set clipboard=unnamedplus
+
 " set font for gvim
 if has('gui_running')
     " use Powerline font for vim-airline
@@ -199,6 +202,7 @@ endif
 " auto unfold everything when open a file
 autocmd BufWinEnter * silent! :%foldopen!
 
+" The below commands work with system clipboard too
 " copy: Ctrl+c
 " cut: Ctrl+x
 " paste: Ctrl+v
