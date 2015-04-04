@@ -46,6 +46,23 @@ let mapleader = ","
 " Comment it out because it seems slow
 " set relativenumber
 
+" ==============================================================================
+" Save stroke when saving file with Ctrl+s
+" http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files
+" If the current buffer has never been saved, it will have no name,
+" call the file browser to save it, otherwise just save it.
+command! -nargs=0 -bar Update if &modified
+                           \|    if empty(bufname('%'))
+                           \|        browse confirm write
+                           \|    else
+                           \|        confirm write
+                           \|    endif
+                           \|endif
+nnoremap <silent> <C-S> :<C-u>Update<CR>
+" 'gv' preserves the previous selection
+vnoremap <C-s> <esc>:Update<CR>gv
+inoremap <c-s> <c-o>:Update<CR>
+" ==============================================================================
 
 " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
