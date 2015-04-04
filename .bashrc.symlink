@@ -274,7 +274,7 @@ export DMENUFONT="Consolas-11"
 # gvim () { command gvim --remote-silent "$@" || command gvim "$@"; }
 
 # some more aliases for personal usage
-if [[ -a ~/Dopbox/morealiases.sh ]]; then
+if [[ -e ~/Dropbox/morealiases.sh ]]; then
     source ~/Dropbox/morealiases.sh
 fi
 
