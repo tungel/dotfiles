@@ -41,6 +41,10 @@ endif
 " will wait for 1s for user to press another key
 let mapleader = ","
 
+" treat all numerals as decimal, regardless whether they are padded with zeros
+" for use with <C-a> and <C-x>
+set nrformats=
+
 " display relative line number with the current line
 " to turn off: set norelativenumber
 " Comment it out because it seems slow
@@ -202,9 +206,9 @@ set wildmenu
 " nnoremap <c-d> :cd %:p:h<CR>
 nnoremap <c-BS> :cd %:p:h<CR>
 
-"easier moving of code blocks
-vnoremap < <gv " better indentation
-vnoremap > >gv " better indentation
+"easier moving of code blocks for indentation
+vnoremap < <gv
+vnoremap > >gv
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
