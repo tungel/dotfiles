@@ -809,3 +809,10 @@ let g:DVB_TrimWS = 1
 "---end dragvisuals.vim
 "===============================================================================
 
+"===============================================================================
+"---begin vim-sexp
+" disable automatically producing closing bracket because we already have it
+let g:sexp_enable_insert_mode_mappings = 0
+"---end vim-sexp
+"===============================================================================
+
