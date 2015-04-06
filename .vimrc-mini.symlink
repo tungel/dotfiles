@@ -143,10 +143,10 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 
 " toggling cursorline highlight when switching on/off insert mode
-autocmd InsertEnter,InsertLeave * set cul!
+" autocmd InsertEnter,InsertLeave * set cul!
 " or:
-" autocmd InsertEnter * set cul
-" autocmd InsertLeave * set nocul
+autocmd InsertEnter * set cul
+autocmd InsertLeave * set nocul
 
 
 " highlight tab and trailing space
@@ -378,6 +378,30 @@ function! MoveToNextTab()
   exe "b".l:cur_buf
 endfunc
 " ==============================================================================
+
+
+" ==============================================================================
+"---begin handling cursorline highlight
+set updatetime=399
+
+au CursorHold * :call EnableCursorLine()
+let g:ltt_highlighted = 0 " 0: not highlighted yet; 1: highlighted
+fun! EnableCursorLine()
+    " echom  g:ltt_highlighted
+    let g:ltt_highlighted = 1
+    set cul
+endf
+
+au CursorMoved * :call DisableCursorLine()
+fun! DisableCursorLine()
+    if (g:ltt_highlighted == 1)
+        set nocul
+        let g:ltt_highlighted = 0
+    endif
+endf
+"---end handling cursorline highlight
+" ==============================================================================
+
 
 
 " Below is from Windows' GVIM example setting
