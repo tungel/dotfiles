@@ -382,23 +382,25 @@ endfunc
 
 " ==============================================================================
 "---begin handling cursorline highlight
-set updatetime=399
+" Comment it out as it's a bit annoying
 
-au CursorHold * :call EnableCursorLine()
-let g:ltt_highlighted = 0 " 0: not highlighted yet; 1: highlighted
-fun! EnableCursorLine()
-    " echom  g:ltt_highlighted
-    let g:ltt_highlighted = 1
-    set cul
-endf
+" set updatetime=100
 
-au CursorMoved * :call DisableCursorLine()
-fun! DisableCursorLine()
-    if (g:ltt_highlighted == 1)
-        set nocul
-        let g:ltt_highlighted = 0
-    endif
-endf
+" au CursorHold * :call EnableCursorLine()
+" let g:ltt_highlighted = 0 " 0: not highlighted yet; 1: highlighted
+" fun! EnableCursorLine()
+"     " echom  g:ltt_highlighted
+"     let g:ltt_highlighted = 1
+"     set cul
+" endf
+
+" au CursorMoved * :call DisableCursorLine()
+" fun! DisableCursorLine()
+"     if (g:ltt_highlighted == 1)
+"         set nocul
+"         let g:ltt_highlighted = 0
+"     endif
+" endf
 "---end handling cursorline highlight
 " ==============================================================================
 
