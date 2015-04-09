@@ -35,6 +35,9 @@ if has('gui_running')
         " set font for GVim in Windows
         set guifont=Consolas:h10:cANSI
     endif
+else
+    " set number of color for the terminal emulator
+    set t_Co=256
 endif
 
 " Rebind <Leader> key. when you pressed the Leader key, the cursor
