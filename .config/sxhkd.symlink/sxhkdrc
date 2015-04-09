@@ -160,7 +160,8 @@ super + {_,shift + }{Left,Right}
 #*******************************************************************************
 super + Return
 # alt + Return
-    terminology
+# terminology
+    urxvt
 
 super + space
 # alt + shift + p
