@@ -11,18 +11,25 @@ Xft.rgba: rgb
 Xcursor.theme: Pulse-Glass
 Xcursor.size:  22
 
+! disable for Ctrl+Shift+c/v for copy and paste
+URxvt.iso14755:false
+URxvt.iso14755_52:false
+
 URxvt.geometry:100x30
 URxvt.depth:32
-URxvt.background:rgba:0000/0000/0000/bbbb
+URxvt.background:#1C1C1C
 URxvt.foreground:white
-URxvt.font:xft:Dejavu Sans Mono for Powerline:pixelsize=12:antialias=true
+! URxvt.font:xft:Dejavu Sans Mono for Powerline:pixelsize=12:antialias=true
+URxvt.font:xft:Dejavu Sans Mono for Powerline:size=9:antialias=true:hinting=true
+URxvt.boldFont:xft:DejaVu Sans Mono for Powerline:bold:size=9:antialias=true:hinting=true
 URxvt.inheritPixmap:false
 URxvt.xftAntialias:true
 URxvt.transparent:true
+URxvt.shading:85
 URxvt.tintColor:black
 URxvt.fading:20
 URxvt.fadeColor: #453e40
-URxvt.perl-ext-common:default,matcher,tabbed
+URxvt.perl-ext-common:default,clipboard,matcher,tabbed
 URxvt.url-launcher:/usr/bin/firefox
 URxvt.matcher.button:1
 URxvt.scrollBar:false
@@ -36,7 +43,30 @@ URxvt.scrollTtyOutput: false
 URxvt.scrollWithBuffer: true
 URxvt.scrollTtyKeypress: true
 
+
+! not working yet
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
+URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
+
 ! make letters stay closer to each other, work well with font Dejavu Sans Mono for Powerline
-! at pixelsize=12
+! at pixelsize=12 or size=9
 URxvt.letterSpace: -2
+
+! black
+! URxvt.color0:  #000000
+! #1C1C1C: similar to ctermfg=234 of vim
+URxvt.color0:  #1C1C1C
+URxvt.color8:  #555753
+
+! yellow
+URxvt.color3:  #dd5608
+URxvt.color11: #dd6a1c
+
+! blue
+URxvt.color4:  RoyalBlue
+URxvt.color12: RoyalBlue
+
+URxvt.cursorBlink: 1
+URxvt.cursorUnderline: 0
 
