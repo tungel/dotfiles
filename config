@@ -20,6 +20,7 @@
 .Xmodmap
 .Xresources
 .xsession
+.tmux.conf
 
 
 # whole directory

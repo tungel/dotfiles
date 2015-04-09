@@ -267,6 +267,14 @@ export EDITOR="/usr/bin/vim"
 # for dmenu font
 export DMENUFONT="Consolas-11"
 
+# fix problem with vim colorscheme in tmux
+# http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode
+# alias tmux="TERM=screen-256color-bce tmux" <- not very nice
+alias tmux="tmux -2" # force tmux to use 256 colors
+
+# for vim-fireplace console
+export TERM=rxvt
+
 #for matlab
 #export AWT_TOOLKIT=MToolkit
 

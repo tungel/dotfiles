@@ -38,7 +38,7 @@ URxvt.tabbed.tabbar-fg: 15
 URxvt.tabbed.tabbar-bg: 0
 URxvt.tabbed.tab-fg: 11
 URxvt.tabbed.tab-bg: 8
-URxvt.visualBell: true
+URxvt.visualBell: false
 URxvt.scrollTtyOutput: false
 URxvt.scrollWithBuffer: true
 URxvt.scrollTtyKeypress: true
