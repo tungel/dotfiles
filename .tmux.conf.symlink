@@ -1,0 +1,44 @@
+# fix problem with vim colorscheme in tmux
+# http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode
+set -g default-terminal "rxvt"
+
+# Change prefix to Ctrl+a
+set -g prefix C-a
+bind C-a send-prefix
+unbind C-b
+
+# y and p as in vim
+bind Escape copy-mode
+unbind p
+bind p paste-buffer
+bind -t vi-copy 'v' begin-selection
+bind -t vi-copy 'y' copy-selection
+bind -t vi-copy 'Space' halfpage-down
+bind -t vi-copy 'Bspace' halfpage-up
+
+# easy-to-remember split pane commands
+bind | split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# moving between panes with vim movement keys
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# moving between windows with vim movement keys
+# Press the prefix (Ctrl+a) then hold Ctrl key and press h or l to cycle through
+bind -r C-h select-window -t :-
+bind -r C-l select-window -t :+
+
+# resize panes with vim movement keys
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+# Credit: some settings are copied from:
+# https://gist.github.com/anonymous/6bebae3eb9f7b972e6f0
+
