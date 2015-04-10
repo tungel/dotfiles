@@ -71,10 +71,13 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-init
     zle -N zle-line-finish
 fi
+
+# alter native method includes running `autoload zkbd` then run `zkbd`, ...
 # ==============================================================================
 
-
 # history search based on what already entered
+# Need below 2 lines to make it work in tmux. Setting in the ablove zkbd
+# compatible hash doesn't work in tmux...
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 

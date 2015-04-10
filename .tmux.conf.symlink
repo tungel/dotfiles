@@ -1,6 +1,9 @@
 # fix problem with vim colorscheme in tmux
 # http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode
-set -g default-terminal "rxvt"
+# set -g default-terminal "rxvt"
+
+# this fixes the HOME and END key problem
+set -g default-terminal "screen-256color"
 
 set-option -g default-shell /bin/zsh
 set-option -g status-keys vi
