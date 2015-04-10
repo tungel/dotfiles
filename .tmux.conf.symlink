@@ -2,6 +2,12 @@
 # http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode
 set -g default-terminal "rxvt"
 
+set-option -g default-shell /bin/zsh
+set-option -g status-keys vi
+set-window-option -g mode-keys vi
+set-window-option -g utf8 on
+set-option -g history-limit 4000
+
 # Change prefix to Ctrl+a
 set -g prefix C-a
 bind C-a send-prefix
@@ -28,6 +34,10 @@ bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
+## swapping:
+bind-key N swap-pane -D
+bind-key P swap-pane -U
+
 # moving between windows with vim movement keys
 # Press the prefix (Ctrl+a) then hold Ctrl key and press h or l to cycle through
 bind -r C-h select-window -t :-
@@ -38,6 +48,41 @@ bind -r H resize-pane -L 5
 bind -r J resize-pane -D 5
 bind -r K resize-pane -U 5
 bind -r L resize-pane -R 5
+
+##+ window title:
+set-option -g set-titles on
+set-option -g set-titles-string '[#S:#I] #W'
+set-window-option -g automatic-rename on
+
+##+ status bar:
+# set-option -g status-utf8 on
+# set-option -g status-justify left
+# set-option -g status-bg '#0e0e0e'
+# set-option -g status-fg '#222222'
+# set-option -g status-interval 5
+# set-option -g status-right-length 60
+# set-option -g status-right '#[fg=#222222]## #[fg=#555555]#T#[default]'
+# set-option -g status-left '#[fg=#333333]#S:#P#[default]'
+# set-option -g visual-activity on
+# set-window-option -g monitor-activity on
+# set-window-option -g window-status-current-bg '#0e0e0e'
+# set-window-option -g window-status-current-fg '#3d3a3a'
+# set-window-option -g window-status-bg '#0e0e0e'
+# set-window-option -g window-status-fg '#222222'
+
+# http://man.cx/tmux
+# http://man.cx/strftime%283%29
+set -g status-left ''
+# set -g status-right '#[fg=colour176,bold,bg=colour236,bold] %B #[fg=colour146,bold,bg=colour236,bold]%d, #[fg=colour173,bold,bg=colour236,bold]%Y#[fg=default] #[fg=colour234,bold,bg=colour12,bold] %R '
+set -g status-right '#[fg=colour176,bold,bg=colour236,bold] #S #[fg=default] #[fg=colour234,bold,bg=colour12,bold] %R '
+set -g status-right-length 100
+set -g status-bg default
+# setw -g window-status-format '#[fg=colour236,bold,bg=colour180,bold] #I #[fg=colour180,bold,bg=colour236,bold] #W '
+# setw -g window-status-format '#[fg=colour180,bg=colour236] #I #[fg=colour236,bg=colour180] #W '
+setw -g window-status-format '#[fg=colour180,bg=colour236] #I #[fg=colour180,bg=colour236] #W '
+setw -g window-status-current-format '#[fg=colour236,bold,bg=colour180,bold] #I #[fg=colour236,bold,bg=#82FA58,bold] #W '
+
+
 
 # Credit: some settings are copied from:
 # https://gist.github.com/anonymous/6bebae3eb9f7b972e6f0
