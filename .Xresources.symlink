@@ -70,6 +70,6 @@ URxvt.color11: #dd6a1c
 URxvt.color4:  RoyalBlue
 URxvt.color12: RoyalBlue
 
-URxvt.cursorBlink: 1
+URxvt.cursorBlink: 0
 URxvt.cursorUnderline: 0
 
