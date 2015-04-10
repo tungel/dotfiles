@@ -117,6 +117,8 @@ alias mybspwm2="~/.config/bspwm/bspwmrc2"
 # zathura -s -x 'gvim --servername SYNCTEX --remote +%{line} %{input}' thesis.pdf
 alias zavim="zathura -s -x 'gvim --servername SYNCTEX --remote +%{line} %{input}'"
 
+alias dev="cd ~/Dropbox/dev"
+
 
 # for Jekyll
 alias jekyllstart="cd ~/Dropbox/dev/everbot.github.io && bundle exec jekyll serve"
@@ -151,7 +153,7 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 # export JAVA_HOME=/usr/lib/jvm/java-7-oracle
 
 # some more aliases for personal usage
-if [[ -e ~/Dropbox/morealiases.sh ]]; then
-    source ~/Dropbox/morealiases.sh
+if [[ -e ~/Dropbox/dev/nogit/morealiases.sh ]]; then
+    source ~/Dropbox/dev/nogit/morealiases.sh
 fi
 
