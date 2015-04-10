@@ -31,7 +31,8 @@ URxvt.perl-ext-common:default,matcher,tabbed
 URxvt.url-launcher:/usr/bin/firefox
 URxvt.matcher.button:1
 URxvt.scrollBar:false
-URxvt.termName:rxvt
+! fix problem with color in tmux plugin from oh-my-zsh
+URxvt.termName:rxvt-256color
 URxvt.tabbed.tabbar-fg: 15
 URxvt.tabbed.tabbar-bg: 0
 URxvt.tabbed.tab-fg: 11
