@@ -11,22 +11,60 @@ zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit promptinit
 compinit
 
+# For autocompletion with an arrow-key driven interface:
+# Press tab twice to active the menu
+zstyle ':completion:*' menu select
+
+# use color in completion
+zstyle ':completion:*:default'         list-colors ${(s.:.)LS_COLORS}
+
+# allow shift-tab for menu complete
+bindkey '^[[Z' reverse-menu-complete
+
 # Use ~/.zfunctions for autoloading functions
 # this must be put above promptinit
 fpath=( "$HOME/.zfunctions" $fpath )
 promptinit
-prompt adam2ltt 8bit
+# prompt adam2ltt 8bit
 # End of lines added by compinstall
 
 # Prevent from putting duplicate lines in the history
 setopt HIST_IGNORE_DUPS
+
+# Persistent rehash to automatically find new files in /usr/bin of new installed
+# packages
+setopt nohashdirs
+
+# ==============================================================================
+#---begin dirstack
+# usage: `dirs -v` and `cd -<NUM>`
+# https://wiki.archlinux.org/index.php/Zsh
+DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1]
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+
+DIRSTACKSIZE=20
+
+setopt autopushd pushdsilent pushdtohome
+
+## Remove duplicate entries
+setopt pushdignoredups
+
+## This reverts the +/- operators.
+setopt pushdminus
+#---end dirstack
+# ==============================================================================
 
 
 autoload -U run-help
 autoload run-help-git
 autoload run-help-svn
 autoload run-help-svk
-unalias run-help
 alias help=run-help
 
 # ==============================================================================
@@ -85,7 +123,21 @@ bindkey "^[[B" history-beginning-search-forward
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 
 # Minimal prompt
-# PS1=$'%{\e[1;34m%}%n %{\e[0m%}at %{\e[0;33m%}%M %{\e[0m%}in %{\e[1;32m%}%~
-# %{\e[1;30m%}>>> %{\e[0m%}'
+PS1=$'%{\e[1;34m%}%n %{\e[0m%}at %{\e[0;33m%}%M %{\e[0m%}in %{\e[1;32m%}%~
+%{\e[1;30m%}>>> %{\e[0m%}'
 
+# Ensure that the prompt is redrawn when the terminal size changes.
+TRAPWINCH() {
+  zle && { zle reset-prompt; zle -R }
+}
+
+
+# allow ctrl-p, ctrl-n for navigate history (standard behaviour)
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+
+# allow ctrl-h, ctrl-w, ctrl-? for char and word deletion (standard behaviour)
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
 
