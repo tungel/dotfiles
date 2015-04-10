@@ -11,9 +11,6 @@ Xft.rgba: rgb
 Xcursor.theme: Pulse-Glass
 Xcursor.size:  22
 
-! disable for Ctrl+Shift+c/v for copy and paste
-URxvt.iso14755:false
-URxvt.iso14755_52:false
 
 URxvt.geometry:100x30
 URxvt.depth:32
@@ -29,7 +26,8 @@ URxvt.shading:85
 URxvt.tintColor:black
 URxvt.fading:20
 URxvt.fadeColor: #453e40
-URxvt.perl-ext-common:default,clipboard,matcher,tabbed
+! URxvt.perl-ext-common:default,clipboard,matcher,tabbed
+URxvt.perl-ext-common:default,matcher,tabbed
 URxvt.url-launcher:/usr/bin/firefox
 URxvt.matcher.button:1
 URxvt.scrollBar:false
@@ -45,6 +43,9 @@ URxvt.scrollTtyKeypress: true
 
 
 ! not working yet
+! disable for Ctrl+Shift+c/v for copy and paste
+URxvt.iso14755:false
+URxvt.iso14755_52:false
 URxvt.keysym.C-C: perl:clipboard:copy
 URxvt.keysym.C-V: perl:clipboard:paste
 URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
