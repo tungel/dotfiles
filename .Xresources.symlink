@@ -52,6 +52,8 @@ URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 
 ! make letters stay closer to each other, work well with font Dejavu Sans Mono for Powerline
 ! at pixelsize=12 or size=9
+! Note: letterSpace:-1 will fix the folk icon of vim-airline but then the spacing is
+! a bit wide, so we scarify the folk icon for the look of the content
 URxvt.letterSpace: -2
 
 ! black
