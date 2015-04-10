@@ -8,8 +8,10 @@
 # the most common dot files
 .vimrc
 .vimrc-mini
+.profile
 .bashrc
 .bash_profile
+.tmux.conf
 
 # other misc dotfiles
 .autostart
@@ -20,7 +22,6 @@
 .Xmodmap
 .Xresources
 .xsession
-.tmux.conf
 
 
 # whole directory

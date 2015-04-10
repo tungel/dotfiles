@@ -26,9 +26,6 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
@@ -71,127 +68,8 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+source ~/.profile
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias ll='ls -alht'
-alias la='ls -A'
-alias l='ls -CF'
-
-# for WiFi
-alias wifiup='sudo ip link set wlo1 up'
-#alias wifiup='sudo ip link set wlp0s29f7u1 up'
-alias wificonnect='sudo wpa_supplicant -i wlo1 -c /etc/wpa_supplicant.conf -B'
-#alias wificonnect='sudo wpa_supplicant -i wlp0s29f7u1 -c /etc/wpa_supplicant.conf -B'
-alias wifiwep='sudo iwconfig wlo1 essid "wifi-id" key s:password'
-alias wifiip='sudo dhcpcd wlo1'
-#alias wifiip='sudo dhcpcd wlp0s29f7u1'
-
-# for LAN network
-alias lanup='sudo ip link set enp3s0 up'
-alias lanip='sudo dhcpcd enp3s0'
-#alias phoneup='sudo ip link set enp0s29f7u4u4u1 up'
-#alias phoneip='sudo dhcpcd enp0s29f7u4u4u1'
-
-# for Android USB tethering: connect to the usb port beside the HDMI
-alias phoneip='sudo dhcpcd enp0s29f7u2'
-
-#fix the DNS problem of the new router
-alias jurong='echo "nameserver 165.21.100.88" | sudo tee /etc/resolv.conf'
-
-
-# adjust keyboard spped
-alias setkb='xset r rate 200 30'
-
-# disable synaptics mouse/touch pad mouse
-alias paddis='synclient TouchpadOff=1'
-# enable synaptics mouse/touch pad mouse
-alias paden='synclient TouchpadOff=0'
-
-#for bluetooth
-alias onbt='sudo systemctl start bluetooth.service'
-
-#for argouml
-alias argouml="bash ~/softwares/argouml/argouml.sh &"
-
-#for mpd music
-alias music="bash ~/startmusic.sh &"
-
-#for matlab
-# export MATLAB_JAVA=/usr/local/MATLAB/R2014a/sys/java/jre/glnxa64/jre
-export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
-# Matlab can also be run with:
-# MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre matlab -desktop
-# to test which java version is used, in Matlab, type: version -java
-# alias matlab="/usr/local/MATLAB/R2011b/bin/matlab -nodesktop -nosplash"
-# Allow Matlab2011b run with -nodesktop but with splash so that it will not hang
-# when plotting
-# alias matlab="/usr/local/MATLAB/R2011b/bin/matlab -nodesktop"
-alias matlab="/usr/local/MATLAB/R2014a/bin/matlab -nodesktop -nosplash"
-
-#for git:
-alias gitp="git push origin master"
-alias gits="git status -sb"
-alias gitc="git commit -am"
-
-# for gvim to load back the session
-alias gvim="gvim -S ~/session.gvim"
-
-# make Acer laptop brighter:
-alias brighter="sudo tee /sys/class/backlight/intel_backlight/brightness <<< 1200"
-
-# sudo make install/uninstall
-alias smi="sudo make install"
-alias smu="sudo make uninstall"
-
-# sublime
-alias sublime="LANG=en_US.UTF-8 ~/Dropbox/shared/sublime3/sublime_text_Linux_64"
-
-
-# project to external HDMI screen/monitor
-alias hdmi="xrandr --output HDMI1 --mode 1920x1080"
-
-# project to external VGA monitor
-alias vga="xrandr --output VGA1 --mode 1920x1080"
-alias vga2="xrandr --output VGA2 --mode 1920x1080"
-
-# delete lock vim's session
-alias rmvim="rm ~/.vim/data/sessions/default.vim.lock"
-
-
-alias foxit="wine 'C:\\windows\\command\\start.exe' /Unix ~/.wine/dosdevices/c:/users/Public/Desktop/FoxitReader.lnk &"
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-#for NXJBROWSER
-alias nxjexplore='~/Downloads/lego/leJOS_NXJ_0.9.1beta-3/bin/nxjbrowse'
-alias cdlejos='cd ~/Downloads/lego/leJOS_NXJ_0.9.1beta-3'
-
-alias mybspwm="~/.config/bspwm/bspwmrc"
-alias mybspwm2="~/.config/bspwm/bspwmrc2"
-
-# for zathura and vim for latex
-# zathura -s -x 'gvim --servername SYNCTEX --remote +%{line} %{input}' thesis.pdf
-alias zavim="zathura -s -x 'gvim --servername SYNCTEX --remote +%{line} %{input}'"
-
-
-# for Jekyll
-alias jekyllstart="cd ~/Dropbox/dev/everbot.github.io && bundle exec jekyll serve"
-
-# for Ruby gem
-export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -241,48 +119,9 @@ echo '\[\033[0;31m\]\u\[\033[0;37m\]@\[\033[0;96m\]\h'; else echo '\[\033[0;33m\
 fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]]\n\[\033[0;37m\]\342\224\224\342\224\200\076 \[\033[0m\]\#\$ "
 
 
-
-#set the umask so that the default permission for new file is 600
-umask 077
-
-# For MPJ Express library
-export MPJ_HOME=~/mpj-dist/mpj/
-export PATH=$PATH:$MPJ_HOME/bin
-
-export export HADOOP_CONF_DIR=/etc/hadoop/hadoop
-
-
-# For Java
-# export JAVA_HOME=/usr/lib/jvm/java-7-openjdk
-# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/jre # jre only
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-# export JAVA_HOME=/usr/lib/jvm/java-7-oracle
-
-
-# change system-wide editor
-#export VISUAL="/usr/bin/vim -p -X"
-export VISUAL="/usr/bin/vim"
-export EDITOR="/usr/bin/vim"
-
-# for dmenu font
-export DMENUFONT="Consolas-11"
-
-# fix problem with vim colorscheme in tmux
-# http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode
-# alias tmux="TERM=screen-256color-bce tmux" <- not very nice
-alias tmux="tmux -2" # force tmux to use 256 colors
-
-# for vim-fireplace console
-export TERM=rxvt
-
 #for matlab
 #export AWT_TOOLKIT=MToolkit
 
 # only allow 1 gvim instance:
 # gvim () { command gvim --remote-silent "$@" || command gvim "$@"; }
-
-# some more aliases for personal usage
-if [[ -e ~/Dropbox/morealiases.sh ]]; then
-    source ~/Dropbox/morealiases.sh
-fi
 
