@@ -11,6 +11,7 @@
 .profile
 .bashrc
 .bash_profile
+.zshrc
 .tmux.conf
 
 # other misc dotfiles

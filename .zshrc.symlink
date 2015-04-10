@@ -1,0 +1,23 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/squallltt/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+
+# http://superuser.com/questions/187639/zsh-not-hitting-profile
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+
+PROMPT_HOSTNAME=''
+PROMPT_COLOR='1;37m'
+PROMPT_COLOR2='1;32m'
+USER_NAME='ltt'
+
+PS1="${USER_NAME}>"
