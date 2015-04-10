@@ -56,6 +56,7 @@ URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 ! a bit wide, so we scarify the folk icon for the look of the content
 URxvt.letterSpace: -2
 
+! To check the default color, see: `man urxvt` section `COLOURS AND GRAPHICS`
 ! black
 ! URxvt.color0:  #000000
 ! #1C1C1C: similar to ctermfg=234 of vim
