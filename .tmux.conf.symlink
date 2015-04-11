@@ -45,7 +45,12 @@ bind p paste-buffer
 bind -t vi-copy 'v' begin-selection
 # bind -t vi-copy 'y' copy-selection
 # Copy selection to system clipboard (make sure xclip is installed)
-bind -t vi-copy 'y' copy-pipe 'xclip -in -selection clipboard'
+# It seems xclip does not close STDOUT after it has read from tmux's buffer. As
+# such, tmux doesn't know that the copy task has completed, and continues to
+# /await xclip's termination, thereby rendering the window manager unresponsive.
+# So we redirect STDOUT of xclip to /dev/null, or you can use an
+# alternative command like xsel (https://wiki.archlinux.org/index.php/Tmux)
+bind -t vi-copy 'y' copy-pipe 'xclip -in -selection clipboard >/dev/null'
 bind -t vi-copy 'Space' halfpage-down
 bind -t vi-copy 'Bspace' halfpage-up
 
@@ -81,20 +86,6 @@ set-option -g set-titles on
 set-option -g set-titles-string '[#S:#I] #W'
 set-window-option -g automatic-rename on
 
-##+ status bar:
-# set-option -g status-justify left
-# set-option -g status-bg '#0e0e0e'
-# set-option -g status-fg '#222222'
-# set-option -g status-interval 5
-# set-option -g status-right-length 60
-# set-option -g status-right '#[fg=#222222]## #[fg=#555555]#T#[default]'
-# set-option -g status-left '#[fg=#333333]#S:#P#[default]'
-# set-option -g visual-activity on
-# set-window-option -g monitor-activity on
-# set-window-option -g window-status-current-bg '#0e0e0e'
-# set-window-option -g window-status-current-fg '#3d3a3a'
-# set-window-option -g window-status-bg '#0e0e0e'
-# set-window-option -g window-status-fg '#222222'
 
 # http://man.cx/tmux
 # http://man.cx/strftime%283%29
@@ -103,8 +94,6 @@ set -g status-left ''
 set -g status-right '#[fg=colour176,bold,bg=colour236,bold] #S #[fg=default] #[fg=colour234,bold,bg=colour12,bold] %R '
 set -g status-right-length 100
 set -g status-bg default
-# setw -g window-status-format '#[fg=colour236,bold,bg=colour180,bold] #I #[fg=colour180,bold,bg=colour236,bold] #W '
-# setw -g window-status-format '#[fg=colour180,bg=colour236] #I #[fg=colour236,bg=colour180] #W '
 setw -g window-status-format '#[fg=colour180,bg=colour236] #I #[fg=colour180,bg=colour236] #W '
 setw -g window-status-current-format '#[fg=colour236,bold,bg=colour180,bold] #I #[fg=colour236,bold,bg=#82FA58,bold] #W '
 
