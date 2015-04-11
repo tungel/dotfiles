@@ -66,6 +66,9 @@ bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
+# move the current pane to become a new window
+bind T break-pane
+
 ## swapping:
 bind-key N swap-pane -D
 bind-key P swap-pane -U
@@ -85,6 +88,10 @@ bind -r L resize-pane -R 5
 set-option -g set-titles on
 set-option -g set-titles-string '[#S:#I] #W'
 set-window-option -g automatic-rename on
+
+# Set window notifications
+setw -g monitor-activity on
+set -g visual-activity on
 
 
 # http://man.cx/tmux
