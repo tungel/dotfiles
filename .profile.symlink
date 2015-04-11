@@ -119,6 +119,9 @@ alias zavim="zathura -s -x 'gvim --servername SYNCTEX --remote +%{line} %{input}
 
 alias dev="cd ~/Dropbox/dev"
 
+# for Dropbox and other app that need to monitor files
+alias mynotify='sudo sysctl fs.inotify.max_user_watches=1000000000'
+
 
 # for Jekyll
 alias jekyllstart="cd ~/Dropbox/dev/everbot.github.io && bundle exec jekyll serve"
