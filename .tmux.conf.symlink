@@ -66,8 +66,10 @@ bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
-# move the current pane to become a new window
+# move the current pane TO become a new window
 bind T break-pane
+# move the current window BACK to a window to join as a pane
+bind B command-prompt -p "Send pane BACK to: " "join-pane -t '%%'"
 
 ## swapping:
 bind-key N swap-pane -D
