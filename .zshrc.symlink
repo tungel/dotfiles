@@ -109,7 +109,6 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-init
     zle -N zle-line-finish
 fi
-
 # alter native method includes running `autoload zkbd` then run `zkbd`, ...
 # ==============================================================================
 
@@ -140,4 +139,11 @@ bindkey '^N' history-beginning-search-forward
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
+
+# ==============================================================================
+source ~/.zplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zplugins/sudo.plugin.zsh
+source ~/.zplugins/archlinux.plugin.zsh
+source ~/.zplugins/dirhistory.plugin.zsh
+source ~/.zplugins/tmux.plugin.zsh
 

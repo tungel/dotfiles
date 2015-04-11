@@ -27,6 +27,7 @@
 
 # whole directory
 .zfunctions
+.zplugins
 bspwm
 sxhkd
 fontconfig
