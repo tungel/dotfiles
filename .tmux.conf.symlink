@@ -97,7 +97,11 @@ set -g status-bg default
 setw -g window-status-format '#[fg=colour180,bg=colour236] #I #[fg=colour180,bg=colour236] #W '
 setw -g window-status-current-format '#[fg=colour236,bold,bg=colour180,bold] #I #[fg=colour236,bold,bg=#82FA58,bold] #W '
 
-
+new  -s tung -n FileManager "cd ~/Dropbox/dev/ && ranger"
+neww -n miscs
+splitw -h -p 50 -t 0
+selectw -t 1 # focus to which window
+selectp -t 0 # focus to which pane
 
 # Credit: some settings are copied from:
 # https://gist.github.com/anonymous/6bebae3eb9f7b972e6f0
