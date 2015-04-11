@@ -8,13 +8,35 @@ set -g default-terminal "screen-256color"
 set-option -g default-shell /bin/zsh
 set-option -g status-keys vi
 set-window-option -g mode-keys vi
+
+# On utf8
+set -g utf8 on
+set-option -g status-utf8 on
 set-window-option -g utf8 on
-set-option -g history-limit 4000
 
 # Change prefix to Ctrl+a
 set -g prefix C-a
 bind C-a send-prefix
 unbind C-b
+
+# address vim mode switching delay (http://superuser.com/a/252717/65504)
+# https://github.com/tmux-plugins/tmux-sensible
+set -s escape-time 0
+
+# increase scrollback buffer size
+set -g history-limit 50000
+
+# tmux messages are displayed for 4 seconds
+set -g display-time 4000
+
+# refresh 'status-left' and 'status-right' more often
+set -g status-interval 5
+
+# focus events enabled for terminals that support them
+set -g focus-events on
+
+# super useful when using "grouped sessions" and multi-monitor setup
+setw -g aggressive-resize on
 
 # y and p as in vim
 bind Escape copy-mode
@@ -60,7 +82,6 @@ set-option -g set-titles-string '[#S:#I] #W'
 set-window-option -g automatic-rename on
 
 ##+ status bar:
-# set-option -g status-utf8 on
 # set-option -g status-justify left
 # set-option -g status-bg '#0e0e0e'
 # set-option -g status-fg '#222222'
