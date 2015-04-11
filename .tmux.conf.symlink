@@ -21,7 +21,9 @@ bind Escape copy-mode
 unbind p
 bind p paste-buffer
 bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'y' copy-selection
+# bind -t vi-copy 'y' copy-selection
+# Copy selection to system clipboard (make sure xclip is installed)
+bind -t vi-copy 'y' copy-pipe 'xclip -in -selection clipboard'
 bind -t vi-copy 'Space' halfpage-down
 bind -t vi-copy 'Bspace' halfpage-up
 
