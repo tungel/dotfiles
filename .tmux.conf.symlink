@@ -26,8 +26,8 @@ set -s escape-time 0
 # increase scrollback buffer size
 set -g history-limit 50000
 
-# tmux messages are displayed for 4 seconds
-set -g display-time 4000
+# tmux messages are displayed for 2 seconds
+set -g display-time 2000
 
 # refresh 'status-left' and 'status-right' more often
 set -g status-interval 5
@@ -90,8 +90,8 @@ set-option -g set-titles-string '[#S:#I] #W'
 set-window-option -g automatic-rename on
 
 # Set window notifications
-setw -g monitor-activity on
-set -g visual-activity on
+setw -g monitor-activity off
+set -g visual-activity off
 
 
 # http://man.cx/tmux

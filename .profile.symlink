@@ -97,7 +97,9 @@ alias vga="xrandr --output VGA1 --mode 1920x1080"
 alias vga2="xrandr --output VGA2 --mode 1920x1080"
 
 # delete lock vim's session
-alias rmvim="rm ~/.vim/data/sessions/default.vim.lock"
+alias rmvim="rm ~/Dropbox/dev/nogit/vimdata/sessions/default.vim.lock ; \
+             rm ~/Dropbox/dev/nogit/vimdata/sessions/default.vim ; \
+             rm ~/Dropbox/dev/nogit/vimdata/sessions/last-session.txt"
 
 
 alias foxit="wine 'C:\\windows\\command\\start.exe' /Unix ~/.wine/dosdevices/c:/users/Public/Desktop/FoxitReader.lnk &"
