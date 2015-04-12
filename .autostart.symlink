@@ -7,7 +7,7 @@ xsetroot -cursor_name left_ptr
 # make keyboard response faster
 xset r rate 200 30
 
-# enable natural scrolling
+# enable natural scrolling and remap Caps Lock key to become left Ctrl
 if [ -f ~/.Xmodmap ]; then
     xmodmap ~/.Xmodmap
 fi
