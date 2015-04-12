@@ -141,6 +141,30 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 
 # ==============================================================================
+# zsh change cursor color to indicate vi mode
+# https://bbs.archlinux.org/viewtopic.php?pid=751788
+zle-keymap-select () {
+    if [ $TERM = "rxvt-256color" ]; then
+        if [ $KEYMAP = vicmd ]; then
+            echo -ne "\033]12;Red\007"
+        else
+            echo -ne "\033]12;Grey\007"
+        fi
+    fi
+}
+zle -N zle-keymap-select
+zle-line-init () {
+    zle -K viins
+    if [ $TERM = "rxvt-256color" ]; then
+        echo -ne "\033]12;Grey\007"
+    fi
+}
+zle -N zle-line-init
+# ==============================================================================
+
+
+
+# ==============================================================================
 source ~/.zplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zplugins/sudo.plugin.zsh
 source ~/.zplugins/archlinux.plugin.zsh
