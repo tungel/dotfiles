@@ -253,11 +253,11 @@ endfun
 "autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-" resize current buffer by +/- 5
-nnoremap <C-left> :vertical resize -5<cr>
-nnoremap <C-down> :resize +5<cr>
-nnoremap <C-up> :resize -5<cr>
-nnoremap <C-right> :vertical resize +5<cr>
+" Using Alt+h/j/k/l to resize current buffer by +/- 5
+nnoremap <M-h> :vertical resize -5<cr>
+nnoremap <M-j> :resize +5<cr>
+nnoremap <M-k> :resize -5<cr>
+nnoremap <M-l> :vertical resize +5<cr>
 
 " map shortcut key for spelling
 noremap <F6> :setlocal spell! spelllang=en_us<CR>
