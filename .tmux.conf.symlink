@@ -80,11 +80,11 @@ bind-key P swap-pane -U
 bind -r C-h select-window -t :-
 bind -r C-l select-window -t :+
 
-# resize panes with vim movement keys
-bind -r H resize-pane -L 5
-bind -r J resize-pane -D 5
-bind -r K resize-pane -U 5
-bind -r L resize-pane -R 5
+# resize panes with similar key binding with my vim settings
+bind -r M-h resize-pane -L 5
+bind -r M-j resize-pane -D 5
+bind -r M-k resize-pane -U 5
+bind -r M-l resize-pane -R 5
 
 ##+ window title:
 set-option -g set-titles on
@@ -111,7 +111,4 @@ neww -n miscs
 splitw -h -p 50 -t 0
 selectw -t 1 # focus to which window
 selectp -t 0 # focus to which pane
-
-# Credit: some settings are copied from:
-# https://gist.github.com/anonymous/6bebae3eb9f7b972e6f0
 
