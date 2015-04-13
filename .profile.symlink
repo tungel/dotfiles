@@ -130,6 +130,7 @@ alias jekyllstart="cd ~/Dropbox/dev/everbot.github.io && bundle exec jekyll serv
 
 # for Ruby gem
 export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
+# PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
 # fix problem with vim colorscheme in tmux
 # http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode

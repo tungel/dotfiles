@@ -203,7 +203,8 @@ zle -N zle-line-finish
 # ==============================================================================
 
 # reduce time waiting for key escape sequence
-export KEYTIMEOUT=1
+# don't reduce to too small value, otherwise sudo.plugin.zsh won't work
+export KEYTIMEOUT=15
 
 # ==============================================================================
 # Plugins...
