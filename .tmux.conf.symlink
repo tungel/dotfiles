@@ -70,7 +70,8 @@ bind l select-pane -R
 # move the current pane TO become a new window
 bind T break-pane
 # move the current window BACK to a window to join as a pane
-bind B command-prompt -p "Send pane BACK to: " "join-pane -t '%%'"
+# -h : split vertical?
+bind B command-prompt -p "Send pane BACK to: " "join-pane -h -t '%%'"
 
 ## swapping:
 bind-key N swap-pane -D
