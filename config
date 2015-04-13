@@ -23,6 +23,7 @@
 .Xmodmap
 .Xresources
 .xsession
+.yaourtrc
 
 
 # whole directory
