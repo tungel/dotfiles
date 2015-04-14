@@ -1,3 +1,4 @@
+! the keycode can be seen by `xev` program
 !pointer = 1 2 3 4 5 7 6 8 9 10 11 12
 
 !map capslock key to escape key
