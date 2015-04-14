@@ -102,6 +102,9 @@ set -g pane-border-fg default
 set -g pane-active-border-fg magenta
 set -g pane-active-border-bg default
 
+# rotate layout with `C-r`
+bind -r C-r next-layout
+
 
 # http://man.cx/tmux
 # http://man.cx/strftime%283%29
