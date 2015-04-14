@@ -55,7 +55,14 @@ bind -t vi-copy 'y' copy-pipe 'xclip -in -selection clipboard >/dev/null'
 bind -t vi-copy 'Space' halfpage-down
 bind -t vi-copy 'Bspace' halfpage-up
 
+# ==============================================================================
+#---begin Window and Pane shortcut keys
 # easy-to-remember split pane commands
+
+# Start windows and panes at 1, not 0, to match with vim and bspwm
+set -g base-index 1
+set -g pane-base-index 1
+
 bind | split-window -h
 bind - split-window -v
 unbind '"'
@@ -74,19 +81,38 @@ bind T break-pane
 bind B command-prompt -p "Send pane BACK to: " "join-pane -h -t '%%'"
 
 ## swapping:
-bind-key N swap-pane -D
-bind-key P swap-pane -U
+bind-key J swap-pane -D
+bind-key K swap-pane -U
+bind-key H swap-pane -U
+bind-key L swap-pane -D
+
+# rotate layout with `C-r`
+bind -r C-r next-layout
 
 # moving between windows with vim movement keys
 # Press the prefix (Ctrl+a) then hold Ctrl key and press h or l to cycle through
 bind -r C-h select-window -t :-
 bind -r C-l select-window -t :+
 
+# Use Ctrl+[0..9] to select window in tmux
+bind -n C-0 select-window -t :10
+bind -n C-1 select-window -t :1
+bind -n C-2 select-window -t :2
+bind -n C-3 select-window -t :3
+bind -n C-4 select-window -t :4
+bind -n C-5 select-window -t :5
+bind -n C-6 select-window -t :6
+bind -n C-7 select-window -t :7
+bind -n C-8 select-window -t :8
+bind -n C-9 select-window -t :9
+
 # resize panes with similar key binding with my vim settings
 bind -r M-h resize-pane -L 5
 bind -r M-j resize-pane -D 5
 bind -r M-k resize-pane -U 5
 bind -r M-l resize-pane -R 5
+#---end Window and Pane shortcut keys
+# ==============================================================================
 
 ##+ window title:
 set-option -g set-titles on
@@ -102,10 +128,6 @@ set -g pane-border-fg default
 set -g pane-active-border-fg magenta
 set -g pane-active-border-bg default
 
-# rotate layout with `C-r`
-bind -r C-r next-layout
-
-
 # http://man.cx/tmux
 # http://man.cx/strftime%283%29
 set -g status-left ''
@@ -119,7 +141,7 @@ setw -g window-status-current-format '#[fg=colour236,bold,bg=colour180,bold] #I 
 
 new  -s tung -n FileManager "cd ~/Dropbox/dev/ && ranger"
 neww -n miscs
-splitw -h -p 50 -t 0
-selectw -t 1 # focus to which window
-selectp -t 0 # focus to which pane
+splitw -h -p 50 -t 1
+selectw -t 2 # focus to which window
+selectp -t 1 # focus to which pane
 

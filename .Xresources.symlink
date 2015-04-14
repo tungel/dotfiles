@@ -51,6 +51,21 @@ URxvt.keysym.C-C: perl:clipboard:copy
 URxvt.keysym.C-V: perl:clipboard:paste
 URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 
+
+! Use Ctrl+[0..9] to select window in tmux
+! http://unix.stackexchange.com/questions/96884/using-ctrl0-9-to-cycle-between-windows-using-tmux
+URxvt.keysym.C-1: \033[27;5;49~
+URxvt.keysym.C-2: \033[27;5;50~
+URxvt.keysym.C-3: \033[27;5;51~
+URxvt.keysym.C-4: \033[27;5;52~
+URxvt.keysym.C-5: \033[27;5;53~
+URxvt.keysym.C-6: \033[27;5;54~
+URxvt.keysym.C-7: \033[27;5;55~
+URxvt.keysym.C-8: \033[27;5;56~
+URxvt.keysym.C-9: \033[27;5;57~
+URxvt.keysym.C-0: \033[27;5;48~
+
+
 ! make letters stay closer to each other, work well with font Dejavu Sans Mono for Powerline
 ! at pixelsize=12 or size=9
 ! Note: letterSpace:-1 will fix the folk icon of vim-airline but then the spacing is
