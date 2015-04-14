@@ -97,6 +97,10 @@ set-window-option -g automatic-rename on
 setw -g monitor-activity off
 set -g visual-activity off
 
+set -g pane-border-fg default
+set -g pane-active-border-fg magenta
+set -g pane-active-border-bg blue
+
 
 # http://man.cx/tmux
 # http://man.cx/strftime%283%29
@@ -105,8 +109,9 @@ set -g status-left ''
 set -g status-right '#[fg=colour176,bold,bg=colour236,bold] #S #[fg=default] #[fg=colour234,bold,bg=colour12,bold] %R '
 set -g status-right-length 100
 set -g status-bg default
-setw -g window-status-format '#[fg=colour180,bg=colour236] #I #[fg=colour180,bg=colour236] #W '
-setw -g window-status-current-format '#[fg=colour236,bold,bg=colour180,bold] #I #[fg=colour236,bold,bg=#82FA58,bold] #W '
+# #P: the pane number
+setw -g window-status-format '#[fg=colour180,bg=colour236] #I #[fg=colour180,bg=colour236] #W:#P '
+setw -g window-status-current-format '#[fg=colour236,bold,bg=colour180,bold] #I #[fg=colour236,bold,bg=#82FA58,bold] #W:#P '
 
 new  -s tung -n FileManager "cd ~/Dropbox/dev/ && ranger"
 neww -n miscs
