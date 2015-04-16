@@ -139,7 +139,9 @@ alias tmux="tmux -2" # force tmux to use 256 colors
 
 # for vim-fireplace console
 # also fix problem with color in tmux plugin from oh-my-zsh
-export TERM=rxvt-256color
+# Update 2015-04-17: we don't really need to manually set TERM variable. In
+# fact, manually setting it may introduce trouble due to wrong terminal name.
+# export TERM=rxvt-256color
 
 # change system-wide editor
 #export VISUAL="/usr/bin/vim -p -X"
