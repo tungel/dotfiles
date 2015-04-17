@@ -295,8 +295,7 @@ vnoremap <Leader>z :sort<CR>
 " Use F7 to compile and run Cpp program
 " map <F7> :exec ':!g++ % -o a.cout && ./a.cout'<cr>
 
-
-function! CompileCode()
+function! ChangeDirToCurrentBuffer()
     " first change dir to the place where the current file is located
     " let curDir = system('pwd') " the result has @ at the end
     let curDir = getcwd() " get current working directory
@@ -308,8 +307,12 @@ function! CompileCode()
     else
         echom "Already at the " . curDir
     endif
+endfunction
 
-    echom '-------'
+function! CompileCode()
+    " echom '-------'
+
+    call ChangeDirToCurrentBuffer()
 
     if (&filetype == 'cpp')
         exec ':!g++ % -o a.cout && ./a.cout'
@@ -329,7 +332,8 @@ function! CompileCode()
 endfunction
 
 " Use F9 to compile and run the code in the current buffer
-nmap <F9> :call CompileCode()<CR>
+" Update 2015-04-18: Use F9 for vim-dispatch
+" nmap <F9> :call CompileCode()<CR>
 " ==============================================================================
 
 " Space to toggle folds.
