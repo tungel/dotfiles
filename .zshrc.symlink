@@ -168,8 +168,10 @@ bindkey '^w' backward-kill-word
 # ---------- new version works in tmux ----------------------------------------
 # http://ivyl.0xcafe.eu/2013/02/03/refining-zsh/#vi_mode_status_indicator
 # urxvt (and family) accepts even #RRGGBB
-INSERT_PROMPT="gray"
-COMMAND_PROMPT="green"
+
+# the cursor color is inversed from Vim's cursor color setting
+INSERT_PROMPT="green"
+COMMAND_PROMPT="gray"
 
 # helper for setting color including all kinds of terminals
 set_prompt_color() {
