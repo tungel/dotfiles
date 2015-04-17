@@ -588,6 +588,24 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 
 "===============================================================================
+"---begin vim-dispatch
+
+" Use <Leader>c to open quickfix window
+" map <Leader>c :copen<CR>
+
+autocmd FileType java let b:dispatch = 'javac % && java -cp %:p:h %:t:r'
+nnoremap <F7> :Dispatch!<CR>
+
+" automatic open quickfix window to see result
+autocmd QuickFixCmdPost * copen
+
+" <Leader><Enter> only active on quickfix window (qf) and move it to the right
+autocmd! FileType qf nnoremap <buffer> <leader><Enter> <C-w>L
+"---end vim-dispatch
+"===============================================================================
+
+
+"===============================================================================
 "---begin ctrlp
 "Usage:
 "  Once ctrlp appeared: press <c-f> and <c-b> to cycle between modes.
