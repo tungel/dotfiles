@@ -139,9 +139,13 @@ set -g status-bg default
 setw -g window-status-format '#[fg=colour180,bg=colour236] #I #[fg=colour180,bg=colour236] #W:#P '
 setw -g window-status-current-format '#[fg=colour236,bold,bg=colour180,bold] #I #[fg=colour236,bold,bg=#82FA58,bold] #W:#P '
 
+# create 3 windows
 new  -s tung -n FileManager "cd ~/Dropbox/dev/ && ranger"
+neww -n Vim "vim"
 neww -n miscs
-splitw -h -p 50 -t 1
-selectw -t 2 # focus to which window
-selectp -t 1 # focus to which pane
+splitw -h -p 50 -t 3
+# trick to select the left-split of window#3, then come back to focus on Vim
+selectw -t 3 # focus to "miscs" window
+selectp -t 1 # focus to the left pane of window#3
+selectw -t 2 # focus on Vim's window
 
