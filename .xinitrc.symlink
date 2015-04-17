@@ -13,11 +13,7 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-#exec startxfce4
-
-# for openbox settings
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-#exec openbox-session
 
 #set keyboard speed
 #xset r rate 200 30
@@ -26,7 +22,6 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 #xsetroot -cursor_name left_ptr
 #setxkbmap -layout en
-#exec ck-launch-session xmonad
 
 #source /etc/X11/xinit/xinitrc.d/30-dbus
 #eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
@@ -44,22 +39,30 @@ xset fp rehash
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 eval `/usr/bin/ssh-agent -s`
-sh ~/.autostart &
 
-# for Arch Linux
-sxhkd &
-exec bspwm
+if [ -f ~/.autostart ] ; then
+    sh ~/.autostart &
+fi
 
-# for Linux Mint
-# exec cinnamon-session
 
-#exec xmonad
+# http://linuxmafia.com/faq/Admin/release-files.html
+# we can also use file /etc/os-release
+if [ -f /etc/arch-release ] ; then
+    # for Arch Linux
+    sxhkd &
+    exec bspwm
+elif [ -f /etc/lsb-release ] ; then
+    # for Linux Mint
+    exec cinnamon-session
+fi
+
 
 #gnome-encfs-manager
 
-
 # exec gnome-session
 # exec startkde
+# exec openbox-session
 # exec startxfce4
+# exec ck-launch-session xmonad
 # ...or the Window Manager of your choice
 
