@@ -169,7 +169,7 @@ bindkey '^w' backward-kill-word
 # http://ivyl.0xcafe.eu/2013/02/03/refining-zsh/#vi_mode_status_indicator
 # urxvt (and family) accepts even #RRGGBB
 INSERT_PROMPT="gray"
-COMMAND_PROMPT="red"
+COMMAND_PROMPT="green"
 
 # helper for setting color including all kinds of terminals
 set_prompt_color() {
