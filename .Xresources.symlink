@@ -1,4 +1,4 @@
-! Run: `xrdb ~/.Xresources`
+! Run: `xrdb -merge ~/.Xresources` after modify this file
 
 ! font stuffs
 Xft.autohint: true
@@ -27,17 +27,18 @@ URxvt.tintColor:black
 URxvt.fading:20
 URxvt.fadeColor: #453e40
 ! URxvt.perl-ext-common:default,clipboard,matcher,tabbed
-URxvt.perl-ext-common:default,matcher,tabbed
+URxvt.perl-ext-common:default,matcher
 URxvt.url-launcher:/usr/bin/firefox
 URxvt.matcher.button:1
 URxvt.scrollBar:false
 ! fix problem with color in tmux plugin from oh-my-zsh,
 ! maybe: rxvt-unicode-256color
 URxvt.termName:rxvt-256color
-URxvt.tabbed.tabbar-fg: 15
-URxvt.tabbed.tabbar-bg: 0
-URxvt.tabbed.tab-fg: 11
-URxvt.tabbed.tab-bg: 8
+! URxvt.tabbed.tabbar-fg: 15
+! URxvt.tabbed.tabbar-bg: 0
+! URxvt.tabbed.tab-fg: 11
+! URxvt.tabbed.tab-bg: 8
+! URxvt.tabbed.autohide: yes
 URxvt.visualBell: false
 URxvt.scrollTtyOutput: false
 URxvt.scrollWithBuffer: true
