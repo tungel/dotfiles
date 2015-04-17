@@ -46,8 +46,12 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 eval `/usr/bin/ssh-agent -s`
 sh ~/.autostart &
 
+# for Arch Linux
 sxhkd &
 exec bspwm
+
+# for Linux Mint
+# exec cinnamon-session
 
 #exec xmonad
 
