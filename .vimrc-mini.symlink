@@ -130,6 +130,10 @@ nnoremap <A-8> 8gt
 nnoremap <A-9> 9gt
 nnoremap <A-0> 10gt
 
+
+" Use <leader>c to quickly close the current buffer
+nnoremap <leader>c :q<CR>
+
 " use Shift+q to format a paragraph to do wrapping at 80 chars
 " commented out on 2015-04-02 to make it automatically join short lines
 " together: " set formatoptions+=w
