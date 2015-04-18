@@ -134,6 +134,10 @@ nnoremap <A-0> 10gt
 " Use <leader>c to quickly close the current buffer
 nnoremap <leader>c :q<CR>
 
+
+" Use <leader>x to open quickfix window and move it to the far right hand side
+nnoremap <leader>x :Copen<CR>:wincmd L<CR>
+
 " use Shift+q to format a paragraph to do wrapping at 80 chars
 " commented out on 2015-04-02 to make it automatically join short lines
 " together: " set formatoptions+=w
@@ -173,7 +177,7 @@ match NonText '^\s\+' "
 nmap <Leader>rr :source $MYVIMRC
 
 " quickly open to edit .vimrc file
-nmap <Leader>v :tabe $MYVIMRC
+" nmap <Leader>v :tabe $MYVIMRC
 
 
 " quickly comment out block of code
@@ -270,6 +274,7 @@ noremap <F6> :setlocal spell! spelllang=en_us<CR>
 " set folding method for C code
 " :setlocal foldmethod=syntax
 autocmd FileType c,java,cpp,python setlocal foldmethod=syntax
+autocmd FileType vim setlocal foldmethod=marker
 
 nmap <silent> <RIGHT> :cnext<CR>
 nmap <silent> <RIGHT><RIGHT> :cnfile<CR><C-G>
@@ -304,12 +309,12 @@ function! ChangeDirToCurrentBuffer()
     " let curDir = system('pwd') " the result has @ at the end
     let curDir = getcwd() " get current working directory
     let targetDir = expand('%:p:h') " get the dir contains the current buffer
-    echom "curDir = " . curDir
+    " echom "curDir = " . curDir
     if (curDir != targetDir)
-        echom "Changing dir to " . targetDir
+        " echom "Changing dir to " . targetDir
         exec 'cd %:p:h'
     else
-        echom "Already at the " . curDir
+        " echom "Already at the " . curDir
     endif
 endfunction
 
