@@ -36,8 +36,7 @@ call pathogen#helptags()
 
 
 "===============================================================================
-"---begin easy-motion
-
+"---begin easy-motion {{{
 
 "let g:EasyMotion_do_mapping = 0 " Disable default mappings
 "map <Leader> <Plug>(easymotion-prefix)
@@ -64,12 +63,12 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
-"---end easy-motion
+"---end easy-motion }}}
 "===============================================================================
 
 
 "===============================================================================
-"---begin nerdtree
+"---begin nerdtree {{{
 "autocmd vimenter * NERDTree "auto open nerdtree upon vim launch
 " use Ctrl+n to open nerdtree
 map <C-n> :NERDTreeToggle<CR>
@@ -81,7 +80,7 @@ let NERDTreeDirArrows=0
 "open nerdtree based on the directory of the current buffer, the cursor will be
 "placed at the current opened file
 map <silent> <Leader>r :NERDTreeFind<cr>
-"---end nerdtree
+"---end nerdtree }}}
 "===============================================================================
 
 
@@ -132,7 +131,7 @@ color molokai
 "
 
 "===============================================================================
-"---begin unite.vim
+"---begin unite.vim {{{
 "usage:
 " :Unite line
 " :Unite tab
@@ -273,7 +272,7 @@ let g:unite_source_menu_menus.git.command_candidates = [
     \]
 nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
 
-"---end unite.vim
+"---end unite.vim }}}
 "===============================================================================
 
 
