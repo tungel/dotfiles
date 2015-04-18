@@ -278,7 +278,7 @@ nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
 
 
 "===============================================================================
-" begin vim-airline
+" begin vim-airline {{{
 
 set laststatus=2
 
@@ -310,12 +310,12 @@ let g:Powerline_symbols="fancy"
 
 " when there is only 1 tab open, vim-airline will display all buffers in the
 " tabline, we can switch to a buffer by :bn or :bp
-" end vim-airline
+" end vim-airline }}}
 "===============================================================================
 
 
 "===============================================================================
-"begin indentLine
+"begin indentLine {{{
 
 if has('gui_running')
     "let g:indentLine_color_gui = '#353833'
@@ -326,12 +326,12 @@ endif
 
 let g:indentLine_char = '┊'
 
-"end indentLine
+"end indentLine }}}
 "===============================================================================
 
 
 "===============================================================================
-"---begin vim-latex plugin
+"---begin vim-latex plugin {{{
 filetype plugin indent on "REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
@@ -380,15 +380,15 @@ function! SyncTexForward()
 endfunction
 nmap <Leader>1 :call SyncTexForward()<CR>
 
-"---end vim-latex
+"---end vim-latex }}}
 "===============================================================================
 
 "===============================================================================
-"---begin fugitive
+"---begin fugitive {{{
 nmap <leader>gs :Gstatus<cr>
 nmap <leader>gc :Gcommit<cr>
 nmap <leader>gp :Gpush<cr>
-"---end fugitive
+"---end fugitive }}}
 "===============================================================================
 
 
@@ -826,9 +826,8 @@ let g:simple_todo_map_keys = 0
 "---end vim-simple-todo }}}
 "===============================================================================
 
-
 "===============================================================================
-"---begin markdown
+"---begin markdown {{{
 " below section need to be at the bottom of the file, or else the auto bullet in
 " markdown will not work
 
@@ -842,11 +841,11 @@ autocmd Filetype markdown setlocal com=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,b:
 " make markdown auto insert list with 1. when possible
 autocmd Filetype markdown setlocal com+=b:1.
 " autocmd Filetype markdown set com+=b:1.
-"---end markdown
+"---end markdown }}}
 "===============================================================================
 
 "===============================================================================
-"---begin dragvisuals.vim
+"---begin dragvisuals.vim {{{
 " move the whole visual block (select by pressing <C-v>
 vmap  <expr>  <LEFT>   DVB_Drag('left')
 vmap  <expr>  <RIGHT>  DVB_Drag('right')
@@ -856,13 +855,13 @@ vmap  <expr>  D        DVB_Duplicate()
 
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
-"---end dragvisuals.vim
+"---end dragvisuals.vim }}}
 "===============================================================================
 
 "===============================================================================
-"---begin vim-sexp
+"---begin vim-sexp {{{
 " disable automatically producing closing bracket because we already have it
 let g:sexp_enable_insert_mode_mappings = 0
-"---end vim-sexp
+"---end vim-sexp }}}
 "===============================================================================
 
