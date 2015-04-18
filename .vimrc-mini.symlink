@@ -216,7 +216,8 @@ set wildmenu
 " In these commands, % gives the name of the current file, %:p gives its full
 " path, and %:p:h gives its directory (the "head" of the full path)
 " nnoremap <c-d> :cd %:p:h<CR>
-nnoremap <c-BS> :cd %:p:h<CR>
+" nnoremap <c-BS> :cd %:p:h<CR>
+nnoremap <leader>d :call ChangeDirToCurrentBuffer()<CR>
 
 "easier moving of code blocks for indentation
 vnoremap < <gv
