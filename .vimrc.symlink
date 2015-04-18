@@ -477,7 +477,7 @@ endfunction
 
 
 "===============================================================================
-"---begin neocomplete
+"---begin neocomplete {{{
 
 "disable AutoComplPop
 let g:acp_enableAtStartup = 0
@@ -545,13 +545,11 @@ nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
 " let g:neocomplcache_force_overwrite_completefunc = 1
 let g:neocomplete#force_overwrite_completefunc = 1
 
-
-"---end neocomplete
+"---end neocomplete }}}
 "===============================================================================
 
-
 "===============================================================================
-"---begin neosnippet
+"---begin neosnippet {{{
 "usage:
 " C-n or C-p to move around the suggested snippets
 " C-k to expand the chosen suggested snippets
@@ -582,7 +580,7 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
-"---end neosnippet
+"---end neosnippet }}}
 "===============================================================================
 
 
@@ -616,10 +614,8 @@ endfunction
 "===============================================================================
 "---end vimux }}}
 
-
-
-
-" rainbow_parentheses
+"===============================================================================
+"---begin rainbow_parentheses {{{
 " \ ['black',       'SeaGreen3'], << original at 10th
 " change it to yellow
 let g:rbpt_colorpairs = [
@@ -640,10 +636,11 @@ let g:rbpt_colorpairs = [
     \ ['darkred',     'DarkOrchid3'],
     \ ['red',         'firebrick3'],
     \ ]
+"---end rainbow_parentheses }}}
+"===============================================================================
 
 "===============================================================================
-"---begin vim-dispatch
-
+"---begin vim-dispatch {{{
 function! MyDispatch()
     call ChangeDirToCurrentBuffer()
     :Dispatch!
@@ -663,12 +660,12 @@ nnoremap <F9> :call MyDispatch()<CR>
 
 " <Leader><Enter> only active on quickfix window (qf) and move it to the right
 autocmd! FileType qf nnoremap <buffer> <leader><Enter> <C-w>L
-"---end vim-dispatch
+"---end vim-dispatch }}}
 "===============================================================================
 
 
 "===============================================================================
-"---begin ctrlp
+"---begin ctrlp {{{
 "Usage:
 "  Once ctrlp appeared: press <c-f> and <c-b> to cycle between modes.
 
@@ -708,21 +705,19 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 "    \ 'file': '\v\.(exe|so|dll)$',
 "    \ 'link': 'some_bad_symbolic_links',
 "    \ }
-"---end ctrlp
+"---end ctrlp }}}
 "===============================================================================
 
-
 "===============================================================================
-"---begin tagbar
+"---begin tagbar {{{
 noremap <F2> :TagbarToggle<CR>
 inoremap <F2> <ESC> :TagbarToggle<CR>
-"---end tagbr
+"---end tagbr }}}
 "===============================================================================
 
 
-
 "===============================================================================
-"---begin commentary
+"---begin commentary {{{
 "usage:
 " gc{motion} comment/uncomment lines that {motion} moves over
 " gcc : comment/uncomment the whole line
@@ -738,12 +733,12 @@ autocmd FileType cpp set commentstring=//\ %s
 autocmd FileType matlab set commentstring=\%\ %s
 
 " autocmd FileType py set commentstring=#\ %s
-"---end commentary
+"---end commentary }}}
 "===============================================================================
 
 
 "===============================================================================
-"---begin syntastic
+"---begin syntastic {{{
 
 "use Ctrl+w E to check error
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
@@ -763,11 +758,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-"---end syntastic
+"---end syntastic }}}
 "===============================================================================
 
 "===============================================================================
-"---begin abolish
+"---begin abolish {{{
 "Usage:
 "   search and replace "tung le" to "squallltt"
 "       :%S/tung le/squallltt/gc
@@ -779,27 +774,27 @@ let g:syntastic_check_on_wq = 0
 "       MixedCase (crm), camelCase (crc), snake_case (crs), and UPPER_CASE (cru)
 "       are all just 3 keystrokes away.
 
-"---end abolish
+"---end abolish }}}
 "===============================================================================
 
 "===============================================================================
-"---begin delimitMate
+"---begin delimitMate {{{
 "create line break when pressing enter
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 
 let delimitMate_jump_expansion = 1
-"---end delimitMate
+"---end delimitMate }}}
 "===============================================================================
 
 "===============================================================================
-"---begin vim-session
+"---begin vim-session {{{
 " let g:session_directory='~/.vim/data/sessions'
 let g:session_directory='~/Dropbox/dev/nogit/vimdata/sessions'
 let g:session_autosave = 'yes'
 let g:session_autoload = 'yes'
 let g:session_default_to_last = 1
-"---end vim-session
+"---end vim-session }}}
 "===============================================================================
 
 "===============================================================================
@@ -818,8 +813,6 @@ let g:session_default_to_last = 1
 " command! OrgCaptureFile :call org#OpenCaptureFile()
 "---end VimOrganizer
 "===============================================================================
-
-
 
 "===============================================================================
 "---begin vimwiki
