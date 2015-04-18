@@ -636,6 +636,11 @@ let g:rbpt_colorpairs = [
     \ ['darkred',     'DarkOrchid3'],
     \ ['red',         'firebrick3'],
     \ ]
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 "---end rainbow_parentheses }}}
 "===============================================================================
 
@@ -798,7 +803,7 @@ let g:session_default_to_last = 1
 "===============================================================================
 
 "===============================================================================
-"---begin vim-simple-todo
+"---begin vim-simple-todo {{{
 " Comment out to use <Space> for folding/unfolding because it's more useful than
 " this plugin
 
@@ -818,18 +823,8 @@ let g:simple_todo_map_keys = 0
 " nmap <Space>X <Plug>(simple-todo-mark-as-undone) :nohl<CR>
 " " imap <Space>X <Plug>(simple-todo-mark-as-undone)
 
-"---end vim-simple-todo
+"---end vim-simple-todo }}}
 "===============================================================================
-
-"===============================================================================
-"---begin rainbow_parentheses
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-"---end rainbow_parentheses
-"===============================================================================
-
 
 
 "===============================================================================
