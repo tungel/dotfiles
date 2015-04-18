@@ -798,17 +798,6 @@ let g:session_default_to_last = 1
 "===============================================================================
 
 "===============================================================================
-"---begin VimOrganizer
-" let g:ft_ignore_pat = '\.org'
-" au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-" au BufEnter *.org    call org#SetOrgFileType()
-" command! OrgCapture :call org#CaptureBuffer()
-" command! OrgCaptureFile :call org#OpenCaptureFile()
-"---end VimOrganizer
-"===============================================================================
-
-
-"===============================================================================
 "---begin vim-simple-todo
 " Comment out to use <Space> for folding/unfolding because it's more useful than
 " this plugin
