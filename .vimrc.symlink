@@ -594,6 +594,12 @@ map <Leader>vc :VimuxCloseRunner<CR>
 " Inspect runner pane
 map <Leader>vi :VimuxInspectRunner<CR>
 
+" Interrupt any command running in the runner pane
+map <Leader>vx :VimuxInterruptRunner<CR>
+
+" Run the current file with rspec
+map <Leader>vr :call MyVimux()<CR>
+
 function! VimuxSlime()
   call VimuxSendText(@v)
   call VimuxSendKeys("Enter")
@@ -602,6 +608,7 @@ endfunction
 " If text is selected, save it in the v buffer and send that buffer it to tmux
 vnoremap <Leader>vs "vy :call VimuxSlime()<CR>
 
+" compile and run Java file and optionally feed an input text file
 function! MyVimux()
     call ChangeDirToCurrentBuffer()
     let cp = expand('%:p:h') " current path
@@ -623,9 +630,6 @@ function! MyVimux()
 
     call VimuxRunCommand(cmd)
 endfunction
-
-" Run the current file with rspec
-map <Leader>vr :call MyVimux()<CR>
 "---end vimux }}}
 "===============================================================================
 
