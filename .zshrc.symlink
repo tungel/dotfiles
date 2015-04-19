@@ -35,6 +35,10 @@ setopt HIST_IGNORE_DUPS
 # packages
 setopt nohashdirs
 
+# disable flow control
+# (default was: Ctrl+s (pause transmission), Ctrl+q (resume transmission))
+setopt noflowcontrol
+
 # ==============================================================================
 #---begin dirstack
 # commented out 2015-04-14 because it interfere with Ranger's `S` command to go
