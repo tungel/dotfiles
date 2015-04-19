@@ -587,6 +587,7 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 "---begin vimux {{{
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "35"
+let g:VimuxPromptString = "Command: "
 
 " Close vim tmux runner opened by VimuxRunCommand
 map <Leader>vc :VimuxCloseRunner<CR>
