@@ -622,8 +622,14 @@ function! MyVimux()
 
     if len(splitDash) <= 1
         " the current file should be a Java source code
-        let cmd = "javac " . className . ".java" .
-            \ "; java -cp " .  cp . " " . className
+
+        " now check if the className has the form of xxxxTest
+        if (match(className, 'Test$') > 0)
+            let cmd = 'rake "test1[' . className . ']"'
+        else
+            let cmd = "javac " . className . ".java" .
+                \ "; java -cp " .  cp . " " . className
+        endif
     else
         " now the current file is a input text file
         let cmd = "javac " . className . ".java" .
@@ -631,6 +637,10 @@ function! MyVimux()
                 \ className . " " . expand('%:t')
     endif
 
+    " send command to change dir to the shell first
+    call VimuxRunCommand('cd ' . cp)
+
+    " then run the actual compile/run command
     call VimuxRunCommand(cmd)
 endfunction
 "---end vimux }}}
