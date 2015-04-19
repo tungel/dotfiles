@@ -39,6 +39,10 @@ setopt nohashdirs
 # (default was: Ctrl+s (pause transmission), Ctrl+q (resume transmission))
 setopt noflowcontrol
 
+# Map Ctrl-S to sth usefull other than XOFF (interrupt data flow).
+# search functionality (same as Ctrl+R) in bash
+stty -ixon
+
 # ==============================================================================
 #---begin dirstack
 # commented out 2015-04-14 because it interfere with Ranger's `S` command to go

@@ -142,7 +142,9 @@ setw -g window-status-current-format '#[fg=colour236,bold,bg=colour180,bold] #I 
 
 # create 3 windows
 new  -s tung -n FileManager "cd ~/Dropbox/dev/ && ranger"
-neww -n Vim "vim"
+# when tmux run a specific command (like `vim`), no initialization takes place
+# and the flow control enabled apply, so we gotta turn it off explicitly
+neww -n Vim "stty -ixon; vim"
 neww -n miscs
 splitw -h -p 50 -t 3
 # trick to select the left-split of window#3, then come back to focus on Vim
