@@ -106,29 +106,12 @@ color molokai
 "===============================================================================
 
 
-
-"let g:molokai_original = 1
-"let g:rehash256 = 1
-"set background=dark
-
-" ----------- The section below is adapted from Vim as a Python IDE
-"------------ Martin Brochhaus , YouTube
-
-"command to create new tab: :tabnew
-" command to split: :split filename
-
 " automatic reloading of .vimrc, so we don't need to close the .vimrc
 " for vim to apply new settings in that file
 " currently, this interfeer with identLine and vim-airline (after save the
 " .vimrc file, those plugin lost their visual.
 "autocmd! bufwritepost .vimrc source %
 
-
-
-" easier moving between tabs
-"map <Leader>n <esc>:tabprevious<CR>
-"map <Leader>m <esc>:tabnext<CR>
-"
 
 "===============================================================================
 "---begin unite.vim {{{
