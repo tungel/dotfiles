@@ -604,21 +604,29 @@ function! MyVimux()
     let splitDash = split(expand('%:t:r'), '-')
     let className = splitDash[0] " the first element is always the class's name
 
-    if len(splitDash) <= 1
-        " the current file should be a Java source code
-
-        " now check if the className has the form of xxxxTest
-        if (match(className, 'Test$') > 0)
-            let cmd = 'rake "test1[' . className . ']"'
-        else
-            let cmd = "javac " . className . ".java" .
-                \ "; java -cp " .  cp . " " . className
-        endif
+    if (&filetype ==? 'cpp')
+        let cmd = 'g++ ' . expand('%:p') . ' -o a.cout && ./a.cout'
+    elseif (&filetype ==? 'c')
+        let cmd = 'gcc -std=c99 ' . expand('%:p') . ' -o a.cout && ./a.cout'
     else
-        " now the current file is a input text file
-        let cmd = "javac " . className . ".java" .
-                \ "; java -cp " .  expand('%:p:h') . " " .
-                \ className . " " . expand('%:t')
+        " now handling Java and its stuff
+
+        if len(splitDash) <= 1
+            " the current file should be a Java source code
+
+            " now check if the className has the form of xxxxTest
+            if (match(className, 'Test$') > 0)
+                let cmd = 'rake "test1[' . className . ']"'
+            else
+                let cmd = "javac " . className . ".java" .
+                    \ "; java -cp " .  cp . " " . className
+            endif
+        else
+            " now the current file is a input text file
+            let cmd = "javac " . className . ".java" .
+                    \ "; java -cp " .  expand('%:p:h') . " " .
+                    \ className . " " . expand('%:t')
+        endif
     endif
 
     " send command to change dir to the shell first
