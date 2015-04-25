@@ -161,6 +161,13 @@ export DMENUFONT="Consolas-11"
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 # export JAVA_HOME=/usr/lib/jvm/java-7-oracle
 
+# configuration for Hadoop where it is downloaded to ~/mytemp/hadoop/
+HADOOP_PREFIX=~/mytemp/hadoop
+PATH=$PATH:${HADOOP_PREFIX}/bin:${HADOOP_PREFIX}/sbin
+
+# for local scripts/programs
+PATH=$PATH:~/bin
+
 # some more aliases for personal usage
 if [[ -e ~/Dropbox/dev/nogit/morealiases.sh ]]; then
     source ~/Dropbox/dev/nogit/morealiases.sh
