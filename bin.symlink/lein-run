@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+lein run -m clojure.main/main -i "$@"
+
+# Clojure script file just need to add `#!/usr/bin/env lein-run` at the top
+# then run `chmod +x script.clj` and then run the script itself `./script.clj`
+
