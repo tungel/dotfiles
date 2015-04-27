@@ -884,6 +884,9 @@ autocmd Filetype mkd setlocal com=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,b:-,b:+
 
 " make markdown auto insert list with 1. when possible
 autocmd Filetype mkd setlocal com+=b:1.
+
+" disable default key mapping of vim-markdown plugin
+let g:vim_markdown_no_default_key_mappings=1
 "---end markdown }}}
 "===============================================================================
 
