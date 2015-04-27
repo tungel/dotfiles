@@ -875,15 +875,13 @@ let g:simple_todo_map_keys = 0
 " markdown will not work
 
 " Set *.md file to be markdown filetype instead of modula2 as default
-" au BufNewFile,BufRead *.md  setf markdown
 autocmd BufRead,BufNew,BufNewFile *.md set filetype=markdown
 
 " http://stackoverflow.com/questions/19211839/markdown-lists-in-vim
 autocmd Filetype markdown setlocal com=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,b:-,b:+ | set formatoptions+=tcroqln
-" autocmd Filetype markdown set com=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,b:-,b:+ | set formatoptions+=tcroqln
+
 " make markdown auto insert list with 1. when possible
 autocmd Filetype markdown setlocal com+=b:1.
-" autocmd Filetype markdown set com+=b:1.
 "---end markdown }}}
 "===============================================================================
 
