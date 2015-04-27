@@ -132,7 +132,7 @@ nnoremap <A-0> 10gt
 
 
 " Use <leader>c to quickly close the current buffer
-nnoremap <leader>c :q<CR>
+nnoremap <leader>c :q<CR><CR>
 
 
 " Use <leader>x to open quickfix window and move it to the far right hand side
