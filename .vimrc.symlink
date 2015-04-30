@@ -243,7 +243,9 @@ let g:unite_source_menu_menus.git.command_candidates = [
     \['▷ git cd           (Fugitive)',
         \'Gcd'],
     \]
-nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
+
+" 2015-04-30 below line cause `[m` motion slow
+" nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
 
 "---end unite.vim }}}
 "===============================================================================
