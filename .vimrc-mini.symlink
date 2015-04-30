@@ -35,6 +35,21 @@ if has('gui_running')
         " set font for GVim in Windows
         set guifont=Consolas:h10:cANSI
     endif
+
+    " remove unwanted stuffs in gvim
+    set guioptions-=m  "remove menu bar
+    set guioptions-=T  "remove toolbar
+    set guioptions-=r  "remove right-hand scroll bar
+    set guioptions-=L  "remove left-hand scroll bar
+
+    " Set tab label to show tab number, filename, modified (show '+')
+    set guitablabel=%N)\ %t\ %M
+
+    " only display file name on the tab instead of full path, this helps making
+    " vim look neater when switching from tab to tab
+    " set guitablabel=%t
+    " limit tablabel to at most 10 characters
+    " set guitablabel=%-0.20t%M
 else
     " set number of color for the terminal emulator
     set t_Co=256
@@ -78,9 +93,6 @@ inoremap <c-s> <c-o>:Update<CR>
 " vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 " vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-" Set tab label to show tab number, filename, if modified ('+' is shown if the
-" current window in the tab has been modified)
-set guitablabel=%N)\ %t\ %M
 
 imap jk <ESC>
 

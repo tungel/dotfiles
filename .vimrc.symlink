@@ -13,16 +13,6 @@
 " Read essential configuration from the mini file
 source ~/.vimrc-mini
 
-" remove unwanted stuffs in gvim
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-
-" only display file name on the tab instead of full path, this helps making vim
-" look neater when switching from tab to tab
-set guitablabel=%t
-
 "===============================================================================
 "---begin pathogen plugin
 execute pathogen#infect()
