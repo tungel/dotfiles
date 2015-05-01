@@ -8,6 +8,7 @@
 # the most common dot files
 .vimrc
 .vimrc-mini
+.vimrc-minimal
 .profile
 .bashrc
 .bash_profile

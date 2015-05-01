@@ -1,0 +1,91 @@
+"===============================================================================
+" https://github.com/everbot/dotfiles
+" Minimal setup for vim
+"
+" The purpose of this file is to configure vim to work with general text file
+" such that it doesn't change the format of the text (like: remove trailing
+" white space, change tab to space, ...)
+" So that, we can use this Vim's configuration file to work with other projects
+" which contains non-standard text format ("Death to the Space Infidels!" -
+" Coding Horror)
+"===============================================================================
+
+
+" disable compatibility to vi because it's annoying.
+" compatibility with vi make `imap jk <ESC>` doesn't work
+set nocompatible
+
+imap jk <ESC>
+
+filetype plugin on
+
+" set line number
+set nu
+
+"display status bar at the bottom which shows file name and cursor position
+set laststatus=2
+
+"display title bar of the current vim window
+set title
+
+syntax on
+
+" Rebind <Leader> key. when you pressed the Leader key, the cursor
+" will wait for 1s for user to press another key
+let mapleader = ","
+
+" highlight tab and trailing space
+set listchars=tab:>-,trail:-
+set list
+" use F11 to toggle between displaying white space or not
+noremap <F11> :set list!<CR>
+
+" use Ctrl + l to redraw the screen and remove any search highlighs
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+
+" toggling cursorline highlight when switching on/off insert mode
+" autocmd InsertEnter,InsertLeave * set cul!
+" or:
+autocmd InsertEnter * set cul
+autocmd InsertLeave * set nocul
+
+" make search case insensitive
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" disable backup and swap files - they trigger too many events
+" for file system watchers, we have Git!
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Use <leader>c to quickly close the current buffer
+" 2 <CR> to auto close the git commit window
+nnoremap <leader>c :q<CR><CR>
+
+" auto reload the file if it's changed
+set autoread
+
+" use Ctrl+d to move the cursor to bottom, then bring that bottom line to middle
+" of screen
+noremap <silent> <C-d> <S-l>zz
+
+" use Ctrl+u to move the cursor to top of the page, then bring that top line
+" to middle of screen
+noremap <silent> <C-u> <S-h>zz
+
+" enable suggestion of available of commands in commands mode, so that we can
+" use arrow keys (or Ctrl+n and Ctrl+p) to choose a desire command form the list
+" Active the wildmenu by entering command mode (:) then type in the first few
+" character and then press Tab
+set wildmenu
+
+"easier moving of code blocks for indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" set autoindent
+set ai
+
