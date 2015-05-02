@@ -215,7 +215,7 @@ noremap <F6> :setlocal spell! spelllang=en_us<CR>
 " set folding method for C code
 " :setlocal foldmethod=syntax
 autocmd FileType c,java,cpp,python setlocal foldmethod=syntax
-autocmd FileType vim setlocal foldmethod=marker
+autocmd FileType vim,sh setlocal foldmethod=marker
 
 nmap <silent> <RIGHT> :cnext<CR>
 nmap <silent> <RIGHT><RIGHT> :cnfile<CR><C-G>
