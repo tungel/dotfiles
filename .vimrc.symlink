@@ -67,6 +67,9 @@ map <C-n> :NERDTreeToggle<CR>
 " of directory name
 let NERDTreeDirArrows=0
 
+" don't display compile output stuffs
+let NERDTreeIgnore=['.class$[[file]]', '.o$[[file]]']
+
 "open nerdtree based on the directory of the current buffer, the cursor will be
 "placed at the current opened file
 map <silent> <Leader>r :NERDTreeFind<cr>
