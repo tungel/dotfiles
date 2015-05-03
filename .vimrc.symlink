@@ -123,6 +123,8 @@ color molokai
 "             \ )
 "             \ )
 
+" "test" ignores test directory/file only.
+" "test/" ignores test directory and inner files.
 " ignore everything at first
 let s:unite_mru_ignores = ['*']
 " add white list of candidates not to be ignored
@@ -130,12 +132,8 @@ let s:unite_mru_whites = ['Test.java',
                     \ '**/dev/code**',
                     \ 'pacman.log',
                     \ '**/dotfiles/**']
-call unite#custom#source('file_mru',
-  \ 'ignore_globs', unite#get_all_sources('file_mru')['ignore_globs'] +
-  \ s:unite_mru_ignores)
-call unite#custom#source('file_mru',
-  \ 'white_globs', unite#get_all_sources('file_mru')['white_globs'] +
-  \ s:unite_mru_whites)
+call unite#custom#source('file_mru', 'ignore_globs', s:unite_mru_ignores)
+call unite#custom#source('file_mru', 'white_globs', s:unite_mru_whites)
 " call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
 "   \ 'ignore_globs', unite#get_all_sources('file_rec')['ignore_globs'] +
 "   \ s:unite_mru_ignores)
