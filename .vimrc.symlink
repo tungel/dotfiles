@@ -112,16 +112,6 @@ color molokai
 " :Unite line
 " :Unite tab
 
-" The below setting works well to ignore certain patterns
-" call unite#custom#source('file_mru', 'ignore_pattern',
-"             \ join(['\.cache',
-"             \ '\.vim\/bundle',
-"             \ '\/usr',
-"             \ '\/etc',
-"             \ '^\/home'],
-"             \ '\|'
-"             \ )
-"             \ )
 
 " "test" ignores test directory/file only.
 " "test/" ignores test directory and inner files.
@@ -129,7 +119,7 @@ color molokai
 let s:unite_mru_ignores = ['*']
 " add white list of candidates not to be ignored
 let s:unite_mru_whites = ['Test.java',
-                    \ '**/dev/code**',
+                    \ '**/Dropbox/dev/**',
                     \ 'pacman.log',
                     \ '**/dotfiles/**']
 call unite#custom#source('file_mru', 'ignore_globs', s:unite_mru_ignores)
@@ -140,6 +130,18 @@ call unite#custom#source('file_mru', 'white_globs', s:unite_mru_whites)
 " call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
 "   \ 'white_globs', unite#get_all_sources('file_rec')['white_globs'] +
 "   \ s:unite_mru_whites)
+
+" The below setting works well to ignore certain patterns in the white_globs list
+" \ '\/.vim\/bundle\/.\+tags$',  : match .vim/bundle/..tags
+call unite#custom#source('file_mru', 'ignore_pattern',
+            \ join([
+            \ '\.cache',
+            \ '\/.vim\/bundle\/',
+            \ '\/everbot\.github\.io\/',
+            \ '^\/run'],
+            \ '\|'
+            \ )
+            \ )
 
 nnoremap <C-Space> :Unite -start-insert<CR>
 
