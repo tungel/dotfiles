@@ -199,7 +199,6 @@ nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 -start-insert buffe
 nnoremap <Leader>f :Unite file -start-insert<cr>
 
 " open bookmark
-" nnoremap <silent> <Leader>t :Unite bookmark -start-insert<cr>
 nnoremap <silent> <Leader>a :Unite -buffer-name=bookmarks -start-insert bookmark<CR>
 
 " yank history
