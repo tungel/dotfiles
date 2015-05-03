@@ -112,15 +112,47 @@ color molokai
 " :Unite line
 " :Unite tab
 
+" The below setting works well to ignore certain patterns
+" call unite#custom#source('file_mru', 'ignore_pattern',
+"             \ join(['\.cache',
+"             \ '\.vim\/bundle',
+"             \ '\/usr',
+"             \ '\/etc',
+"             \ '^\/home'],
+"             \ '\|'
+"             \ )
+"             \ )
+
+" ignore everything at first
+let s:unite_mru_ignores = ['*']
+" add white list of candidates not to be ignored
+let s:unite_mru_whites = ['Test.java',
+                    \ '**/dev/code**',
+                    \ 'pacman.log',
+                    \ '**/dotfiles/**']
+call unite#custom#source('file_mru',
+  \ 'ignore_globs', unite#get_all_sources('file_mru')['ignore_globs'] +
+  \ s:unite_mru_ignores)
+call unite#custom#source('file_mru',
+  \ 'white_globs', unite#get_all_sources('file_mru')['white_globs'] +
+  \ s:unite_mru_whites)
+" call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+"   \ 'ignore_globs', unite#get_all_sources('file_rec')['ignore_globs'] +
+"   \ s:unite_mru_ignores)
+" call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+"   \ 'white_globs', unite#get_all_sources('file_rec')['white_globs'] +
+"   \ s:unite_mru_whites)
+
 nnoremap <C-Space> :Unite -start-insert<CR>
 
 " custom profile:
 " \   'direction': 'botright',
 " 'direction': 'botright', 'topleft'
 " 'prompt_direction': 'top', 'below'
+" \   'prompt': '» ',
 call unite#custom#profile('default', 'context', {
 \   'startinsert': 1,
-\   'prompt': '» ',
+\   'prompt': '>> ',
 \   'prompt_direction': 'top',
 \   'direction': 'topleft',
 \ })
@@ -167,7 +199,8 @@ nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 -start-insert buffe
 nnoremap <Leader>f :Unite file -start-insert<cr>
 
 " open bookmark
-nnoremap <Leader>t :Unite bookmark -start-insert<cr>
+" nnoremap <silent> <Leader>t :Unite bookmark -start-insert<cr>
+nnoremap <silent> <Leader>a :Unite -buffer-name=bookmarks -start-insert bookmark<CR>
 
 " yank history
 nnoremap <Leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
@@ -204,6 +237,8 @@ autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()"{{{
   " Overwrite settings.
   nmap <buffer> <C-l>      <Plug>(unite_redraw)
+
+  nnoremap <buffer><expr> t unite#do_action('tabswitch')
 
   " Enable navigation with control-j and control-k in insert mode
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
