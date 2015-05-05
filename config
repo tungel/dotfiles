@@ -5,6 +5,8 @@
 #
 
 <symlink>
+
+#===============================================================================
 # the most common dot files
 .vimrc
 .vimrc-mini
@@ -14,7 +16,19 @@
 .bash_profile
 .zshrc
 .tmux.conf
+.yaourtrc
 
+# common directories
+.zfunctions
+.zplugins
+bin
+#===============================================================================
+
+
+
+
+
+#===============================================================================
 # other misc dotfiles
 .autostart
 .xinitrc
@@ -24,16 +38,12 @@
 .Xmodmap
 .Xresources
 .xsession
-.yaourtrc
 
-
-# whole directory
-.zfunctions
-.zplugins
+# other directories
 bspwm
 sxhkd
 fontconfig
-bin
+#===============================================================================
 
 
 </symlink>
