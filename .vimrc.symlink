@@ -185,7 +185,7 @@ nnoremap <F8> :Unite grep:.<cr>
 
 " For ack.
 " Using ack-grep as recursive command.
-let g:unite_source_rec_async_command = 'find .'
+let g:unite_source_rec_async_command = 'find'
 
 
 
