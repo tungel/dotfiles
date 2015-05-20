@@ -38,6 +38,7 @@ bin
 .Xmodmap
 .Xresources
 .xsession
+.gemrc
 
 # other directories
 bspwm

@@ -1,0 +1,3 @@
+# don't store local documentation to speed up gem installation
+gem: --no-document
+
