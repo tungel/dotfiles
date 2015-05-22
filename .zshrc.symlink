@@ -132,9 +132,11 @@ bindkey "^[[B" history-beginning-search-forward
 # http://superuser.com/questions/187639/zsh-not-hitting-profile
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 
-# Minimal prompt
-PS1=$'%{\e[1;34m%}%n %{\e[0m%}at %{\e[0;33m%}%M %{\e[0m%}in %{\e[1;32m%}%~
+# PROMPT with git status
+source ~/.zplugins/zsh-git-prompt/zshrc.sh
+PS1=$'%{\e[1;34m%}%n %{\e[0m%}at %{\e[0;33m%}%M %{\e[0m%}in %{\e[1;32m%}%~ %b$(git_super_status)
 %{\e[1;30m%}>>> %{\e[0m%}'
+
 
 # Ensure that the prompt is redrawn when the terminal size changes.
 TRAPWINCH() {
