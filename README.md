@@ -13,6 +13,17 @@ I love tinkering with configuration files. So here is my dotfiles repo.
 - `sudo apt-get install tmux`
 - `sudo apt-get Install xclip`
 
+## Manage subtrees:
+
+- Change dir to the root of this repo, then:
+- Add `zsh-git-prompt` subtree:
+
+`git subtree add --prefix .zplugins.symlink/zsh-git-prompt https://github.com/olivierverdier/zsh-git-prompt.git master --squash`
+
+- Get update from the original repo:
+
+`git subtree pull --prefix .zplugins.symlink/zsh-git-prompt https://github.com/olivierverdier/zsh-git-prompt.git master --squash`
+
 ## Usage
 
 - Clone this repo: `git clone git@github.com:everbot/dotfiles.git`
