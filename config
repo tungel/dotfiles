@@ -39,6 +39,7 @@ bin
 .Xresources
 .xsession
 .gemrc
+.irbrc
 
 # other directories
 bspwm
