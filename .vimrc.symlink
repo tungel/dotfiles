@@ -144,6 +144,18 @@ call unite#custom#source('file_mru', 'ignore_pattern',
             \ )
             \ )
 
+" For file_rec/async source: Ignore all files under tmp directory of Rails app
+call unite#custom#source('file_rec/async', 'ignore_pattern',
+            \ join([
+            \ '\.cache',
+            \ '\/tmp\/cache\/',
+            \ '\/tmp\/pids\/',
+            \ '\/tmp\/sessions\/',
+            \ '\/tmp\/sockets\/'],
+            \ '\|'
+            \ )
+            \ )
+
 nnoremap <C-Space> :Unite -start-insert<CR>
 
 " custom profile:
