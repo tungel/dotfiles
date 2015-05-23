@@ -70,6 +70,10 @@ let NERDTreeDirArrows=0
 " don't display compile output stuffs
 let NERDTreeIgnore=['.class$[[file]]', '.o$[[file]]']
 
+" split and vsplit behave similar with Unite candidate window shortcut
+let NERDTreeMapOpenSplit='s'
+let NERDTreeMapOpenVSplit='v'
+
 "open nerdtree based on the directory of the current buffer, the cursor will be
 "placed at the current opened file
 map <silent> <Leader>r :NERDTreeFind<cr>
@@ -250,7 +254,10 @@ function! s:unite_my_settings()"{{{
   " Overwrite settings.
   nmap <buffer> <C-l>      <Plug>(unite_redraw)
 
+  " these mapping are used in the Unite candidate window
   nnoremap <buffer><expr> t unite#do_action('tabswitch')
+  nnoremap <buffer><expr> s unite#do_action('splitswitch')
+  nnoremap <buffer><expr> v unite#do_action('vsplitswitch')
 
   " Enable navigation with control-j and control-k in insert mode
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
