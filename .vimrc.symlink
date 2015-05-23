@@ -538,10 +538,19 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown,md setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType eruby,html,markdown,md setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+
+
+" Enable auto display a completion list candidates, but it's slow
+" if !exists('g:neocomplete#force_omni_input_patterns')
+"     let g:neocomplete#force_omni_input_patterns = {}
+" endif
+" let g:neocomplete#force_omni_input_patterns.ruby =
+"     \ '[^. *\t]\.\w*\|\h\w*::'
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -977,4 +986,6 @@ let g:DVB_TrimWS = 1
 let g:sexp_enable_insert_mode_mappings = 0
 "---end vim-sexp }}}
 "===============================================================================
+
+let g:ragtag_global_maps = 1
 

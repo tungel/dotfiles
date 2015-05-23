@@ -99,7 +99,11 @@ set shiftwidth=4
 set shiftround
 
 " community friendly format for Ruby and Clojure code indentation
-autocmd FileType ruby,clj setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType ruby,eruby,clj setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Use Alt+number to go to a specific tab number
 nnoremap <A-1> 1gt
