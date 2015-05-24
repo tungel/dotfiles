@@ -197,7 +197,11 @@ let g:unite_source_grep_default_opts = '-inH'
 " nnoremap <space>/ :Unite grep:.:-iR:tung<cr>
 " nnoremap <space>/ :Unite grep:.::tung<cr>
 " nnoremap <space>/ :Unite grep:.<cr>
-nnoremap <F8> :Unite grep:.<cr>
+
+nnoremap <leader><F8> :Unite grep:.<cr>
+
+" Use F8 to grep from the root level of the current git repo
+nnoremap <F8> :Unite grep/git:/<cr>
 
 " For ack.
 " Using ack-grep as recursive command.
