@@ -308,6 +308,10 @@ let g:unite_source_menu_menus.git.command_candidates = [
 " 2015-04-30 below line cause `[m` motion slow
 " nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
 
+let g:unite_source_tag_max_name_length=25
+let g:unite_source_tag_max_fname_length=50
+let g:unite_source_tag_relative_fname=1
+
 "---end unite.vim }}}
 "===============================================================================
 
