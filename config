@@ -40,6 +40,7 @@ bin
 .xsession
 .gemrc
 .irbrc
+.gitignore
 
 # other directories
 bspwm

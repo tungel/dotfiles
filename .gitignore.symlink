@@ -1,0 +1,5 @@
+# Ignore files from Exuberant CTags
+tags
+!tags/
+gems.tags
+
