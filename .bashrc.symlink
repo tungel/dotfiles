@@ -125,3 +125,5 @@ fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]]\n\[\033[0;37m\]\3
 # only allow 1 gvim instance:
 # gvim () { command gvim --remote-silent "$@" || command gvim "$@"; }
 
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

@@ -230,3 +230,5 @@ source ~/.zplugins/dirhistory.plugin.zsh
 source ~/.zplugins/tmux.plugin.zsh
 # ==============================================================================
 
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
