@@ -173,8 +173,23 @@ if [ $(pgrep -cx trayer) -gt 0 ] ; then
 
     kill -9 $(ps aux | grep trayer | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
 fi
-#`which trayer` --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --height 16 &
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --height 16 &
+
+# `which trayer` --edge top --align right --SetDockType true \
+                # --SetPartialStrut true \
+                # --expand true \
+                # --width 10 \
+                # --transparent true \
+                # --alpha 0 \
+                # --tint 0x000000 \
+                # --height 16 &
+trayer --edge top --align right --SetDockType true \
+        --SetPartialStrut true  \
+        --expand true \
+        --width 10 \
+        --transparent true \
+        --alpha 0 \
+        --tint 0x000000 \
+        --height 16 &
 
 
 if [ $(pgrep -cx dropbox) -lt 1 ] ; then
