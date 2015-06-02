@@ -103,6 +103,11 @@ alias rmvim="rm ~/Dropbox/dev/nogit/vimdata/sessions/default.vim.lock ; \
              rm ~/Dropbox/dev/nogit/vimdata/sessions/default.vim ; \
              rm ~/Dropbox/dev/nogit/vimdata/sessions/last-session.txt"
 
+# To enable various useful stuff for Arch Linux guest in VirtualBox machine
+alias myvirtualbox="sudo modprobe -a vboxguest vboxsf vboxvideo ; \
+                    sudo VBoxClient-all & ; \
+                    sudo systemctl start vboxservice.service"
+
 
 alias foxit="wine 'C:\\windows\\command\\start.exe' /Unix ~/.wine/dosdevices/c:/users/Public/Desktop/FoxitReader.lnk &"
 
