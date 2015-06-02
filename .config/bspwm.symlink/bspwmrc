@@ -57,10 +57,13 @@ if [ $num_mon -gt 1 ] ; then
     # xrandr --output eDP1 --primary
     # xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1
 
-
     # for HP Pavilion dm3 laptop
-    xrandr --output LVDS1 --primary
-    xrandr --output VGA1 --mode 1920x1080 --left-of LVDS1
+    # xrandr --output LVDS1 --primary
+    # xrandr --output VGA1 --mode 1920x1080 --left-of LVDS1
+
+    # for VirtualBox at work
+    xrandr --output VGA-0 --primary
+    xrandr --output VGA-1 --mode 1920x1016 --right-of VGA-0
 
     # first native monitor
     bspc monitor ^1 --reset-desktops 1
@@ -175,7 +178,9 @@ trayer --edge top --align right --SetDockType true --SetPartialStrut true --expa
 
 
 if [ $(pgrep -cx dropbox) -lt 1 ] ; then
-    dropboxd &
+    if [[ -e $TLPC ]]; then
+        dropboxd &
+    fi
 fi
 
 

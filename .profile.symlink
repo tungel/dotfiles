@@ -166,8 +166,10 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 # export JAVA_HOME=/usr/lib/jvm/java-7-oracle
 
 # configuration for Hadoop where it is downloaded to ~/mytemp/hadoop/
-HADOOP_PREFIX=~/mytemp/hadoop
+HADOOP_PREFIX=~/dev/libs/hadoop
 PATH=$PATH:${HADOOP_PREFIX}/bin:${HADOOP_PREFIX}/sbin
+
+PATH=~/dev/libs/flume/bin:$PATH
 
 # for local scripts/programs
 PATH=$PATH:~/bin
