@@ -3,6 +3,7 @@
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 export TLPC=~/.tlpc
+NOGIT=~/dev/mylinux/nogit
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -186,8 +187,8 @@ PATH=$PATH:~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
 alias mydfs="hdfs dfs "
 
 # some more aliases for personal usage
-if [[ -e ~/Dropbox/dev/nogit/morealiases.sh ]]; then
-    source ~/Dropbox/dev/nogit/morealiases.sh
+if [[ -e $NOGIT/morealiases.sh ]]; then
+    source $NOGIT/morealiases.sh
 fi
 
 
