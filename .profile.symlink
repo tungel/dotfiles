@@ -5,6 +5,12 @@
 export TLPC=~/.tlpc
 NOGIT=~/dev/mylinux/nogit
 
+pathAdd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -172,18 +178,23 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 
 # configuration for Hadoop where it is downloaded to ~/mytemp/hadoop/
 HADOOP_PREFIX=~/dev/libs/hadoop
-PATH=$PATH:${HADOOP_PREFIX}/bin:${HADOOP_PREFIX}/sbin
+# PATH=$PATH:${HADOOP_PREFIX}/bin:${HADOOP_PREFIX}/sbin
+pathAdd ${HADOOP_PREFIX}/bin
+pathAdd ${HADOOP_PREFIX}/sbin
 
 alias mypsql="sudo su postgres -c psql"
 alias avroview="java -jar ~/dev/libs/avro-tools-1.7.7.jar tojson "
 
 # for flume
-PATH=~/dev/libs/flume/bin:$PATH
+# PATH=~/dev/libs/flume/bin:$PATH
+pathAdd ~/dev/libs/flume/bin:$PATH
 
 # for local scripts/programs
-PATH=$PATH:~/bin
+# PATH=$PATH:~/bin
+pathAdd ~/bin
 
-PATH=$PATH:~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
+# PATH=$PATH:~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
+pathAdd ~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
 alias mydfs="hdfs dfs "
 
 # some more aliases for personal usage
@@ -191,8 +202,9 @@ if [[ -e $NOGIT/tl.sh ]]; then
     source $NOGIT/tl.sh
 fi
 
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# Add RVM to PATH for scripting
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+pathAdd $HOME/.rvm/bin
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
