@@ -76,6 +76,8 @@ alias matlab="/usr/local/MATLAB/R2014a/bin/matlab -nodesktop -nosplash"
 alias gitp="git push origin master"
 alias gits="git status -sb"
 alias gitc="git commit -am"
+alias gitco="git checkout "
+alias gitcom="git checkout master"
 
 # for gvim to load back the session
 alias gvim="gvim -S ~/session.gvim"
@@ -174,10 +176,16 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 HADOOP_PREFIX=~/dev/libs/hadoop
 PATH=$PATH:${HADOOP_PREFIX}/bin:${HADOOP_PREFIX}/sbin
 
+alias mypsql="sudo su postgres -c psql"
+
+# for flume
 PATH=~/dev/libs/flume/bin:$PATH
 
 # for local scripts/programs
 PATH=$PATH:~/bin
+
+PATH=$PATH:~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
+alias mydfs="hdfs dfs "
 
 # some more aliases for personal usage
 if [[ -e ~/Dropbox/dev/nogit/morealiases.sh ]]; then
