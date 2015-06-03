@@ -4,6 +4,10 @@
 
 export TLPC=~/.tlpc
 NOGIT=~/dev/mylinux/nogit
+# some more aliases for personal usage
+if [[ -e $NOGIT/tl.sh ]]; then
+    source $NOGIT/tl.sh
+fi
 
 pathAdd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -196,11 +200,6 @@ pathAdd ~/bin
 # PATH=$PATH:~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
 pathAdd ~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
 alias mydfs="hdfs dfs "
-
-# some more aliases for personal usage
-if [[ -e $NOGIT/tl.sh ]]; then
-    source $NOGIT/tl.sh
-fi
 
 # Add RVM to PATH for scripting
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
