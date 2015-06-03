@@ -43,7 +43,7 @@ alias phoneip='sudo dhcpcd enp0s29f7u2'
 alias jurong='echo "nameserver 165.21.100.88" | sudo tee /etc/resolv.conf'
 
 
-# adjust keyboard spped
+# adjust keyboard speed
 alias setkb='xset r rate 200 30'
 
 # disable synaptics mouse/touch pad mouse
@@ -53,9 +53,6 @@ alias paden='synclient TouchpadOff=0'
 
 #for bluetooth
 alias onbt='sudo systemctl start bluetooth.service'
-
-#for argouml
-alias argouml="bash ~/softwares/argouml/argouml.sh &"
 
 #for mpd music
 alias music="bash ~/startmusic.sh &"
@@ -177,6 +174,7 @@ HADOOP_PREFIX=~/dev/libs/hadoop
 PATH=$PATH:${HADOOP_PREFIX}/bin:${HADOOP_PREFIX}/sbin
 
 alias mypsql="sudo su postgres -c psql"
+alias avroview="java -jar ~/dev/libs/avro-tools-1.7.7.jar tojson "
 
 # for flume
 PATH=~/dev/libs/flume/bin:$PATH
@@ -196,3 +194,4 @@ fi
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
