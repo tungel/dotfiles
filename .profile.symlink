@@ -187,8 +187,8 @@ PATH=$PATH:~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
 alias mydfs="hdfs dfs "
 
 # some more aliases for personal usage
-if [[ -e $NOGIT/morealiases.sh ]]; then
-    source $NOGIT/morealiases.sh
+if [[ -e $NOGIT/tl.sh ]]; then
+    source $NOGIT/tl.sh
 fi
 
 
