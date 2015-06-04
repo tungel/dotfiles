@@ -195,7 +195,7 @@ pathAdd ~/dev/libs/flume/bin:$PATH
 
 # for sqoop
 export SQOOP_HOME=~/dev/libs/sqoop
-export PATH=$PATH:$SQOOP_HOME/bin
+pathAdd $SQOOP_HOME/bin
 
 # for local scripts/programs
 # PATH=$PATH:~/bin
