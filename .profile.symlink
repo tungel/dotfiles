@@ -180,6 +180,10 @@ alias avroview="java -jar ~/dev/libs/avro-tools-1.7.7.jar tojson "
 # for flume
 PATH=~/dev/libs/flume/bin:$PATH
 
+# for sqoop
+export SQOOP_HOME=~/dev/libs/sqoop
+export PATH=$PATH:$SQOOP_HOME/bin
+
 # for local scripts/programs
 PATH=$PATH:~/bin
 
