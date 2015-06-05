@@ -195,6 +195,8 @@ pathAdd ~/dev/libs/flume/bin
 
 # for sqoop
 export SQOOP_HOME=~/dev/libs/sqoop
+export SQOOP_CONF_DIR=~/dev/libs/sqoop/conf
+export HADOOP_MAPRED_HOME=~/dev/libs/hadoop
 pathAdd $SQOOP_HOME/bin
 
 # for local scripts/programs

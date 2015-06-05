@@ -942,7 +942,7 @@ let delimitMate_jump_expansion = 1
 "===============================================================================
 "---begin vim-session {{{
 " let g:session_directory='~/.vim/data/sessions'
-let g:session_directory='~/Dropbox/dev/nogit/vimdata/sessions'
+let g:session_directory='~/dev/mylinux/nogit/vimdata/sessions'
 let g:session_autosave = 'yes'
 let g:session_autoload = 'yes'
 let g:session_default_to_last = 1
