@@ -68,6 +68,9 @@ alias onbt='sudo systemctl start bluetooth.service'
 #for mpd music
 alias music="bash ~/startmusic.sh &"
 
+alias topbigdirs="du -h | sort -rh | head -n 20"
+alias topbigfiles="find . -type f -exec du -Sh {} + | sort -rh | head -n 20"
+
 #for matlab
 # export MATLAB_JAVA=/usr/local/MATLAB/R2014a/sys/java/jre/glnxa64/jre
 export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre

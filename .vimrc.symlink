@@ -124,6 +124,7 @@ let s:unite_mru_ignores = ['*']
 " add white list of candidates not to be ignored
 let s:unite_mru_whites = ['Test.java',
                     \ '**/Dropbox/dev/**',
+                    \ '**/dev/**',
                     \ '*.md',
                     \ 'pacman.log',
                     \ '**/dotfiles/**']
