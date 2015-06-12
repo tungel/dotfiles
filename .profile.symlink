@@ -91,6 +91,7 @@ alias gitco="git checkout "
 alias gitcom="git checkout master"
 
 alias findproc="ps aux | grep "
+alias killproc="kill -9"
 
 # for gvim to load back the session
 alias gvim="gvim -S ~/session.gvim"
