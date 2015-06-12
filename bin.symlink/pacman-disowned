@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# https://wiki.archlinux.org/index.php/Pacman_tips#Listing_installed_packages_with_size
+
+tmp=${TMPDIR-/tmp}/pacman-disowned-$UID-$$
+db=$tmp/db
+fs=$tmp/fs
+
+mkdir "$tmp"
+trap 'rm -rf "$tmp"' EXIT
+
+pacman -Qlq | sort -u > "$db"
+
+find /etc /opt /usr ! -name lost+found \( -type d -printf '%p/\n' -o -print \) | sort > "$fs"
+
+comm -23 "$fs" "$db"
+
