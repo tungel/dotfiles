@@ -213,7 +213,8 @@ pathAdd ~/bin
 pathAdd ~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
 alias mydfs="hdfs dfs "
 
-export SSH_ASKPASS=ssh-askpass
+# Don't use this, just use the default from `ksshaskpass`
+# export SSH_ASKPASS=ssh-askpass
 
 # Add RVM to PATH for scripting
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

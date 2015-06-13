@@ -22,6 +22,8 @@ fi
 # feh --bg-center ~/Dropbox/temp/arch_sparks_wall_by_rajasegar-d6csc95.jpg
 sh ~/.fehbg &
 
+~/.kde4/Autostart/ssh-add.sh
+
 gnome-encfs-manager
 
 
