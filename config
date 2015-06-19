@@ -41,6 +41,7 @@ bin
 .gemrc
 .irbrc
 .gitignore
+.ideavimrc
 
 # other directories
 bspwm
