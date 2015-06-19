@@ -207,7 +207,7 @@ endfun
 
 " remove trailing whitespace upon save
 "autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+" autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " Using Alt+h/j/k/l to resize current buffer by +/- 5
 nnoremap <M-h> :vertical resize -5<cr>

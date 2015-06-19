@@ -588,7 +588,7 @@ endif
 " use <Leader>s to go to symbol with Unite. This is to replace CtrlP
 " nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
 "             \ -silent tag/include -start-insert<CR>
-nnoremap <silent> <Leader>s :Unite tag -start-insert<CR>
+nnoremap <silent> <Leader>s :Unite tag -no-quit -start-insert<CR>
 
 " completefunc of vim-clojure-static interferes with neocomplcache
 " https://github.com/guns/vim-clojure-static/issues/32
