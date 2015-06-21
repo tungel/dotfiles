@@ -42,6 +42,7 @@ bin
 .irbrc
 .gitignore
 .ideavimrc
+.pryrc
 
 # other directories
 bspwm
