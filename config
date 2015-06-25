@@ -43,6 +43,8 @@ bin
 .gitignore
 .ideavimrc
 .pryrc
+.editrc
+.inputrc
 
 # other directories
 bspwm
