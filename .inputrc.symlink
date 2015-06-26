@@ -1,2 +1,52 @@
+# vim:set et sw=2:
+
 # enable vi keys for other command line programm like irb, pry, ...
 set editing-mode vi
+
+# https://github.com/jacknagel/dotfiles/blob/master/inputrc
+set bell-style none
+set completion-ignore-case on
+set mark-directories on
+set mark-symlinked-directories on
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set skip-completed-text on
+
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# Display completions using different colors for their file types
+set colored-stats on
+
+$if Bash
+  Space: magic-space
+$endif
+
+set keymap vi-command
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"gg": beginning-of-history
+"G": end-of-history
+
+set keymap vi-move
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+set keymap vi-insert
+Control-a: beginning-of-line
+Control-b: backward-char
+Control-d: delete-char
+Control-e: end-of-line
+Control-f: forward-char
+Control-k: kill-line
+Control-n: next-history
+Control-p: previous-history
+Control-L: clear-screen
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+set keymap emacs-ctlx
+v: vi-editing-mode
+Control-v: "\C-xv\e"
+Escape: "\C-xv\e"
