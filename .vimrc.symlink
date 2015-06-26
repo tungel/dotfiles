@@ -430,6 +430,11 @@ nmap <leader>gc :Gcommit<cr>
 nmap <leader>gd :Gdiff<cr>
 nmap <leader>gp :Gpush<cr>
 nmap <leader>ge :Gedit<cr>
+
+" After analyze :Gdiff we want to just display the current version on disk only,
+" and clos the rest of other windows
+nmap <leader>gE :Gedit<cr>:only<cr>
+
 nmap <leader>gl :exe "silent Glog \| Unite quickfix -no-quit"<cr>
 "---end fugitive }}}
 "===============================================================================
