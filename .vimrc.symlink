@@ -428,6 +428,8 @@ nmap <Leader>1 :call SyncTexForward()<CR>
 nmap <leader>gs :Gstatus<cr>
 nmap <leader>gc :Gcommit<cr>
 nmap <leader>gp :Gpush<cr>
+nmap <leader>ge :Gedit<cr>
+nmap <leader>gl :exe "silent Glog \| Unite quickfix -no-quit"<cr>
 "---end fugitive }}}
 "===============================================================================
 
