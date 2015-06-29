@@ -502,12 +502,12 @@ endif
 function! CursorPing()
     set cursorline cursorcolumn
     redraw
-    sleep 50m
+    sleep 150m
     set nocursorline nocursorcolumn
 endfunction
 
 " seldom use this, so use C-Space for Unite because it's more useful!
-" nmap <C-Space> :call CursorPing()<CR>
+nmap <leader>. :call CursorPing()<CR>
 "---end cursor highlight
 "===============================================================================
 
