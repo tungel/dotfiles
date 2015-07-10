@@ -63,7 +63,8 @@ if [ $num_mon -gt 1 ] ; then
 
     # for VirtualBox at work
     xrandr --output VGA-0 --primary
-    xrandr --output VGA-1 --mode 1920x1016 --right-of VGA-0
+    # xrandr --output VGA-1 --mode 1920x1016 --right-of VGA-0
+    xrandr --output VGA-1 --right-of VGA-0
 
     # first native monitor
     bspc monitor ^1 --reset-desktops 1
