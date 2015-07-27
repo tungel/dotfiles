@@ -1035,3 +1035,7 @@ let g:sexp_enable_insert_mode_mappings = 0
 
 let g:ragtag_global_maps = 1
 
+" show quote character in json file!!!
+" by default, the quote characters in json file are hidden
+let g:vim_json_syntax_conceal = 0
+
