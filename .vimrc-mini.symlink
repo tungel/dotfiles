@@ -256,7 +256,13 @@ endfunction
 nnoremap <leader>c :call CloseSomething()<CR><CR>
 " }}}
 
-
+" {{{ Switch to last active tab
+" http://stackoverflow.com/questions/2119754/switch-to-last-active-tab-in-vim
+let g:lasttab = 1
+" nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+nmap <Leader><Tab> :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+" }}}
 
 " ==============================================================================
 " run the current buffer python code
