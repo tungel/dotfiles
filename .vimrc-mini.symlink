@@ -99,7 +99,7 @@ set shiftwidth=4
 set shiftround
 
 " community friendly format for Ruby and Clojure code indentation
-autocmd FileType lua,json,yml,yaml,scss,ruby,eruby,clj,html,mkd,md,txt setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType vim,lua,json,yml,yaml,scss,ruby,eruby,clj,html,mkd,md,txt setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
@@ -238,6 +238,24 @@ nmap <silent> <LEFT><LEFT> :cpfile<CR><C-G>
 
 " map sort function to a key
 vnoremap <Leader>z :sort<CR>
+
+
+" {{{ Focus to left tab after tabclose
+function! CloseSomething()
+  if winnr("$") == 1 && tabpagenr("$") > 1 && tabpagenr() > 1 && tabpagenr() < tabpagenr("$")
+    q | tabprev
+  else
+    q
+  endif
+endfunction
+" cnoremap q<CR> :call CloseSomething()<CR>
+
+" Use <leader>c to quickly close the current buffer
+" 2 <CR> to auto close the git commit window
+" nnoremap <leader>c :q<CR><CR>
+nnoremap <leader>c :call CloseSomething()<CR><CR>
+" }}}
+
 
 
 " ==============================================================================

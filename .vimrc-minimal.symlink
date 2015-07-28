@@ -61,9 +61,6 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-" Use <leader>c to quickly close the current buffer
-" 2 <CR> to auto close the git commit window
-nnoremap <leader>c :q<CR><CR>
 
 " Use F5 to refresh the current buffer if it's changed outside Vim
 map <F5> :checktime<CR>
