@@ -152,3 +152,6 @@ selectw -t 3 # focus to "miscs" window
 selectp -t 1 # focus to the left pane of window#3
 selectw -t 2 # focus on Vim's window
 
+# Faster Command Sequences, fix neovim switching to command mode problem?
+# set -s escape-time 0
+set -g escape-time 10

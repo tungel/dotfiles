@@ -539,81 +539,81 @@ nmap <leader>. :call CursorPing()<CR>
 "===============================================================================
 "---begin neocomplete {{{
 
-"disable AutoComplPop
-let g:acp_enableAtStartup = 0
+" "disable AutoComplPop
+" let g:acp_enableAtStartup = 0
 
 
-" disable annoying preview window of the current item in the completion list
-" especially in clojure file
-set completeopt-=preview
+" " disable annoying preview window of the current item in the completion list
+" " especially in clojure file
+" set completeopt-=preview
 
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_fuzzy_completion = 1
-let g:neocomplete#enable_ignore_case = 1
+" let g:neocomplete#enable_at_startup = 0
+" let g:neocomplete#enable_fuzzy_completion = 1
+" let g:neocomplete#enable_ignore_case = 1
 
-let g:neocomplete#max_list = 15
-let g:neocomplete#enable_auto_select = 1
+" let g:neocomplete#max_list = 15
+" let g:neocomplete#enable_auto_select = 1
 
-" Fix keyword length violate min and max value
-" https://github.com/Shougo/neocomplete.vim/issues/359
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
-
-
-" disable omni completion for Clojure because it's so slow!
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.clojure = ''
-
-" comment out the below line because it interfere with delimitMate of auto
-" insert matching brace - 2015-03-12
-" let g:neocomplete#enable_auto_delimiter = 1
-
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 4
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#min_keyword_length = 3
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType eruby,html,markdown,md setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+" " Fix keyword length violate min and max value
+" " https://github.com/Shougo/neocomplete.vim/issues/359
+" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
 
 
-" Enable auto display a completion list candidates, but it's slow
-" if !exists('g:neocomplete#force_omni_input_patterns')
-"     let g:neocomplete#force_omni_input_patterns = {}
+" " disable omni completion for Clojure because it's so slow!
+" if !exists('g:neocomplete#sources#omni#input_patterns')
+"     let g:neocomplete#sources#omni#input_patterns = {}
 " endif
-" let g:neocomplete#force_omni_input_patterns.ruby =
-"     \ '[^. *\t]\.\w*\|\h\w*::'
+" let g:neocomplete#sources#omni#input_patterns.clojure = ''
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
+" " comment out the below line because it interfere with delimitMate of auto
+" " insert matching brace - 2015-03-12
+" " let g:neocomplete#enable_auto_delimiter = 1
 
-" use <Leader>s to go to symbol with Unite. This is to replace CtrlP
-" nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
-"             \ -silent tag/include -start-insert<CR>
-nnoremap <silent> <Leader>s :Unite tag -no-quit -start-insert<CR>
+" " Set minimum syntax keyword length.
+" let g:neocomplete#sources#syntax#min_keyword_length = 4
+" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" let g:neocomplete#min_keyword_length = 3
 
-" completefunc of vim-clojure-static interferes with neocomplcache
-" https://github.com/guns/vim-clojure-static/issues/32
-" let g:neocomplcache_force_overwrite_completefunc = 1
-let g:neocomplete#force_overwrite_completefunc = 1
+" " Define keyword.
+" if !exists('g:neocomplete#keyword_patterns')
+"     let g:neocomplete#keyword_patterns = {}
+" endif
+" let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" " <TAB>: completion.
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" " Enable omni completion.
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd FileType eruby,html,markdown,md setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+
+
+" " Enable auto display a completion list candidates, but it's slow
+" " if !exists('g:neocomplete#force_omni_input_patterns')
+" "     let g:neocomplete#force_omni_input_patterns = {}
+" " endif
+" " let g:neocomplete#force_omni_input_patterns.ruby =
+" "     \ '[^. *\t]\.\w*\|\h\w*::'
+
+" " Enable heavy omni completion.
+" if !exists('g:neocomplete#sources#omni#input_patterns')
+"   let g:neocomplete#sources#omni#input_patterns = {}
+" endif
+
+" " use <Leader>s to go to symbol with Unite. This is to replace CtrlP
+" " nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
+" "             \ -silent tag/include -start-insert<CR>
+" nnoremap <silent> <Leader>s :Unite tag -no-quit -start-insert<CR>
+
+" " completefunc of vim-clojure-static interferes with neocomplcache
+" " https://github.com/guns/vim-clojure-static/issues/32
+" " let g:neocomplcache_force_overwrite_completefunc = 1
+" let g:neocomplete#force_overwrite_completefunc = 1
 
 "---end neocomplete }}}
 "===============================================================================
@@ -1042,3 +1042,55 @@ let g:ragtag_global_maps = 1
 " by default, the quote characters in json file are hidden
 let g:vim_json_syntax_conceal = 0
 
+
+
+" ============= NEOVIM ================
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" Fixing neovim switching to normal mode problem {{{
+set timeout
+set matchtime=0
+set timeoutlen=350
+set ttimeoutlen=250
+
+"NeoVim handles ESC keys as alt+key, set this to solve the problem
+if has('nvim')
+  set ttimeout
+  set ttimeoutlen=0
+endif
+" }}}
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+" Use smartcase.
+let g:deoplete#enable_smart_case = 1
+
+inoremap <expr><C-y>  deoplete#mappings#close_popup()
+inoremap <expr><C-e>  deoplete#mappings#cancel_popup()
+
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+set completeopt+=noinsert
+if has("patch-7.4.314")
+  set shortmess+=c
+endif
+
+" " Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType eruby,html,markdown,md setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = ['buffer']
+let g:deoplete#sources.cpp = ['buffer', 'tag']
+
+let g:deoplete#omni_patterns = {}
+" let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
+let g:deoplete#omni_patterns.ruby = ''
+" let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+
+let g:deoplete#keyword_patterns = {}
+let g:deoplete#keyword_patterns.ruby = ''
