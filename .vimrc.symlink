@@ -364,6 +364,9 @@ else
     let g:indentLine_color_term = 239
 endif
 
+" enable by default
+let g:indentLine_enabled = 1
+
 let g:indentLine_char = '┊'
 
 "end indentLine }}}
