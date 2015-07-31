@@ -1050,7 +1050,7 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " Fixing neovim switching to normal mode problem {{{
 set timeout
 set matchtime=0
-set timeoutlen=350
+set timeoutlen=200
 set ttimeoutlen=250
 
 "NeoVim handles ESC keys as alt+key, set this to solve the problem
