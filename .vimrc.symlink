@@ -1067,9 +1067,9 @@ if has("patch-7.4.314")
 endif
 
 let g:deoplete#sources = {}
-let g:deoplete#sources._ = ['buffer']
-let g:deoplete#sources.cpp = ['buffer', 'tag']
-let g:deoplete#sources.ruby = ['buffer', 'tag']
+let g:deoplete#sources._ = ['buffer', 'file']
+let g:deoplete#sources.cpp = ['buffer', 'tag', 'file']
+let g:deoplete#sources.ruby = ['buffer', 'tag', 'file']
 
 let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
@@ -1079,4 +1079,8 @@ let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
 " let g:deoplete#keyword_patterns = {}
 " let g:deoplete#keyword_patterns.ruby = ''
 
+" Use double ESC to go to normal mode in terminal window. We want to reserve a
+" single ESC to use vi editing mode for the line-editor
+tnoremap <Esc><Esc> <C-\><C-n>
 " end Neovim }}}
+
