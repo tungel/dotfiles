@@ -1044,28 +1044,16 @@ let g:vim_json_syntax_conceal = 0
 
 
 
-" ============= NEOVIM ================
+" ============= NEOVIM ================ {{{
+" makes the cursor a pipe in insert-mode, and a block in normal-mode
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
-" Fixing neovim switching to normal mode problem {{{
-set timeout
-set matchtime=0
-set timeoutlen=200
-set ttimeoutlen=250
-
-"NeoVim handles ESC keys as alt+key, set this to solve the problem
-if has('nvim')
-  set ttimeout
-  set ttimeoutlen=0
-endif
-" }}}
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 " Use smartcase.
 let g:deoplete#enable_smart_case = 1
 
-let g:deoplete#disable_auto_complete = 1
+let g:deoplete#disable_auto_complete = 0
 
 inoremap <expr><C-y>  deoplete#mappings#close_popup()
 inoremap <expr><C-e>  deoplete#mappings#cancel_popup()
@@ -1078,21 +1066,17 @@ if has("patch-7.4.314")
   set shortmess+=c
 endif
 
-" " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType eruby,html,markdown,md setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 let g:deoplete#sources = {}
 let g:deoplete#sources._ = ['buffer']
 let g:deoplete#sources.cpp = ['buffer', 'tag']
+let g:deoplete#sources.ruby = ['buffer', 'tag']
 
 let g:deoplete#omni_patterns = {}
-" let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
-let g:deoplete#omni_patterns.ruby = ''
+let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
+" let g:deoplete#omni_patterns.ruby = ''
 " let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
 
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns.ruby = ''
+" let g:deoplete#keyword_patterns = {}
+" let g:deoplete#keyword_patterns.ruby = ''
+
+" end Neovim }}}
