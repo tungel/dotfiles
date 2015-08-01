@@ -46,6 +46,10 @@ EXPORT=2           # Export to 1: EXPORTDIR or PKGDEST
 #EDITFILES=1
 #NOENTER=1
 
+# disable yaourt asking too much
+BUILD_NOCONFIRM=1
+EDITFILES=0
+
 # Output
 #USECOLOR=1
 #USEPAGER=0
