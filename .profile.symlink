@@ -150,6 +150,9 @@ alias dev="cd ~/Dropbox/dev"
 # for Dropbox and other app that need to monitor files
 alias mynotify='sudo sysctl fs.inotify.max_user_watches=1000000000'
 
+# AUR Arch Linux has moved to https://aur4.archlinux.org but by default yaourt
+# doesn't seem to use the new url, so here is the fix:
+alias yaourt4='yaourt --aur-url https://aur4.archlinux.org'
 
 # for Jekyll
 alias jekyllstart="cd ~/Dropbox/dev/everbot.github.io && bundle exec jekyll serve"
