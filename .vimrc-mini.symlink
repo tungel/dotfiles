@@ -247,6 +247,14 @@ function! CloseSomething()
   else
     q
   endif
+
+  " try to move the cursor back to Unite candidate window
+  " This normally happens when I use Unite grep, then open a candidate in a new
+  " tab, analyze it and then close it. Then go back to analyze next candidate...
+  let uniteWindow = bufwinnr("unite")
+  if uniteWindow > 0
+    execute uniteWindow "wincmd w"
+  endif
 endfunction
 " cnoremap q<CR> :call CloseSomething()<CR>
 
