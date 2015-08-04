@@ -176,8 +176,8 @@ alias tmux="tmux -2" # force tmux to use 256 colors
 
 # change system-wide editor
 #export VISUAL="/usr/bin/vim -p -X"
-export VISUAL="/usr/bin/vim"
-export EDITOR="/usr/bin/vim"
+export VISUAL="/usr/bin/nvim"
+export EDITOR="/usr/bin/nvim"
 
 #set the umask so that the default permission for new file is 600
 umask 077
