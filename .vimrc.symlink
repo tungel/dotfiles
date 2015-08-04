@@ -204,6 +204,11 @@ nnoremap <leader><F8> :Unite -no-quit -keep-focus -no-empty grep:.<cr>
 " Use F8 to grep from the root level of the current git repo
 nnoremap <F8> :Unite -no-quit -keep-focus -no-empty grep/git:/<cr>
 
+" use <Leader>s to go to symbol with Unite. This is to replace CtrlP
+" nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
+"             \ -silent tag/include -start-insert<CR>
+nnoremap <silent> <Leader>s :Unite tag -no-quit -start-insert<CR>
+
 " For ack.
 " Using ack-grep as recursive command.
 let g:unite_source_rec_async_command = 'find'
@@ -608,10 +613,6 @@ nmap <leader>. :call CursorPing()<CR>
 "   let g:neocomplete#sources#omni#input_patterns = {}
 " endif
 
-" " use <Leader>s to go to symbol with Unite. This is to replace CtrlP
-" " nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
-" "             \ -silent tag/include -start-insert<CR>
-" nnoremap <silent> <Leader>s :Unite tag -no-quit -start-insert<CR>
 
 " " completefunc of vim-clojure-static interferes with neocomplcache
 " " https://github.com/guns/vim-clojure-static/issues/32
