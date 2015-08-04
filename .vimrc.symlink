@@ -438,7 +438,10 @@ nmap <leader>ge :Gedit<cr>
 " and clos the rest of other windows
 nmap <leader>gE :Gedit<cr>:only<cr>
 
+" View general git log
 " nmap <leader>gl :exe "silent Glog -- % \| Unite quickfix -no-quit"<cr>
+
+" View git log of current buffer
 nmap <leader>gl :exe "silent Glog \| Unite quickfix -no-quit"<cr>
 
 " Each time you open a git object using fugitive it creates a new buffer. This
