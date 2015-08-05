@@ -8,7 +8,7 @@
 
 #===============================================================================
 # the most common dot files
-.vimrc
+.nvimrc
 .vimrc-mini
 .vimrc-minimal
 .profile
