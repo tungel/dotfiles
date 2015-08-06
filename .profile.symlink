@@ -84,11 +84,13 @@ export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
 alias matlab="/usr/local/MATLAB/R2014a/bin/matlab -nodesktop -nosplash"
 
 #for git:
-alias gitp="git push origin master"
+alias gitp="git pull"
 alias gits="git status -sb"
 alias gitc="git commit -am"
 alias gitco="git checkout "
 alias gitcom="git checkout master"
+
+alias dotfiles="cd ~/dev/mylinux/dotfiles/"
 
 alias findproc="ps aux | grep "
 alias killproc="kill -9"
