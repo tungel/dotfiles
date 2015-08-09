@@ -234,6 +234,9 @@ nnoremap <Leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
 " Unite outline (support markdown quite well!)
 nnoremap <Leader>o :Unite outline -start-insert<cr>
 
+" list all window except the current one
+nnoremap <Leader>w :Unite window:no-current:all -start-insert<cr>
+
 
 
 " control where the unite buffer will appear
