@@ -44,6 +44,12 @@ if [ -f ~/.autostart ] ; then
     sh ~/.autostart &
 fi
 
+# check and enable various useful services if Arch is running inside VirtualBox
+# also can use `dmesg` command to check this
+if [ $(lspci | grep -i VirtualBox | wc -l) -gt 0 ]; then
+  /usr/bin/VBoxClient-all
+fi
+
 
 # http://linuxmafia.com/faq/Admin/release-files.html
 # we can also use file /etc/os-release
