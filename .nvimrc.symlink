@@ -1046,12 +1046,24 @@ let g:sexp_enable_insert_mode_mappings = 0
 "---end vim-sexp }}}
 "===============================================================================
 
+"===============================================================================
+" setup some aliases {{{
+source ~/.nvim/bundle/cmdalias.vim/plugin/cmdalias.vim
+
+" View Git log and load previous revision of the current file.
+" To disable file filtering (view global Git log) and load commit, append `--`
+call CmdAlias('GL', 'silent Glog -i --author= --grep=')
+" Vim doesn't expand 2 abbre on the same cmd line?
+" call CmdAlias('UQ', 'Unite quickfix -no-quit')
+command UQ Unite quickfix -no-quit
+" end aliases }}}
+"===============================================================================
+
 let g:ragtag_global_maps = 1
 
 " show quote character in json file!!!
 " by default, the quote characters in json file are hidden
 let g:vim_json_syntax_conceal = 0
-
 
 
 " ============= NEOVIM ================ {{{
