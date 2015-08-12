@@ -209,6 +209,9 @@ endfun
 "autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 " autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
+" alias command to manually remove trailing space
+command TS %s/\s\+$//e
+
 " Using Alt+h/j/k/l to resize current buffer by +/- 5
 nnoremap <M-h> :vertical resize -5<cr>
 nnoremap <M-j> :resize +5<cr>
