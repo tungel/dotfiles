@@ -106,6 +106,7 @@ bind -n C-6 select-window -t :6
 bind -n C-7 select-window -t :7
 bind -n C-8 select-window -t :8
 bind -n C-9 select-window -t :9
+bind -n C-Tab last-window
 
 # resize panes with similar key binding with my vim settings
 bind -r M-h resize-pane -L 5

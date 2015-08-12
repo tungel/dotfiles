@@ -82,6 +82,7 @@ URxvt.keysym.C-7: \033[27;5;55~
 URxvt.keysym.C-8: \033[27;5;56~
 URxvt.keysym.C-9: \033[27;5;57~
 URxvt.keysym.C-0: \033[27;5;48~
+URxvt.keysym.C-Tab: \033[27;5;9~
 
 ! To check the default color, see: `man urxvt` section `COLOURS AND GRAPHICS`
 ! black
