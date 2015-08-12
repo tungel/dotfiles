@@ -64,8 +64,9 @@ bind -t vi-copy 'Bspace' halfpage-up
 set -g base-index 1
 set -g pane-base-index 1
 
-bind | split-window -h
-bind - split-window -v
+# Split/create new pane with current directory
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
 unbind '"'
 unbind %
 
