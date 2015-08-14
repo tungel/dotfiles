@@ -1059,6 +1059,36 @@ command UQ Unite quickfix -no-quit
 " end aliases }}}
 "===============================================================================
 
+"===============================================================================
+"--- vim-test {{{
+function! MyStrategy(cmd)
+  let app = '/usr/bin/top'
+  rightbelow vnew
+  " call termopen(app)
+  call termopen(a:cmd)
+  startinsert
+  echo 'It works! Command for running tests: ' . a:cmd
+endfunction
+
+let test#ruby#rspec#options = {
+  \ 'nearest': '--backtrace',
+  \ 'file':    '--format documentation',
+\}
+
+" let g:test#custom_strategies = {'my_strategy': function('MyStrategy')}
+" let g:test#strategy = 'my_strategy'
+
+let test#strategy = "vimux"
+
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
+"--- end vim-test
+"===============================================================================
+
+
 let g:ragtag_global_maps = 1
 
 " show quote character in json file!!!
