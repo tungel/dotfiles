@@ -1050,9 +1050,9 @@ let g:sexp_enable_insert_mode_mappings = 0
 " setup some aliases {{{
 source ~/.nvim/bundle/cmdalias.vim/plugin/cmdalias.vim
 
-" View Git log and load previous revision of the current file.
+" View Git log (limit to 9 items) and load previous revision of the current file.
 " To disable file filtering (view global Git log) and load commit, append `--`
-call CmdAlias('GL', 'silent Glog -i --author= --grep=')
+call CmdAlias('GL', 'silent Glog -i -9 --author= --grep=')
 " Vim doesn't expand 2 abbre on the same cmd line?
 " call CmdAlias('UQ', 'Unite quickfix -no-quit')
 command UQ Unite quickfix -no-quit
