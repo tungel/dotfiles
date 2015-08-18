@@ -95,7 +95,9 @@ alias gitcom="git checkout master"
 alias dotfiles="cd ~/dev/mylinux/dotfiles/"
 
 alias findproc="ps aux | grep "
+alias fp="ps aux | grep "
 alias killproc="kill -9"
+alias kp="kill -9"
 
 # Find out which distro we are using
 alias mydistro="cat /etc/*-release"
