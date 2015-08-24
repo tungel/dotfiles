@@ -94,6 +94,10 @@ alias gitcom="git checkout master"
 
 alias dotfiles="cd ~/dev/mylinux/dotfiles/"
 
+# for mount/unmount USB flashdrive using devmon
+alias um="devmon --mount"
+alias uu="devmon --unmount"
+
 alias findproc="ps aux | grep "
 alias fp="ps aux | grep "
 alias killproc="kill -9"
