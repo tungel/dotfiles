@@ -1122,6 +1122,40 @@ nmap <silent> <leader>tv :TestVisit<CR>
 "--- end vim-test
 "===============================================================================
 
+"===============================================================================
+"--- begin neoterm {{{
+let g:neoterm_position = 'vertical'
+let g:neoterm_automap_keys = ',tt'
+
+nnoremap <silent> <f10> :TREPLSendFile<cr>
+nnoremap <silent> <f9> :TREPLSend<cr>
+vnoremap <silent> <f9> :TREPLSend<cr>
+
+" run set test lib
+" Don't use this to run test, it will cause `segmentation fault (core dumped)`
+" Use `vim-test` plugin to run test instead!
+nnoremap <silent> ,rt :call neoterm#test#run('all')<cr>
+nnoremap <silent> ,rf :call neoterm#test#run('file')<cr>
+nnoremap <silent> ,rn :call neoterm#test#run('current')<cr>
+nnoremap <silent> ,rr :call neoterm#test#rerun()<cr>
+
+" Useful maps
+" hide/close all terminals
+nnoremap <silent> ,th :call neoterm#close_all()<cr>
+" clear terminal
+nnoremap <silent> ,tl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tc :call neoterm#kill()<cr>
+
+" Rails commands
+command! Troutes :T rake routes
+command! -nargs=+ Troute :T rake routes | grep <args>
+command! Tmigrate :T rake db:migrate
+
+" Git commands
+command! -nargs=+ Tg :T git <args>
+"--- end neoterm }}}
+"===============================================================================
 
 let g:ragtag_global_maps = 1
 
@@ -1169,4 +1203,5 @@ let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
 " single ESC to use vi editing mode for the line-editor
 tnoremap <Esc><Esc> <C-\><C-n>
 " end Neovim }}}
+
 
