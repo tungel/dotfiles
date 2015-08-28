@@ -728,7 +728,9 @@ function! VimuxSlime()
 endfunction
 
 " If text is selected, save it in the v buffer and send that buffer it to tmux
-vnoremap <Leader>vs "vy :call VimuxSlime()<CR>
+" vnoremap <Leader>vs "vy :call VimuxSlime()<CR>
+nnoremap <silent> <f9> :call VimuxRunCommand(getline("."))<cr>
+vnoremap <silent> <f9> "vy :call VimuxSlime()<CR>
 
 function! MyHadoop()
     call ChangeDirToCurrentBuffer()
@@ -870,7 +872,7 @@ function! MyDispatch()
 endfunction
 
 autocmd FileType java let b:dispatch = 'javac % && java -cp %:p:h %:t:r'
-nnoremap <F9> :call MyDispatch()<CR>
+" nnoremap <F9> :call MyDispatch()<CR>
 
 " automatic open quickfix window to see result
 " autocmd QuickFixCmdPost * copen
@@ -1127,9 +1129,9 @@ nmap <silent> <leader>tv :TestVisit<CR>
 let g:neoterm_position = 'vertical'
 let g:neoterm_automap_keys = ',tt'
 
-nnoremap <silent> <f10> :TREPLSendFile<cr>
-nnoremap <silent> <f9> :TREPLSend<cr>
-vnoremap <silent> <f9> :TREPLSend<cr>
+" nnoremap <silent> <f10> :TREPLSendFile<cr>
+" nnoremap <silent> <f9> :TREPLSend<cr>
+" vnoremap <silent> <f9> :TREPLSend<cr>
 
 " run set test lib
 " Don't use this to run test, it will cause `segmentation fault (core dumped)`
