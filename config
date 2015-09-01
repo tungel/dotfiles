@@ -4,8 +4,6 @@
 # Define which dotfiles to be symlinked
 #
 
-<symlink>
-
 #===============================================================================
 # the most common dot files
 .nvimrc
@@ -53,7 +51,4 @@ fontconfig
 icons
 themes
 #===============================================================================
-
-
-</symlink>
 
