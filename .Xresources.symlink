@@ -72,6 +72,7 @@ URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 
 ! Use Ctrl+[0..9] to select window in tmux
 ! http://unix.stackexchange.com/questions/96884/using-ctrl0-9-to-cycle-between-windows-using-tmux
+! Use `xev` program to view the `keysym` code
 URxvt.keysym.C-1: \033[27;5;49~
 URxvt.keysym.C-2: \033[27;5;50~
 URxvt.keysym.C-3: \033[27;5;51~

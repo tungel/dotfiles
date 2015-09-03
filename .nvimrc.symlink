@@ -1166,44 +1166,46 @@ let g:ragtag_global_maps = 1
 let g:vim_json_syntax_conceal = 0
 
 
-" ============= NEOVIM ================ {{{
-" makes the cursor a pipe in insert-mode, and a block in normal-mode
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+if has("nvim")
+  " ============= NEOVIM ================ {{{
+  " makes the cursor a pipe in insert-mode, and a block in normal-mode
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-" Use smartcase.
-let g:deoplete#enable_smart_case = 1
+  " Use double ESC to go to normal mode in terminal window. We want to reserve a
+  " single ESC to use vi editing mode for the line-editor
+  tnoremap <Esc><Esc> <C-\><C-n>
 
-let g:deoplete#disable_auto_complete = 0
+  " Use deoplete.
+  let g:deoplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:deoplete#enable_smart_case = 1
 
-inoremap <expr><C-y>  deoplete#mappings#close_popup()
-inoremap <expr><C-e>  deoplete#mappings#cancel_popup()
+  let g:deoplete#disable_auto_complete = 0
 
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
-set completeopt+=noinsert
-if has("patch-7.4.314")
-  set shortmess+=c
+  inoremap <expr><C-y>  deoplete#mappings#close_popup()
+  inoremap <expr><C-e>  deoplete#mappings#cancel_popup()
+
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+  set completeopt+=noinsert
+  if has("patch-7.4.314")
+    set shortmess+=c
+  endif
+
+  let g:deoplete#sources = {}
+  let g:deoplete#sources._ = ['buffer', 'file']
+  let g:deoplete#sources.cpp = ['buffer', 'tag', 'file']
+  let g:deoplete#sources.ruby = ['buffer', 'tag', 'file']
+
+  let g:deoplete#omni_patterns = {}
+  let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
+  " let g:deoplete#omni_patterns.ruby = ''
+  " let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+
+  " let g:deoplete#keyword_patterns = {}
+  " let g:deoplete#keyword_patterns.ruby = ''
+
+  " end Neovim }}}
 endif
-
-let g:deoplete#sources = {}
-let g:deoplete#sources._ = ['buffer', 'file']
-let g:deoplete#sources.cpp = ['buffer', 'tag', 'file']
-let g:deoplete#sources.ruby = ['buffer', 'tag', 'file']
-
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
-" let g:deoplete#omni_patterns.ruby = ''
-" let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
-
-" let g:deoplete#keyword_patterns = {}
-" let g:deoplete#keyword_patterns.ruby = ''
-
-" Use double ESC to go to normal mode in terminal window. We want to reserve a
-" single ESC to use vi editing mode for the line-editor
-tnoremap <Esc><Esc> <C-\><C-n>
-" end Neovim }}}
-
 
