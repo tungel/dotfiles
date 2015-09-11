@@ -1186,6 +1186,15 @@ command! -nargs=+ Tg :T git <args>
 "--- end neoterm }}}
 "===============================================================================
 
+
+"===============================================================================
+"--- begin colorscheme {{{
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark='hard'
+" colorscheme gruvbox
+"--- end colorscheme }}}
+"===============================================================================
+
 let g:ragtag_global_maps = 1
 
 " show quote character in json file!!!
