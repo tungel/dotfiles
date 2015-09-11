@@ -26,6 +26,7 @@ URxvt.foreground:white
 
 URxvt.font:xft:Ubuntu Mono derivative Powerline:pixelsize=14:antialias=true:hinting=true
 URxvt.boldFont:xft:Ubuntu Mono derivative Powerline:bold:pixelsize=14:antialias=true:hinting=true
+URxvt.italicFont:xft:DejaVu Sans Mono for Powerline:italic:pixelsize=14:antialias=true:hinting=true
 
 ! make letters stay closer to each other, work well with font Dejavu Sans Mono for Powerline
 ! at pixelsize=12 or size=9
@@ -49,7 +50,7 @@ URxvt.matcher.button:1
 URxvt.scrollBar:false
 ! fix problem with color in tmux plugin from oh-my-zsh,
 ! maybe: rxvt-unicode-256color
-URxvt.termName:rxvt-256color
+URxvt.termName:rxvt-unicode-256color
 ! URxvt.tabbed.tabbar-fg: 15
 ! URxvt.tabbed.tabbar-bg: 0
 ! URxvt.tabbed.tab-fg: 11
