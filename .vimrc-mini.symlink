@@ -166,8 +166,27 @@ map ,/ :s/^/\/\//<CR>
 " path, and %:p:h gives its directory (the "head" of the full path)
 " nnoremap <c-d> :cd %:p:h<CR>
 " nnoremap <c-BS> :cd %:p:h<CR>
-nnoremap <leader>d :call ChangeDirToCurrentBuffer()<CR>
+nnoremap <leader>D :call ChangeDirToCurrentBuffer()<CR>
 
+" change current directory to the root of git repo if possible, otherwise just
+" change dir to where the current buffer locates at
+function! CDToGitRoot()
+  call ChangeDirToCurrentBuffer()
+  let gitDir = finddir('.git', ';')
+  if gitDir == ''
+    echo "Not a git repo: " . getcwd()
+  else
+    echo "Found .git dir at: " . gitDir
+    " remove the substring `/.git` in `gitDir`
+    let gitDir = substitute(gitDir, '/*.git$', '', 'g')
+
+    " if we aren't currently at the git's root yet
+    if gitDir != ''
+      exec 'cd '.gitDir
+    endif
+  endif
+endfunction
+nnoremap <leader>d :call CDToGitRoot()<CR>
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file

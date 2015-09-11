@@ -191,7 +191,8 @@ call unite#custom#source('file_rec/neovim', 'ignore_pattern',
             \ '\/tmp\/cache\/',
             \ '\/tmp\/pids\/',
             \ '\/tmp\/sessions\/',
-            \ '\/tmp\/sockets\/'],
+            \ '\/tmp\/sockets\/',
+            \ '.*admin\/tmp\/'],
             \ '\|'
             \ )
             \ )
@@ -275,7 +276,13 @@ nnoremap <silent> <Leader>s :Unite tag -no-quit -start-insert<CR>
 " Using ack-grep as recursive command.
 let g:unite_source_rec_async_command = 'find'
 
-
+function! MyFileBrowser()
+  if finddir('.git', ';') == ''
+    Unite file_rec/neovim -start-insert
+  else
+    Unite file_rec/git -start-insert
+  endif
+endfunction
 
 
 " access recently edited files
@@ -285,7 +292,8 @@ nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 -start-inse
 nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 -start-insert buffer<cr>
 
 " open Unite file browser
-nnoremap <Leader>f :Unite file_rec/neovim -start-insert<cr>
+" nnoremap <Leader>f :Unite file_rec/neovim -start-insert<cr>
+nnoremap <Leader>f :call MyFileBrowser()<cr>
 
 " open bookmark
 nnoremap <silent> <Leader>a :Unite -buffer-name=bookmarks -start-insert bookmark<CR>
@@ -1076,7 +1084,7 @@ let g:simple_todo_map_keys = 0
 " Set *.md file to be markdown filetype instead of modula2 as default
 " autocmd BufRead,BufNew,BufNewFile *.md set filetype=markdown
 " update 2015-04-27 to use with https://github.com/plasticboy/vim-markdown
-autocmd BufRead,BufNew,BufNewFile *.md set filetype=mkd
+autocmd BufRead,BufNew,BufNewFile *.md set filetype=markdown
 
 " http://stackoverflow.com/questions/19211839/markdown-lists-in-vim
 autocmd Filetype mkd setlocal com=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,b:-,b:+ | set formatoptions+=tcroqln
@@ -1192,7 +1200,9 @@ command! -nargs=+ Tg :T git <args>
 "--- begin colorscheme {{{
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='hard'
-" colorscheme gruvbox
+let g:gruvbox_contrast_light='light'
+set background=dark
+colorscheme gruvbox
 "--- end colorscheme }}}
 "===============================================================================
 
@@ -1223,7 +1233,7 @@ if has("nvim")
   inoremap <expr><C-e>  deoplete#mappings#cancel_popup()
 
   " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
+  " inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
   inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
   set completeopt+=noinsert
   if has("patch-7.4.314")
