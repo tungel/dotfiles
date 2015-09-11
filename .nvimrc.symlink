@@ -184,7 +184,8 @@ call unite#custom#source('file_mru', 'ignore_pattern',
             \ )
 
 " For file_rec/async source: Ignore all files under tmp directory of Rails app
-call unite#custom#source('file_rec/async', 'ignore_pattern',
+" call unite#custom#source('file_rec/async', 'ignore_pattern',
+call unite#custom#source('file_rec/neovim', 'ignore_pattern',
             \ join([
             \ '\.cache',
             \ '\/tmp\/cache\/',
@@ -284,7 +285,7 @@ nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 -start-inse
 nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 -start-insert buffer<cr>
 
 " open Unite file browser
-nnoremap <Leader>f :Unite file_rec/async -start-insert<cr>
+nnoremap <Leader>f :Unite file_rec/neovim -start-insert<cr>
 
 " open bookmark
 nnoremap <silent> <Leader>a :Unite -buffer-name=bookmarks -start-insert bookmark<CR>
