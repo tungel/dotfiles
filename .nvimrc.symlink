@@ -307,6 +307,7 @@ nnoremap <Leader>o :Unite outline -start-insert<cr>
 " list all window except the current one
 nnoremap <Leader>w :Unite window:no-current:all -start-insert<cr>
 
+nnoremap <Leader>uc :Unite colorscheme -start-insert<cr>
 
 
 " control where the unite buffer will appear
@@ -1198,10 +1199,18 @@ command! -nargs=+ Tg :T git <args>
 
 "===============================================================================
 "--- begin colorscheme {{{
+set background=dark
+
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='light'
-set background=dark
+
+let g:solarized_termcolors=256
+let g:solarized_contrast = "high"
+let g:solarized_visibility= "high"
+let g:solarized_italic = 1
+let g:solarized_termtrans = 1
+
 colorscheme gruvbox
 "--- end colorscheme }}}
 "===============================================================================
