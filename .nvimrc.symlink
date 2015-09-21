@@ -33,11 +33,11 @@ call pathogen#helptags()
 
 let g:EasyMotion_smartcase = 0
 
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+" nmap s <Plug>(easymotion-s2)
+" nmap t <Plug>(easymotion-t2)
 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
 
 " These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to
 " EasyMotion.  " Without these mappings, 'n' & 'N' works fine. (These mappings
@@ -90,6 +90,14 @@ let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 "---end easy-motion }}}
 "===============================================================================
 
+
+"===============================================================================
+"---begin vim-sneak {{{
+let g:sneak#streak = 1
+" use case insensitive
+let g:sneak#use_ic_scs = 1
+"---end vim-sneak }}}
+"===============================================================================
 
 "===============================================================================
 "---begin nerdtree {{{
@@ -1264,4 +1272,45 @@ if has("nvim")
 
   " end Neovim }}}
 endif
+
+
+
+"===============================================================================
+"--- begin terminal window {{{
+function! ToggleTerm()
+  " if you close the terminal buffer, then `g:termbuf` exists but it doesn't
+  " point to any buffer, so we gotta check `bufexists(g:termbuf)` as well
+  if !exists('g:termbuf') || !bufexists(g:termbuf)
+    exec "botright vert new"
+    call termopen("zsh")
+    let g:termbuf=bufnr('%')
+    exec "wincmd w"
+  else
+    " if there is no visible terminal window in the current tab
+    if bufwinnr(g:termbuf) < 0
+      exec "botright vert new"
+      exec g:termbuf . "buffer"
+      exec "wincmd w"
+    else
+      " you can't call `exec g:termbuf."hide"` here
+      exec bufwinnr(g:termbuf)."hide"
+    end
+  endif
+endfunction
+
+au TermOpen * let g:last_term_job_id = b:terminal_job_id
+function! SendToTerm(lines)
+  call jobsend(g:last_term_job_id, add(a:lines, ''))
+endfunction
+
+function! MySelection(text)
+  call SendToTerm(split(a:text, '\n'))
+endfunction
+
+nnoremap <leader>` :call ToggleTerm()<CR>
+nnoremap <silent> <f9> :call SendToTerm([ getline(".") ])<cr>
+vnoremap <f9> "vy :call MySelection(@v)<cr>
+
+"--- end terminal window }}}
+"===============================================================================
 
