@@ -168,7 +168,10 @@ alias yaourt4='yaourt --aur-url https://aur4.archlinux.org'
 # for Jekyll
 alias jekyllstart="cd ~/Dropbox/dev/everbot.github.io && bundle exec jekyll serve"
 
+# list all docker containers
 alias da='docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
+# list running containers
+alias dr='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
 
 # for Ruby gem
 # export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
