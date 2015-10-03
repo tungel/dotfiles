@@ -195,9 +195,21 @@ alias tmux="tmux -2" # force tmux to use 256 colors
 export VISUAL="/usr/bin/nvim"
 export EDITOR="/usr/bin/nvim"
 
-# set the umask so that the default permission for new file is 600 to increase
-# security
-umask 077
+# - Non-root user: set umask to `077` to increase security, so that the default
+#   permission:
+#   + new file is 600
+#   + new directory is 700
+# - Root: umask to `022`, so that default permission:
+#   + new file is 644
+#   + new directory is 755
+# if [ "$EUID" -ne 0 ]; then
+if (( $EUID != 0 )); then
+    # non-root user
+    umask 077
+else
+    # root
+    umask 022
+fi
 
 # Use `umask 022` for sudo command to allow root user to create new file with 755
 # permission, which allows reading and executing permissions to all users
