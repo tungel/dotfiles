@@ -3,8 +3,8 @@
 # set -g default-terminal "rxvt"
 
 # this fixes the HOME and END key problem
-set -g default-terminal "screen-256color"
-# set -g default-terminal "rxvt-256color"
+# set -g default-terminal "screen-256color"
+set -g default-terminal "rxvt-unicode-256color"
 
 set-option -g default-shell /bin/zsh
 set-option -g default-command /bin/zsh
@@ -64,8 +64,9 @@ bind -t vi-copy 'Bspace' halfpage-up
 set -g base-index 1
 set -g pane-base-index 1
 
-bind | split-window -h
-bind - split-window -v
+# Split/create new pane with current directory
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
 unbind '"'
 unbind %
 
@@ -90,6 +91,9 @@ bind-key L swap-pane -D
 # rotate layout with `C-r`
 bind -r C-r next-layout
 
+# Use F10 to toggle zoom the current pane
+bind-key -n F10 resize-pane -Z
+
 # moving between windows with vim movement keys
 # Press the prefix (Ctrl+a) then hold Ctrl key and press h or l to cycle through
 bind -r C-h select-window -t :-
@@ -106,6 +110,7 @@ bind -n C-6 select-window -t :6
 bind -n C-7 select-window -t :7
 bind -n C-8 select-window -t :8
 bind -n C-9 select-window -t :9
+bind -n C-Tab last-window
 
 # resize panes with similar key binding with my vim settings
 bind -r M-h resize-pane -L 5
@@ -144,7 +149,8 @@ setw -g window-status-current-format '#[fg=colour236,bold,bg=colour180,bold] #I 
 new  -s tung -n FileManager "cd ~/dev/ && ranger"
 # when tmux run a specific command (like `vim`), no initialization takes place
 # and the flow control enabled apply, so we gotta turn it off explicitly
-neww -n Vim "stty -ixon; vim"
+# neww -n Neovim "stty -ixon; nvim"
+neww -n Neovim "nvim"
 neww -n miscs
 splitw -h -p 50 -t 3
 # trick to select the left-split of window#3, then come back to focus on Vim
@@ -152,3 +158,6 @@ selectw -t 3 # focus to "miscs" window
 selectp -t 1 # focus to the left pane of window#3
 selectw -t 2 # focus on Vim's window
 
+# Faster Command Sequences, fix neovim switching to command mode problem?
+# set -s escape-time 0
+set -g escape-time 10

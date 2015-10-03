@@ -4,11 +4,9 @@
 # Define which dotfiles to be symlinked
 #
 
-<symlink>
-
 #===============================================================================
 # the most common dot files
-.vimrc
+.nvimrc
 .vimrc-mini
 .vimrc-minimal
 .profile
@@ -53,7 +51,4 @@ fontconfig
 icons
 themes
 #===============================================================================
-
-
-</symlink>
 

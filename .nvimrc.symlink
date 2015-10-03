@@ -33,18 +33,52 @@ call pathogen#helptags()
 
 let g:EasyMotion_smartcase = 0
 
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+" nmap s <Plug>(easymotion-s2)
+" nmap t <Plug>(easymotion-t2)
 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
 
 " These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to
 " EasyMotion.  " Without these mappings, 'n' & 'N' works fine. (These mappings
 " just provide " different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
 
+" https://www.youtube.com/watch?v=aHm36-na4-4&feature=youtu.be
+" This rewires n and N to do the highlighing...
+nnoremap <silent> n   n:call HLNext(0.3)<cr>
+nnoremap <silent> N   N:call HLNext(0.3)<cr>
+
+" highlight the match in red...
+" function! HLNext (blinktime)
+"     highlight WhiteOnRed ctermfg=white ctermbg=red
+"     let [bufnum, lnum, col, off] = getpos('.')
+"     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+"     let target_pat = '\c\%#\%('.@/.'\)'
+"     let ring = matchadd('WhiteOnRed', target_pat, 101)
+"     redraw
+"     exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+"     call matchdelete(ring)
+"     redraw
+" endfunction
+
+function! HLNext (blinktime)
+  highlight WhiteOnRed ctermfg=white ctermbg=red
+  let [bufnum, lnum, col, off] = getpos('.')
+  let matchlen = strlen(matchstr(strpart(getline('.'), col-1),@/))
+  let target_pat = '\c\%#'.@/
+  let blinks = 3
+
+  for n in range(1, blinks)
+    let red = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime / (2*blinks) * 1000) . "m"
+    call matchdelete(red)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime / (2*blinks) * 1000) . "m"
+  endfor
+endfunction
 
 "map <Leader>l <Plug>(easymotion-lineforward) "comment this out, interfere with
 "latex
@@ -56,6 +90,14 @@ let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 "---end easy-motion }}}
 "===============================================================================
 
+
+"===============================================================================
+"---begin vim-sneak {{{
+let g:sneak#streak = 1
+" use case insensitive
+let g:sneak#use_ic_scs = 1
+"---end vim-sneak }}}
+"===============================================================================
 
 "===============================================================================
 "---begin nerdtree {{{
@@ -150,13 +192,15 @@ call unite#custom#source('file_mru', 'ignore_pattern',
             \ )
 
 " For file_rec/async source: Ignore all files under tmp directory of Rails app
-call unite#custom#source('file_rec/async', 'ignore_pattern',
+" call unite#custom#source('file_rec/async', 'ignore_pattern',
+call unite#custom#source('file_rec/neovim', 'ignore_pattern',
             \ join([
             \ '\.cache',
             \ '\/tmp\/cache\/',
             \ '\/tmp\/pids\/',
             \ '\/tmp\/sessions\/',
-            \ '\/tmp\/sockets\/'],
+            \ '\/tmp\/sockets\/',
+            \ '.*admin\/tmp\/'],
             \ '\|'
             \ )
             \ )
@@ -199,16 +243,54 @@ let g:unite_source_grep_default_opts = '-inH'
 " nnoremap <space>/ :Unite grep:.::tung<cr>
 " nnoremap <space>/ :Unite grep:.<cr>
 
-nnoremap <leader><F8> :Unite grep:.<cr>
+if executable('ag')
+  " Use ag in unite grep source.
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+  \ '-i --vimgrep --hidden --ignore ' .
+  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('pt')
+  " Use pt in unite grep source.
+  " https://github.com/monochromegane/the_platinum_searcher
+  let g:unite_source_grep_command = 'pt'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('ack-grep')
+  " Use ack in unite grep source.
+  let g:unite_source_grep_command = 'ack-grep'
+  let g:unite_source_grep_default_opts =
+  \ '-i --no-heading --no-color -k -H'
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('jvgrep')
+  " For jvgrep.
+  let g:unite_source_grep_command = 'jvgrep'
+  let g:unite_source_grep_default_opts =
+  \ '-i --exclude ''\.(git|svn|hg|bzr)'''
+  let g:unite_source_grep_recursive_opt = '-R'
+endif
+
+nnoremap <F8> :Unite -no-quit -keep-focus -no-empty grep:.<cr>
 
 " Use F8 to grep from the root level of the current git repo
-nnoremap <F8> :Unite -no-quit grep/git:/<cr>
+" nnoremap <F8> :Unite -no-quit -keep-focus -no-empty grep/git:/<cr>
+
+" use <Leader>s to go to symbol with Unite. This is to replace CtrlP
+" nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
+"             \ -silent tag/include -start-insert<CR>
+nnoremap <silent> <Leader>s :Unite tag -no-quit -start-insert<CR>
 
 " For ack.
 " Using ack-grep as recursive command.
 let g:unite_source_rec_async_command = 'find'
 
-
+function! MyFileBrowser()
+  if finddir('.git', ';') == ''
+    Unite file_rec/neovim -start-insert
+  else
+    Unite file_rec/git -start-insert
+  endif
+endfunction
 
 
 " access recently edited files
@@ -218,7 +300,8 @@ nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 -start-inse
 nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 -start-insert buffer<cr>
 
 " open Unite file browser
-nnoremap <Leader>f :Unite file_rec/async -start-insert<cr>
+" nnoremap <Leader>f :Unite file_rec/neovim -start-insert<cr>
+nnoremap <Leader>f :call MyFileBrowser()<cr>
 
 " open bookmark
 nnoremap <silent> <Leader>a :Unite -buffer-name=bookmarks -start-insert bookmark<CR>
@@ -229,6 +312,10 @@ nnoremap <Leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
 " Unite outline (support markdown quite well!)
 nnoremap <Leader>o :Unite outline -start-insert<cr>
 
+" list all window except the current one
+nnoremap <Leader>w :Unite window:no-current:all -start-insert<cr>
+
+nnoremap <Leader>uc :Unite colorscheme -start-insert<cr>
 
 
 " control where the unite buffer will appear
@@ -348,6 +435,9 @@ let g:Powerline_symbols="fancy"
 " let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
 
+" disable showing closed buffers' names in the tabline when there is only 1 tab
+" open because it looks annoying
+let g:airline#extensions#tabline#show_buffers = 0
 " when there is only 1 tab open, vim-airline will display all buffers in the
 " tabline, we can switch to a buffer by :bn or :bp
 " end vim-airline }}}
@@ -438,7 +528,10 @@ nmap <leader>ge :Gedit<cr>
 " and clos the rest of other windows
 nmap <leader>gE :Gedit<cr>:only<cr>
 
-" nmap <leader>gl :exe "silent Glog -- % \| Unite quickfix -no-quit"<cr>
+" View general git log
+" nmap <leader>gl :exe "silent Glog -- \| Unite quickfix -no-quit"<cr>
+
+" View git log of current buffer
 nmap <leader>gl :exe "silent Glog \| Unite quickfix -no-quit"<cr>
 
 " Each time you open a git object using fugitive it creates a new buffer. This
@@ -539,81 +632,77 @@ nmap <leader>. :call CursorPing()<CR>
 "===============================================================================
 "---begin neocomplete {{{
 
-"disable AutoComplPop
-let g:acp_enableAtStartup = 0
+" "disable AutoComplPop
+" let g:acp_enableAtStartup = 0
 
 
-" disable annoying preview window of the current item in the completion list
-" especially in clojure file
-set completeopt-=preview
+" " disable annoying preview window of the current item in the completion list
+" " especially in clojure file
+" set completeopt-=preview
 
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_fuzzy_completion = 1
-let g:neocomplete#enable_ignore_case = 1
+" let g:neocomplete#enable_at_startup = 0
+" let g:neocomplete#enable_fuzzy_completion = 1
+" let g:neocomplete#enable_ignore_case = 1
 
-let g:neocomplete#max_list = 15
-let g:neocomplete#enable_auto_select = 1
+" let g:neocomplete#max_list = 15
+" let g:neocomplete#enable_auto_select = 1
 
-" Fix keyword length violate min and max value
-" https://github.com/Shougo/neocomplete.vim/issues/359
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
-
-
-" disable omni completion for Clojure because it's so slow!
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.clojure = ''
-
-" comment out the below line because it interfere with delimitMate of auto
-" insert matching brace - 2015-03-12
-" let g:neocomplete#enable_auto_delimiter = 1
-
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 4
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#min_keyword_length = 3
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType eruby,html,markdown,md setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+" " Fix keyword length violate min and max value
+" " https://github.com/Shougo/neocomplete.vim/issues/359
+" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
 
 
-" Enable auto display a completion list candidates, but it's slow
-" if !exists('g:neocomplete#force_omni_input_patterns')
-"     let g:neocomplete#force_omni_input_patterns = {}
+" " disable omni completion for Clojure because it's so slow!
+" if !exists('g:neocomplete#sources#omni#input_patterns')
+"     let g:neocomplete#sources#omni#input_patterns = {}
 " endif
-" let g:neocomplete#force_omni_input_patterns.ruby =
-"     \ '[^. *\t]\.\w*\|\h\w*::'
+" let g:neocomplete#sources#omni#input_patterns.clojure = ''
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
+" " comment out the below line because it interfere with delimitMate of auto
+" " insert matching brace - 2015-03-12
+" " let g:neocomplete#enable_auto_delimiter = 1
 
-" use <Leader>s to go to symbol with Unite. This is to replace CtrlP
-" nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
-"             \ -silent tag/include -start-insert<CR>
-nnoremap <silent> <Leader>s :Unite tag -no-quit -start-insert<CR>
+" " Set minimum syntax keyword length.
+" let g:neocomplete#sources#syntax#min_keyword_length = 4
+" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" let g:neocomplete#min_keyword_length = 3
 
-" completefunc of vim-clojure-static interferes with neocomplcache
-" https://github.com/guns/vim-clojure-static/issues/32
-" let g:neocomplcache_force_overwrite_completefunc = 1
-let g:neocomplete#force_overwrite_completefunc = 1
+" " Define keyword.
+" if !exists('g:neocomplete#keyword_patterns')
+"     let g:neocomplete#keyword_patterns = {}
+" endif
+" let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" " <TAB>: completion.
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" " Enable omni completion.
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd FileType eruby,html,markdown,md setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+
+
+" " Enable auto display a completion list candidates, but it's slow
+" " if !exists('g:neocomplete#force_omni_input_patterns')
+" "     let g:neocomplete#force_omni_input_patterns = {}
+" " endif
+" " let g:neocomplete#force_omni_input_patterns.ruby =
+" "     \ '[^. *\t]\.\w*\|\h\w*::'
+
+" " Enable heavy omni completion.
+" if !exists('g:neocomplete#sources#omni#input_patterns')
+"   let g:neocomplete#sources#omni#input_patterns = {}
+" endif
+
+
+" " completefunc of vim-clojure-static interferes with neocomplcache
+" " https://github.com/guns/vim-clojure-static/issues/32
+" " let g:neocomplcache_force_overwrite_completefunc = 1
+" let g:neocomplete#force_overwrite_completefunc = 1
 
 "---end neocomplete }}}
 "===============================================================================
@@ -684,7 +773,9 @@ function! VimuxSlime()
 endfunction
 
 " If text is selected, save it in the v buffer and send that buffer it to tmux
-vnoremap <Leader>vs "vy :call VimuxSlime()<CR>
+" vnoremap <Leader>vs "vy :call VimuxSlime()<CR>
+nnoremap <silent> <f9> :call VimuxRunCommand(getline("."))<cr>
+vnoremap <silent> <f9> "vy :call VimuxSlime()<CR>
 
 function! MyHadoop()
     call ChangeDirToCurrentBuffer()
@@ -826,7 +917,7 @@ function! MyDispatch()
 endfunction
 
 autocmd FileType java let b:dispatch = 'javac % && java -cp %:p:h %:t:r'
-nnoremap <F9> :call MyDispatch()<CR>
+" nnoremap <F9> :call MyDispatch()<CR>
 
 " automatic open quickfix window to see result
 " autocmd QuickFixCmdPost * copen
@@ -1002,7 +1093,7 @@ let g:simple_todo_map_keys = 0
 " Set *.md file to be markdown filetype instead of modula2 as default
 " autocmd BufRead,BufNew,BufNewFile *.md set filetype=markdown
 " update 2015-04-27 to use with https://github.com/plasticboy/vim-markdown
-autocmd BufRead,BufNew,BufNewFile *.md set filetype=mkd
+autocmd BufRead,BufNew,BufNewFile *.md set filetype=markdown
 
 " http://stackoverflow.com/questions/19211839/markdown-lists-in-vim
 autocmd Filetype mkd setlocal com=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,b:-,b:+ | set formatoptions+=tcroqln
@@ -1036,9 +1127,190 @@ let g:sexp_enable_insert_mode_mappings = 0
 "---end vim-sexp }}}
 "===============================================================================
 
+"===============================================================================
+" setup some aliases {{{
+source ~/.nvim/bundle/cmdalias.vim/plugin/cmdalias.vim
+
+" View Git log (limit to 9 items) and load previous revision of the current file.
+" To disable file filtering (view global Git log) and load commit, append `--`
+call CmdAlias('GL', 'silent Glog -i -9 --author= --grep=')
+" Vim doesn't expand 2 abbre on the same cmd line?
+" call CmdAlias('UQ', 'Unite quickfix -no-quit')
+command UQ Unite quickfix -no-quit
+" end aliases }}}
+"===============================================================================
+
+"===============================================================================
+"--- vim-test {{{
+function! MyStrategy(cmd)
+  let app = '/usr/bin/top'
+  rightbelow vnew
+  " call termopen(app)
+  call termopen(a:cmd)
+  startinsert
+  echo 'It works! Command for running tests: ' . a:cmd
+endfunction
+
+let test#ruby#rspec#options = {
+  \ 'nearest': '--backtrace',
+  \ 'file':    '--format documentation',
+\}
+
+" let g:test#custom_strategies = {'my_strategy': function('MyStrategy')}
+" let g:test#strategy = 'my_strategy'
+
+let test#strategy = "vimux"
+
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
+"--- end vim-test
+"===============================================================================
+
+"===============================================================================
+"--- begin neoterm {{{
+let g:neoterm_position = 'vertical'
+let g:neoterm_automap_keys = ',tt'
+
+" nnoremap <silent> <f10> :TREPLSendFile<cr>
+" nnoremap <silent> <f9> :TREPLSend<cr>
+" vnoremap <silent> <f9> :TREPLSend<cr>
+
+" run set test lib
+" Don't use this to run test, it will cause `segmentation fault (core dumped)`
+" Use `vim-test` plugin to run test instead!
+nnoremap <silent> ,rt :call neoterm#test#run('all')<cr>
+nnoremap <silent> ,rf :call neoterm#test#run('file')<cr>
+nnoremap <silent> ,rn :call neoterm#test#run('current')<cr>
+nnoremap <silent> ,rr :call neoterm#test#rerun()<cr>
+
+" Useful maps
+" hide/close all terminals
+nnoremap <silent> ,th :call neoterm#close_all()<cr>
+" clear terminal
+nnoremap <silent> ,tl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tc :call neoterm#kill()<cr>
+
+" Rails commands
+command! Troutes :T rake routes
+command! -nargs=+ Troute :T rake routes | grep <args>
+command! Tmigrate :T rake db:migrate
+
+" Git commands
+command! -nargs=+ Tg :T git <args>
+"--- end neoterm }}}
+"===============================================================================
+
+
+"===============================================================================
+"--- begin colorscheme {{{
+set background=dark
+
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='light'
+
+let g:solarized_termcolors=256
+let g:solarized_contrast = "high"
+let g:solarized_visibility= "high"
+let g:solarized_italic = 1
+let g:solarized_termtrans = 1
+
+colorscheme gruvbox
+"--- end colorscheme }}}
+"===============================================================================
+
 let g:ragtag_global_maps = 1
 
 " show quote character in json file!!!
 " by default, the quote characters in json file are hidden
 let g:vim_json_syntax_conceal = 0
+
+
+if has("nvim")
+  " ============= NEOVIM ================ {{{
+  " makes the cursor a pipe in insert-mode, and a block in normal-mode
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+  " Use double ESC to go to normal mode in terminal window. We want to reserve a
+  " single ESC to use vi editing mode for the line-editor
+  tnoremap <Esc><Esc> <C-\><C-n>
+
+  " Use deoplete.
+  let g:deoplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:deoplete#enable_smart_case = 1
+
+  let g:deoplete#disable_auto_complete = 0
+
+  inoremap <expr><C-y>  deoplete#mappings#close_popup()
+  inoremap <expr><C-e>  deoplete#mappings#cancel_popup()
+
+  " <C-h>, <BS>: close popup and delete backword char.
+  " inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+  set completeopt+=noinsert
+  if has("patch-7.4.314")
+    set shortmess+=c
+  endif
+
+  let g:deoplete#sources = {}
+  let g:deoplete#sources._ = ['buffer', 'file']
+  let g:deoplete#sources.cpp = ['buffer', 'tag', 'file']
+  let g:deoplete#sources.ruby = ['buffer', 'tag', 'file']
+
+  let g:deoplete#omni_patterns = {}
+  let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
+  " let g:deoplete#omni_patterns.ruby = ''
+  " let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+
+  " let g:deoplete#keyword_patterns = {}
+  " let g:deoplete#keyword_patterns.ruby = ''
+
+  " end Neovim }}}
+endif
+
+
+
+"===============================================================================
+"--- begin terminal window {{{
+function! ToggleTerm()
+  " if you close the terminal buffer, then `g:termbuf` exists but it doesn't
+  " point to any buffer, so we gotta check `bufexists(g:termbuf)` as well
+  if !exists('g:termbuf') || !bufexists(g:termbuf)
+    exec "botright vert new"
+    call termopen("zsh")
+    let g:termbuf=bufnr('%')
+    exec "wincmd w"
+  else
+    " if there is no visible terminal window in the current tab
+    if bufwinnr(g:termbuf) < 0
+      exec "botright vert new"
+      exec g:termbuf . "buffer"
+      exec "wincmd w"
+    else
+      " you can't call `exec g:termbuf."hide"` here
+      exec bufwinnr(g:termbuf)."hide"
+    end
+  endif
+endfunction
+
+au TermOpen * let g:last_term_job_id = b:terminal_job_id
+function! SendToTerm(lines)
+  call jobsend(g:last_term_job_id, add(a:lines, ''))
+endfunction
+
+function! MySelection(text)
+  call SendToTerm(split(a:text, '\n'))
+endfunction
+
+nnoremap <leader>` :call ToggleTerm()<CR>
+nnoremap <silent> <f9> :call SendToTerm([ getline(".") ])<cr>
+vnoremap <f9> "vy :call MySelection(@v)<cr>
+
+"--- end terminal window }}}
+"===============================================================================
 

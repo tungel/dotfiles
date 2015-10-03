@@ -4,9 +4,11 @@
 
 export TLPC=~/.tlpc
 NOGIT=~/dev/mylinux/nogit
+
+MOREALIASES=~/dev/mylinux/dotfiles-private/morealiases.sh
 # some more aliases for personal usage
-if [[ -e $NOGIT/tl.sh ]]; then
-    source $NOGIT/tl.sh
+if [[ -e $MOREALIASES ]]; then
+    source $MOREALIASES
 fi
 
 pathAdd() {
@@ -71,6 +73,8 @@ alias music="bash ~/startmusic.sh &"
 alias topbigdirs="du -h | sort -rh | head -n 20"
 alias topbigfiles="find . -type f -exec du -Sh {} + | sort -rh | head -n 20"
 
+alias ag="ag -i --hidden"
+
 #for matlab
 # export MATLAB_JAVA=/usr/local/MATLAB/R2014a/sys/java/jre/glnxa64/jre
 export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
@@ -84,14 +88,22 @@ export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
 alias matlab="/usr/local/MATLAB/R2014a/bin/matlab -nodesktop -nosplash"
 
 #for git:
-alias gitp="git push origin master"
+alias gitp="git pull"
 alias gits="git status -sb"
 alias gitc="git commit -am"
 alias gitco="git checkout "
 alias gitcom="git checkout master"
 
+alias dotfiles="cd ~/dev/mylinux/dotfiles/"
+
+# for mount/unmount USB flashdrive using devmon
+alias um="devmon --mount"
+alias uu="devmon --unmount"
+
 alias findproc="ps aux | grep "
+alias fp="ps aux | grep "
 alias killproc="kill -9"
+alias kp="kill -9"
 
 # Find out which distro we are using
 alias mydistro="cat /etc/*-release"
@@ -118,15 +130,14 @@ alias vga="xrandr --output VGA1 --mode 1920x1080"
 alias vga2="xrandr --output VGA2 --mode 1920x1080"
 
 # delete lock vim's session
-alias rmvim="rm ~/Dropbox/dev/nogit/vimdata/sessions/default.vim.lock ; \
-             rm ~/Dropbox/dev/nogit/vimdata/sessions/default.vim ; \
-             rm ~/Dropbox/dev/nogit/vimdata/sessions/last-session.txt"
+alias rmvim="rm $NOGIT/vimdata/sessions/default.vim.lock ; \
+             rm $NOGIT/vimdata/sessions/default.vim ; \
+             rm $NOGIT/vimdata/sessions/last-session.txt"
 
 # To enable various useful stuff for Arch Linux guest in VirtualBox machine
 alias myvirtualbox="sudo modprobe -a vboxguest vboxsf vboxvideo ; \
                     sudo VBoxClient-all & ; \
                     sudo systemctl start vboxservice.service"
-
 
 alias foxit="wine 'C:\\windows\\command\\start.exe' /Unix ~/.wine/dosdevices/c:/users/Public/Desktop/FoxitReader.lnk &"
 
@@ -157,6 +168,11 @@ alias yaourt4='yaourt --aur-url https://aur4.archlinux.org'
 # for Jekyll
 alias jekyllstart="cd ~/Dropbox/dev/everbot.github.io && bundle exec jekyll serve"
 
+# list all docker containers
+alias da='docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
+# list running containers
+alias dr='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
+
 # for Ruby gem
 # export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
 # GEM_ROOT, GEM_PATH
@@ -176,8 +192,8 @@ alias tmux="tmux -2" # force tmux to use 256 colors
 
 # change system-wide editor
 #export VISUAL="/usr/bin/vim -p -X"
-export VISUAL="/usr/bin/vim"
-export EDITOR="/usr/bin/vim"
+export VISUAL="/usr/bin/nvim"
+export EDITOR="/usr/bin/nvim"
 
 #set the umask so that the default permission for new file is 600
 umask 077

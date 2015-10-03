@@ -24,8 +24,17 @@ URxvt.foreground:white
 ! URxvt.font:xft:Dejavu Sans Mono for Powerline:pixelsize=12:antialias=true:hinting=true
 ! URxvt.boldFont:xft:DejaVu Sans Mono for Powerline:bold:pixelsize=12:antialias=true:hinting=true
 
-URxvt.font:xft:Ubuntu Mono derivative Powerline:pixelsize=16:antialias=true:hinting=true
-URxvt.boldFont:xft:Ubuntu Mono derivative Powerline:bold:pixelsize=16:antialias=true:hinting=true
+URxvt.font:xft:Ubuntu Mono derivative Powerline:pixelsize=14:antialias=true:hinting=true
+URxvt.boldFont:xft:Ubuntu Mono derivative Powerline:bold:pixelsize=14:antialias=true:hinting=true
+URxvt.italicFont:xft:DejaVu Sans Mono for Powerline:italic:pixelsize=14:antialias=true:hinting=true
+
+! make letters stay closer to each other, work well with font Dejavu Sans Mono for Powerline
+! at pixelsize=12 or size=9
+! Note: letterSpace:-1 will fix the folk icon of vim-airline but then the spacing is
+! a bit wide, so we scarify the folk icon for the look of the content by setting
+! it to -2
+URxvt.letterSpace: -1
+
 
 URxvt.inheritPixmap:false
 URxvt.xftAntialias:true
@@ -41,7 +50,7 @@ URxvt.matcher.button:1
 URxvt.scrollBar:false
 ! fix problem with color in tmux plugin from oh-my-zsh,
 ! maybe: rxvt-unicode-256color
-URxvt.termName:rxvt-256color
+URxvt.termName:rxvt-unicode-256color
 ! URxvt.tabbed.tabbar-fg: 15
 ! URxvt.tabbed.tabbar-bg: 0
 ! URxvt.tabbed.tab-fg: 11
@@ -64,6 +73,7 @@ URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 
 ! Use Ctrl+[0..9] to select window in tmux
 ! http://unix.stackexchange.com/questions/96884/using-ctrl0-9-to-cycle-between-windows-using-tmux
+! Use `xev` program to view the `keysym` code
 URxvt.keysym.C-1: \033[27;5;49~
 URxvt.keysym.C-2: \033[27;5;50~
 URxvt.keysym.C-3: \033[27;5;51~
@@ -74,14 +84,7 @@ URxvt.keysym.C-7: \033[27;5;55~
 URxvt.keysym.C-8: \033[27;5;56~
 URxvt.keysym.C-9: \033[27;5;57~
 URxvt.keysym.C-0: \033[27;5;48~
-
-
-! make letters stay closer to each other, work well with font Dejavu Sans Mono for Powerline
-! at pixelsize=12 or size=9
-! Note: letterSpace:-1 will fix the folk icon of vim-airline but then the spacing is
-! a bit wide, so we scarify the folk icon for the look of the content by setting
-! it to -2
-URxvt.letterSpace: -1
+URxvt.keysym.C-Tab: \033[27;5;9~
 
 ! To check the default color, see: `man urxvt` section `COLOURS AND GRAPHICS`
 ! black
