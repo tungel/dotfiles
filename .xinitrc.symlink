@@ -50,6 +50,10 @@ if [ $(lspci | grep -i VirtualBox | wc -l) -gt 0 ]; then
   /usr/bin/VBoxClient-all
 fi
 
+# locks in 10 minutes of inactivity, or whenever you place the mouse cursor in
+# the bottom right corner for 3 seconds.
+xautolock -time 10 -locker slock -nowlocker slock -detectsleep -corners 000+ -cornerdelay 3 &
+
 
 # http://linuxmafia.com/faq/Admin/release-files.html
 # we can also use file /etc/os-release
