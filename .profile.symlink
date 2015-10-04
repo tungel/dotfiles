@@ -172,6 +172,8 @@ alias jekyllstart="cd ~/Dropbox/dev/everbot.github.io && bundle exec jekyll serv
 alias da='docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
 # list running containers
 alias dr='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
+# list docker images
+alias di='docker images'
 
 # for Ruby gem
 # export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
