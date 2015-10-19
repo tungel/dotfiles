@@ -226,7 +226,8 @@ export KEYTIMEOUT=15
 source ~/.zplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zplugins/sudo.plugin.zsh
 source ~/.zplugins/archlinux.plugin.zsh
-source ~/.zplugins/dirhistory.plugin.zsh
+# commented it out as it seems interfere with RVM
+# source ~/.zplugins/dirhistory.plugin.zsh
 source ~/.zplugins/tmux.plugin.zsh
 # ==============================================================================
 
