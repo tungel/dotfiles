@@ -123,7 +123,7 @@ def installDotfiles
     if @toSymlink.include?(basename)
       subDir = File.dirname(source).sub(SOURCE_DIR, '').delete("/")
 
-      dest = (subDir.length == 0) ? File.join(TARGET, basename) : 
+      dest = (subDir.length == 0) ? File.join(TARGET, basename) :
                                     File.join(TARGET, subDir, basename)
 
       linkFile(source, dest)
@@ -144,8 +144,8 @@ SOURCE_DIR = File.expand_path File.dirname(__FILE__)
 @overwriteAll = false
 @backupAll = false
 
-if !ENV['all'].nil?
-  case ENV['all']
+if ARGV.length > 0
+  case ARGV[0]
   when 'overwrite'
     @overwriteAll = true
   when 'skip'
