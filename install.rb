@@ -143,6 +143,18 @@ SOURCE_DIR = File.expand_path File.dirname(__FILE__)
 @skipAll = false
 @overwriteAll = false
 @backupAll = false
+
+if !ENV['all'].nil?
+  case ENV['all']
+  when 'overwrite'
+    @overwriteAll = true
+  when 'skip'
+    @skipAll = true
+  when 'backup'
+    @backupAll = true
+  end
+end
+
 installDotfiles
 puts "Number of config files = #{@toSymlink.count}"
 
