@@ -164,6 +164,9 @@ alias mynotify='sudo sysctl fs.inotify.max_user_watches=1000000000'
 # list all users
 alias userlist='cut -d: -f1 /etc/passwd'
 
+# list all groups
+alias grouplist='cut -d: -f1 /etc/group'
+
 # AUR Arch Linux has moved to https://aur4.archlinux.org but by default yaourt
 # doesn't seem to use the new url, so here is the fix:
 alias yaourt4='yaourt --aur-url https://aur4.archlinux.org'
