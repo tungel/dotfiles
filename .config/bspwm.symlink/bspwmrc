@@ -116,7 +116,7 @@ bspc rule -a "Foxit Reader" desktop=^4
 bspc rule -a "PDFXCview.exe" desktop=^4
 
 # move gvim to window 9
-bspc rule -a gvim desktop=^9
+# bspc rule -a gvim desktop=^9
 
 # for matlab figure: make the figure window floating by default
 # use: xprop | grep WM_CLASS to get the class title
@@ -206,7 +206,4 @@ if [ $(pgrep -cx nm-applet) -gt 0 ] ; then
 fi
 # `which nm-applet` &
 nm-applet &
-
-
-
 

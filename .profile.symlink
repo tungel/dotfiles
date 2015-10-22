@@ -109,7 +109,7 @@ alias kp="kill -9"
 alias mydistro="cat /etc/*-release"
 
 # for gvim to load back the session
-alias gvim="gvim -S ~/session.gvim"
+# alias gvim="gvim -S ~/session.gvim"
 
 # make Acer laptop brighter:
 alias brighter="sudo tee /sys/class/backlight/intel_backlight/brightness <<< 1200"
