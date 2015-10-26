@@ -1129,7 +1129,7 @@ let g:sexp_enable_insert_mode_mappings = 0
 
 "===============================================================================
 " setup some aliases {{{
-source ~/.nvim/bundle/cmdalias.vim/plugin/cmdalias.vim
+source ~/.config/nvim/bundle/cmdalias.vim/plugin/cmdalias.vim
 
 " View Git log (limit to 9 items) and load previous revision of the current file.
 " To disable file filtering (view global Git log) and load commit, append `--`
@@ -1171,36 +1171,38 @@ nmap <silent> <leader>tv :TestVisit<CR>
 
 "===============================================================================
 "--- begin neoterm {{{
-let g:neoterm_position = 'vertical'
-let g:neoterm_automap_keys = ',tt'
+if has("nvim")
+  let g:neoterm_position = 'vertical'
+  let g:neoterm_automap_keys = ',tt'
 
-" nnoremap <silent> <f10> :TREPLSendFile<cr>
-" nnoremap <silent> <f9> :TREPLSend<cr>
-" vnoremap <silent> <f9> :TREPLSend<cr>
+  " nnoremap <silent> <f10> :TREPLSendFile<cr>
+  " nnoremap <silent> <f9> :TREPLSend<cr>
+  " vnoremap <silent> <f9> :TREPLSend<cr>
 
-" run set test lib
-" Don't use this to run test, it will cause `segmentation fault (core dumped)`
-" Use `vim-test` plugin to run test instead!
-nnoremap <silent> ,rt :call neoterm#test#run('all')<cr>
-nnoremap <silent> ,rf :call neoterm#test#run('file')<cr>
-nnoremap <silent> ,rn :call neoterm#test#run('current')<cr>
-nnoremap <silent> ,rr :call neoterm#test#rerun()<cr>
+  " run set test lib
+  " Don't use this to run test, it will cause `segmentation fault (core dumped)`
+  " Use `vim-test` plugin to run test instead!
+  nnoremap <silent> ,rt :call neoterm#test#run('all')<cr>
+  nnoremap <silent> ,rf :call neoterm#test#run('file')<cr>
+  nnoremap <silent> ,rn :call neoterm#test#run('current')<cr>
+  nnoremap <silent> ,rr :call neoterm#test#rerun()<cr>
 
-" Useful maps
-" hide/close all terminals
-nnoremap <silent> ,th :call neoterm#close_all()<cr>
-" clear terminal
-nnoremap <silent> ,tl :call neoterm#clear()<cr>
-" kills the current job (send a <c-c>)
-nnoremap <silent> ,tc :call neoterm#kill()<cr>
+  " Useful maps
+  " hide/close all terminals
+  nnoremap <silent> ,th :call neoterm#close_all()<cr>
+  " clear terminal
+  nnoremap <silent> ,tl :call neoterm#clear()<cr>
+  " kills the current job (send a <c-c>)
+  nnoremap <silent> ,tc :call neoterm#kill()<cr>
 
-" Rails commands
-command! Troutes :T rake routes
-command! -nargs=+ Troute :T rake routes | grep <args>
-command! Tmigrate :T rake db:migrate
+  " Rails commands
+  command! Troutes :T rake routes
+  command! -nargs=+ Troute :T rake routes | grep <args>
+  command! Tmigrate :T rake db:migrate
 
-" Git commands
-command! -nargs=+ Tg :T git <args>
+  " Git commands
+  command! -nargs=+ Tg :T git <args>
+endif
 "--- end neoterm }}}
 "===============================================================================
 
@@ -1277,39 +1279,41 @@ endif
 
 "===============================================================================
 "--- begin terminal window {{{
-function! ToggleTerm()
-  " if you close the terminal buffer, then `g:termbuf` exists but it doesn't
-  " point to any buffer, so we gotta check `bufexists(g:termbuf)` as well
-  if !exists('g:termbuf') || !bufexists(g:termbuf)
-    exec "botright vert new"
-    call termopen("zsh")
-    let g:termbuf=bufnr('%')
-    exec "wincmd w"
-  else
-    " if there is no visible terminal window in the current tab
-    if bufwinnr(g:termbuf) < 0
+if has("nvim")
+  function! ToggleTerm()
+    " if you close the terminal buffer, then `g:termbuf` exists but it doesn't
+    " point to any buffer, so we gotta check `bufexists(g:termbuf)` as well
+    if !exists('g:termbuf') || !bufexists(g:termbuf)
       exec "botright vert new"
-      exec g:termbuf . "buffer"
+      call termopen("zsh")
+      let g:termbuf=bufnr('%')
       exec "wincmd w"
     else
-      " you can't call `exec g:termbuf."hide"` here
-      exec bufwinnr(g:termbuf)."hide"
-    end
-  endif
-endfunction
+      " if there is no visible terminal window in the current tab
+      if bufwinnr(g:termbuf) < 0
+        exec "botright vert new"
+        exec g:termbuf . "buffer"
+        exec "wincmd w"
+      else
+        " you can't call `exec g:termbuf."hide"` here
+        exec bufwinnr(g:termbuf)."hide"
+      end
+    endif
+  endfunction
 
-au TermOpen * let g:last_term_job_id = b:terminal_job_id
-function! SendToTerm(lines)
-  call jobsend(g:last_term_job_id, add(a:lines, ''))
-endfunction
+  au TermOpen * let g:last_term_job_id = b:terminal_job_id
+  function! SendToTerm(lines)
+    call jobsend(g:last_term_job_id, add(a:lines, ''))
+  endfunction
 
-function! MySelection(text)
-  call SendToTerm(split(a:text, '\n'))
-endfunction
+  function! MySelection(text)
+    call SendToTerm(split(a:text, '\n'))
+  endfunction
 
-nnoremap <leader>` :call ToggleTerm()<CR>
-nnoremap <silent> <f9> :call SendToTerm([ getline(".") ])<cr>
-vnoremap <f9> "vy :call MySelection(@v)<cr>
+  nnoremap <leader>` :call ToggleTerm()<CR>
+  nnoremap <silent> <f9> :call SendToTerm([ getline(".") ])<cr>
+  vnoremap <f9> "vy :call MySelection(@v)<cr>
+endif
 
 "--- end terminal window }}}
 "===============================================================================
