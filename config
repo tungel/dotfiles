@@ -43,6 +43,7 @@ bin
 .pryrc
 .editrc
 .inputrc
+.vimperatorrc
 
 # other directories
 bspwm

@@ -44,6 +44,9 @@ if has('gui_running')
     " Set tab label to show tab number, filename, modified (show '+')
     set guitablabel=%N)\ %t\ %M
 
+    " stop cursor blinking
+    set guicursor=a:blinkon0
+
     " only display file name on the tab instead of full path, this helps making
     " vim look neater when switching from tab to tab
     " set guitablabel=%t

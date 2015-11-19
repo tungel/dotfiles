@@ -1319,3 +1319,6 @@ endif
 "--- end terminal window }}}
 "===============================================================================
 
+" Fix death slow with Ruby files
+set regexpengine=1
+
