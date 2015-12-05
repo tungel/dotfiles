@@ -400,6 +400,9 @@ function! MoveToNextTab()
 endfunc
 " ==============================================================================
 
+" So that we can scroll up/down when the screen is filled up by command output
+" For example `:Source for` command in vim-fireplace
+set more
 
 " ==============================================================================
 "---begin make Alt key work on both GVim and vim
