@@ -44,6 +44,7 @@ bin
 .editrc
 .inputrc
 .vimperatorrc
+profiles.clj
 
 # other directories
 bspwm
