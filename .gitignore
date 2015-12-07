@@ -1,0 +1,13 @@
+# ignore RubyEncoder stuff
+/bin.symlink/encode.lic
+/bin.symlink/license.txt
+/bin.symlink/licgen
+/bin.symlink/rginfo
+/bin.symlink/rubyencoder
+/bin.symlink/rubyencoder18.so
+/bin.symlink/rubyencoder192.so
+/bin.symlink/rubyencoder19.so
+/bin.symlink/rubyencoder20.so
+/bin.symlink/rubyencoder21.so
+/bin.symlink/rubyencoder22.so
+
