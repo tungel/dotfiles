@@ -13,7 +13,10 @@ end
 
 # for debug with pry in emacs {{{
 # http://emacs.stackexchange.com/questions/3537/how-do-you-run-pry-from-emacs
-# Pry.config.color = false # may not need to set this
-Pry.config.pager = false # disable paging because it doesn't play well with comint
+# if ENV["INSIDE_EMACS"]
+  # Pry.config.color = false # may not need to set this
+  # Pry.config.correct_indent = false # may not need to set this
+  Pry.config.pager = false # disable paging because it doesn't play well with comint
+# end
 # end emacs debug }}}
 
