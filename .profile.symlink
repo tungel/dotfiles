@@ -34,6 +34,13 @@ alias ll='ls -alht'
 alias la='ls -A'
 alias l='ls -CF'
 
+# List files only
+# alias lsf="ls -lp | ag -v /" # (or grep -v '^d')
+alias lsf="ls -alh | ag -v '^d'" # (or grep -v '^d')
+
+# List directories only
+alias lsd="ls -alh | ag '^d'" # (or grep -v '^d')
+
 # for WiFi
 alias wifiup='sudo ip link set wlo1 up'
 #alias wifiup='sudo ip link set wlp0s29f7u1 up'
@@ -267,8 +274,10 @@ pathAdd ~/bin
 pathAdd ~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
 alias mydfs="hdfs dfs "
 
-# Don't use this, just use the default from `ksshaskpass`
-# export SSH_ASKPASS=ssh-askpass
+# update: [2015-12-27 17:33] [ALPM-SCRIPTLET] The SSH_ASKPASS environment
+# variable is not exported by default anymore. Set it in /etc/profile to revert
+# to the previous behavior
+export SSH_ASKPASS="/usr/bin/ksshaskpass"
 
 # Add RVM to PATH for scripting
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
