@@ -45,6 +45,7 @@ bin
 .inputrc
 .vimperatorrc
 profiles.clj
+.spacemacs
 
 # other directories
 bspwm
