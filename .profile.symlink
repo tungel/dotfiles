@@ -266,6 +266,10 @@ export SQOOP_CONF_DIR=~/dev/libs/sqoop/conf
 export HADOOP_MAPRED_HOME=~/dev/libs/hadoop
 pathAdd $SQOOP_HOME/bin
 
+# for Go
+export GOPATH=~/go
+pathAdd $GOPATH/bin
+
 # for local scripts/programs
 # PATH=$PATH:~/bin
 pathAdd ~/bin
