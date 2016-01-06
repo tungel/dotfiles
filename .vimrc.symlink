@@ -33,11 +33,11 @@ call pathogen#helptags()
 
 let g:EasyMotion_smartcase = 0
 
-" nmap s <Plug>(easymotion-s2)
-" nmap t <Plug>(easymotion-t2)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
 
-" map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
 
 " These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to
 " EasyMotion.  " Without these mappings, 'n' & 'N' works fine. (These mappings
@@ -93,9 +93,9 @@ let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
 "===============================================================================
 "---begin vim-sneak {{{
-let g:sneak#streak = 1
+" let g:sneak#streak = 1
 " use case insensitive
-let g:sneak#use_ic_scs = 1
+" let g:sneak#use_ic_scs = 1
 "---end vim-sneak }}}
 "===============================================================================
 
