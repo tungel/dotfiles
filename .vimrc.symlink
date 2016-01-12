@@ -775,8 +775,8 @@ endfunction
 
 " If text is selected, save it in the v buffer and send that buffer it to tmux
 " vnoremap <Leader>vs "vy :call VimuxSlime()<CR>
-nnoremap <silent> <f9> :call VimuxRunCommand(getline("."))<cr>
-vnoremap <silent> <f9> "vy :call VimuxSlime()<CR>
+nnoremap <silent> <f7> :call VimuxRunCommand(getline("."))<cr>
+vnoremap <silent> <f7> "vy :call VimuxSlime()<CR>
 
 function! MyHadoop()
     call ChangeDirToCurrentBuffer()

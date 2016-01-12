@@ -67,6 +67,7 @@ map <F5> :checktime<CR>
 
 " auto reload the file if it's changed
 set autoread
+au CursorHold * checktime
 
 " use Ctrl+d to move the cursor to bottom, then bring that bottom line to middle
 " of screen
