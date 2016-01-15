@@ -1314,6 +1314,9 @@ endif
 "--- end terminal window }}}
 "===============================================================================
 
+" disable annoying additional window with autocomplete in Clojure and Go
+set completeopt-=preview
+
 " Fix death slow with Ruby files
 set regexpengine=1
 
