@@ -7,7 +7,12 @@ kill -9 $(ps aux | grep bspc | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
 
 PANEL_FIFO=/tmp/panel-fifo
 PANEL_FIFO_SECOND=/tmp/panel-fifo-second
-PANEL_HEIGHT=18
+if [[ -e $TLPC ]]; then
+    # for 4k monitor
+    PANEL_HEIGHT=30
+else
+    PANEL_HEIGHT=18
+fi
 #PANEL_FONT_FAMILY="-*-Dejavu Sans Mono for Powerline-r-normal-*-14-*-*-*-c-*-*-1"
 #PANEL_FONT_FAMILY="-*-dejavu sans mono-medium-r-normal--12-*-*-*-*-*-iso10646-1"
 #PANEL_FONT_FAMILY="-*-dejavu sans mono-medium-r-normal--11-*-*-*-*-*-iso10646-1"
@@ -52,41 +57,40 @@ export PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY
 #   ~/.config/bspwm/bspwmrc
 num_mon=$(bspc query -M | wc -l)
 if [ $num_mon -gt 1 ] ; then
-
-    # for Acer Aspire V11 Touch
-    # xrandr --output eDP1 --primary
-    # xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1
-
-    # for HP Pavilion dm3 laptop
-    # xrandr --output LVDS1 --primary
-    # xrandr --output VGA1 --mode 1920x1080 --left-of LVDS1
-
-    # for VirtualBox at work
-    xrandr --output VGA-0 --primary
-    # xrandr --output VGA-1 --mode 1920x1016 --right-of VGA-0
-    xrandr --output VGA-1 --right-of VGA-0
-
-    # first native monitor
-    bspc monitor ^1 --reset-desktops 1
-    bspc config -m ^1 top_padding 10
-
-    # external monitor exists, so we prefer to use it instead of the native
-    # small size monitor
-    bspc monitor ^2 --reset-desktops 2 web 4 5 6 7 8 9 10
-    bspc config -m ^2 top_padding 10
-else
     if [[ -e $TLPC ]]; then
         xrandr --output HDMI-0 --primary
-        xrandr --output VGA-0 --right-of HDMI-0
+        xrandr --output DVI-I-1 --right-of HDMI-0
         bspc monitor ^1 --reset-desktops 1
         bspc config -m ^1 top_padding 10
 
         bspc monitor ^2 --reset-desktops 2 web 4 5 6 7 8 9 10
         bspc config -m ^2 top_padding 10
     else
-        bspc monitor ^1 --reset-desktops 1 2 web 4 5 6 7 8 9 10
+        # for Acer Aspire V11 Touch
+        # xrandr --output eDP1 --primary
+        # xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1
+
+        # for HP Pavilion dm3 laptop
+        # xrandr --output LVDS1 --primary
+        # xrandr --output VGA1 --mode 1920x1080 --left-of LVDS1
+
+        # for VirtualBox at work
+        xrandr --output VGA-0 --primary
+        # xrandr --output VGA-1 --mode 1920x1016 --right-of VGA-0
+        xrandr --output VGA-1 --right-of VGA-0
+
+        # first native monitor
+        bspc monitor ^1 --reset-desktops 1
         bspc config -m ^1 top_padding 10
+
+        # external monitor exists, so we prefer to use it instead of the native
+        # small size monitor
+        bspc monitor ^2 --reset-desktops 2 web 4 5 6 7 8 9 10
+        bspc config -m ^2 top_padding 10
     fi
+else
+    bspc monitor ^1 --reset-desktops 1 2 web 4 5 6 7 8 9 10
+    bspc config -m ^1 top_padding 10
 fi
 
 

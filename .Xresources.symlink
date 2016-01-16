@@ -1,6 +1,8 @@
 ! Run: `xrdb -merge ~/.Xresources` after modify this file
 
 ! font stuffs
+! for 4K monitor
+Xft.dpi: 180
 Xft.autohint: true
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
