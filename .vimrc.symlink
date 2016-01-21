@@ -716,6 +716,9 @@ nmap <leader>. :call CursorPing()<CR>
 " C-k in insert mode to move to next field in the snippets (using Tab is fine
 " too)
 
+" Disable runtime snippet
+let g:neosnippet#disable_runtime_snippets = { "_": 1, }
+
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
