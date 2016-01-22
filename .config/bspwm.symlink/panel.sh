@@ -127,10 +127,13 @@ while true; do
     # previously
     MEMUSED=(`free | awk '/Mem/{printf("%02d", $3/($2) * 100.0 + 0.5);}'`)
 
+    GPUTEMP=(`nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits`)
+    # celsius char, http://stackoverflow.com/questions/8334266/how-to-make-special-characters-in-a-bash-script-for-conky
+    CEL=$'\xc2\xb0'C
 
     if [ $useDzen2 == true ]; then
         # echo "B" "CPU:$DIFF_USAGE1% MEM:$MEMUSED% ($(battery)" > "$PANEL_FIFO" &
-        echo "S" "CPU:$DIFF_USAGE1% MEM:$MEMUSED%" > "$PANEL_FIFO" &
+        echo "S" "CPU:$DIFF_USAGE1% MEM:$MEMUSED% GPU:$GPUTEMP$CEL" > "$PANEL_FIFO" &
         echo "B" "$(battery)" > "$PANEL_FIFO" &
     else
         echo "B" "CPU:$DIFF_USAGE1%% MEM:$MEMUSED%% $(battery)" > "$PANEL_FIFO" &
