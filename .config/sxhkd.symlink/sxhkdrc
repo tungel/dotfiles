@@ -30,8 +30,15 @@ super + b
     bspc desktop -B
 
 # switch between floating/fullscreen of the current focused window
-super + {s,f}
-    bspc window -t {floating,fullscreen}
+# super + {s,f}
+#   bspc window -t {floating,fullscreen}
+
+# The below 1 liner doesn't work, because of the pair '' quote?
+# bspc query --windows --desktop | xargs -n1 -I '{}' bspc window {} -t floating=on
+# get all windows under the current desktop and then toggle floating
+super + s
+    ws=$(bspc query --windows --desktop); \
+    while read l; do bspc window $l -t {floating}; done <<< $ws
 
 # switch between the current desktop and the previous desktop
 super + {grave,Tab}
