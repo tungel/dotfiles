@@ -120,6 +120,11 @@ nnoremap <A-8> 8gt
 nnoremap <A-9> 9gt
 nnoremap <A-0> 10gt
 
+" move cursor by display lines when wrapping
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " Use <leader>x to open quickfix window and move it to the far right hand side
 nnoremap <leader>x :Copen<CR>:wincmd L<CR>
