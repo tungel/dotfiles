@@ -45,14 +45,14 @@ bind Escape copy-mode
 unbind p
 bind p paste-buffer
 bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'y' copy-selection -x
+# bind -t vi-copy 'y' copy-selection -x
 # Copy selection to system clipboard (make sure xclip is installed)
 # It seems xclip does not close STDOUT after it has read from tmux's buffer. As
 # such, tmux doesn't know that the copy task has completed, and continues to
 # /await xclip's termination, thereby rendering the window manager unresponsive.
 # So we redirect STDOUT of xclip to /dev/null, or you can use an
 # alternative command like xsel (https://wiki.archlinux.org/index.php/Tmux)
-# bind -t vi-copy 'y' copy-pipe 'xclip -in -selection clipboard >/dev/null'
+bind -t vi-copy 'y' copy-pipe 'xclip -in -selection clipboard >/dev/null'
 bind -t vi-copy 'Space' halfpage-down
 bind -t vi-copy 'Bspace' halfpage-up
 
