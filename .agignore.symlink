@@ -1,0 +1,13 @@
+# Ignore *.js file, need both lines below to works. Looks like `*.js` can't
+# ignore `abc.def.js`
+*.js
+*.*.js
+
+# ignore css
+*.css
+*.*.css
+*.scss
+*.*.scss
+*.css.erb
+*.*.css.erb
+
