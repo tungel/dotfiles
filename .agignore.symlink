@@ -11,3 +11,7 @@
 *.css.erb
 *.*.css.erb
 
+# ignore *.sock file
+*.sock
+*.*.sock
+
