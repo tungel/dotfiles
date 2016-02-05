@@ -193,13 +193,15 @@ call unite#custom#source('file_mru', 'ignore_pattern',
 
 " For file_rec/async source: Ignore all files under tmp directory of Rails app
 " call unite#custom#source('file_rec/async', 'ignore_pattern',
-call unite#custom#source('file_rec/neovim', 'ignore_pattern',
+call unite#custom#source('file_rec/git', 'ignore_pattern',
             \ join([
             \ '\.cache',
             \ '\/tmp\/cache\/',
             \ '\/tmp\/pids\/',
             \ '\/tmp\/sessions\/',
             \ '\/tmp\/sockets\/',
+            \ '\.\(js\|css\|png\|gif\)$',
+            \ 'lib\/ale',
             \ '.*admin\/tmp\/'],
             \ '\|'
             \ )
@@ -226,7 +228,7 @@ call unite#custom#profile('source/grep', 'context', {
 
 " don't limit number of candidate
 let g:unite_source_rec_max_cache_files = 0
-  call unite#custom#source('file_rec,file_rec/async,grep',
+  call unite#custom#source('file_rec,file_rec/async,file_rec/neovim,file_rec/git,grep',
   \ 'max_candidates', 0)
 
 
