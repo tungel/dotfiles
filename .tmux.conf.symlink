@@ -161,3 +161,9 @@ selectw -t 2 # focus on Vim's window
 # Faster Command Sequences, fix neovim switching to command mode problem?
 # set -s escape-time 0
 set -g escape-time 10
+
+# allow Neovim in tmux to change cursor shape to vertical bar in insert mode
+# previously it worked fine, but after neovim commit 0e546d8 we need the below
+# See `man nvim`
+set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
+
