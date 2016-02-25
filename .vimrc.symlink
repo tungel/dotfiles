@@ -1274,6 +1274,7 @@ if has("nvim")
   let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
   " let g:deoplete#omni_patterns.ruby = ''
   " let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+  let g:deoplete#omni_patterns.rust = '[(\.)(::)]'
 
   " let g:deoplete#keyword_patterns = {}
   " let g:deoplete#keyword_patterns.ruby = ''
@@ -1326,6 +1327,12 @@ endif
 
 " disable annoying additional window with autocomplete in Clojure and Go
 set completeopt-=preview
+
+" Rust
+set hidden
+let g:racer_cmd = "~/.cargo/bin/racer"
+let $RUST_SRC_PATH="/usr/src/rust/src/"
+
 
 " Fix death slow with Ruby files
 set regexpengine=1
