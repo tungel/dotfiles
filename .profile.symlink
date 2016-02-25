@@ -287,6 +287,8 @@ export SSH_ASKPASS="/usr/bin/ksshaskpass"
 
 # For Rust Cargo
 pathAdd $HOME/.cargo/bin
+# For Rust Racer completion
+export RUST_SRC_PATH=/usr/src/rust/src
 
 # Add RVM to PATH for scripting
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
