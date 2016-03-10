@@ -340,6 +340,8 @@ function! CompileCode()
         exec '!python' shellescape(@%, 1)
     elseif (&filetype == 'java')
         exec ':!javac % && java -cp %:p:h %:t:r'
+    elseif (&filetype == 'rust')
+        exec ':!rustc % && ./%:t:r'
     elseif (&ft == 'html')
         exec '!firefox % &'
     elseif (&ft == 'lisp')
@@ -351,7 +353,7 @@ endfunction
 
 " Use F9 to compile and run the code in the current buffer
 " Update 2015-04-18: Use F9 for vim-dispatch
-" nmap <F9> :call CompileCode()<CR>
+nmap <F3> :call CompileCode()<CR>
 " ==============================================================================
 
 " Space to toggle folds.
