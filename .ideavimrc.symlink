@@ -1,2 +1,6 @@
 source ~/.vimrc-mini
 
+" allow using system clipboard
+" http://stackoverflow.com/questions/27898407/intellij-idea-with-ideavim-cannot-copy-text-from-another-source
+set clipboard+=unnamed
+
