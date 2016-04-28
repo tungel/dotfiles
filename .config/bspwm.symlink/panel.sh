@@ -157,7 +157,8 @@ rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 
 bspc config top_padding $PANEL_HEIGHT
-bspc control --subscribe > "$PANEL_FIFO" &
+# 0.9: bspc control --subscribe > "$PANEL_FIFO" &
+bspc subscribe all > "$PANEL_FIFO" &
 xtitle -sf 'T%s' > "$PANEL_FIFO" &
 
 # call clock at interval 1seconds (-i 1)

@@ -21,7 +21,7 @@ super + alt + Escape
 
 # closing a window, close
 super + w
-    bspc window -c
+    bspc node -c
 
 super + t
     bspc desktop -l next
@@ -58,21 +58,24 @@ super + y
 # swap the position of the current window with the biggest window in the current
 # desktop view
 super + m
-    bspc window -s biggest
+    bspc node -s biggest
 
 # moving window around in the current desktop view
+# 0.9:   bspc window -{f,s} {left,down,up,right}
 super + {_,shift + }{h,j,k,l}
-    bspc window -{f,s} {left,down,up,right}
+    bspc node -{f,s} {west,south,north,east}
 
 # move the current window to desktop number
 #bspc {desktop -f, window -d} $(bspc query -M -m)/{1-9,10}
+# 0.9:   bspc {desktop -f,window -d} ^{1-9,10}
 super + {_,shift + }{1-9,0}
-    bspc {desktop -f,window -d} ^{1-9,10}
+    bspc {desktop -f,node -d} ^{1-9,10}
 
 # rotate focusing each window in the current desktop view
 # super + {_,shift + }c
+# 0.9:   bspc window -f {next,prev}
 alt + Tab
-    bspc window -f {next,prev}
+    bspc node -f {next,prev}
 
 # circulate the leaves of the tree of the selected desktop
 super + {comma,period}
@@ -89,12 +92,14 @@ super + ctrl + {_,shift + }space
     bspc {window -p cancel,desktop -c}
 
 # resize the current focused window
+# 0.9:    bspc window -e {left -10,down +10,up -10,right +10}
 super + alt + {h,j,k,l}
-    bspc window -e {left -10,down +10,up -10,right +10}
+    bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
 
 # resize the current focused window in reversed direction
+# 0.9:    bspc window -e {right -10,up +10,down -10,left +10}
 super + alt + shift + {h,j,k,l}
-    bspc window -e {right -10,up +10,down -10,left +10}
+    bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
 
 # rotate view of the current desktop
 super + r
