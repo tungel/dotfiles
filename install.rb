@@ -3,6 +3,7 @@
 # https://github.com/everbot/dotfiles
 
 require 'io/console' # for STDIN.getch
+require 'fileutils'
 
 # help to print colorized string to terminal
 class String
@@ -89,6 +90,11 @@ def linkFile(source, target)
 
   if !skip
     begin
+      # create target directory recursively if it doesn't exist
+      if !File.exist?(File.dirname(target))
+        FileUtils.mkdir_p(File.dirname(target))
+      end
+
       File.symlink(source, target)
       success("linked #{source} to #{target}")
     rescue => err
