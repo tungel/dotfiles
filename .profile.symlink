@@ -249,6 +249,9 @@ export DMENUFONT="Consolas-11"
 export JAVA_HOME=/usr/lib/jvm/java-8-jdk
 # export JAVA_HOME=/usr/lib/jvm/java-7-oracle
 
+# Fix Maven Java heap space error
+export MAVEN_OPTS="-Xmx1024m"
+
 # configuration for Hadoop where it is downloaded to ~/mytemp/hadoop/
 HADOOP_PREFIX=~/dev/libs/hadoop
 # PATH=$PATH:${HADOOP_PREFIX}/bin:${HADOOP_PREFIX}/sbin
