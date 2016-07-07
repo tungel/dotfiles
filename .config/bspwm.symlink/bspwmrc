@@ -63,7 +63,13 @@ if [ $num_mon -gt 1 ] ; then
         bspc monitor ^1 --reset-desktops 1
         bspc config -m ^1 top_padding 10
 
-        bspc monitor ^2 --reset-desktops 2 web 4 5 6 7 8 9 10
+        # bspc monitor ^2 --reset-desktops 2 web 4 5 6 7 8 9 10
+
+        # give 3 desktops to the 1st monitor
+        bspc monitor DVI-I-1 -d 1 2 3
+        # the rest of the desktops are for 2nd monitor
+        bspc monitor HDMI-0 -d 4 5 6 7 8 9 web
+
         bspc config -m ^2 top_padding 10
     else
         # for Acer Aspire V11 Touch
@@ -121,10 +127,10 @@ bspc config urgent_border_color     "#504339"
 #*******************************************************************************
 bspc rule -a Thunderbird desktop=^1
 
-bspc rule -a Firefox desktop=^3
+bspc rule -a Firefox desktop=^10
 
-bspc rule -a "Foxit Reader" desktop=^4
-bspc rule -a "PDFXCview.exe" desktop=^4
+bspc rule -a "Foxit Reader" desktop=^5
+bspc rule -a "PDFXCview.exe" desktop=^5
 
 # move gvim to window 9
 # bspc rule -a gvim desktop=^9
