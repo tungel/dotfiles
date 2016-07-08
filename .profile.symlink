@@ -249,6 +249,9 @@ export DMENUFONT="Consolas-11"
 export JAVA_HOME=/usr/lib/jvm/java-8-jdk
 # export JAVA_HOME=/usr/lib/jvm/java-7-oracle
 
+# IntelliJ IDEA
+alias idea="~/dev/tools/idea/2016/idea-IC-145.971.21/bin/idea.sh"
+
 # Fix Maven Java heap space error
 export MAVEN_OPTS="-Xmx1024m"
 
