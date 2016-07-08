@@ -60,16 +60,13 @@ if [ $num_mon -gt 1 ] ; then
     if [[ -e $TLPC ]]; then
         xrandr --output HDMI-0 --primary
         xrandr --output DVI-I-1 --right-of HDMI-0
-        bspc monitor ^1 --reset-desktops 1
-        bspc config -m ^1 top_padding 10
-
-        # bspc monitor ^2 --reset-desktops 2 web 4 5 6 7 8 9 10
 
         # give 3 desktops to the 1st monitor
         bspc monitor DVI-I-1 -d 1 2 3
+        bspc config -m ^1 top_padding 10
+
         # the rest of the desktops are for 2nd monitor
         bspc monitor HDMI-0 -d web 5 6 7 8 9 10
-
         bspc config -m ^2 top_padding 10
     else
         # for Acer Aspire V11 Touch
@@ -81,17 +78,16 @@ if [ $num_mon -gt 1 ] ; then
         # xrandr --output VGA1 --mode 1920x1080 --left-of LVDS1
 
         # for VirtualBox at work
-        xrandr --output VGA-0 --primary
+        xrandr --output VGA-1 --primary
         # xrandr --output VGA-1 --mode 1920x1016 --right-of VGA-0
-        xrandr --output VGA-1 --right-of VGA-0
+        xrandr --output VGA-2 --right-of VGA-1
 
-        # first native monitor
-        bspc monitor ^1 --reset-desktops 1
+        # first monitor
+        bspc monitor ^1 --reset-desktops 1 2 3
         bspc config -m ^1 top_padding 10
 
-        # external monitor exists, so we prefer to use it instead of the native
-        # small size monitor
-        bspc monitor ^2 --reset-desktops 2 web 4 5 6 7 8 9 10
+        # second monitor
+        bspc monitor ^2 --reset-desktops web 5 6 7 8 9 10
         bspc config -m ^2 top_padding 10
     fi
 else
