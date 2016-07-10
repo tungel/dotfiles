@@ -1,9 +1,9 @@
 #
-# https://github.com/everbot/dotfiles
+# https://github.com/tungel/dotfiles
 # bspwm hotkeys
 #
 
-# kill all active background programs that we started earlier
+# kill all active background programs that we started earlier and quit bspwm
 super + alt + Escape
     killall trayer; \
     killall nm-applet; \
@@ -12,165 +12,109 @@ super + alt + Escape
     killall dzen2; \
     bspc quit;
 
+# make sxhkd reload its configuration files:
+super + Escape
+    pkill -USR1 -x sxhkd
 
-# closing a window, close
+
+# close a window
 super + w
     bspc node -c
 
+# alternate between the tiled and monocle layout
 super + t
     bspc desktop -l next
 
+# balance, adjust the split ratios of the tree rooted at the selected node so
+# that all windows occupy the same area.
 super + b
-    bspc desktop -B
+    bspc node @/ -B
 
 # switch between floating/fullscreen of the current focused window
 # super + {s,f}
-#   bspc window -t {floating,fullscreen}
+#   bspc node -t {floating,fullscreen}
 
-# The below 1 liner doesn't work, because of the pair '' quote?
-# bspc query --windows --desktop | xargs -n1 -I '{}' bspc window {} -t floating=on
-# get all windows under the current desktop and then toggle floating
+# get all windows under the current desktop and then toggle floating/tiled
 super + s
-    ws=$(bspc query --windows --desktop); \
-    while read l; do bspc window $l -t {floating}; done <<< $ws
+    ws=$(bspc query --nodes --desktop); \
+    while read l; do bspc node $l -t {floating,tiled}; done <<< $ws
 
 # switch between the current desktop and the previous desktop
 super + {grave,Tab}
     bspc {window,desktop} -f last
 
+# Super + '   swap current window with the last focused window
 super + apostrophe
-    bspc window -s last
+    bspc node -s last
 
-super + {o,i}
-    bspc control --record-history off; \
-    bspc window {older,newer} -f; \
-    bspc control --record-history on
-
-super + y
-    bspc window -w last.manual
-
-# swap the position of the current window with the biggest window in the current
-# desktop view
+# swap this window with the biggest window in the current desktop view
 super + m
     bspc node -s biggest
 
-# moving window around in the current desktop view
-# 0.9:   bspc window -{f,s} {left,down,up,right}
-super + {_,shift + }{h,j,k,l}
-    bspc node -{f,s} {west,south,north,east}
-
-# move the current window to desktop number
-#bspc {desktop -f, window -d} $(bspc query -M -m)/{1-9,10}
-# 0.9:   bspc {desktop -f,window -d} ^{1-9,10}
-super + {_,shift + }{1-9,0}
-    bspc {desktop -f,node -d} ^{1-9,10}
-
-# rotate focusing each window in the current desktop view
-# super + {_,shift + }c
-# 0.9:   bspc window -f {next,prev}
-alt + Tab
-    bspc node -f {next,prev}
-
-# circulate the leaves of the tree of the selected desktop
-super + {comma,period}
-    bspc desktop -C {backward,forward}
-
-# go to the next/previous desktop
-super + bracket{left,right}
-    bspc desktop -f {prev,next}
-
-# super + ctrl + {h,j,k,l}
-#     bspc window -p {left,down,up,right}
-
-# preselect the direction
-super + ctrl + {h,j,k,l}
-    bspc node -p {west,south,north,east}
+# focus (-f), or shift (-s), or preselect direction (-p) for current window
+super + {_,shift +,ctrl+}{h,j,k,l}
+    bspc node -{f,s,p} {west,south,north,east}
 
 # cancel the preselection for the focused node
 super + ctrl + space
     bspc node -p cancel
 
-super + ctrl + {_,shift + }space
-    bspc {window -p cancel,desktop -c}
+# focus (-f), or shift the current window to a desktop number
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} ^{1-9,10}
 
-# resize the current focused window
+# switch windows sequentially (like an app/task switcher)
+alt + {_,shift + }Tab
+    bspc node -f {next,prev}
+
+# circulate the leaves (nodes) of the tree of the selected desktop
+super + {comma,period}
+    bspc node @/ -C {backward,forward}
+
+# rotate view of the current desktop
+super + r
+    bspc node @/ -R 90
+
+# go to the next/previous desktop in the current monitor
+super + bracket{left,right}
+    bspc desktop -f {prev,next}
+
+# expand: resize the current focused window
 # 0.9:    bspc window -e {left -10,down +10,up -10,right +10}
 super + alt + {h,j,k,l}
     bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
 
-# resize the current focused window in reversed direction
+# contract: resize the current focused window in reversed direction
 # 0.9:    bspc window -e {right -10,up +10,down -10,left +10}
 super + alt + shift + {h,j,k,l}
     bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
 
-# rotate view of the current desktop
-super + r
-    bspc desktop -R 90
 
-super + ctrl + {1-9}
-    bspc window -r 0.{1-9}
-
-
+#*******************************************************************************
+# mouse support
+#*******************************************************************************
 ~button1
     bspc pointer -g focus
 
 super + button{1-3}
     bspc pointer -g {move,resize_side,resize_corner}
 
-super + !button{1-3}
-    bspc pointer -t %i %i
-
 super + @button{1-3}
     bspc pointer -u
-
-
 
 
 #*******************************************************************************
 # MONITOR handling
 #*******************************************************************************
 
-# switch to another monitor
-super + {Left,Right}
-    bspc monitor -f {next,prev}
-
-# move the current window to next monitor
+# focus (monitor -f) next/prev monitor
+# OR: bring current window to next monitor (node -m)
 super + {_,shift + }{Left,Right}
-    bspc {monitor -f,window -m} {next,prev}
-
-# use super + alt + number to switch to a desktop [number] in an external
-# monitor
-# bspc monitor -f ^2; \
-# bspc desktop -f ^{1-9,10};
-# super + alt + {1-9,0}
-    # bspc desktop -f ^1^{1-9,10}
-
-#----------
-# super + {1-9,0,a-c}
-#     D={1-9,0,a-c}; \
-#     M=$(bspc query --monitors --desktop $D); \
-#     if [ $(bspc query --desktops --monitor $M | wc -l) -gt 1 ]; then \
-#         if [ $(bspc query --desktops --desktop focused) != $D ]; then \
-#             bspc desktop $D --to-monitor focused; \
-#             bspc desktop $D --focus; \
-#         fi; \
-#     elif [ $(bspc query --monitors --monitor focused) != $M ]; then \
-#         bspc desktop eDP1:focused --swap HDMI1:focused; \
-#     fi;
-#
-
-# super +{1-9,0} is used, so we use alt
-# alt + {1-9,0}
-#     D={1-9,0}; \
-#     M=$(bspc query --monitors --desktop $D); \
-#     bspc monitor $M -f;
-
+    bspc {monitor -f,node -m} {next,prev}
 
 
 #*******************************************************************************
-#
 # wm independent hotkeys
-#
 #*******************************************************************************
 super + Return
 # alt + Return
@@ -178,7 +122,6 @@ super + Return
     urxvt
 
 super + space
-# alt + shift + p
 #dmenu_run
 #dmenu_run -fn 'Droid Sans Mono-9'
 #use the script dmenu-recent.sh. Provided the scripts directory in dropbox is
@@ -216,8 +159,4 @@ ctrl + @Print
 #wine 'C:\\windows\\command\\start.exe' /Unix /home/squallltt/.wine/dosdevices/c:/users/Public/Desktop/PDF-Viewer.lnk
 super + F10
     /usr/share/playonlinux/playonlinux --run "PDFXCview" %F
-
-# make sxhkd reload its configuration files:
-super + Escape
-    pkill -USR1 -x sxhkd
 
