@@ -79,8 +79,16 @@ super + {comma,period}
 super + bracket{left,right}
     bspc desktop -f {prev,next}
 
+# super + ctrl + {h,j,k,l}
+#     bspc window -p {left,down,up,right}
+
+# preselect the direction
 super + ctrl + {h,j,k,l}
-    bspc window -p {left,down,up,right}
+    bspc node -p {west,south,north,east}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+    bspc node -p cancel
 
 super + ctrl + {_,shift + }space
     bspc {window -p cancel,desktop -c}
