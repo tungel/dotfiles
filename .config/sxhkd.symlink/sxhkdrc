@@ -4,18 +4,12 @@
 #
 
 # kill all active background programs that we started earlier
-    # killall trayer \
-    # killall nm-applet \
-    # killall panel.sh \
-    # killall panel_bar \
-    # bspc quit
-#killall trayer && killall nm-applet && killall panel.sh && killall bar && bspc quit
 super + alt + Escape
     killall trayer; \
     killall nm-applet; \
     killall panel.sh; \
-    killall panel_bar; \
-    killall bar; \
+    killall panel-dzen2; \
+    killall dzen2; \
     bspc quit;
 
 

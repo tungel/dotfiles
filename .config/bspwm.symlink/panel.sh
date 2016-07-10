@@ -207,9 +207,9 @@ fi
 if [ $useDzen2 == true ]; then
     # -ta l  : make the bar position on left edge
     # -e 'button3=' is to disable right click to exit dzen by default
-    cat "$PANEL_FIFO" | ~/.config/bspwm/panel_bar | dzen2 -fn "$PANEL_FONT_FAMILY" -p -ta l -bg "$COLOR_BACKGROUND" -e 'button3='
+    cat "$PANEL_FIFO" | ~/.config/bspwm/panel-dzen2 | dzen2 -fn "$PANEL_FONT_FAMILY" -p -ta l -bg "$COLOR_BACKGROUND" -e 'button3='
 else
-    cat "$PANEL_FIFO" | ~/.config/bspwm/panel_bar-baraint | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND"
+    cat "$PANEL_FIFO" | ~/.config/bspwm/panel-lemonbar | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND"
 fi
 
 # cat "$PANEL_FIFO" | dzen2 -fn "$PANEL_FONT_FAMILY" &
