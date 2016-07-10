@@ -80,9 +80,12 @@ bspc rule -a sun-awt-X11-XFramePeer floating=on
 bspc rule -a Steam desktop=^5 floating=on
 #*******************************************************************************
 
-kill -9 $(ps aux | grep panel | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
-kill -9 $(ps aux | grep dzen2 | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+# kill all panel scripts from bspwm directory such as ~/.config/bspwm/{panel-dzen2,panel.sh}
+# OR the panel FIFO at /tmp/panel-fifo
+kill -9 $(ps aux | grep -e "bspwm.*panel\|tmp/panel-fifo" | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
 
+# kill dzen2 and xtitle as well
+kill -9 $(ps aux | grep dzen2 | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
 kill -9 $(ps aux | grep xtitle | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
 
 # run panel
