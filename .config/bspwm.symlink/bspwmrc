@@ -5,11 +5,7 @@
 # kill all the bspc process first
 kill -9 $(ps aux | grep bspc | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
 
-# Take note:
-# If the computer is already running with just its default monitor, then you
-# wanna plug in an external monitor to use with bspwm, you must first use xrandr
-# to output to that external monitor first. For example we plugin a HDMI
-# monitor. First:
+# For newly plugged in monitor to be recognized by bspwm, we must first run:
 #   xrandr --output HDMI1 --mode 1920x1080
 # then run:
 #   ~/.config/bspwm/bspwmrc
@@ -32,24 +28,15 @@ if [ $num_mon -gt 1 ] ; then
         bspc monitor HDMI-0 -d web 5 6 7 8 9 10
         bspc config -m ^2 top_padding 10
     else
-        # for Acer Aspire V11 Touch
-        # xrandr --output eDP1 --primary
-        # xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1
-
-        # for HP Pavilion dm3 laptop
-        # xrandr --output LVDS1 --primary
-        # xrandr --output VGA1 --mode 1920x1080 --left-of LVDS1
-
         # for VirtualBox at work
         xrandr --output VGA-1 --primary
-        # xrandr --output VGA-1 --mode 1920x1016 --right-of VGA-0
         xrandr --output VGA-2 --right-of VGA-1
 
-        # first monitor
+        # allocate desktop for first monitor
         bspc monitor ^1 --reset-desktops 1 2 3
         bspc config -m ^1 top_padding 10
 
-        # second monitor
+        # allocate desktop for second monitor
         bspc monitor ^2 --reset-desktops web 5 6 7 8 9 10
         bspc config -m ^2 top_padding 10
     fi
