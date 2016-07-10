@@ -8,6 +8,29 @@
 
 useDzen2=true
 
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_FIFO_SECOND=/tmp/panel-fifo-second
+if [[ -e $TLPC ]]; then
+    # for 4k monitor
+    PANEL_HEIGHT=30
+else
+    PANEL_HEIGHT=18
+fi
+#PANEL_FONT_FAMILY="-*-Dejavu Sans Mono for Powerline-r-normal-*-14-*-*-*-c-*-*-1"
+#PANEL_FONT_FAMILY="-*-dejavu sans mono-medium-r-normal--12-*-*-*-*-*-iso10646-1"
+#PANEL_FONT_FAMILY="-*-dejavu sans mono-medium-r-normal--11-*-*-*-*-*-iso10646-1"
+# PANEL_FONT_FAMILY="-misc-roboto-medium-r-normal--12-*-*-*-*-*-iso10646-1"
+# PANEL_FONT_FAMILY="-misc-roboto light-light-r-normal--13-*-*-*-*-*-iso10646-1"
+#PANEL_FONT_FAMILY="-misc-roboto black-black-r-normal--13-*-*-*-*-*-iso10646-1"
+# PANEL_FONT_FAMILY="-microsoft-consolas-medium-r-normal-*-17-*-*-*-*-*-microsoft-*"
+PANEL_FONT_FAMILY="Roboto-10"
+# PANEL_FONT_FAMILY="Ubuntu-8"
+# PANEL_FONT_FAMILY="Dejavu-9"
+# PANEL_FONT_FAMILY="Droid Sans Mono-9"
+
+export PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY
+
+
 # https://wiki.archlinux.org/index.php/Bspwm
 panel_volume()
 {
