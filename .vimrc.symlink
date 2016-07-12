@@ -1158,8 +1158,8 @@ function! MyStrategy(cmd)
 endfunction
 
 let test#ruby#rspec#options = {
-  \ 'nearest': '--backtrace',
-  \ 'file':    '--format documentation',
+  \ 'nearest': '--color',
+  \ 'file':    '--format documentation --color',
 \}
 
 " let g:test#custom_strategies = {'my_strategy': function('MyStrategy')}
