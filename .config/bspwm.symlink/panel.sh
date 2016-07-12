@@ -94,7 +94,7 @@ battery() {
     # BATPERC=$(acpi --battery | awk -F, '{print $2}')
 
     if hash acpi 2>/dev/null; then
-        BATPERC=$(acpi | grep -Po '\d+%')
+        BATPERC=$(acpi -b | grep -Po '\d+%')
         if [ $useDzen2 == true ]; then
             echo $BATPERC
         else
