@@ -93,15 +93,13 @@ battery() {
 
     # BATPERC=$(acpi --battery | awk -F, '{print $2}')
 
-    if [ -d /sys/class/power_supply/BAT1 ]; then
-        BATPERC=$(acpi | egrep -o [0-9]+%)
-        BATPERC=${BATPERC:0:$(expr length $BATPERC - 1)}
-
+    if hash acpi 2>/dev/null; then
+        BATPERC=$(acpi | grep -Po '\d+%')
         if [ $useDzen2 == true ]; then
-            echo $BATPERC%
+            echo $BATPERC
         else
             # echo "%{Findianred} $BATPERC %{F-}"
-            x="%{Findianred} $BATPERC% %{F-}"
+            x="%{Findianred} $BATPERC %{F-}"
             echo $x
         fi
     fi
