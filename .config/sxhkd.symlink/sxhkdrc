@@ -160,3 +160,11 @@ ctrl + @Print
 super + F10
     /usr/share/playonlinux/playonlinux --run "PDFXCview" %F
 
+# laptop brightness up button
+XF86MonBrightnessUp
+    xbacklight -inc 5
+
+# laptop brightness down button
+XF86MonBrightnessDown
+    xbacklight -dec 5
+
