@@ -102,6 +102,8 @@ alias gits="git status -sb"
 alias gitc="git commit -am"
 alias gitco="git checkout "
 alias gitcom="git checkout master"
+# git pull and rebase
+alias gitprb="git stash && git pull && git rebase && git stash apply && git stash drop"
 
 alias dotfiles="cd ~/dev/mylinux/dotfiles/"
 
