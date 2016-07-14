@@ -20,6 +20,12 @@ select which dotfile to be symlinked in the `config` file.
 - `rxvt-unicode`
 - `neovim` (yaourt)
 
+To use `deoplete` in `Neovim`, we must also install:
+```
+sudo pacman -S python-pip
+pip3 install --user neovim
+```
+
 ## Install required packages for Linux Mint
 
 I use Linux Mint occasionally, so here is the minimum list of packages that I
