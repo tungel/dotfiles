@@ -303,10 +303,12 @@ export RUST_SRC_PATH=/usr/src/rust/src
 pathAdd $HOME/.rvm/bin
 
 # add temporary path for Markman
-pathAdd $HOME/dev/miscs/rust/markman/target/debug/
+pathAdd $HOME/dev/miscs/rust/markman/target/debug
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # load Node Version Manager
 [[ -s "/usr/share/nvm/init-nvm.sh" ]] && source /usr/share/nvm/init-nvm.sh
 
+# for Rust
+export PATH="$HOME/.cargo/bin:$PATH"
