@@ -305,6 +305,14 @@ pathAdd $HOME/.rvm/bin
 # add temporary path for Markman
 pathAdd $HOME/dev/miscs/rust/markman/target/debug
 
+# aaap {{{
+# jboss
+JBOSS_HOME=~/dev/libs/jboss
+export M2_HOME=~/dev/aaap/aaap/apache-maven-phoenix
+export M2=$M2_HOME/bin
+pathAdd $M2
+# }}}
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # load Node Version Manager
