@@ -307,7 +307,7 @@ pathAdd $HOME/dev/miscs/rust/markman/target/debug
 
 # aaap {{{
 # jboss
-JBOSS_HOME=~/dev/libs/jboss
+export JBOSS_HOME=~/dev/libs/jboss
 export M2_HOME=~/dev/aaap/aaap/apache-maven-phoenix
 export M2=$M2_HOME/bin
 pathAdd $M2
