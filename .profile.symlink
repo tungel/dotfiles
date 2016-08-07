@@ -163,6 +163,9 @@ alias cdlejos='cd ~/Downloads/lego/leJOS_NXJ_0.9.1beta-3'
 alias mybspwm="~/.config/bspwm/bspwmrc"
 alias mybspwm2="~/.config/bspwm/bspwmrc2"
 
+# Sync time and store to hardware clock
+alias mytime="sudo ntpd -qg && sudo hwclock -w"
+
 # for zathura and vim for latex
 # zathura -s -x 'gvim --servername SYNCTEX --remote +%{line} %{input}' thesis.pdf
 alias zavim="zathura -s -x 'gvim --servername SYNCTEX --remote +%{line} %{input}'"
