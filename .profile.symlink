@@ -242,6 +242,23 @@ sudo() {
     umask $old
 }
 
+# print the wireless driver in use
+mywifidriver() {
+    wireless=$(lspci | grep -i wireless | awk '{ print $1  }')
+    if [ $wireless ]; then
+        lspci -vv -s $wireless | grep -iP 'kernel driver in use' | awk -F: '{ gsub(/[ \t]+/, ""); print $2;  }'
+    fi
+}
+
+# restart wifi driver as it's broken sometimes after waking up from suspend
+mywifirestart() {
+    wirelessDriver=$(mywifidriver)
+    if [ $wirelessDriver ]; then
+        echo "Restarting wireless driver: $wirelessDriver"
+        sudo modprobe -r $wirelessDriver
+        sudo modprobe $wirelessDriver
+    fi
+}
 
 # for dmenu font
 export DMENUFONT="Consolas-11"
