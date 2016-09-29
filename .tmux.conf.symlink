@@ -11,10 +11,10 @@ set-option -g default-command /bin/zsh
 set-option -g status-keys vi
 set-window-option -g mode-keys vi
 
-# On utf8
-set -g utf8 on
-set-option -g status-utf8 on
-set-window-option -g utf8 on
+# On utf8. Update 2016-09-30: no longer necessary
+# set -g utf8 on
+# set-option -g status-utf8 on
+# set-window-option -g utf8 on
 
 # Change prefix to Ctrl+a
 set -g prefix C-a
