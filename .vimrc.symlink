@@ -1022,15 +1022,16 @@ nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 " disable checking for cpp file type
 let g:syntastic_cpp_checkers=['']
 
-let g:syntastic_disabled_filetypes=['html']
+let g:syntastic_disabled_filetypes=['html', 'ts']
 
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "---end syntastic }}}
