@@ -2,9 +2,11 @@
 # ignore `abc.def.js`
 *.js
 *.*.js
+*.min.map
 
 # ignore css
 *.css
+*.css.map
 *.*.css
 *.scss
 *.*.scss

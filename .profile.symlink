@@ -195,6 +195,7 @@ alias dr='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}
 # list docker images
 alias di='docker images'
 
+alias simplehttpserver="ruby -rwebrick -e'WEBrick::HTTPServer.new(Port: 8000, DocumentRoot: Dir.pwd).start'"
 # for Ruby gem
 # export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
 # GEM_ROOT, GEM_PATH
@@ -333,10 +334,8 @@ export M2=$M2_HOME/bin
 pathAdd $M2
 # }}}
 
+pathAdd $HOME/.rvm/bin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# load Node Version Manager
-[[ -s "/usr/share/nvm/init-nvm.sh" ]] && source /usr/share/nvm/init-nvm.sh
 
 # for Rust
 export PATH="$HOME/.cargo/bin:$PATH"

@@ -1272,7 +1272,7 @@ if has("nvim")
   let g:deoplete#sources.ruby = ['buffer', 'tag', 'file']
 
   let g:deoplete#omni_patterns = {}
-  let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
+  " let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
   " let g:deoplete#omni_patterns.ruby = ''
   " let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
   let g:deoplete#omni_patterns.rust = '[(\.)(::)]'
