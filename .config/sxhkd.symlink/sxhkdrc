@@ -93,14 +93,14 @@ super + alt + shift + {h,j,k,l}
 #*******************************************************************************
 # mouse support
 #*******************************************************************************
-~button1
-    bspc pointer -g focus
+# ~button1
+#     bspc pointer -g focus
 
-super + button{1-3}
-    bspc pointer -g {move,resize_side,resize_corner}
+# super + button{1-3}
+#     bspc pointer -g {move,resize_side,resize_corner}
 
-super + @button{1-3}
-    bspc pointer -u
+# super + @button{1-3}
+#     bspc pointer -u
 
 
 #*******************************************************************************
