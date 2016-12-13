@@ -65,7 +65,7 @@ super + {_,shift + }{1-9,0}
 
 # switch windows sequentially (like an app/task switcher)
 alt + {_,shift + }Tab
-    bspc node -f {next,prev}
+    bspc node -f {next,prev}.local
 
 # circulate the leaves (nodes) of the tree of the selected desktop
 super + {comma,period}
