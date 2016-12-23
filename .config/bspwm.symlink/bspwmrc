@@ -5,6 +5,13 @@
 # kill all the bspc process first
 kill -9 $(ps aux | grep bspc | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
 
+if [[ -e $TLPC ]]; then
+    # for 4k monitor
+    export PANEL_HEIGHT=30
+else
+    export PANEL_HEIGHT=18
+fi
+
 # For newly plugged in monitor to be recognized by bspwm, we must first run:
 #   xrandr --output HDMI1 --mode 1920x1080
 # then run:
@@ -109,7 +116,7 @@ trayer --edge top --align right --SetDockType true \
         --transparent true \
         --alpha 0 \
         --tint 0x000000 \
-        --height 16 &
+        --height $PANEL_HEIGHT &
 
 
 if [ $(pgrep -cx dropbox) -lt 1 ] ; then

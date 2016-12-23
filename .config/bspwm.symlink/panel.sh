@@ -10,12 +10,9 @@ useDzen2=true
 
 PANEL_FIFO=/tmp/panel-fifo
 PANEL_FIFO_SECOND=/tmp/panel-fifo-second
-if [[ -e $TLPC ]]; then
-    # for 4k monitor
-    PANEL_HEIGHT=30
-else
-    PANEL_HEIGHT=18
-fi
+
+echo panel height = $PANEL_HEIGHT
+
 #PANEL_FONT_FAMILY="-*-Dejavu Sans Mono for Powerline-r-normal-*-14-*-*-*-c-*-*-1"
 #PANEL_FONT_FAMILY="-*-dejavu sans mono-medium-r-normal--12-*-*-*-*-*-iso10646-1"
 #PANEL_FONT_FAMILY="-*-dejavu sans mono-medium-r-normal--11-*-*-*-*-*-iso10646-1"
