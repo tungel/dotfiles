@@ -38,7 +38,8 @@ xset fp rehash
 # wmname LG3D
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-eval `/usr/bin/ssh-agent -s`
+# don't need to run this anymore, ssh-agent is handled in ~/.profile
+# eval `/usr/bin/ssh-agent -s`
 
 if [ -f ~/.autostart ] ; then
     sh ~/.autostart &

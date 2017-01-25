@@ -314,8 +314,14 @@ alias mydfs="hdfs dfs "
 # to the previous behavior
 export SSH_ASKPASS="/usr/bin/ksshaskpass"
 
-# start ssh-agent
-alias tl-start-ssh-agent="eval `/usr/bin/ssh-agent -s`"
+# handle ssh-agent
+# ref: https://wiki.archlinux.org/index.php?title=SSH_keys&redirect=no#SSH_agents
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+    eval "$(< ~/.ssh-agent-thing)"
+fi
 
 # For Rust Cargo
 pathAdd $HOME/.cargo/bin
