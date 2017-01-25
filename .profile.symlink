@@ -314,6 +314,9 @@ alias mydfs="hdfs dfs "
 # to the previous behavior
 export SSH_ASKPASS="/usr/bin/ksshaskpass"
 
+# start ssh-agent
+alias tl-start-ssh-agent="eval `/usr/bin/ssh-agent -s`"
+
 # For Rust Cargo
 pathAdd $HOME/.cargo/bin
 # For Rust Racer completion
@@ -333,6 +336,8 @@ export M2_HOME=~/dev/aaap/aaap/apache-maven-phoenix
 export M2=$M2_HOME/bin
 pathAdd $M2
 # }}}
+
+pathAdd $HOME/.node_modules/bin
 
 pathAdd $HOME/.rvm/bin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
