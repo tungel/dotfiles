@@ -418,7 +418,7 @@ set laststatus=2
 
 " use Powerline font to enable the nice arrow icons
 set encoding=utf-8 " to use the Powerline font
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 
 " display nice icon ontop
 " currently having problem messing up the top tabs indicator after a buffer
@@ -436,11 +436,15 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 
 " let g:airline#extensions#tabline#buffer_nr_show = 1
 
-let g:Powerline_symbols="fancy"
+" not sure if needed
+" let g:Powerline_symbols="fancy"
+
+let g:airline_left_sep = ' '
+let g:airline_right_sep = ' '
 
 " make tabline separator straight instead of the nice arrow icon
 " let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " disable showing closed buffers' names in the tabline when there is only 1 tab
 " open because it looks annoying
