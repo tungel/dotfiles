@@ -111,6 +111,9 @@ alias gitcom="git checkout master"
 # git pull and rebase
 alias gitprb="git stash && git pull && git rebase && git stash apply && git stash drop"
 
+# drop all stashes
+alias gitstashclean="while git std; do :; done"
+
 alias dotfiles="cd ~/dev/mylinux/dotfiles/"
 
 # for mount/unmount USB flashdrive using devmon
