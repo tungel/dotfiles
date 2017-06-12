@@ -1246,7 +1246,8 @@ let g:vim_json_syntax_conceal = 0
 if has("nvim")
   " ============= NEOVIM ================ {{{
   " makes the cursor a pipe in insert-mode, and a block in normal-mode
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
   " Use double ESC to go to normal mode in terminal window. We want to reserve a
   " single ESC to use vi editing mode for the line-editor

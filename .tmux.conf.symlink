@@ -45,7 +45,7 @@ setw -g aggressive-resize on
 bind Escape copy-mode
 unbind p
 bind p paste-buffer
-bind -t vi-copy 'v' begin-selection
+# bind -t vi-copy 'v' begin-selection
 # bind -t vi-copy 'y' copy-selection -x
 # Copy selection to system clipboard (make sure xclip is installed)
 # It seems xclip does not close STDOUT after it has read from tmux's buffer. As
@@ -53,9 +53,14 @@ bind -t vi-copy 'v' begin-selection
 # /await xclip's termination, thereby rendering the window manager unresponsive.
 # So we redirect STDOUT of xclip to /dev/null, or you can use an
 # alternative command like xsel (https://wiki.archlinux.org/index.php/Tmux)
-bind-key -t vi-copy y copy-pipe 'xclip -in -selection clipboard >/dev/null'
-bind -t vi-copy 'Space' halfpage-down
-bind -t vi-copy 'Bspace' halfpage-up
+# bind-key -t vi-copy y copy-pipe 'xclip -in -selection clipboard >/dev/null'
+# bind -t vi-copy 'Space' halfpage-down
+# bind -t vi-copy 'Bspace' halfpage-up
+
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+bind-key -T copy-mode-vi 'V' send -X select-line
+bind-key -T copy-mode-vi 'r' send -X rectangle-toggle
+bind-key -T copy-mode-vi 'y' send -X copy-pipe-and-cancel "xclip -in -selection clipboard"
 
 # ==============================================================================
 #---begin Window and Pane shortcut keys

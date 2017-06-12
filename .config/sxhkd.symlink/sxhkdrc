@@ -157,8 +157,9 @@ ctrl + @Print
 # open FoxitReader
 #wine 'C:\\windows\\command\\start.exe' /Unix /home/squallltt/.wine/dosdevices/c:/users/Public/Desktop/FoxitReader.lnk
 #wine 'C:\\windows\\command\\start.exe' /Unix /home/squallltt/.wine/dosdevices/c:/users/Public/Desktop/PDF-Viewer.lnk
+#/usr/share/playonlinux/playonlinux --run "PDFXCview" %F
 super + F10
-    /usr/share/playonlinux/playonlinux --run "PDFXCview" %F
+    WINEPREFIX="/home/tung/.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/tung/.wine/dosdevices/c:/users/Public/Desktop/PDF-Viewer.lnk
 
 # laptop brightness up button
 XF86MonBrightnessUp
