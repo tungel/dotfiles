@@ -352,6 +352,11 @@ export M2=$M2_HOME/bin
 pathAdd $M2
 # }}}
 
+# for ibus - input method framework to enter foreign characters
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+
 pathAdd $HOME/.node_modules/bin
 
 pathAdd $HOME/.rvm/bin
