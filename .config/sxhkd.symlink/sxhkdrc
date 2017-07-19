@@ -60,8 +60,9 @@ super + ctrl + space
     bspc node -p cancel
 
 # focus (-f), or shift the current window to a desktop number
+# bspc {desktop -f,node -d} ^{1-9,10}
 super + {_,shift + }{1-9,0}
-    bspc {desktop -f,node -d} ^{1-9,10}
+    bspc {desktop -f,node -d} {1-9,10}
 
 # switch windows sequentially (like an app/task switcher)
 alt + {_,shift + }Tab
