@@ -90,6 +90,8 @@ alias ag="ag -i --hidden"
 alias agr="ag -i --hidden -G '.*.rb'" # search only ruby files
 # ag -G ".*.(rb|haml)" # search *.rb and *.haml files
 
+alias rg="rg -i --hidden"
+
 #for matlab
 # export MATLAB_JAVA=/usr/local/MATLAB/R2014a/sys/java/jre/glnxa64/jre
 export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre

@@ -1,8 +1,10 @@
 # Ignore *.js file, need both lines below to works. Looks like `*.js` can't
 # ignore `abc.def.js`
-*.js
-*.*.js
+# *.js
+# *.*.js
 *.min.map
+*.*.min.js
+*.min.js
 
 # ignore css
 *.css
