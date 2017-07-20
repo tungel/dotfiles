@@ -35,6 +35,7 @@
         "key": "ctrl+p",
         "command": "-workbench.action.quickOpen"
     },
+
     // scroll up and down. Need to redefine these because the default
     // vim binding extension is slow
     {
@@ -47,6 +48,17 @@
         "command": "cursorPageUp",
         "when": "editorTextFocus"
     },
+    {
+        "key": "ctrl+d",
+        "command": "-extension.vim_ctrl+d",
+        "when": "editorTextFocus && vim.active && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "-extension.vim_ctrl+n",
+        "when": "editorTextFocus && vim.active && vim.use<C-n> && !inDebugRepl"
+    },
+
     // use ctrl+h to delete left char
     // "when": "(editorTextFocus && !editorReadonly) || inFilesPicker"
     {
