@@ -1,16 +1,31 @@
 // Place your settings in this file to overwrite the default settings
 {
     "editor.fontSize": 12,
-
+    // "editor.fontFamily": "'Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
+    // "editor.fontFamily": "'Ubuntu Mono derivative Powerline', 'Courier New', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "'Dejavu Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
+    // auto format document upon saving
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80
+    ],
+    "files.trimTrailingWhitespace": true,
     "vim.insertModeKeyBindings": [
-       {
-           "before": ["j", "k"],
-           "after": ["<Esc>"]
-       }
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
     ],
     "vim.otherModesKeyBindingsNonRecursive": [
         {
-            "before": ["u"],
+            "before": [
+                "u"
+            ],
             "after": [],
             "commands": [
                 {
@@ -20,7 +35,9 @@
             ]
         },
         {
-            "before": ["ctrl+r"],
+            "before": [
+                "ctrl+r"
+            ],
             "after": [],
             "commands": [
                 {
@@ -38,6 +55,9 @@
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
     "vim.leader": "<space>",
+    // ignore case when searching
+    "vim.ignorecase": true,
+    "vim.autoindent": true,
     "editor.minimap.enabled": false,
     "workbench.colorCustomizations": {
         // make warning color less in-your-face
@@ -54,9 +74,9 @@
     "rust.rls": {
         "useRustfmt": true
     },
-    "workbench.iconTheme": "vs-minimal",
+    "workbench.iconTheme": "vscode-icons",
     "vim.disableAnnoyingNeovimMessage": true,
     "workbench.statusBar.visible": true,
-    "workbench.activityBar.visible": false,
+    "workbench.activityBar.visible": true,
     "workbench.colorTheme": "One Dark Pro"
 }

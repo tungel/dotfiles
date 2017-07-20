@@ -59,6 +59,11 @@
         "when": "editorTextFocus && vim.active && vim.use<C-n> && !inDebugRepl"
     },
 
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.togglePanel"
+    },
+
     // use ctrl+h to delete left char
     // "when": "(editorTextFocus && !editorReadonly) || inFilesPicker"
     {
