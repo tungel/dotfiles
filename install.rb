@@ -127,7 +127,8 @@ def installDotfiles
     basename = File.basename(source).match(/(?:(?!\.symlink).)*/)[0]
 
     if @toSymlink.include?(basename)
-      subDir = File.dirname(source).sub(SOURCE_DIR, '').delete("/")
+      # remove leading and trailing forward slash
+      subDir = File.dirname(source).sub(SOURCE_DIR, '').gsub(/(^\/+|\/+$)/, '')
 
       dest = (subDir.length == 0) ? File.join(TARGET, basename) :
                                     File.join(TARGET, subDir, basename)
