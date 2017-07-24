@@ -48,7 +48,7 @@ if [ $num_mon -gt 1 ] ; then
         bspc config -m ^2 top_padding 10
     fi
 else
-    bspc monitor ^1 --reset-desktops 1 2 3 web 5 6 7 8 9 10
+    bspc monitor ^1 --reset-desktops 1 2 3 4 5 6 7 8 9 10
     bspc config -m ^1 top_padding 10
 fi
 
