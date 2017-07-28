@@ -343,9 +343,6 @@ export RUST_SRC_PATH=$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/l
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 pathAdd $HOME/.rvm/bin
 
-# add temporary path for Markman
-pathAdd $HOME/dev/miscs/rust/markman/target/debug
-
 # aaap {{{
 # jboss
 export JBOSS_HOME=~/dev/libs/jboss

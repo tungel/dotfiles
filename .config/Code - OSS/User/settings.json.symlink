@@ -5,7 +5,7 @@
     // "editor.fontFamily": "'Ubuntu Mono derivative Powerline', 'Courier New', monospace, 'Droid Sans Fallback'",
     "editor.fontFamily": "'Dejavu Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
     // auto format document upon saving
-    "editor.formatOnSave": true,
+    // "editor.formatOnSave": true,
     "editor.rulers": [
         80
     ],
