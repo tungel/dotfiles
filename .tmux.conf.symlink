@@ -5,7 +5,11 @@
 # this fixes the HOME and END key problem
 # set -g default-terminal "screen-256color"
 # set -g default-terminal "rxvt-unicode-256color"
-set-option -g default-terminal "tmux-256color"
+# set-option -g default-terminal "tmux-256color"
+set-option -g default-terminal "xterm-256color"
+# Needs this line also to overrides the default color, so that the neovim color
+# themes work correctly
+set-option -ga terminal-overrides ",xterm-256color:Tc"
 
 set-option -g default-shell /bin/zsh
 set-option -g default-command /bin/zsh
@@ -173,3 +177,6 @@ set -g escape-time 10
 # See `man nvim`
 set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
 
+# macOS: Fix neovim unable to copy to system clipboard while running inside tmux
+set -g default-shell $SHELL
+set -g default-command "reattach-to-user-namespace -l ${SHELL}"

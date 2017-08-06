@@ -14,7 +14,9 @@
 .bash_profile
 .zshrc
 .tmux.conf
-.yaourtrc
+
+# TODO: NA for macOS
+#.yaourtrc
 
 # common directories
 .zfunctions
@@ -28,14 +30,17 @@ bin
 
 #===============================================================================
 # other misc dotfiles
-.autostart
-.xinitrc
-.gtkrc-2.0
-.gtkrc-2.0.mine
-.Xdefaults
-.Xmodmap
-.Xresources
-.xsession
+
+# TODO: NA for macOS
+#.autostart
+#.xinitrc
+#.gtkrc-2.0
+#.gtkrc-2.0.mine
+#.Xdefaults
+#.Xmodmap
+#.Xresources
+#.xsession
+
 .gemrc
 .irbrc
 .gitignore
@@ -48,12 +53,13 @@ profiles.clj
 .spacemacs
 .agignore
 
+# TODO: NA for macOS
 # other directories
-bspwm
-sxhkd
-fontconfig
-icons
-themes
+#bspwm
+#sxhkd
+#fontconfig
+#icons
+#themes
 
 # for VS Code
 keybindings.json

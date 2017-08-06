@@ -339,6 +339,11 @@ pathAdd $HOME/.cargo/bin
 # For Rust Racer completion
 export RUST_SRC_PATH=$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
 
+# # add path for Ruby gems installed with `--user-install` option
+# if which ruby >/dev/null && which gem >/dev/null; then
+#     pathAdd "$(ruby -rubygems -e 'puts Gem.user_dir')"/bin
+# fi
+
 # Add RVM to PATH for scripting
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 pathAdd $HOME/.rvm/bin

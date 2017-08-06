@@ -1220,22 +1220,53 @@ endif
 "--- end neoterm }}}
 "===============================================================================
 
+let g:vrc_curl_opts = {
+  \ '-sS': '',
+  \ '--connect-timeout': 10,
+  \}
+let g:vrc_response_default_content_type = 'application/json'
+let g:vrc_auto_format_uhex = 1
+let g:vrc_output_buffer_name = '__VRC_OUTPUT.json'
+let g:vrc_auto_format_response_enabled = 1
+
+" using Perl's `/usr/bin/json_pp` to pretty print json result. If `json_pp` is
+" not installed, use the python version at `~/bin/jsonpp.py`
+let g:vrc_auto_format_response_patterns = {
+  \ 'json': 'jsonpp.py',
+  \ 'xml': 'xmllint --format -',
+  \}
 
 "===============================================================================
 "--- begin colorscheme {{{
 set background=dark
 
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='light'
+" let g:gruvbox_italic=1
+" let g:gruvbox_contrast_dark='hard'
+" let g:gruvbox_contrast_light='light'
 
-let g:solarized_termcolors=256
-let g:solarized_contrast = "high"
-let g:solarized_visibility= "high"
-let g:solarized_italic = 1
-let g:solarized_termtrans = 1
+" let g:solarized_termcolors=256
+" let g:solarized_contrast = "high"
+" let g:solarized_visibility= "high"
+" let g:solarized_italic = 1
+" let g:solarized_termtrans = 1
 
-colorscheme gruvbox
+" colorscheme gruvbox
+
+" Or if you have Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" Theme
+syntax enable
+syntax on
+" colorscheme OceanicNext
+" let g:airline_theme='oceanicnext'
+" let g:oceanic_next_terminal_bold = 1
+" let g:oceanic_next_terminal_italic = 1
+
+colorscheme onedark
+let g:airline_theme='onedark'
 "--- end colorscheme }}}
 "===============================================================================
 

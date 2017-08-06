@@ -126,8 +126,8 @@ fi
 # history search based on what already entered
 # Need below 2 lines to make it work in tmux. Setting in the ablove zkbd
 # compatible hash doesn't work in tmux...
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
+# bindkey "^[[A" history-beginning-search-backward
+# bindkey "^[[B" history-beginning-search-forward
 
 # http://superuser.com/questions/187639/zsh-not-hitting-profile
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
@@ -233,14 +233,29 @@ export KEYTIMEOUT=15
 
 # ==============================================================================
 # Plugins...
+
+# syntax plugin must be loaded before the history-substring-search
 source ~/.zplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zplugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.zplugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+source ~/.zplugins/z.sh
+
+# may need to force rebuild zcompdump: `rm -f ~/.zcompdump; compinit`
+fpath=(~/.zplugins/zsh-completions/src $fpath)
+
 source ~/.zplugins/sudo.plugin.zsh
-source ~/.zplugins/archlinux.plugin.zsh
+# source ~/.zplugins/archlinux.plugin.zsh
 # commented it out as it seems interfere with RVM
 # source ~/.zplugins/dirhistory.plugin.zsh
 source ~/.zplugins/tmux.plugin.zsh
 # ==============================================================================
 
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
+# use Ctrl+space to accept the current suggestion
+bindkey '^ ' autosuggest-accept
 
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 pathAdd $HOME/.rvm/bin
