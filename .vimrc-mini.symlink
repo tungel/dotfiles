@@ -103,6 +103,7 @@ set shiftround
 
 " community friendly format for Ruby and Clojure code indentation
 autocmd FileType vim,lua,json,yml,yaml,scss,ruby,lisp,eruby,clj,html,mkd,md,markdown,txt setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1

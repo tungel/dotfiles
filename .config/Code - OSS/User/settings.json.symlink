@@ -72,11 +72,12 @@
     },
     "rust.mode": "rls",
     "rust.rls": {
-        "useRustfmt": true
+        "useRustfmt": false
     },
     "workbench.iconTheme": "vscode-icons",
     "vim.disableAnnoyingNeovimMessage": true,
     "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": true,
-    "workbench.colorTheme": "One Dark Pro"
+    "workbench.colorTheme": "One Dark Pro",
+    "window.zoomLevel": 0
 }
