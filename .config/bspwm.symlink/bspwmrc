@@ -118,14 +118,13 @@ trayer --edge top --align right --SetDockType true \
         --tint 0x000000 \
         --height $PANEL_HEIGHT &
 
-
-if [ $(pgrep -cx dropbox) -lt 1 ] ; then
-    if [[ -e $TLPC ]]; then
-        # dropboxd &
-        dropbox &
-    fi
-fi
-
+# Update 2017-08-06: run dropbox inside docker container instead
+# if [ $(pgrep -cx dropbox) -lt 1 ] ; then
+#     if [[ -e $TLPC ]]; then
+#         # dropboxd &
+#         dropbox &
+#     fi
+# fi
 
 # network manager applet icon
 if [ $(pgrep -cx nm-applet) -gt 0 ] ; then
