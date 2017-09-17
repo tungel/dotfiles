@@ -86,6 +86,9 @@ bspc rule -a "PDFXCview.exe" desktop=^5
 bspc rule -a sun-awt-X11-XFramePeer floating=on
 
 bspc rule -a Steam desktop=^5 floating=on
+
+# fix Zathura pdf reader starts as floating
+bspc rule -a Zathura state=tiled
 #*******************************************************************************
 
 # kill all panel scripts from bspwm directory such as ~/.config/bspwm/{panel-dzen2,panel.sh}
