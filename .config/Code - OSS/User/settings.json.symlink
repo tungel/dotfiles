@@ -74,10 +74,15 @@
     "rust.rls": {
         "useRustfmt": false
     },
+    "rust-client.updateOnStartup": true,
+    "rust.goto_def_racer_fallback": true,
+    // todo: switch to just `nightly` later
+    "rust-client.channel": "nightly-2017-11-30",
     "workbench.iconTheme": "vscode-icons",
     "vim.disableAnnoyingNeovimMessage": true,
     "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": true,
     "workbench.colorTheme": "One Dark Pro",
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "vsicons.dontShowNewVersionMessage": true
 }

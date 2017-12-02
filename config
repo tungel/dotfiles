@@ -54,6 +54,7 @@ sxhkd
 fontconfig
 icons
 themes
+mpv
 
 # for VS Code
 keybindings.json
