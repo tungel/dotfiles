@@ -1,2 +1,34 @@
 # sub-text-font-size = 50
 sub-scale = 0.4
+
+#############
+# OSD / OSC #
+#############
+osd-level=1         # enable osd and display --osd-status-msg on interaction
+osd-duration=2500   # hide the osd after x ms
+# osd-font='Source Sans Pro'
+osd-font-size=20
+osd-color='#CCFFFFFF'           # ARGB format
+osd-border-color='#DD322640'    # ARGB format
+osd-bar-align-y=0               # progress bar y alignment (-1 top, 0 centered, 1 bottom)
+osd-border-size=2               # size for osd text and progress bar
+osd-bar-h=2                     # height of osd bar as a fractional percentage of your screen height
+osd-bar-w=60                    # width of " " "
+osd-status-msg='${time-pos} / ${duration}${?percent-pos:　(${percent-pos}%)}${?frame-drop-count:${!frame-drop-count==0:　Dropped: ${frame-drop-count}}}\n${?chapter:Chapter: ${chapter}}'
+
+# Terminal Playing Message
+# term-playing-msg='FPS: ${fps}'
+msg-color
+term-osd-bar
+
+# enable the On Screen Controller (OSC).
+osc=yes
+
+# Don't exit when the end of playlist is reached
+keep-open=yes
+
+# Always save the current playback position on exit
+save-position-on-quit=yes
+
+# Always open a video window even with no video
+force-window=yes
