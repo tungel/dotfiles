@@ -739,3 +739,18 @@ mp.add_key_binding("SHIFT+ENTER", "showplaylist", toggle_playlist)
 
 mp.register_event("file-loaded", on_loaded)
 mp.register_event("end-file", on_closed)
+
+-- added by Tung
+-- Shortcut keys to play next/previous file on the playlist,
+-- the playlist osd will be shown after the key is pressed.
+function play_next()
+  mp.commandv("playlist-next", "weak")
+  showplaylist()
+end
+function play_prev()
+  mp.commandv("playlist-prev", "weak")
+  showplaylist()
+end
+mp.add_key_binding('>', 'next', play_next)
+mp.add_key_binding('<', 'prev', play_prev)
+
