@@ -135,7 +135,7 @@ super + BackSpace
     dmenu-running-apps.sh
 
 alt + shift + f
-    firefox-developer
+    firefox-developer-edition
 
 # lower volume
 super + Down
