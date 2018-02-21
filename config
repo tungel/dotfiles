@@ -55,6 +55,7 @@ fontconfig
 icons
 themes
 mpv
+dunst
 
 # for VS Code
 keybindings.json
