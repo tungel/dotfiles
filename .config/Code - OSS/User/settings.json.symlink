@@ -84,5 +84,16 @@
     "workbench.activityBar.visible": true,
     "workbench.colorTheme": "One Dark Pro",
     "window.zoomLevel": 0,
-    "vsicons.dontShowNewVersionMessage": true
+    "vsicons.dontShowNewVersionMessage": true,
+    "[html]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
+    },
+    "[json]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
+    },
+    "editor.detectIndentation": false,
+    // open file from quickopen dialog in new tab
+    "workbench.editor.enablePreviewFromQuickOpen": false
 }
