@@ -1,7 +1,7 @@
 module BranchParse where
 
-import Control.Applicative ((<$>), (<*>), (<*), (*>), (<$), pure)
-import Text.Parsec (digit, string, char, eof, anyChar, 
+import Control.Applicative (liftA, liftA2)
+import Text.Parsec (digit, string, char, eof, anyChar,
 				   many, many1, manyTill, noneOf, between,
 				   parse, ParseError, (<|>), try)
 import Text.Parsec.String (Parser)
@@ -27,11 +27,11 @@ instance Show Distance where
 
 instance Arbitrary Distance where
 	arbitrary = oneof [
-				   Ahead <$> pos,
-				   Behind <$> pos,
-				   AheadBehind <$> pos <*> pos]
+				   liftA Ahead  pos,
+				   liftA Behind pos,
+				   liftA2 AheadBehind pos pos]
 		where
-			pos = getPositive <$> arbitrary
+			pos = liftA getPositive arbitrary
 
 {- Branch type -}
 
@@ -41,15 +41,17 @@ instance Show Branch where
 		show (MkBranch b) = b
 
 isValidBranch :: String -> Bool
-isValidBranch b = not . or $ [null,
-							 (' ' `elem`),
-							 (".." `isInfixOf`),
-							 ("." `isPrefixOf`),
-							 ("." `isSuffixOf`)]
-							 <*> pure b
+isValidBranch b = not (or (isForbidden b)) where
+	isForbidden s = do -- List
+		forbidden <- [null, (' ' `elem`), (".." `isInfixOf`), ("." `isPrefixOf`), ("." `isSuffixOf`)]
+		return (forbidden s)
+
 
 instance Arbitrary Branch where
-	arbitrary = MkBranch <$> arbitrary `suchThat` isValidBranch
+	arbitrary =
+		do -- Gen
+			branch <- arbitrary `suchThat` isValidBranch
+			return (MkBranch branch)
 
 data Remote = MkRemote Branch (Maybe Distance) deriving (Eq, Show)
 
@@ -61,38 +63,56 @@ data BranchInfo = MkBranchInfo Branch (Maybe Remote) deriving (Eq, Show)
 type MBranchInfo = Maybe BranchInfo
 
 newRepo :: Parser MBranchInfo
-newRepo = 
-	fmap (\ branch -> Just $ MkBranchInfo (MkBranch branch) Nothing)
-		$ string "Initial commit on " *> many anyChar <* eof
+newRepo =
+	do -- Parsec
+		string "Initial commit on "
+		branchOnly
 
 noBranch :: Parser MBranchInfo
-noBranch = 
-	Nothing
-		<$ manyTill anyChar (try $ string " (no branch)") <* eof
+noBranch =
+	do -- Parsec
+		manyTill anyChar (try (string " (no branch)"))
+		eof
+		return Nothing
 
 trackedBranch :: Parser Branch
-trackedBranch = MkBranch <$> manyTill anyChar (try $ string "...")
+trackedBranch =
+		do -- Parsec
+			b <- manyTill anyChar (try (string "..."))
+			return (MkBranch b)
 
 branchRemoteTracking :: Parser MBranchInfo
-branchRemoteTracking = 
-	(\ branch tracking behead -> Just $ MkBranchInfo branch $ Just $ MkRemote (MkBranch tracking) (Just behead))
-		<$> trackedBranch
-		<*> many (noneOf " ") <* char ' '
-		<*> inBrackets
+branchRemoteTracking =
+	do -- Parsec
+		branch <- trackedBranch
+		tracking <- many (noneOf " ")
+		char ' '
+		behead <- inBrackets
+		let remote = MkRemote (MkBranch tracking) (Just behead)
+		let bi = MkBranchInfo branch  (Just remote)
+		return (Just bi)
+
 
 branchRemote :: Parser MBranchInfo
-branchRemote = 
-	(\ branch tracking -> Just $ MkBranchInfo branch $ Just $ MkRemote (MkBranch tracking) Nothing)
-		<$> trackedBranch
-		<*> many (noneOf " ") <* eof
+branchRemote =
+	do -- Parsec
+		branch <- trackedBranch
+		tracking <- many (noneOf " ")
+		eof
+		let remote = MkRemote (MkBranch tracking) Nothing
+		let bi = MkBranchInfo branch (Just remote)
+		return (Just bi)
 
 branchOnly :: Parser MBranchInfo
-branchOnly = 
-	(\ branch -> Just $ MkBranchInfo (MkBranch branch) Nothing)
-		<$> many (noneOf " ") <* eof
+branchOnly =
+	do -- Parsec
+		branch <- many (noneOf " ")
+		eof
+		let bi = MkBranchInfo (MkBranch branch) Nothing
+		return (Just bi)
 
 branchParser :: Parser MBranchInfo
-branchParser = 
+branchParser =
 			try noBranch
 		<|> try newRepo
 		<|> try branchRemoteTracking
@@ -100,14 +120,20 @@ branchParser =
 		<|> branchOnly
 
 branchParser' :: Parser MBranchInfo
-branchParser' = (string "## ") >> branchParser
+branchParser' =
+	do -- Parsec
+		string "## "
+		branchParser
 
 inBrackets :: Parser Distance
 inBrackets = between (char '[') (char ']') (behind <|> try aheadBehind <|> ahead)
 
 makeAheadBehind :: String -> (Int -> Distance) -> Parser Distance
-makeAheadBehind name constructor = 
-	constructor . read <$> (string (name ++ " ") *> many1 digit)
+makeAheadBehind name constructor =
+	do -- Parsec
+		string (name ++ " ")
+		dist <- many1 digit
+		return (constructor (read dist))
 
 ahead :: Parser Distance
 ahead = makeAheadBehind "ahead" Ahead
@@ -115,10 +141,11 @@ behind :: Parser Distance
 behind = makeAheadBehind "behind" Behind
 aheadBehind :: Parser Distance
 aheadBehind =
-	(\ (Ahead aheadBy) (Behind behindBy) -> AheadBehind aheadBy behindBy)
-		<$> ahead
-		<* string ", "
-		<*> behind
+	do -- Parsec
+		Ahead aheadBy <- ahead
+		string ", "
+		Behind behindBy <- behind
+		return (AheadBehind aheadBy behindBy)
 
 branchInfo :: String -> Either ParseError MBranchInfo
 branchInfo = parse branchParser' ""
