@@ -143,9 +143,8 @@ alias smu="sudo make uninstall"
 # sublime
 alias sublime="LANG=en_US.UTF-8 ~/Dropbox/shared/sublime3/sublime_text_Linux_64"
 
-
-# project to external HDMI screen/monitor
-alias hdmi="xrandr --output HDMI1 --mode 1920x1080"
+# output to 4k monitor (display port) on the left and to a HD monitor (HDMI port) on the right
+alias mymonitors="xrandr --output DP-0 --auto --primary --pos 0x0 --panning 3840x2160+0+0 --output HDMI-0 --auto --right-of DP-0 --panning 1920x1080+3840+0"
 
 # project to external VGA monitor
 alias vga="xrandr --output VGA1 --mode 1920x1080"

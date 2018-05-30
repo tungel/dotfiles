@@ -38,14 +38,25 @@ if [ $num_mon -gt 1 ] ; then
         # new 2 monitors
         # xrandr --output DVI-D-0
         # xrandr --output DVI-I-1 --primary --right-of DVI-D-0
-        xrandr --output DVI-I-1 --primary
-        xrandr --output DVI-D-0 --left-of DVI-I-1
+        # xrandr --output DVI-I-1 --primary
+        # xrandr --output DVI-D-0 --left-of DVI-I-1
         # give 3 desktops to the 1st monitor
-        bspc monitor DVI-I-1 -d 1 2 3 4 5 6 7 8 9
-        bspc config -m ^1 top_padding 10
+        # bspc monitor DVI-I-1 -d 1 2 3 4 5 6 7 8 9
+        # bspc config -m ^1 top_padding 10
 
         # the rest of the desktops are for 2nd monitor
-        bspc monitor DVI-D-0 -d 10
+        # bspc monitor DVI-D-0 -d 10
+        # bspc config -m ^2 top_padding 10
+
+        xrandr --output DP-0 --primary
+        xrandr --output HDMI-0 --right-of DP-0
+        # xrandr --output DP-0 --auto --primary --pos 0x0 --panning 3840x2160+0+0 --output HDMI-0 --auto --right-of DP-0 --panning 1920x1080+3840+0
+
+        # give 3 desktops to the 1st monitor
+        bspc monitor DP-0 -d 1 2 3 4 5 6 7 8 9
+        bspc config -m ^1 top_padding 10
+        # the rest of the desktops are for 2nd monitor
+        bspc monitor HDMI-0 -d 10
         bspc config -m ^2 top_padding 10
     else
         # for VirtualBox at work
