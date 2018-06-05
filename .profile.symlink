@@ -146,6 +146,10 @@ alias sublime="LANG=en_US.UTF-8 ~/Dropbox/shared/sublime3/sublime_text_Linux_64"
 # output to 4k monitor (display port) on the left and to a HD monitor (HDMI port) on the right
 alias mymonitors="xrandr --output DP-0 --auto --primary --pos 0x0 --panning 3840x2160+0+0 --output HDMI-0 --auto --right-of DP-0 --panning 1920x1080+3840+0"
 
+# kill and restart pulseaudio before setting audio output
+alias myaudio-hdmi="pulseaudio -k; pulseaudio --start; pacmd set-card-profile 0 output:hdmi-stereo"
+alias myaudio-internal="pulseaudio -k; pulseaudio --start; pacmd set-card-profile 1 output:analog-stereo+input:analog-stereo"
+
 # project to external VGA monitor
 alias vga="xrandr --output VGA1 --mode 1920x1080"
 alias vga2="xrandr --output VGA2 --mode 1920x1080"
