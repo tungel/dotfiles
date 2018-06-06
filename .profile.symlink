@@ -206,6 +206,9 @@ alias dr='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}
 # list docker images
 alias di='docker images'
 
+# remove xcode DerivedData
+alias xcodecleanup='if [[ -e ~/Library/Developer/Xcode/DerivedData ]]; then rm -rf ~/Library/Developer/Xcode/DerivedData/*; fi'
+
 alias simplehttpserver="ruby -rwebrick -e'WEBrick::HTTPServer.new(Port: 8000, DocumentRoot: Dir.pwd).start'"
 # for Ruby gem
 # export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
