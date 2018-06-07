@@ -1,11 +1,9 @@
 import System.Process (readProcessWithExitCode)
 import System.Exit (ExitCode(ExitSuccess))
 import System.IO.Unsafe (unsafeInterleaveIO)
-import Data.List (intercalate)
 
 import Utils (stringsFromStatus, Hash(MkHash))
 import Data.Maybe (fromMaybe)
-import Control.Applicative ((<$>))
 
 {- Git commands -}
 
@@ -14,24 +12,26 @@ successOrNothing (exitCode, output, _) =
 	if exitCode == ExitSuccess then Just output else Nothing
 
 safeRun :: String -> [String] -> IO (Maybe String)
-safeRun command arguments = successOrNothing <$> readProcessWithExitCode command arguments ""
-
-gitstatus :: IO (Maybe String)
-gitstatus =   safeRun "git" ["status", "--porcelain", "--branch"]
+safeRun command arguments =
+	do -- IO
+		output <- readProcessWithExitCode command arguments ""
+		return (successOrNothing output)
 
 gitrevparse :: IO (Maybe Hash)
-gitrevparse = do
-		result <- safeRun "git" ["rev-parse", "--short", "HEAD"]
-		return $ MkHash . init <$> result
+gitrevparse = do -- IO
+		mresult <- safeRun "git" ["rev-parse", "--short", "HEAD"]
+		let rev = do -- Maybe
+			result <- mresult
+			return (MkHash (init result))
+		return rev
 
 {- main -}
 
 main :: IO ()
-main = do
-	mstatus <- gitstatus
+main = do -- IO
+	status <- getContents
 	mhash <- unsafeInterleaveIO gitrevparse -- defer the execution until we know we need the hash
-	let result = do
-		status <- mstatus
+	let result = do -- Maybe
 		strings <- stringsFromStatus mhash status
-		return $ intercalate " " strings
-	putStr $ fromMaybe "" result
+		return (unwords strings)
+	putStr (fromMaybe "" result)

@@ -20,7 +20,9 @@ The prompt may look like the following:
 
 Here is how it could look like when you are ahead by 4 commits, behind by 5 commits, and have 1 staged files, 1 changed but unstaged file, and some untracked files, on branch `dev`:
 
-![Example][]
+
+<img src="https://github.com/olivierverdier/zsh-git-prompt/raw/master/screenshot.png" width=300/>
+
 
 ## Prompt Structure
 
@@ -72,9 +74,11 @@ When the branch name starts with a colon `:`, it means it’s actually a hash, n
 
 There is now a Haskell implementation as well, which can be four to six times faster than the Python one. The reason is not that Haskell is faster in itself (although it is), but that this implementation calls `git` only once. To install, do the following:
 
-1.  Make sure Haskell is installed on your system
-2.  Run `cabal build` from this folder
-3.  Define the variable `GIT_PROMPT_EXECUTABLE="haskell"` somewhere in
+1.  Make sure [Haskell's stack](http://docs.haskellstack.org/en/stable/README.html#how-to-install) is installed on your system
+2.  `cd` to this folder
+2.  Run `stack setup` to install the Haskell compiler, if it is not already there
+3.  Run `stack build && stack install` (don't worry, the executable is only “installed” in this folder, not on your system)
+4.  Define the variable `GIT_PROMPT_EXECUTABLE="haskell"` somewhere in
     your `.zshrc`
 
 ## Customisation
@@ -86,5 +90,4 @@ There is now a Haskell implementation as well, which can be four to six times fa
 **Enjoy!**
 
   [blog post]: http://sebastiancelis.com/2009/nov/16/zsh-prompt-git-users/
-  [Example]: https://github.com/olivierverdier/zsh-git-prompt/raw/master/screenshot.png
   

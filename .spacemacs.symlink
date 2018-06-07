@@ -141,7 +141,7 @@ values."
    ; dotspacemacs-default-font '("Source Code Pro for Powerline"
    ; dotspacemacs-default-font '("Ubuntu Mono derivative Powerline"
    dotspacemacs-default-font '("Dejavu Sans Mono for Powerline"
-                               :size 12
+                               :size 24
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)

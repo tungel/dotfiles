@@ -19,20 +19,44 @@ fi
 num_mon=$(bspc query -M | wc -l)
 if [ $num_mon -gt 1 ] ; then
     if [[ -e $TLPC ]]; then
-        xrandr --output HDMI-0 --primary
-        xrandr --output DVI-I-1 --right-of HDMI-0
+        # xrandr --output HDMI-0 --primary
+        # xrandr --output DVI-I-1 --right-of HDMI-0
 
-        # trying to scale the low res monitor to match with the HiDPI monitor
-        # (4k), but the result is not acceptable, the font is so blurry
-        # scale 2x2 will make the whole screen black !!!
-        # xrandr --output DVI-I-1 --mode 1920x1080 --scale 2.0005x2.0005 --right-of HDMI-0
+        # # trying to scale the low res monitor to match with the HiDPI monitor
+        # # (4k), but the result is not acceptable, the font is so blurry
+        # # scale 2x2 will make the whole screen black !!!
+        # # xrandr --output DVI-I-1 --mode 1920x1080 --scale 2.0005x2.0005 --right-of HDMI-0
 
+        # # give 3 desktops to the 1st monitor
+        # bspc monitor DVI-I-1 -d 1 2 3
+        # bspc config -m ^1 top_padding 10
+
+        # # the rest of the desktops are for 2nd monitor
+        # bspc monitor HDMI-0 -d 4 5 6 7 8 9 10
+        # bspc config -m ^2 top_padding 10
+
+        # new 2 monitors
+        # xrandr --output DVI-D-0
+        # xrandr --output DVI-I-1 --primary --right-of DVI-D-0
+        # xrandr --output DVI-I-1 --primary
+        # xrandr --output DVI-D-0 --left-of DVI-I-1
         # give 3 desktops to the 1st monitor
-        bspc monitor DVI-I-1 -d 1 2 3
-        bspc config -m ^1 top_padding 10
+        # bspc monitor DVI-I-1 -d 1 2 3 4 5 6 7 8 9
+        # bspc config -m ^1 top_padding 10
 
         # the rest of the desktops are for 2nd monitor
-        bspc monitor HDMI-0 -d 4 5 6 7 8 9 10
+        # bspc monitor DVI-D-0 -d 10
+        # bspc config -m ^2 top_padding 10
+
+        xrandr --output DP-0 --primary
+        xrandr --output HDMI-0 --right-of DP-0
+        # xrandr --output DP-0 --auto --primary --pos 0x0 --panning 3840x2160+0+0 --output HDMI-0 --auto --right-of DP-0 --panning 1920x1080+3840+0
+
+        # give 3 desktops to the 1st monitor
+        bspc monitor DP-0 -d 1 2 3 4 5 6 7 8 9
+        bspc config -m ^1 top_padding 10
+        # the rest of the desktops are for 2nd monitor
+        bspc monitor HDMI-0 -d 10
         bspc config -m ^2 top_padding 10
     else
         # for VirtualBox at work
@@ -74,7 +98,7 @@ bspc config click_to_focus          true
 #*******************************************************************************
 # Rules
 #*******************************************************************************
-bspc rule -a Thunderbird desktop=^1
+# bspc rule -a Thunderbird desktop=^1
 
 bspc rule -a Firefox desktop=^4
 
@@ -86,6 +110,9 @@ bspc rule -a "PDFXCview.exe" desktop=^5
 bspc rule -a sun-awt-X11-XFramePeer floating=on
 
 bspc rule -a Steam desktop=^5 floating=on
+
+# fix Zathura pdf reader starts as floating
+bspc rule -a Zathura state=tiled
 #*******************************************************************************
 
 # kill all panel scripts from bspwm directory such as ~/.config/bspwm/{panel-dzen2,panel.sh}

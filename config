@@ -61,6 +61,8 @@ profiles.clj
 #icons
 #themes
 
+mpv
+
 # for VS Code
 keybindings.json
 settings.json
