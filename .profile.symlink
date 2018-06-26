@@ -275,6 +275,12 @@ mywifirestart() {
     fi
 }
 
+# Search a pattern from content of all PDF files in current directory recursively
+# Example usage: searchpdf '1\.\d+'
+searchpdf() {
+    find . -iname '*.pdf' -exec pdfgrep -iPn "$1" {} +
+}
+
 # for dmenu font
 export DMENUFONT="Consolas-11"
 
