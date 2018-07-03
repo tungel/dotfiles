@@ -33,6 +33,9 @@ echo "Processing final output document..."
 # convert "$pre-page"*.tif -deskew 40% -bordercolor black -border 1x1 -fuzz 10% -trim +repage -despeckle "$pre-final.tif"
 convert "$pre-page"*.tif -deskew 40% -bordercolor black -border 1x1 -fuzz 10% -trim +repage -enhance -enhance -enhance -enhance -enhance -antialias -sharpen 0x2.0 "$pre-final.tif"
 
+# for photo
+# convert "$pre-page"*.tif -deskew 40% -bordercolor black -border 1x1 -fuzz 10% -trim +repage "$pre-final.tif"
+
 # remove temp files
 rm "$pre-page"*.tif 2> /dev/null
 
