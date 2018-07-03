@@ -2,6 +2,17 @@
 
 # ref: http://blog.mro.name/2009/07/sane-batch-scan-workaroun/
 
+# Scan multipages document from flatbed source
+
+# Usage:
+# Scan in grayscale: `scan-flatbed Gray` or just `scan-flatbed`
+# Scan in color: `scan-flatbed Color`
+
+# default is grayscale
+SCANMODE=${1:-Gray}
+
+echo "Scanning mode is: $SCANMODE"
+
 pre=doc-`date "+%Y-%m-%dT%H-%M"`
 for ((i=1;i < 100;i++))
 do
@@ -13,12 +24,13 @@ do
     fi
 
     dst=$pre-page$(printf %03d $i)
-    scanimage -x 210 -y 297 --source Flatbed --mode Gray --format=tiff --progress --resolution 300 > $dst.tif
+    scanimage -x 210 -y 297 --source Flatbed --mode "$SCANMODE" --format=tiff --progress --resolution 300 > $dst.tif
 done
 
 # make final tiff file
-convert *.tif -deskew 40% -bordercolor black -border 1x1 -fuzz 10% -trim +repage -despeckle "$pre-final.tif"
+echo "Processing final output document..."
+convert "$pre-page"*.tif -deskew 40% -bordercolor black -border 1x1 -fuzz 10% -trim +repage -despeckle "$pre-final.tif"
 
 # remove temp files
-rm "$pre-page"*.tif
+rm "$pre-page"*.tif 2> /dev/null
 
