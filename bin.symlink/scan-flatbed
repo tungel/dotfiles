@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
 # ref: http://blog.mro.name/2009/07/sane-batch-scan-workaroun/
+# Use for loop to work around the issue with `--batch-prompt`
+# $ scanimage --batch-start=45 --batch-count=16 --batch --batch-prompt --format=pnm --mode Color --resolution 300
+# ...
+# Scanning page 46
+# scanimage: sane_start: Invalid argument
 
 # Scan multipages document from flatbed source
 
