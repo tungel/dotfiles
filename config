@@ -55,6 +55,7 @@ fontconfig
 icons
 themes
 mpv
+youtube-dl
 dunst
 
 # for VS Code
