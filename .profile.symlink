@@ -209,6 +209,9 @@ alias dr='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}
 # list docker images
 alias di='docker images'
 
+# download and save youtube video as m4a audio file
+alias yaudio="youtube-dl -f 'bestaudio[ext=m4a]'"
+
 alias simplehttpserver="ruby -rwebrick -e'WEBrick::HTTPServer.new(Port: 8000, DocumentRoot: Dir.pwd).start'"
 # for Ruby gem
 # export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
