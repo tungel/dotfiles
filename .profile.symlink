@@ -215,15 +215,15 @@ alias xcodecleanup='if [[ -e ~/Library/Developer/Xcode/DerivedData ]]; then rm -
 # download and save youtube video as m4a audio file
 alias youtube_dl_audio="youtube-dl -f 'bestaudio[ext=m4a]'"
 
-# Usage: `play 'faded'` will play Alan Walker's Faded song. The downloaded audio
+# Usage: `youtube_play 'faded'` will play Alan Walker's Faded song. The downloaded audio
 # file is saved in `${TMPDIR}`.
 function youtube_play {
-  youtube-dl --default-search=ytsearch: \
-            --youtube-skip-dash-manifest \
-            --output="${TMPDIR:-/tmp/}%(title)-s%(id)s.%(ext)s" \
-            --restrict-filenames \
-            --format="bestaudio[ext!=webm]" \
-            --exec=mpv "$*"
+    youtube-dl --default-search=ytsearch: \
+               --youtube-skip-dash-manifest \
+               --output="${TMPDIR:-/tmp/}%(title)-s%(id)s.%(ext)s" \
+               --restrict-filenames \
+               --format="bestaudio[ext!=webm]" \
+               --exec=mpv "$*"
 }
 
 alias simplehttpserver="ruby -rwebrick -e'WEBrick::HTTPServer.new(Port: 8000, DocumentRoot: Dir.pwd).start'"
