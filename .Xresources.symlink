@@ -3,7 +3,10 @@
 ! font stuffs
 
 ! for 4K monitor
-!Xft.dpi: 180
+Xft.dpi: 187
+
+! for 1080p monitor
+!Xft.dpi: 92
 
 Xft.autohint: true
 Xft.lcdfilter:  lcddefault
@@ -28,10 +31,14 @@ URxvt.foreground:white
 ! URxvt.font:xft:Dejavu Sans Mono for Powerline:pixelsize=12:antialias=true:hinting=true
 ! URxvt.boldFont:xft:DejaVu Sans Mono for Powerline:bold:pixelsize=12:antialias=true:hinting=true
 
-! font size 24 for 4k monitor (3840x2160)
-URxvt.font:xft:Ubuntu Mono derivative Powerline:pixelsize=14:antialias=true:hinting=true
-URxvt.boldFont:xft:Ubuntu Mono derivative Powerline:bold:pixelsize=14:antialias=true:hinting=true
-URxvt.italicFont:xft:DejaVu Sans Mono for Powerline:italic:pixelsize=14:antialias=true:hinting=true
+! URxvt.font:xft:Ubuntu Mono derivative Powerline:pixelsize=14:antialias=true:hinting=true
+! URxvt.boldFont:xft:Ubuntu Mono derivative Powerline:bold:pixelsize=14:antialias=true:hinting=true
+! URxvt.italicFont:xft:DejaVu Sans Mono for Powerline:italic:pixelsize=14:antialias=true:hinting=true
+
+! font size 26 for 4k monitor (3840x2160)
+URxvt.font:xft:Ubuntu Mono derivative Powerline:pixelsize=26:antialias=true:hinting=true
+URxvt.boldFont:xft:Ubuntu Mono derivative Powerline:bold:pixelsize=26:antialias=true:hinting=true
+URxvt.italicFont:xft:DejaVu Sans Mono for Powerline:italic:pixelsize=26:antialias=true:hinting=true
 
 ! make letters stay closer to each other, work well with font Dejavu Sans Mono for Powerline
 ! at pixelsize=12 or size=9

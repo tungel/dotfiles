@@ -60,8 +60,10 @@ profiles.clj
 #fontconfig
 #icons
 #themes
+#dunst
 
 mpv
+youtube-dl
 
 # for VS Code
 keybindings.json

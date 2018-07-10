@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Scan multipages document
+# Use ADF if it's loaded, otherwise use flatbed
+
+# Usage:
+# Scan in grayscale: `myscan Gray` or just `myscan`
+# Scan in color: `myscan Color`
+
+# default is grayscale
+SCANMODE=${1:-Gray}
+
+scan-adf "$SCANMODE"
+
+if [ $? -eq 0 ]; then
+    echo "Done scanning from ADF."
+else
+    echo "ADF is not loaded. Scanning from flatbed source..."
+    scan-flatbed "$SCANMODE"
+fi
+

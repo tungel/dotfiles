@@ -1,0 +1,1 @@
+-f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]' --add-metadata --xattrs --embed-thumbnail --restrict-filenames -o '%(title)s.%(ext)s'

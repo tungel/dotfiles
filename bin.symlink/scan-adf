@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Scan multipages document from Auto Document Feeder source
+
+# Usage:
+# Scan in grayscale: `scan-adf Gray` or just `scan-adf`
+# Scan in color: `scan-adf Color`
+
+# default is grayscale
+SCANMODE=${1:-Gray}
+
+echo "========================ADF=================================="
+echo "Scanning mode is: $SCANMODE"
+
+pre=doc-`date "+%Y-%m-%dT%H-%M"`
+
+# A4
+scanimage -x 210 -y 297 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --format=tiff --progress --resolution 300
+
+# letter
+# scanimage -x 215.9 -y 279.4 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --format=tiff --progress --resolution 300
+
+if [ $? -eq 0 ]; then
+    # Fix error
+    # convert: Bogus "StripByteCounts" field, ignoring and calculating from imagelength.
+    # convert: Read error on strip 1168; got 0 bytes, expected 7440. `TIFFFillStrip'
+    echo "Fixing image length..."
+    mogrify -bordercolor black -border 1x1 -fuzz 20% -trim +repage "$pre-page"*.tif 2> /dev/null
+    rm "$pre-page"*.tif~ 2> /dev/null # remove backup files created by mogrify
+
+    # make final tiff file
+    echo "Processing final output document..."
+    # convert "$pre-page"*.tif -deskew 40% -bordercolor black -border 1x1 -fuzz 20% -trim +repage -despeckle "$pre-final.tif"
+    convert "$pre-page"*.tif -deskew 40% -bordercolor black -border 1x1 -fuzz 20% -trim +repage -enhance -enhance -enhance -enhance -enhance -antialias -sharpen 0x2.0 "$pre-final.tif"
+
+    # remove temp files
+    rm "$pre-page"*.tif 2> /dev/null
+
+    exit 0
+else
+    exit 1
+fi
+

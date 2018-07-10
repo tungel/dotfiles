@@ -20,7 +20,11 @@ fi
 # --bg-max FILE
 # --bg-fill FILE
 # feh --bg-center ~/Dropbox/temp/arch_sparks_wall_by_rajasegar-d6csc95.jpg
-sh ~/.fehbg &
+# sh ~/.fehbg &
+
+# having issue with wallpapers size if running the script here
+# TODO: to fix this issue
+# mywallpaper.sh
 
 ~/.kde4/Autostart/ssh-add.sh
 
