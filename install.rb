@@ -73,7 +73,11 @@ def linkFile(source, target)
 
       if overwrite
         # TODO: optimize this
-        File.delete(target)
+        if File.directory?(target)
+          FileUtils.remove_dir(target)
+        else
+          File.delete(target)
+        end
         success("removed #{target}")
       end
 
