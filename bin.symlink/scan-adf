@@ -16,9 +16,30 @@ pre=doc-`date "+%Y-%m-%dT%H-%M"`
 
 # A4
 scanimage -x 210 -y 297 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --format=tiff --progress --resolution 300
-
 # letter
 # scanimage -x 215.9 -y 279.4 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --format=tiff --progress --resolution 300
+
+# ==============================================================================
+# ---------------------- DOUBLE-SIDED scanning ---------------------------------
+# comment out the `scanimage` command above and uncomment below section to scan
+# double sided pages
+
+# scanimage -x 210 -y 297 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --batch-start=0 --batch-increment=2 --format=tiff --progress --resolution 300
+
+# pages=$(ls -p $pre-page*.tif | wc -l)
+# pages=$((pages*2-1))
+
+# echo "Now, turn the set of pages upside down (last page on top and first page at the bottom) and press Enter to continue"
+
+# read key
+# if [[ $key != "q" && $key != "Q" ]] ; then
+#     scanimage -x 210 -y 297 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --batch-start=$pages --batch-increment=-2 --format=tiff --progress --resolution 300
+# fi
+
+# # note: the below echo command is important for working around the exit status 7
+# # when scanning double sided pages
+# echo "Exit status: $?"
+# ==============================================================================
 
 if [ $? -eq 0 ]; then
     # Fix error
