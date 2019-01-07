@@ -1,0 +1,134 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.fontSize": 11,
+    // "editor.fontFamily": "'Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
+    // "editor.fontFamily": "'Ubuntu Mono derivative Powerline', 'Courier New', monospace, 'Droid Sans Fallback'",
+    //"editor.fontFamily": "'Dejavu Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
+    // auto format document upon saving
+    "editor.formatOnSave": false,
+    "editor.rulers": [
+        80
+    ],
+    "editor.tabSize": 2,
+    "files.trimTrailingWhitespace": false,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "u"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "undo",
+                    "when": "editorTextFocus && !editorReadonly"
+                }
+            ]
+        },
+        {
+            "before": [
+                "ctrl+r"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "redo",
+                    "when": "editorTextFocus && !editorReadonly"
+                }
+            ]
+        }
+    ],
+    "vim.enableNeovim": true,
+    // "vim.neovimPath": "/usr/bin/nvim",
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.leader": "<space>",
+    // ignore case when searching
+    "vim.ignorecase": true,
+    "vim.autoindent": true,
+    "editor.minimap.enabled": false,
+    "workbench.colorCustomizations": {
+        // make warning color less in-your-face
+        "editorWarning.foreground": "#535353"
+    },
+    // show full path of the current editing file
+    "window.title": "${activeEditorLong}",
+    "rust.rustup": {
+        "toolchain": "nightly-x86_64-apple-darwin",
+        "nightlyToolchain": "nightly-x86_64-apple-darwin"
+    },
+    "rust.mode": "rls",
+    "rust.goto_def_racer_fallback": true,
+    "rust-client.updateOnStartup": false,
+    "rust-client.showStdErr": true,
+    "rust.build_lib": false,
+    "rust.rustLangSrcPath": "/Users/tung/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src",
+    // "rust.rls": {
+    //     "executable": "/Users/tung/dev/rust/libs/rls/target/release/rls",
+    //     "useRustfmt": false
+    // },
+    "rust.rls": {
+        "executable": "rustup",
+        "args": [
+            "run",
+            "nightly",
+            "rls"
+        ],
+        "useRustfmt": false
+    },
+    "workbench.iconTheme": "vscode-icons",
+    "vim.disableAnnoyingNeovimMessage": true,
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    "workbench.colorTheme": "One Dark Pro",
+    "telemetry.enableTelemetry": false,
+    "workbench.sideBar.location": "left",
+    "vsicons.dontShowNewVersionMessage": true,
+    "[json]": {
+        // "editor.tabSize": 4
+    },
+    // disable split xmlns to new line
+    "xmlTools.splitXmlnsOnFormat": false,
+    // open file from quickopen dialog in new tab
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true
+    },
+    "vetur.format.defaultFormatter.html": "js-beautify-html",
+    "[html]": {
+        "editor.tabSize": 2,
+        // Insert spaces when pressing Tab
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false
+    },
+    "[rust]": {
+        "editor.tabSize": 4,
+        // Insert spaces when pressing Tab
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false
+    },
+    "gitlens.keymap": "alternate",
+    "breadcrumbs.enabled": true,
+    "r.lintr.enabled": false
+}
