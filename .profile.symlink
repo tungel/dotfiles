@@ -223,6 +223,9 @@ function youtube_play {
                --exec=mpv "$*"
 }
 
+alias startredshift='systemctl --user start redshift.service'
+alias stopredshift='systemctl --user stop redshift.service'
+
 alias simplehttpserver="ruby -rwebrick -e'WEBrick::HTTPServer.new(Port: 8000, DocumentRoot: Dir.pwd).start'"
 # for Ruby gem
 # export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
