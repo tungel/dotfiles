@@ -341,6 +341,7 @@ pathAdd $GOPATH/bin
 # for local scripts/programs
 # PATH=$PATH:~/bin
 pathAdd ~/bin
+pathAdd ~/.local/bin
 
 # PATH=$PATH:~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
 pathAdd ~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
