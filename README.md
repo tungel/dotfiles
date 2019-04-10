@@ -23,7 +23,7 @@ select which dotfile to be symlinked in the `config` file.
 To use `deoplete` in `Neovim`, we must also install:
 ```
 sudo pacman -S python-pip
-pip3 install --user neovim
+pip3 install --user pynvim
 ```
 
 ## Install required packages for Linux Mint
