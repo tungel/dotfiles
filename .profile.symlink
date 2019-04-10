@@ -226,6 +226,9 @@ function youtube_play {
                --exec=mpv "$*"
 }
 
+alias startredshift='systemctl --user start redshift.service'
+alias stopredshift='systemctl --user stop redshift.service'
+
 alias simplehttpserver="ruby -rwebrick -e'WEBrick::HTTPServer.new(Port: 8000, DocumentRoot: Dir.pwd).start'"
 # for Ruby gem
 # export PATH=$PATH:~/.gem/ruby/2.2.0/bin/
@@ -342,6 +345,7 @@ pathAdd $GOPATH/bin
 # PATH=$PATH:~/bin
 pathAdd ~/bin
 pathAdd ~/local-bin
+pathAdd ~/.local/bin
 
 # PATH=$PATH:~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
 pathAdd ~/dev/libs/flume-client/flume-client-1.0-SNAPSHOT/bin
