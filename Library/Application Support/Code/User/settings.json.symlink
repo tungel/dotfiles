@@ -1,16 +1,10 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "editor.fontSize": 11,
-    // "editor.fontFamily": "'Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
-    // "editor.fontFamily": "'Ubuntu Mono derivative Powerline', 'Courier New', monospace, 'Droid Sans Fallback'",
-    //"editor.fontFamily": "'Dejavu Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
-    // auto format document upon saving
     "editor.formatOnSave": false,
     "editor.rulers": [
         80
     ],
     "editor.tabSize": 2,
-    "files.trimTrailingWhitespace": false,
     "vim.insertModeKeyBindings": [
         {
             "before": [
@@ -94,7 +88,7 @@
     "vim.disableAnnoyingNeovimMessage": true,
     "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": true,
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "One Dark Pro Vivid",
     "telemetry.enableTelemetry": false,
     "workbench.sideBar.location": "left",
     "vsicons.dontShowNewVersionMessage": true,
@@ -126,9 +120,17 @@
         "editor.tabSize": 4,
         // Insert spaces when pressing Tab
         "editor.insertSpaces": true,
-        "editor.detectIndentation": false
+        "editor.detectIndentation": false,
+        "files.trimTrailingWhitespace": true,
+        "editor.formatOnSave": true,
+    },
+    "[python]": {
+        "editor.tabSize": 4,
+        "files.trimTrailingWhitespace": true,
+        "editor.formatOnSave": true,
     },
     "gitlens.keymap": "alternate",
     "breadcrumbs.enabled": true,
-    "r.lintr.enabled": false
+    "r.lintr.enabled": false,
+    "editor.fontSize": 13
 }
