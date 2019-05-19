@@ -223,6 +223,9 @@ function youtube_play {
                --exec=mpv "$*"
 }
 
+alias myconvertalltiffs2pdf='for tiff in *.tif; do tiff2pdf -o "`basename "${tiff}" .tif`.pdf" "${tiff}"; done'
+alias myresizepdf='for pdf in *.pdf; do pdf2ps "${pdf}" temp.ps; ps2pdf temp.ps `basename "${pdf}" .pdf`-resized.pdf; rm temp.ps; done'
+
 alias startredshift='systemctl --user start redshift.service'
 alias stopredshift='systemctl --user stop redshift.service'
 
