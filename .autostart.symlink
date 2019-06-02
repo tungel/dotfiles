@@ -5,7 +5,10 @@ xsetroot -cursor_name left_ptr
 #xcompmgr &
 
 # make keyboard response faster
-xset r rate 200 30
+# set auto repeat delay to 400 and repeat rate to 25
+# Note that: (200 30) is a bit too fast and that would cause issue with VirtualBox
+# VM on macOS
+xset r rate 400 25
 
 # enable natural scrolling and remap Caps Lock key to become left Ctrl
 if [ -f ~/.Xmodmap ]; then
