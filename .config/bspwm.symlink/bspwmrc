@@ -120,22 +120,17 @@ bspc rule -a Zathura state=tiled
 # OR the panel FIFO at /tmp/panel-fifo
 kill -9 $(ps aux | grep -e "bspwm.*panel\|tmp/panel-fifo" | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
 
-# kill dzen2 and xtitle as well
-kill -9 $(ps aux | grep dzen2 | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
-kill -9 $(ps aux | grep xtitle | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+# kill existing processes
+pkill dzen2
+pkill xtitle
+pkill panel.sh
+pkill panel-dzen2.sh
+pkill trayer
 
 # run panel
 ~/.config/bspwm/panel.sh &
+
 sleep 2; # wait for panel to show up first (bar or dzen2)
-
-
-if [ $(pgrep -cx trayer) -gt 0 ] ; then
-    # echo "Trayer already running!"
-    # pkill trayer
-    # killall trayer
-
-    kill -9 $(ps aux | grep trayer | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
-fi
 
 trayer --edge top --align right --SetDockType true \
         --SetPartialStrut true  \
@@ -146,18 +141,8 @@ trayer --edge top --align right --SetDockType true \
         --tint 0x000000 \
         --height $PANEL_HEIGHT &
 
-# Update 2017-08-06: run dropbox inside docker container instead
-# if [ $(pgrep -cx dropbox) -lt 1 ] ; then
-#     if [[ -e $TLPC ]]; then
-#         # dropboxd &
-#         dropbox &
-#     fi
-# fi
-
 # network manager applet icon
-if [ $(pgrep -cx nm-applet) -gt 0 ] ; then
-    kill -9 $(ps aux | grep nm-applet | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
-fi
+pkill nm-applet
 # `which nm-applet` &
 nm-applet &
 

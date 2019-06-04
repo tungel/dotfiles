@@ -27,6 +27,12 @@ PANEL_FONT_FAMILY="Roboto-10"
 
 export PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY
 
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+
+mkfifo "$PANEL_FIFO"
+
+bspc config top_padding $PANEL_HEIGHT
 
 # https://wiki.archlinux.org/index.php/Bspwm
 panel_volume()
@@ -171,17 +177,9 @@ while true; do
 done &
 #*******************************************************************************
 
-
-# these 2 lines are commented out on 2014-09-24
-trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
-[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
-
-rm "$PANEL_FIFO"
-mkfifo "$PANEL_FIFO"
-
-bspc config top_padding $PANEL_HEIGHT
 # 0.9: bspc control --subscribe > "$PANEL_FIFO" &
-bspc subscribe all > "$PANEL_FIFO" &
+# bspc subscribe all > "$PANEL_FIFO" &
+bspc subscribe report > "$PANEL_FIFO" &
 xtitle -sf 'T%s' > "$PANEL_FIFO" &
 
 # call clock at interval 1seconds (-i 1)
