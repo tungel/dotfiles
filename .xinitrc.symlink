@@ -60,6 +60,7 @@ xautolock -time 10 -locker slock -nowlocker slock -detectsleep -corners 000+ -co
 # we can also use file /etc/os-release
 if [ -f /etc/arch-release ] ; then
     # for Arch Linux
+    urxvt &
     sxhkd &
     exec bspwm
 elif [ -f /etc/lsb-release ] ; then
