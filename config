@@ -50,6 +50,7 @@ profiles.clj
 
 # other directories
 bspwm
+polybar
 sxhkd
 fontconfig
 icons

@@ -1,0 +1,249 @@
+[global/wm]
+
+[colors]
+transparent = #99000000
+invisible = #0000
+background = #061229
+foreground = #b8bbc2
+
+red = #ff0000
+dim = #f0a000
+white = #d1d1d1
+gray = #585858
+black = #ff121212
+; red = #c795ae
+blue = #95aec7
+yellow = #c7ae95
+green = #aec795
+
+[settings]
+; Define fallback values used by all module formats
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+format-padding = 1
+; margin between multiple labels in a module
+; e.g. bspwm workspace module
+;format-margin = 1
+
+panel-height = ${env:BAR_HEIGHT:20}
+
+[bar/top]
+monitor = ${env:MONITOR}
+
+width = 100%
+height = ${settings.panel-height}
+
+offset-x = 0%
+offset-y = 5
+
+radius = 2.5
+
+padding-left = 0
+; leave room for detached tray
+padding-right = 20
+
+module-margin = 1
+
+font-0 = Roboto:weight=medium:size=24
+font-1 = Roboto:weight=medium:size=24
+font-2 = Hack:size=24
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+separator =
+
+modules-left = bspwm title
+modules-center = date
+modules-right = cpu memory packages volume battery menu0 eth
+
+tray-position = right
+tray-padding = 10
+tray-detached = true
+tray-background = ${colors.background}
+
+underline-size = 2
+underline-color = ${colors.foreground}
+wm-restack = bspwm
+
+border-size = 1
+border-color = #00aaaaaa
+; border-color = #ff0000
+
+[module/bspwm]
+type = internal/bspwm
+
+; Only show workspaces defined on the same output as the bar
+; Default: true
+pin-workspaces = false
+
+format = <label-monitor> <label-state>
+label-monitor = "%name%:"
+label-focused = " %name% "
+label-focused-underline = ${colors.foreground}
+label-occupied = " %name% "
+label-occupied-foreground = ${colors.dim}
+label-empty =
+
+
+[module/memory]
+type = internal/memory
+interval = 3
+format = <label> <ramp-used>
+; label = MEM %gb_used% (%percentage_used%)
+label = MEM %percentage_used%%
+
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+
+
+[module/cpu]
+type = internal/cpu
+format = <label> <ramp-coreload>
+label = CPU %percentage%%
+
+ramp-coreload-font = 2
+ramp-coreload-5-foreground = ${colors.red}
+ramp-coreload-6-foreground = ${colors.red}
+ramp-coreload-7-foreground = ${colors.red}
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+; show window's title
+[module/title]
+type = internal/xwindow
+label = %title%
+label-maxlen = 60
+format-foreground = #00ff00
+
+[module/wlan]
+type = internal/network
+label-connected = %{A1:nm-connection-editor:}%essid%%{A}
+; label-connected = %local_ip% %downspeed:9%
+interval = 3.0
+
+[module/eth]
+type = internal/network
+; host-only network
+; interface = enp0s3
+interface = enp0s8
+interval = 3.0
+
+format-connected-padding = 1
+format-disconnected-padding = 1
+
+format-connected-underline = #ffffff
+format-disconnected-underline = #00ff00
+
+label-connected = %local_ip% %downspeed:9%
+; label-connected = Tung
+label-disconnected = landown
+label-disconnected-foreground = #ff0000
+
+[module/menu0]
+type = custom/menu
+
+expand-right = true
+
+format = <label-toggle> <menu>
+;format-underline = ${colors.white}
+format-padding = 1
+
+menu-0-0 = urxvt
+menu-0-0-exec = urxvt &
+menu-0-1 = Firefox
+menu-0-1-exec = firefox-developer-edition &
+
+label-open = Apps
+label-close = x
+label-separator = |
+
+[module/date]
+; format ref: https://en.cppreference.com/w/cpp/io/manip/put_time
+type = internal/date
+interval = 5.0
+date = %e %b
+time = %H:%M
+
+; A3: action on right click. Ref: https://github.com/polybar/polybar/wiki/Formatting#action-a
+label = %{A3:urxvt &:}%date%, %time%%{A}
+
+
+[module/battery]
+format-charging-background = ${settings.format-background}
+format-charging-padding = ${settings.format-padding}
+format-discharging-background = ${settings.format-background}
+format-discharging-padding = ${settings.format-padding}
+format-full-background = ${settings.format-background}
+format-full-padding = ${settings.format-padding}
+
+type = internal/battery
+battery = BAT0
+adapter = AC
+
+format-charging = <label-charging>
+format-discharging = <label-discharging>
+format-full = <label-full>
+label-discharging = BAT-- %percentage%% %time%
+label-charging = BAT++ %percentage%% %time%
+label-full = BAT %percentage%%
+time-format = (%H:%M)
+
+
+[module/temperature]
+type = internal/temperature
+interval = 3
+
+; Thermal zone to use
+; To list all the zone types, run
+; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
+; Default: 0
+thermal-zone = 1
+
+; Threshold temperature to display warning label
+warn-temperature = 75
+format = <ramp> <label>
+label = TEMP %temperature%
+label-warn = TEMP %temperature%
+label-warn-foreground = ${colors.red}
+ramp-0 =
+
+
+[module/volume]
+type = internal/pulseaudio
+
+; increase/decrease volume interval
+interval = 5
+
+format-volume-background = ${settings.format-background}
+format-volume-padding = ${settings.format-padding}
+format-muted-background = ${settings.format-background}
+format-muted-padding = ${settings.format-padding}
+
+format-volume = <label-volume>
+
+label-muted-foreground = ${colors.dim}
+label-muted = VOL -
+label-volume = VOL %percentage%%
+
+click-left = pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+[module/packages]
+type = custom/script
+exec = ~/.config/polybar/package_update_checker.sh lemonbar
+interval = 300
+label = PKG %output%
+
+
+; vim: set ft=dosini:

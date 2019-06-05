@@ -33,4 +33,12 @@ fi
 
 gnome-encfs-manager
 
+# for HiDPI display, run this:
+~/.config/polybar/launch.sh hidpi
+
+# for low DPI display, run:
+# ~/.config/polybar/launch.sh
+
+# launch this last, after merging ~/.Xresources using xrdb
+urxvt &
 

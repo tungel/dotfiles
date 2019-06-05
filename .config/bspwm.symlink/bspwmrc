@@ -116,33 +116,34 @@ bspc rule -a Steam desktop=^5 floating=on
 bspc rule -a Zathura state=tiled
 #*******************************************************************************
 
-# kill all panel scripts from bspwm directory such as ~/.config/bspwm/{panel-dzen2,panel.sh}
-# OR the panel FIFO at /tmp/panel-fifo
-kill -9 $(ps aux | grep -e "bspwm.*panel\|tmp/panel-fifo" | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
+# # kill all panel scripts from bspwm directory such as ~/.config/bspwm/{panel-dzen2,panel.sh}
+# # OR the panel FIFO at /tmp/panel-fifo
+# kill -9 $(ps aux | grep -e "bspwm.*panel\|tmp/panel-fifo" | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
 
-# kill existing processes
-pkill dzen2
-pkill xtitle
-pkill panel.sh
-pkill panel-dzen2.sh
-pkill trayer
+# # kill existing processes
+# pkill dzen2
+# pkill xtitle
+# pkill panel.sh
+# pkill panel-dzen2.sh
+# pkill trayer
 
-# run panel
-~/.config/bspwm/panel.sh &
+# # run panel
+# ~/.config/bspwm/panel.sh &
 
-sleep 2; # wait for panel to show up first (bar or dzen2)
+# sleep 2; # wait for panel to show up first (bar or dzen2)
 
-trayer --edge top --align right --SetDockType true \
-        --SetPartialStrut true  \
-        --expand true \
-        --width 10 \
-        --transparent true \
-        --alpha 0 \
-        --tint 0x000000 \
-        --height $PANEL_HEIGHT &
+# trayer --edge top --align right --SetDockType true \
+#         --SetPartialStrut true  \
+#         --expand true \
+#         --width 10 \
+#         --transparent true \
+#         --alpha 0 \
+#         --tint 0x000000 \
+#         --height $PANEL_HEIGHT &
 
 # network manager applet icon
 pkill nm-applet
+sleep 1
 # `which nm-applet` &
 nm-applet &
 

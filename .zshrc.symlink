@@ -197,8 +197,8 @@ COMMAND_PROMPT="gray"
 set_prompt_color() {
     if [[ $TERM = "linux" ]]; then
        # nothing
-    elif [[ $TMUX != '' ]]; then
-        printf '\033Ptmux;\033\033]12;%b\007\033\\' "$1"
+    # elif [[ $TMUX != '' && "${TERM}" == 'xterm-256color' ]]; then
+    #     printf '\033Ptmux;\033\033]12;%b\007\033\\' "$1"
     else
         echo -ne "\033]12;$1\007"
     fi
