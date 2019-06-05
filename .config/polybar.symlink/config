@@ -90,7 +90,7 @@ type = internal/memory
 interval = 3
 format = <label> <ramp-used>
 ; label = MEM %gb_used% (%percentage_used%)
-label = MEM %percentage_used%%
+label = M %percentage_used%%
 
 ramp-used-0 = ▁
 ramp-used-1 = ▂
@@ -105,7 +105,7 @@ ramp-used-7 = █
 [module/cpu]
 type = internal/cpu
 format = <label> <ramp-coreload>
-label = CPU %percentage%%
+label = C %percentage%%
 
 ramp-coreload-font = 2
 ramp-coreload-5-foreground = ${colors.red}
@@ -146,8 +146,8 @@ format-disconnected-padding = 1
 format-connected-underline = #ffffff
 format-disconnected-underline = #00ff00
 
-label-connected = %local_ip% %downspeed:9%
-; label-connected = Tung
+; label-connected = %local_ip% %downspeed:9%
+label-connected = %downspeed:9%
 label-disconnected = landown
 label-disconnected-foreground = #ff0000
 
@@ -195,9 +195,11 @@ adapter = AC
 format-charging = <label-charging>
 format-discharging = <label-discharging>
 format-full = <label-full>
-label-discharging = BAT-- %percentage%% %time%
-label-charging = BAT++ %percentage%% %time%
-label-full = BAT %percentage%%
+; label-discharging = BAT-- %percentage%% %time%
+; label-charging = BAT++ %percentage%% %time%
+label-discharging = B %percentage%%
+label-charging = B %percentage%%
+label-full = B %percentage%%
 time-format = (%H:%M)
 
 
@@ -234,8 +236,8 @@ format-muted-padding = ${settings.format-padding}
 format-volume = <label-volume>
 
 label-muted-foreground = ${colors.dim}
-label-muted = VOL -
-label-volume = VOL %percentage%%
+label-muted = V -
+label-volume = V %percentage%%
 
 click-left = pactl set-sink-mute @DEFAULT_SINK@ toggle
 
@@ -243,7 +245,7 @@ click-left = pactl set-sink-mute @DEFAULT_SINK@ toggle
 type = custom/script
 exec = ~/.config/polybar/package_update_checker.sh lemonbar
 interval = 300
-label = PKG %output%
+label = P %output%
 
 
 ; vim: set ft=dosini:
