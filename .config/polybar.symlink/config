@@ -13,8 +13,14 @@ gray = #585858
 black = #ff121212
 ; red = #c795ae
 blue = #95aec7
-yellow = #c7ae95
-green = #aec795
+deepblue= #00BFFF
+; yellow = #c7ae95
+yellow= #ffff00
+; green = #aec795
+green = #00ff00
+violet = #EE82EE
+hotpink = #FF69B4
+cornsilk = #FFF8DC
 
 [settings]
 ; Define fallback values used by all module formats
@@ -51,6 +57,8 @@ font-2 = Hack:size=24
 background = ${colors.background}
 foreground = ${colors.foreground}
 separator =
+
+enable-ipc = true
 
 modules-left = bspwm title
 modules-center = date
@@ -90,7 +98,9 @@ type = internal/memory
 interval = 3
 format = <label> <ramp-used>
 ; label = MEM %gb_used% (%percentage_used%)
-label = M %percentage_used%%
+label = %percentage_used%%
+format-prefix = "M "
+format-prefix-foreground= ${colors.deepblue}
 
 ramp-used-0 = ▁
 ramp-used-1 = ▂
@@ -104,8 +114,11 @@ ramp-used-7 = █
 
 [module/cpu]
 type = internal/cpu
+
 format = <label> <ramp-coreload>
-label = C %percentage%%
+label = %percentage%%
+format-prefix = "C "
+format-prefix-foreground= ${colors.yellow}
 
 ramp-coreload-font = 2
 ramp-coreload-5-foreground = ${colors.red}
@@ -166,8 +179,12 @@ menu-0-1 = Firefox
 menu-0-1-exec = firefox-developer-edition &
 
 label-open = Apps
+label-open-foreground= ${colors.hotpink}
+
 label-close = x
+label-close-foreground= ${colors.red}
 label-separator = |
+label-separator-foreground= ${colors.violet}
 
 [module/date]
 ; format ref: https://en.cppreference.com/w/cpp/io/manip/put_time
@@ -197,10 +214,17 @@ format-discharging = <label-discharging>
 format-full = <label-full>
 ; label-discharging = BAT-- %percentage%% %time%
 ; label-charging = BAT++ %percentage%% %time%
-label-discharging = B %percentage%%
-label-charging = B %percentage%%
-label-full = B %percentage%%
+label-discharging = %percentage%%
+label-charging = %percentage%%
+label-full = %percentage%%
 time-format = (%H:%M)
+
+format-discharging-prefix = "B "
+format-discharging-prefix-foreground= ${colors.violet}
+format-charging-prefix = "B "
+format-charging-prefix-foreground= ${colors.violet}
+format-full-prefix = "B "
+format-full-prefix-foreground= ${colors.violet}
 
 
 [module/temperature]
@@ -234,10 +258,12 @@ format-muted-background = ${settings.format-background}
 format-muted-padding = ${settings.format-padding}
 
 format-volume = <label-volume>
+format-volume-prefix = "V "
+format-volume-prefix-foreground= ${colors.green}
+label-volume = %percentage%%
 
-label-muted-foreground = ${colors.dim}
+label-muted-foreground = ${colors.red}
 label-muted = V -
-label-volume = V %percentage%%
 
 click-left = pactl set-sink-mute @DEFAULT_SINK@ toggle
 
@@ -246,6 +272,28 @@ type = custom/script
 exec = ~/.config/polybar/package_update_checker.sh lemonbar
 interval = 300
 label = P %output%
+; click-left = echo left %counter% >> ~/test.txt
 
+[module/my-text-label]
+type = custom/text
+content = Some random label
+; click-left = echo left >> ~/test.txt
+
+; for testing IPC
+[module/demo]
+type = custom/ipc
+hook-0 = uptime -p
+hook-1 = date
+hook-2 = hostname
+
+format-foreground = ${colors.cornsilk}
+
+initial = 1
+click-left = polybar-msg -p %pid% hook demo 1
+click-right = polybar-msg -p %pid% hook demo 2
+; double-click-left = polybar-msg -p %pid% hook demo 3
+scroll-up = polybar-msg -p %pid% hook demo 3
+; we can simulate this by running command:
+; echo hook:module/demo1 > /tmp/polybar_mqueue.`pidof polybar`
 
 ; vim: set ft=dosini:
