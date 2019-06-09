@@ -139,11 +139,6 @@ set-window-option -g automatic-rename on
 setw -g monitor-activity off
 set -g visual-activity off
 
-# split pane border style
-set -g pane-border-fg default
-set -g pane-active-border-fg magenta
-set -g pane-active-border-bg default
-
 # http://man.cx/tmux
 # http://man.cx/strftime%283%29
 set -g status-left ''
