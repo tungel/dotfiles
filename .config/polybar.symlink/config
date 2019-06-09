@@ -62,7 +62,7 @@ enable-ipc = true
 
 modules-left = bspwm title
 modules-center = date
-modules-right = cpu memory packages volume battery menu0 eth
+modules-right = cpu memory packages volume battery menu0
 
 tray-position = right
 tray-padding = 10
@@ -84,7 +84,8 @@ type = internal/bspwm
 ; Default: true
 pin-workspaces = false
 
-format = <label-monitor> <label-state>
+; format = <label-monitor> <label-state>
+format = <label-state>
 label-monitor = "%name%:"
 label-focused = " %name% "
 label-focused-underline = ${colors.foreground}

@@ -142,6 +142,7 @@ bspc rule -a Zathura state=tiled
 #         --height $PANEL_HEIGHT &
 
 # network manager applet icon
+sleep 1
 pkill nm-applet
 sleep 1
 # `which nm-applet` &
