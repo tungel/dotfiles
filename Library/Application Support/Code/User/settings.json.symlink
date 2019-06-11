@@ -87,7 +87,7 @@
     "vim.disableAnnoyingNeovimMessage": true,
     "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": true,
-    "workbench.colorTheme": "One Dark Pro Bold",
+    "workbench.colorTheme": "One Dark Pro Vivid",
     "telemetry.enableTelemetry": false,
     "workbench.sideBar.location": "left",
     "[json]": {
