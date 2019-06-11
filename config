@@ -16,7 +16,7 @@
 .tmux.conf
 
 # TODO: NA for macOS
-#.yaourtrc
+.yaourtrc
 
 # common directories
 .zfunctions
@@ -32,14 +32,14 @@ bin
 # other misc dotfiles
 
 # TODO: NA for macOS
-#.autostart
-#.xinitrc
-#.gtkrc-2.0
-#.gtkrc-2.0.mine
-#.Xdefaults
-#.Xmodmap
-#.Xresources
-#.xsession
+.autostart
+.xinitrc
+.gtkrc-2.0
+.gtkrc-2.0.mine
+.Xdefaults
+.Xmodmap
+.Xresources
+.xsession
 
 .gemrc
 .irbrc
@@ -55,13 +55,13 @@ profiles.clj
 
 # TODO: NA for macOS
 # other directories
-#bspwm
-#sxhkd
-#polybar
-#fontconfig
-#icons
-#themes
-#dunst
+bspwm
+sxhkd
+polybar
+fontconfig
+icons
+themes
+dunst
 
 mpv
 youtube-dl

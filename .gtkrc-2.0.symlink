@@ -2,8 +2,8 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/tung/.gtkrc-2.0.mine"
-gtk-theme-name="Raleigh"
-gtk-icon-theme-name="oxygen"
+gtk-theme-name="Adapta-Nokto-Eta"
+gtk-icon-theme-name="Papirus-Dark"
 gtk-font-name="Cantarell 11"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
