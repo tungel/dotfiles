@@ -535,7 +535,9 @@ nmap <Leader>1 :call SyncTexForward()<CR>
 
 "===============================================================================
 "---begin fugitive {{{
-nmap <leader>gs :Gstatus<cr>
+" whow and resize the git status window to be 30% of the screen size
+nmap <leader>gs :Gstatus<cr>:exec 'resize' . string(&lines * 0.3)<cr>
+
 nmap <leader>gc :Gcommit<cr>
 nmap <leader>gd :Gdiff<cr>
 nmap <leader>gp :Gpush<cr>

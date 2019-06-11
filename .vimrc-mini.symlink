@@ -16,6 +16,10 @@ source ~/.vimrc-minimal
 " use system clipboard for normal yank/paste
 " set clipboard=unnamedplus
 
+" need to set this, so that neovim running inside tmux on macOS can copy to
+" system's clipboard
+set clipboard=unnamed
+
 " set font for gvim
 if has('gui_running')
     " use Powerline font for vim-airline
