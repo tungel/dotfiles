@@ -58,6 +58,7 @@ profiles.clj
 bspwm
 sxhkd
 polybar
+pcmanfm
 fontconfig
 icons
 themes
