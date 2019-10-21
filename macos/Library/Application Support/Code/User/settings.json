@@ -1,5 +1,8 @@
 // Place your settings in this file to overwrite the default settings
 {
+    // jdk setting on macOS
+    "java.home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home",
+
     "editor.formatOnSave": false,
     "editor.rulers": [
         80
@@ -66,11 +69,10 @@
         "nightlyToolchain": "nightly-x86_64-apple-darwin"
     },
     "rust.mode": "rls",
-    "rust.goto_def_racer_fallback": true,
     "rust-client.updateOnStartup": false,
     "rust-client.showStdErr": true,
     "rust.build_lib": false,
-    "rust.rustLangSrcPath": "/Users/tung/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src",
+    "rust.rustLangSrcPath": "/Users/ttl/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src",
     // "rust.rls": {
     //     "executable": "/Users/tung/dev/rust/libs/rls/target/release/rls",
     //     "useRustfmt": false
@@ -97,6 +99,8 @@
     "xmlTools.splitXmlnsOnFormat": false,
     // open file from quickopen dialog in new tab
     "workbench.editor.enablePreviewFromQuickOpen": false,
+    // open new tab for go-to-definition
+    "workbench.editor.enablePreview": false,
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
         "suppressCommitNotFoundWarning": false,
@@ -130,8 +134,9 @@
     "gitlens.keymap": "alternate",
     "breadcrumbs.enabled": true,
     "r.lintr.enabled": false,
-    "editor.fontSize": 13,
-    "window.zoomLevel": 0,
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    "window.zoomLevel": -1,
     "cSpell.enabledLanguageIds": [
         "asciidoc",
         "c",

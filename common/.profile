@@ -238,6 +238,7 @@ alias simplehttpserver="ruby -rwebrick -e'WEBrick::HTTPServer.new(Port: 8000, Do
 # GEM_ROOT, GEM_PATH
 # export GEM_HOME=~/.gem/ruby/2.2.0
 # PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+pathAdd ~/.gem/ruby/2.3.0/bin
 
 # fix problem with vim colorscheme in tmux
 # http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode
@@ -252,8 +253,30 @@ alias tmux="tmux -2" # force tmux to use 256 colors
 
 # change system-wide editor
 #export VISUAL="/usr/bin/vim -p -X"
-export VISUAL="/usr/bin/nvim"
-export EDITOR="/usr/bin/nvim"
+export VISUAL="$(which nvim)"
+export EDITOR="$(which nvim)"
+
+# setup ~/.config/nvim for Neovim
+setup_nvim_config() {
+  # For neovim
+  local home_config=$HOME/.config
+  local nvim_config="${home_config}/nvim"
+  mkdir -p ${home_config}
+
+  if [[ -e "${nvim_config}" ]]; then
+    rm -rf "${nvim_config}"
+    rm -f "${nvim_config}"
+  fi
+
+  if [[ -e "$HOME/.vim" ]]; then
+    ln -s "$HOME/.vim" "${nvim_config}"
+  fi
+
+  if [[ -e "$HOME/.vimrc" ]]; then
+    rm -rf "${nvim_config}/init.vim"
+    ln -s "$HOME/.vimrc" "${nvim_config}/init.vim"
+  fi
+}
 
 # - Non-root user: set umask to `077` to increase security, so that the default
 #   permission:
@@ -263,22 +286,22 @@ export EDITOR="/usr/bin/nvim"
 #   + new file is 644
 #   + new directory is 755
 # if [ "$EUID" -ne 0 ]; then
-if (( $EUID != 0 )); then
-    # non-root user
-    umask 077
-else
-    # root
-    umask 022
-fi
+# if (( $EUID != 0 )); then
+#     # non-root user
+#     umask 077
+# else
+#     # root
+#     umask 022
+# fi
 
 # Use `umask 022` for sudo command to allow root user to create new file with 755
 # permission, which allows reading and executing permissions to all users
-sudo() {
-    old=$(umask)
-    umask 0022
-    command sudo "$@"
-    umask $old
-}
+# sudo() {
+#     old=$(umask)
+#     umask 0022
+#     command sudo "$@"
+#     umask $old
+# }
 
 # print the wireless driver in use
 mywifidriver() {
@@ -368,6 +391,9 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
     eval "$(< ~/.ssh-agent-thing)"
 fi
 
+# temp ssh
+alias ssht='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+
 # For Rust Cargo
 pathAdd $HOME/.cargo/bin
 # For Rust Racer completion
@@ -417,4 +443,7 @@ pathAdd $HOME/.rvm/bin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # for Rust
-export PATH="$HOME/.cargo/bin:$PATH"
+pathAdd $HOME/.cargo/bin
+
+pathAdd $HOME/.toolbox/bin
+
