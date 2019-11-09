@@ -64,28 +64,28 @@
     },
     // show full path of the current editing file
     "window.title": "${activeEditorLong}",
-    "rust.rustup": {
-        "toolchain": "nightly-x86_64-apple-darwin",
-        "nightlyToolchain": "nightly-x86_64-apple-darwin"
-    },
-    "rust.mode": "rls",
+    // "rust.rustup": {
+    //     "toolchain": "nightly-x86_64-apple-darwin",
+    //     "nightlyToolchain": "nightly-x86_64-apple-darwin"
+    // },
+    // "rust.mode": "rls",
     "rust-client.updateOnStartup": false,
     "rust-client.showStdErr": true,
     "rust.build_lib": false,
-    "rust.rustLangSrcPath": "/Users/ttl/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src",
+    // "rust.rustLangSrcPath": "/Users/ttl/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src",
     // "rust.rls": {
     //     "executable": "/Users/tung/dev/rust/libs/rls/target/release/rls",
     //     "useRustfmt": false
     // },
-    "rust.rls": {
-        "executable": "rustup",
-        "args": [
-            "run",
-            "nightly",
-            "rls"
-        ],
-        "useRustfmt": false
-    },
+    // "rust.rls": {
+    //     "executable": "rustup",
+    //     "args": [
+    //         "run",
+    //         "nightly",
+    //         "rls"
+    //     ],
+    //     "useRustfmt": false
+    // },
     "vim.disableAnnoyingNeovimMessage": true,
     "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": true,
@@ -136,7 +136,7 @@
     "r.lintr.enabled": false,
     "editor.fontSize": 14,
     "terminal.integrated.fontSize": 14,
-    "window.zoomLevel": -1,
+    "window.zoomLevel": 0,
     "cSpell.enabledLanguageIds": [
         "asciidoc",
         "c",
