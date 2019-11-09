@@ -15,7 +15,7 @@ echo "Scanning mode is: $SCANMODE"
 pre=doc-`date "+%Y-%m-%dT%H-%M"`
 
 # A4
-scanimage -x 210 -y 297 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --format=tiff --progress --resolution 300
+scanimage --device "hpaio:/usb/Officejet_2620_series?serial=CN56F4G19Y0600" -x 210 -y 297 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --format=tiff --progress --resolution 300
 # letter
 # scanimage -x 215.9 -y 279.4 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --format=tiff --progress --resolution 300
 

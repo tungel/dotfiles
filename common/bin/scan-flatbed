@@ -23,7 +23,8 @@ pre=doc-`date "+%Y-%m-%dT%H-%M"`
 for ((i=1;i < 100;i++))
 do
     dst=$pre-page$(printf %03d $i)
-    scanimage -x 210 -y 297 --source Flatbed --mode "$SCANMODE" --format=tiff --progress --resolution 300 > $dst.tif
+    scanimage --device "hpaio:/usb/Officejet_2620_series?serial=CN56F4G19Y0600" -x 210 -y 297 --source Flatbed --mode "$SCANMODE" --format=tiff --progress --resolution 300 > $dst.tif
+    # scanimage -x 210 -y 297 --device "hpaio:/usb/Officejet_2620_series?serial=CN56F4G19Y0600" --source Flatbed --mode Gray --format=tiff --progress --resolution 300 > test.tif
 
     echo "Place page no. $((i+1)) on the scanner."
     echo "Press RETURN to continue, q or Q + RETURN to quit."

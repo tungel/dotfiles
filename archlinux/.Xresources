@@ -3,7 +3,7 @@
 ! font stuffs
 
 ! for 4K monitor
-Xft.dpi: 187
+Xft.dpi: 92
 
 ! for 1080p monitor
 !Xft.dpi: 92
@@ -32,9 +32,9 @@ URxvt.foreground:white
 !URxvt.italicFont:xft:Hack:italic:pixelsize=14:antialias=true:hinting=true
 
 ! font size 26 for 4k monitor (3840x2160)
-URxvt.font:xft:Hack:pixelsize=26:antialias=true:hinting=true
-URxvt.boldFont:xft:Hack:bold:pixelsize=26:antialias=true:hinting=true
-URxvt.italicFont:xft:Hack:italic:pixelsize=26:antialias=true:hinting=true
+URxvt.font:xft:Hack:pixelsize=14:antialias=true:hinting=true
+URxvt.boldFont:xft:Hack:bold:pixelsize=14:antialias=true:hinting=true
+URxvt.italicFont:xft:Hack:italic:pixelsize=14:antialias=true:hinting=true
 
 ! make letters stay closer to each other, work well with font Dejavu Sans Mono for Powerline
 ! at pixelsize=12 or size=9

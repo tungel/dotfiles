@@ -50,9 +50,9 @@ padding-right = 20
 
 module-margin = 1
 
-font-0 = Roboto:weight=medium:size=24
-font-1 = Roboto:weight=medium:size=24
-font-2 = Hack:size=24
+font-0 = Roboto:weight=medium:size=11
+font-1 = Roboto:weight=medium:size=11
+font-2 = Hack:size=11
 
 background = ${colors.background}
 foreground = ${colors.foreground}
