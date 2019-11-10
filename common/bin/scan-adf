@@ -14,9 +14,19 @@ echo "Scanning mode is: $SCANMODE"
 
 pre=doc-`date "+%Y-%m-%dT%H-%M"`
 
-# A4
-scanimage --device "hpaio:/usb/Officejet_2620_series?serial=CN56F4G19Y0600" -x 210 -y 297 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --format=tiff --progress --resolution 300
-# letter
+DEVICE="hpaio:/usb/Officejet_2620_series?serial=CN56F4G19Y0600"
+
+# A4 size
+# Note: for some reason, setting `-y 297` caused error with imagemagick
+# processing later with error (happened on HP Officejet 2620 - might be HP specific):
+# convert: Bogus "StripByteCounts" field, ignoring and calculating from imagelength. `TIFFReadDirectory' @ warning/tiff.c/TIFFWarnings/1029.
+# convert: Read error on strip 1160; got 0 bytes, expected 7440. `TIFFFillStrip' @ error/tiff.c/TIFFErrors/665.
+# convert:  `test.tif' @ error/convert.c/ConvertImageCommand/3270.
+#
+# Reducing the value of `y` to 294 and it works. Ref: https://alioth-lists.debian.net/pipermail/sane-devel/2013-May/031269.html
+scanimage --device "${DEVICE}" -x 210 -y 294 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --format=tiff --progress --resolution 300
+
+# letter size
 # scanimage -x 215.9 -y 279.4 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --format=tiff --progress --resolution 300
 
 # ==============================================================================
@@ -24,7 +34,7 @@ scanimage --device "hpaio:/usb/Officejet_2620_series?serial=CN56F4G19Y0600" -x 2
 # comment out the `scanimage` command above and uncomment below section to scan
 # double sided pages
 
-# scanimage -x 210 -y 297 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --batch-start=0 --batch-increment=2 --format=tiff --progress --resolution 300
+# scanimage --device "${DEVICE}" -x 210 -y 294 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --batch-start=0 --batch-increment=2 --format=tiff --progress --resolution 300
 
 # pages=$(ls -p $pre-page*.tif | wc -l)
 # pages=$((pages*2-1))
@@ -33,13 +43,16 @@ scanimage --device "hpaio:/usb/Officejet_2620_series?serial=CN56F4G19Y0600" -x 2
 
 # read key
 # if [[ $key != "q" && $key != "Q" ]] ; then
-#     scanimage -x 210 -y 297 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --batch-start=$pages --batch-increment=-2 --format=tiff --progress --resolution 300
+#     scanimage --device "${DEVICE}" -x 210 -y 294 --source ADF --mode "$SCANMODE" --batch="$pre-page%03d.tif" --batch-start=$pages --batch-increment=-2 --format=tiff --progress --resolution 300
 # fi
 
 # # note: the below echo command is important for working around the exit status 7
 # # when scanning double sided pages
 # echo "Exit status: $?"
 # ==============================================================================
+
+# To combine a list of scanned pages, we can set the prefix here
+# pre="doc-2019-11-10T10-15"
 
 if [ $? -eq 0 ]; then
     # Fix error

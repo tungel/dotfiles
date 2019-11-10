@@ -1,0 +1,119 @@
+https://alioth-lists.debian.net/pipermail/sane-devel/2013-May/031269.html
+
+[sane-devel] HP OfficeJet 6700 ADF Problems
+m. allan noah kitno455 at gmail.com
+Thu May 16 18:30:54 UTC 2013
+
+    Previous message: [sane-devel] HP OfficeJet 6700 ADF Problems
+    Next message: [sane-devel] HP OfficeJet 6700 ADF Problems
+    Messages sorted by: [ date ] [ thread ] [ subject ] [ author ]
+
+The issue you describe with truncated data is a common one across many
+brands of scanner. With sane, it is the job of the backend to pad the
+image with the some default data. In your case, the backend is
+produced by the HPLIP project, not by the SANE project. They might be
+able to help you more quickly than we can.
+
+allan
+
+On Thu, May 16, 2013 at 2:18 PM, Alex <i.am.the.memory at gmail.com> wrote:
+> I apologize if this is the wrong place to ask, but I have run into a
+> couple of problems scanning from my HP OfficeJet 6700's ADF. The flatbed
+> scanner works perfectly and as expected, though. I'm running x86_64
+> Gentoo using sane-backends 1.0.23 and hplip 3.13.4 built with scanner
+> support.
+>
+> I'm not really entirely sure what's going on with it, but when I use
+> scanimage like this:
+>
+> scanimage -d 'hpaio:/usb/Officejet_6700?serial=[SERIAL]' --format=tiff
+> -p -v--source ADF --mode Color --resolution 300 -x 215.9 -y 279 -b
+> --batch-start=1 --batch-count=4
+>
+> it feeds the documents and scans them each to out1.tif, out2.tif,
+> out3.tif, out4.tif just as expected. The progress percentage, however,
+> stops at some percentage before it moves on to the next page or
+> finishes. This percentage varies, and depends a bit on the -y argument.
+> If I leave it at the default (which I think is A4 sized), it'll stop at
+> about 75% for each page. If I have it at 279, for US letter sized, it'll
+> stop around 90%.
+>
+> The files open fine in EOG (Eye of GNOME), but everything below the end
+> of the physical page is the transparent checkerboard. Additionally,
+> tiffinfo complains about a '"Bogus StripByteCounts" field'.
+>
+> These would be fine if it worked in everything else, but if I run it
+> through graphicsmagick to convert it, like "gm convert out1.tif
+> out1.png", it complains "gm convert: Read error at scanline 3247; got 0
+> bytes, expected 7602. (TIFFFillStrip)." and doesn't create out1.png. If
+> I run it through imagemagick like "convert out1.tif out1.png", it complains:
+>
+> convert: Bogus "StripByteCounts" field, ignoring and calculating from
+> imagelength. `TIFFReadDirectory' @ warning/tiff.c/TIFFWarnings/820.
+> convert: Read error at scanline 3248; got 0 bytes, expected 7602.
+> `TIFFFillStrip' @ error/tiff.c/TIFFErrors/560.
+>
+> though it replaces the transparent part with black, or sometimes white
+> with a few black vertical lines through it.
+>
+> If I try to run the same thing, with the -y decreased well below page
+> length, like at 100, the scanner audibly stops scanning half way through
+> the page and finishes sending the page through the ADF, though scanimage
+> says it "read more data than announced by backend". The .tif's made like
+> this open fine, with no transparent sections, and no errors or warnings
+> from imagemagick or graphicsmagick.
+>
+> If I run it with SANE_DEBUG_HPAIO=50, the sane_hpaio_read() bytes_read=0
+> status=5, though it seems to do this with the small and regular -y values.
+>
+> If I use --format=pnm, then in EOG below the page is black, gm convert
+> complains "gm convert: Unexpected end-of-file (out1.pnm).", and convert
+> complains:
+>
+> convert: unable to read image data `out1.pnm' @
+> error/pnm.c/ReadPNMImage/899.
+> convert: no images defined `out1.png' @
+> error/convert.c/ConvertImageCommand/3044.
+>
+> and doesn't create out1.png.
+>
+> So, what I'm thinking is that the Officejet 6700 stops scanning a page
+> going through the ADF when it reaches the end of the page, and stops
+> sending any image data at that point. I'm guessing that scanimage
+> doesn't just fill any remaining space it expects because of -y with
+> white or black or anything and just writes out the file as it is, with
+> the expected remainder of the file missing, as far as other programs are
+> concerned.
+>
+>
+>
+> Additionally, though less important, and likely due to how the scanner
+> actually works, if I use --batch-count and set it to less than the
+> number of pages in the ADF, the ADF will continue and feed all pages
+> through the scanner, though it is easy to see that due to their speed
+> and the sounds, it doesn't actually scan them.
+>
+>
+> Anyway, does anyone know of anyway to fix this problem, because I have
+> to scan a few thousand pages over the next few weeks into several pdfs,
+> and I'd like to write a bash script to sort-of automate a lot of it.
+>
+> Thanks,
+> Alex
+>
+>
+> --
+> sane-devel mailing list: sane-devel at lists.alioth.debian.org
+> http://lists.alioth.debian.org/cgi-bin/mailman/listinfo/sane-devel
+> Unsubscribe: Send mail with subject "unsubscribe your_password"
+>              to sane-devel-request at lists.alioth.debian.org
+
+
+
+-- 
+"The truth is an offense, but not a sin"
+
+    Previous message: [sane-devel] HP OfficeJet 6700 ADF Problems
+    Next message: [sane-devel] HP OfficeJet 6700 ADF Problems
+    Messages sorted by: [ date ] [ thread ] [ subject ] [ author ]
+
