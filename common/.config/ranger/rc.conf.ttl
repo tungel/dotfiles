@@ -1,0 +1,39 @@
+# vim: ft=cfg
+# ==============================================================================
+# Section added by me
+
+# Show hidden files? You can toggle this by typing 'zh'
+set show_hidden true
+# Display the directory name in tabs?
+set dirname_in_tabs true
+# Enable the mouse support?
+set mouse_enabled false
+# Turning this on makes sense for screen readers:
+# set to true to fix docker container cursor highlight issue
+set show_cursor true
+
+# Open a text file with Vim in tmux
+# More info: `man ranger` then search for `fm`
+
+# This method works best: Using tmux sendkey
+map ef eval fm.execute_console("shell tmux splitw -h 'nvim \"" + str(fm.thisfile) + "\"'")
+map ee eval fm.execute_console("shell tmux selectp -t 2; tmux send-keys -t 2 '" + ":tabe {0}".format(str(fm.thisfile).replace(" ", "\ ")) + "' C-m")
+
+# press `ed` to open a new terminal on the right
+map ed eval fm.execute_console("shell tmux splitw -h")
+# use <Ctrl+n> to open new tab in current directory
+map <c-n>  eval fm.tab_new('%d')
+
+# for macOS
+# Note: use `-f` flag for the shell commands below to fork the process and
+# run it in background. More details in the `man ranger` page, looks for `FLAGS`
+# f   Fork the process.  (Run in background)
+#
+# open picture/pdf with Preview
+map <Enter> shell -f open %s
+# quick look in current directory
+# map el eval fm.execute_console("shell qlmanage -p *.* > /dev/null")
+map el shell -f qlmanage -p *.* > /dev/null
+
+#===============================================================================
+

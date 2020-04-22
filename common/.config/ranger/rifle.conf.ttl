@@ -1,0 +1,9 @@
+# vim: ft=cfg
+
+# ==============================================================================
+# Section added by me
+
+mime ^audio|ogg$, has mpv,  X,  flag f   = mpv -- "$@" # open audio file in a GUI window with mpv
+mime ^video|mts$,       has mpv,      X, flag f = mpv -- "$@" # open Sony's camera MTS file in mpv
+# ==============================================================================
+
