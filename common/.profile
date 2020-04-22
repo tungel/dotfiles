@@ -335,7 +335,8 @@ export DMENUFONT="Consolas-11"
 # export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/jre # jre only
 # export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 # use Oracle Java
-export JAVA_HOME=/usr/lib/jvm/java-8-jdk
+# export JAVA_HOME=/usr/lib/jvm/java-8-jdk
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home
 # export JAVA_HOME=/usr/lib/jvm/java-7-oracle
 
 # IntelliJ IDEA, link `current` directory to latest stable release dir

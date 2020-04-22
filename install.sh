@@ -8,6 +8,8 @@ DRY_RUN=0
 OVERWRITE=0
 
 TARGET_DIR=~
+# create .config dir if it doesn't exist
+mkdir -p $TARGET_DIR/.config
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'

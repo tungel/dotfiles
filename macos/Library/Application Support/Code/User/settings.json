@@ -1,7 +1,7 @@
 // Place your settings in this file to overwrite the default settings
 {
     // jdk setting on macOS
-    "java.home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home",
+    "java.home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home",
 
     "editor.formatOnSave": false,
     "editor.rulers": [
@@ -47,7 +47,10 @@
     ],
     "vim.enableNeovim": true,
     // "vim.neovimPath": "/usr/bin/nvim",
-    "vim.neovimPath": "/Users/ttl/.local/bin/nvim",
+    // "vim.neovimPath": "/Users/ttl/.local/bin/nvim",
+    // https://github.com/VSCodeVim/Vim/issues/3584
+    // leaving neovimPath empty would cause error: Configuration: Invalid neovimPath. The argument 'file' cannot be empty. Received ''.
+    "vim.neovimPath": "nvim",
     "vim.easymotion": true,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
@@ -89,7 +92,7 @@
     "vim.disableAnnoyingNeovimMessage": true,
     "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": true,
-    "workbench.colorTheme": "One Dark Pro Vivid",
+    "workbench.colorTheme": "One Dark Pro",
     "telemetry.enableTelemetry": false,
     "workbench.sideBar.location": "left",
     "[json]": {
@@ -168,5 +171,61 @@
         "typescriptreact",
         "yaml",
         "yml"
-    ]
+    ],
+    "ruby.format": "rubocop",
+    "telemetry.enableCrashReporter": false,
+    "viceroy.config.lastVersion": "0.28.200585",
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/build/**": true,
+        "**/env/**": true,
+        "**/node_modules/**": true,
+        "/": true,
+        "build": true
+    },
+    "files.exclude": {
+        ".viceroy": true,
+        "apollo-overrides": true,
+        "release-info": true,
+        "src/*/build": false,
+        "build": true,
+        "env": true,
+        "packageInfo*": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.classpath": true,
+        "**/.factorypath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/build/**": true,
+        "**/env/**": true
+    },
+    "search.exclude": {
+        "env": true,
+        "src/*/build": true,
+        "build": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true
+    },
+    "viceroy.config.internal.lastUpdateTime": "2020-04-07T23:15:44.320Z",
+    "viceroy.config.internal.zeroDowntimeColour": "green",
+    "viceroy.doc.welcome.showAtStartup": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    // disable jedi to use language server. However viceroy wont't be able to resolve python paths
+    // Workaround by setting `"python.jediEnabled": true` at workspace level
+    "python.jediEnabled": false,
+    "java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/Users/ttl/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
+    "plantuml.render": "Local",
+    "plantuml.exportFormat": "svg",
+    "plantuml.exportSubFolder": false,
+    "terminal.integrated.inheritEnv": false,
+    "ruby.intellisense": "rubyLocate",
+    "editor.largeFileOptimizations": false,
+    "plantuml.urlFormat": "svg"
 }

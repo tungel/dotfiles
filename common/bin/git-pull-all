@@ -1,0 +1,4 @@
+#!/bin/bash
+
+find . -type d -name .git -exec sh -c "echo && echo && echo \"------------------------------------------------\" && cd \"{}\"/../ && pwd && git stash save \"******** STASHED WHILE git pull rebase all **********\" && git pull --rebase && git stash apply" \;
+
