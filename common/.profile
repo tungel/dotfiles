@@ -446,5 +446,8 @@ pathAdd $HOME/.rvm/bin
 # for Rust
 pathAdd $HOME/.cargo/bin
 
+pathAdd $HOME/.local/bin
+
+# for cloud dev desktop
 pathAdd $HOME/.toolbox/bin
 
