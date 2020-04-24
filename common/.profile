@@ -7,13 +7,13 @@ NOGIT=~/dev/mylinux/nogit
 
 MOREALIASES=~/dev/mylinux/dotfiles-private/morealiases.sh
 # some more aliases for personal usage
-if [[ -e $MOREALIASES ]]; then
+if [ -e $MOREALIASES ]; then
     source $MOREALIASES
 fi
 
 # machine specific aliases
 CUSTOM_ALIASES=~/morealiases.sh
-if [[ -e $CUSTOM_ALIASES ]]; then
+if [ -e $CUSTOM_ALIASES ]; then
     source $CUSTOM_ALIASES
 fi
 
@@ -217,7 +217,7 @@ alias youtube_dl_audio="youtube-dl -f 'bestaudio[ext=m4a]'"
 
 # Usage: `youtube_play 'faded'` will play Alan Walker's Faded song. The downloaded audio
 # file is saved in `${TMPDIR}`.
-function youtube_play {
+youtube_play() {
     youtube-dl --default-search=ytsearch: \
                --youtube-skip-dash-manifest \
                --output="${TMPDIR:-/tmp/}%(title)-s%(id)s.%(ext)s" \
@@ -441,7 +441,7 @@ unset __conda_setup
 pathAdd $HOME/.node_modules/bin
 
 pathAdd $HOME/.rvm/bin
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+[ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # for Rust
 pathAdd $HOME/.cargo/bin
