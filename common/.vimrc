@@ -1300,7 +1300,7 @@ if has("nvim")
   " Use deoplete.
   let g:deoplete#enable_at_startup = 1
   " Use smartcase.
-  let g:deoplete#enable_smart_case = 1
+  call deoplete#custom#option('smart_case', v:true)
 
   let g:deoplete#disable_auto_complete = 0
 
@@ -1315,10 +1315,7 @@ if has("nvim")
     set shortmess+=c
   endif
 
-  let g:deoplete#sources = {}
-  let g:deoplete#sources._ = ['buffer', 'file']
-  let g:deoplete#sources.cpp = ['buffer', 'tag', 'file']
-  let g:deoplete#sources.ruby = ['buffer', 'tag', 'file']
+  call deoplete#custom#source('buffer', 'filetypes', ['c', 'cpp'])
 
   let g:deoplete#omni_patterns = {}
   " let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
