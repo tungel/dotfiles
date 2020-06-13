@@ -137,7 +137,7 @@ topics=('e:description for e help topic' 'f:description for f help topic')
 _describe 'command' subcmds -- topics
 #+END_SRC
 
-If two candidates have the same description, _describe collects them together on the same row and ensures that descriptions are aligned in neatedly in columns.
+If two candidates have the same description, _describe collects them together on the same row and ensures that descriptions are aligned in neatly in columns.
 The _describe function can be used in an ACTION as part of a specification for _alternative, _arguments or _regex_arguments.
 In this case you will have to put it in braces with its arguments, e.g. 'TAG:DESCRIPTION:{_describe 'values' options}'
 ** Writing completion functions using _alternative
@@ -441,5 +441,5 @@ Note this only applies to utility functions that use ACTIONs in their specificat
 
 * Other resources
 [[https://wikimatze.de/writing-zsh-completion-for-padrino/][Here]] is a nicely formatted short tutorial showing basic usage of the _arguments function, 
-and [[http://www.linux-mag.com/id/1106/][here]] is a slightly more advanced tutorial using the _arguments function.
+and [[https://web.archive.org/web/20190411104837/http://www.linux-mag.com/id/1106/][here]] is a slightly more advanced tutorial using the _arguments function.
 [[http://zsh.sourceforge.net/Doc/Release/Completion-System.html#Completion-System][Here]] is the zshcompsys man page.
