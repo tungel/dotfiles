@@ -19,7 +19,9 @@ def generate_file_dict(hash_file):
 
             # split the line into hash part and path part
             hash_path = line.split(" ", 1)
-            if len(hash_path) != 2:
+            if len(hash_path) != 2 or "*./.hashes/" in hash_path[1]:
+                # ignore .hashes folder or if there is problem with string
+                # splitting
                 continue
             hash_path[1] = hash_path[1].rstrip('\n')
             hash_value = hash_path[0]
