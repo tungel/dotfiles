@@ -395,6 +395,13 @@ fi
 # temp ssh
 alias ssht='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
+# Usage: git-add-subtree https://github.com/path/to-repo.git
+function git-add-subtree {
+  local url_without_git=$(echo $1 | sed "s/\.git$//")
+  local repo_name=$(basename $url_without_git)
+  git subtree add --prefix "$repo_name" $1 master --squash
+}
+
 # For Rust Cargo
 pathAdd $HOME/.cargo/bin
 # For Rust Racer completion
