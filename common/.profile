@@ -402,6 +402,12 @@ function git-add-subtree {
   git subtree add --prefix "$repo_name" $1 master --squash
 }
 
+# 1-liner python server
+function python-server {
+  local port=${1:-8000}
+  python -m http.server $port
+}
+
 # For Rust Cargo
 pathAdd $HOME/.cargo/bin
 # For Rust Racer completion
