@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import sys
+import os
+from datetime import datetime
 
 # Usage: ./process-hashes.py hashes.txt
 
@@ -49,20 +51,40 @@ def print_dicts_diff(dict1, dict2, file1, file2):
 
 args = sys.argv
 
-if len(args) > 1:
-    hash_file_1 = args[1]
-    file_dict_1 = generate_file_dict(hash_file_1)
-    duplicates_1 = dict(filter(lambda item: len(item[1]) > 1, file_dict_1.items()))
-    print_duplicates(duplicates_1, hash_file_1)
+hashes_dir = '.hashes'
+today_file = f"hashes-{datetime.today().strftime('%Y-%m-%d')}.txt"
 
-# Usage: ./process-hashes.py hashes1.txt hashes2.txt
-if len(args) > 2:
-    hash_file_2 = args[2]
-    file_dict_2 = generate_file_dict(hash_file_2)
+# trying to get latest hashes file
+previous_hash_file = ''
+files_list = sorted(os.listdir(hashes_dir), reverse=True)
+if len(files_list) > 0:
+    previous_hash_file = os.path.join(hashes_dir, files_list[0])
+    print(f"Current latest hash file:  {previous_hash_file}")
+
+try:
+    os.makedirs(hashes_dir)
+except OSError as e:
+    if not os.path.exists(hashes_dir):
+        sys.exit("Error creating '.hashes' directory. Check permissions.")
+
+new_hash_file = os.path.join(hashes_dir, today_file)
+print(f"Creating new hash file in: {new_hash_file}")
+create_hashes_cmd = "time find . -type f -exec openssl sha256 -r '{}' \; | sort -t ' ' -k2,2 > .hashes/" + today_file
+stream = os.popen(create_hashes_cmd)
+create_hashes_output = stream.read()
+print(create_hashes_output)
+print('----------------------------------------------------------------------')
+
+file_dict_1 = generate_file_dict(new_hash_file)
+duplicates_1 = dict(filter(lambda item: len(item[1]) > 1, file_dict_1.items()))
+print_duplicates(duplicates_1, new_hash_file)
+
+if previous_hash_file:
+    file_dict_2 = generate_file_dict(previous_hash_file)
     duplicates_2 = dict(filter(lambda item: len(item[1]) > 1, file_dict_2.items()))
-    print_duplicates(duplicates_2, hash_file_2)
+    print_duplicates(duplicates_2, previous_hash_file)
 
     # now compare 2 hashes files
-    print_dicts_diff(file_dict_1, file_dict_2, hash_file_1, hash_file_2)
-    print_dicts_diff(file_dict_2, file_dict_1, hash_file_2, hash_file_1)
+    print_dicts_diff(file_dict_1, file_dict_2, new_hash_file, previous_hash_file)
+    print_dicts_diff(file_dict_2, file_dict_1, previous_hash_file, new_hash_file)
 
