@@ -195,7 +195,20 @@
     },
     // Toggle between terminal and editor focus
     { "key": "ctrl+`", "command": "workbench.action.terminal.focus"},
-    { "key": "ctrl+`", "command": "workbench.action.focusActiveEditorGroup", "when": "terminalFocus"}
+    { "key": "ctrl+`", "command": "workbench.action.focusActiveEditorGroup", "when": "terminalFocus"},
+    {
+        "command": "vscode-neovim.compositeEscape1",
+        "key": "j",
+        "when": "neovim.mode == insert",
+        "args": "j"
+    },
+    {
+        "command": "vscode-neovim.compositeEscape2",
+        "key": "k",
+        "when": "neovim.mode == insert",
+        "args": "k"
+    }
+
 
     // for vimStyle extension
     // {

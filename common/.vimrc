@@ -47,8 +47,10 @@ omap / <Plug>(easymotion-tn)
 
 " https://www.youtube.com/watch?v=aHm36-na4-4&feature=youtu.be
 " This rewires n and N to do the highlighing...
-nnoremap <silent> n   n:call HLNext(0.3)<cr>
-nnoremap <silent> N   N:call HLNext(0.3)<cr>
+if !exists('g:vscode')
+  nnoremap <silent> n   n:call HLNext(0.3)<cr>
+  nnoremap <silent> N   N:call HLNext(0.3)<cr>
+endif
 
 " highlight the match in red...
 " function! HLNext (blinktime)
@@ -101,24 +103,27 @@ let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
 "===============================================================================
 "---begin nerdtree {{{
-"autocmd vimenter * NERDTree "auto open nerdtree upon vim launch
-" use Ctrl+n to open nerdtree
-map <C-n> :NERDTreeToggle<CR>
 
-" fix can't navigate to directory using enter key, due to odd symbols infront
-" of directory name
-let NERDTreeDirArrows=0
+if !exists('g:vscode')
+  "autocmd vimenter * NERDTree "auto open nerdtree upon vim launch
+  " use Ctrl+n to open nerdtree
+  map <C-n> :NERDTreeToggle<CR>
 
-" don't display compile output stuffs
-let NERDTreeIgnore=['.class$[[file]]', '.o$[[file]]']
+  " fix can't navigate to directory using enter key, due to odd symbols infront
+  " of directory name
+  let NERDTreeDirArrows=0
 
-" split and vsplit behave similar with Unite candidate window shortcut
-let NERDTreeMapOpenSplit='s'
-let NERDTreeMapOpenVSplit='v'
+  " don't display compile output stuffs
+  let NERDTreeIgnore=['.class$[[file]]', '.o$[[file]]']
 
-"open nerdtree based on the directory of the current buffer, the cursor will be
-"placed at the current opened file
-map <silent> <Leader>r :NERDTreeFind<cr>
+  " split and vsplit behave similar with Unite candidate window shortcut
+  let NERDTreeMapOpenSplit='s'
+  let NERDTreeMapOpenVSplit='v'
+
+  "open nerdtree based on the directory of the current buffer, the cursor will be
+  "placed at the current opened file
+  map <silent> <Leader>r :NERDTreeFind<cr>
+endif
 "---end nerdtree }}}
 "===============================================================================
 
@@ -158,254 +163,256 @@ color molokai
 " :Unite line
 " :Unite tab
 
+if !exists('g:vscode')
 
-" "test" ignores test directory/file only.
-" "test/" ignores test directory and inner files.
-" ignore everything at first
-let s:unite_mru_ignores = ['*']
-" add white list of candidates not to be ignored
-let s:unite_mru_whites = ['Test.java',
-                    \ '**/Dropbox/dev/**',
-                    \ '**/dev/**',
-                    \ '*.md',
-                    \ 'pacman.log',
-                    \ '**/dotfiles/**']
-call unite#custom#source('file_mru', 'ignore_globs', s:unite_mru_ignores)
-call unite#custom#source('file_mru', 'white_globs', s:unite_mru_whites)
-" call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-"   \ 'ignore_globs', unite#get_all_sources('file_rec')['ignore_globs'] +
-"   \ s:unite_mru_ignores)
-" call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-"   \ 'white_globs', unite#get_all_sources('file_rec')['white_globs'] +
-"   \ s:unite_mru_whites)
+  " "test" ignores test directory/file only.
+  " "test/" ignores test directory and inner files.
+  " ignore everything at first
+  let s:unite_mru_ignores = ['*']
+  " add white list of candidates not to be ignored
+  let s:unite_mru_whites = ['Test.java',
+                      \ '**/Dropbox/dev/**',
+                      \ '**/dev/**',
+                      \ '*.md',
+                      \ 'pacman.log',
+                      \ '**/dotfiles/**']
+  call unite#custom#source('file_mru', 'ignore_globs', s:unite_mru_ignores)
+  call unite#custom#source('file_mru', 'white_globs', s:unite_mru_whites)
+  " call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+  "   \ 'ignore_globs', unite#get_all_sources('file_rec')['ignore_globs'] +
+  "   \ s:unite_mru_ignores)
+  " call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+  "   \ 'white_globs', unite#get_all_sources('file_rec')['white_globs'] +
+  "   \ s:unite_mru_whites)
 
-" The below setting works well to ignore certain patterns in the white_globs list
-" \ '\/.vim\/bundle\/.\+tags$',  : match .vim/bundle/..tags
-call unite#custom#source('file_mru', 'ignore_pattern',
-            \ join([
-            \ '\.cache',
-            \ '\/.vim\/bundle\/',
-            \ '\/everbot\.github\.io\/',
-            \ '^\/run'],
-            \ '\|'
-            \ )
-            \ )
+  " The below setting works well to ignore certain patterns in the white_globs list
+  " \ '\/.vim\/bundle\/.\+tags$',  : match .vim/bundle/..tags
+  call unite#custom#source('file_mru', 'ignore_pattern',
+              \ join([
+              \ '\.cache',
+              \ '\/.vim\/bundle\/',
+              \ '\/everbot\.github\.io\/',
+              \ '^\/run'],
+              \ '\|'
+              \ )
+              \ )
 
-" For file_rec/async source: Ignore all files under tmp directory of Rails app
-" call unite#custom#source('file_rec/async', 'ignore_pattern',
-call unite#custom#source('file_rec/git', 'ignore_pattern',
-            \ join([
-            \ '\.cache',
-            \ '\/tmp\/cache\/',
-            \ '\/tmp\/pids\/',
-            \ '\/tmp\/sessions\/',
-            \ '\/tmp\/sockets\/',
-            \ '\.\(js\|css\|png\|gif\)$',
-            \ 'lib\/ale',
-            \ '.*admin\/tmp\/'],
-            \ '\|'
-            \ )
-            \ )
+  " For file_rec/async source: Ignore all files under tmp directory of Rails app
+  " call unite#custom#source('file_rec/async', 'ignore_pattern',
+  call unite#custom#source('file_rec/git', 'ignore_pattern',
+              \ join([
+              \ '\.cache',
+              \ '\/tmp\/cache\/',
+              \ '\/tmp\/pids\/',
+              \ '\/tmp\/sessions\/',
+              \ '\/tmp\/sockets\/',
+              \ '\.\(js\|css\|png\|gif\)$',
+              \ 'lib\/ale',
+              \ '.*admin\/tmp\/'],
+              \ '\|'
+              \ )
+              \ )
 
-nnoremap <C-Space> :Unite -start-insert<CR>
+  nnoremap <C-Space> :Unite -start-insert<CR>
 
-" custom profile:
-" \   'direction': 'botright',
-" 'direction': 'botright', 'topleft'
-" 'prompt_direction': 'top', 'below'
-" \   'prompt': '» ',
-call unite#custom#profile('default', 'context', {
-\   'startinsert': 1,
-\   'prompt': '>> ',
-\   'prompt_direction': 'top',
-\   'direction': 'topleft',
-\ })
-"
-" Set "-no-quit" automatically in grep unite source.
-call unite#custom#profile('source/grep', 'context', {
-\   'no_quit' : 1
-\ })
+  " custom profile:
+  " \   'direction': 'botright',
+  " 'direction': 'botright', 'topleft'
+  " 'prompt_direction': 'top', 'below'
+  " \   'prompt': '» ',
+  call unite#custom#profile('default', 'context', {
+  \   'startinsert': 1,
+  \   'prompt': '>> ',
+  \   'prompt_direction': 'top',
+  \   'direction': 'topleft',
+  \ })
+  "
+  " Set "-no-quit" automatically in grep unite source.
+  call unite#custom#profile('source/grep', 'context', {
+  \   'no_quit' : 1
+  \ })
 
-" don't limit number of candidate
-let g:unite_source_rec_max_cache_files = 0
-  call unite#custom#source('file_rec,file_rec/async,file_rec/neovim,file_rec/git,grep',
-  \ 'max_candidates', 0)
+  " don't limit number of candidate
+  let g:unite_source_rec_max_cache_files = 0
+    call unite#custom#source('file_rec,file_rec/async,file_rec/neovim,file_rec/git,grep',
+    \ 'max_candidates', 0)
 
 
-" call unite#util#set_default(
-" \ 'g:unite_source_grep_command', 'grep')
-" call unite#util#set_default(
-" \ 'g:unite_source_grep_default_opts', '-inH')
-" " \ 'g:unite_source_grep_default_opts', '-inH --directories=recurse')
-" call unite#util#set_default('g:unite_source_grep_recursive_opt', '-r')
-" call unite#util#set_default('g:unite_source_grep_max_candidates', 100)
-" call unite#util#set_default('g:unite_source_grep_search_word_highlight', 'Search')
-" call unite#util#set_default('g:unite_source_grep_encoding', 'char')
-"
-let g:unite_source_grep_command = "grep"
-let g:unite_source_grep_recursive_opt = "-R"
-let g:unite_source_grep_default_opts = '-inH'
-" let g:unite_source_grep_default_opts = '-ir'
-" nnoremap <space>/ :Unite grep:.:-iR:tung<cr>
-" nnoremap <space>/ :Unite grep:.::tung<cr>
-" nnoremap <space>/ :Unite grep:.<cr>
+  " call unite#util#set_default(
+  " \ 'g:unite_source_grep_command', 'grep')
+  " call unite#util#set_default(
+  " \ 'g:unite_source_grep_default_opts', '-inH')
+  " " \ 'g:unite_source_grep_default_opts', '-inH --directories=recurse')
+  " call unite#util#set_default('g:unite_source_grep_recursive_opt', '-r')
+  " call unite#util#set_default('g:unite_source_grep_max_candidates', 100)
+  " call unite#util#set_default('g:unite_source_grep_search_word_highlight', 'Search')
+  " call unite#util#set_default('g:unite_source_grep_encoding', 'char')
+  "
+  let g:unite_source_grep_command = "grep"
+  let g:unite_source_grep_recursive_opt = "-R"
+  let g:unite_source_grep_default_opts = '-inH'
+  " let g:unite_source_grep_default_opts = '-ir'
+  " nnoremap <space>/ :Unite grep:.:-iR:tung<cr>
+  " nnoremap <space>/ :Unite grep:.::tung<cr>
+  " nnoremap <space>/ :Unite grep:.<cr>
 
-if executable('ag')
-  " Use ag in unite grep source.
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-  \ '-i --vimgrep --hidden --ignore ' .
-  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-  let g:unite_source_grep_recursive_opt = ''
-elseif executable('pt')
-  " Use pt in unite grep source.
-  " https://github.com/monochromegane/the_platinum_searcher
-  let g:unite_source_grep_command = 'pt'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
-  let g:unite_source_grep_recursive_opt = ''
-elseif executable('ack-grep')
-  " Use ack in unite grep source.
-  let g:unite_source_grep_command = 'ack-grep'
-  let g:unite_source_grep_default_opts =
-  \ '-i --no-heading --no-color -k -H'
-  let g:unite_source_grep_recursive_opt = ''
-elseif executable('jvgrep')
-  " For jvgrep.
-  let g:unite_source_grep_command = 'jvgrep'
-  let g:unite_source_grep_default_opts =
-  \ '-i --exclude ''\.(git|svn|hg|bzr)'''
-  let g:unite_source_grep_recursive_opt = '-R'
-endif
-
-nnoremap <F8> :Unite -no-quit -keep-focus -no-empty grep:.<cr>
-
-" Use F8 to grep from the root level of the current git repo
-" nnoremap <F8> :Unite -no-quit -keep-focus -no-empty grep/git:/<cr>
-
-" use <Leader>s to go to symbol with Unite. This is to replace CtrlP
-" nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
-"             \ -silent tag/include -start-insert<CR>
-nnoremap <silent> <Leader>s :Unite tag -no-quit -start-insert<CR>
-
-" For ack.
-" Using ack-grep as recursive command.
-let g:unite_source_rec_async_command = 'find'
-
-function! MyFileBrowser()
-  if finddir('.git', ';') == ''
-    Unite file_rec/neovim -start-insert
-  else
-    Unite file_rec/git -start-insert
+  if executable('ag')
+    " Use ag in unite grep source.
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+    \ '-i --vimgrep --hidden --ignore ' .
+    \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    let g:unite_source_grep_recursive_opt = ''
+  elseif executable('pt')
+    " Use pt in unite grep source.
+    " https://github.com/monochromegane/the_platinum_searcher
+    let g:unite_source_grep_command = 'pt'
+    let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+    let g:unite_source_grep_recursive_opt = ''
+  elseif executable('ack-grep')
+    " Use ack in unite grep source.
+    let g:unite_source_grep_command = 'ack-grep'
+    let g:unite_source_grep_default_opts =
+    \ '-i --no-heading --no-color -k -H'
+    let g:unite_source_grep_recursive_opt = ''
+  elseif executable('jvgrep')
+    " For jvgrep.
+    let g:unite_source_grep_command = 'jvgrep'
+    let g:unite_source_grep_default_opts =
+    \ '-i --exclude ''\.(git|svn|hg|bzr)'''
+    let g:unite_source_grep_recursive_opt = '-R'
   endif
-endfunction
+
+  nnoremap <F8> :Unite -no-quit -keep-focus -no-empty grep:.<cr>
+
+  " Use F8 to grep from the root level of the current git repo
+  " nnoremap <F8> :Unite -no-quit -keep-focus -no-empty grep/git:/<cr>
+
+  " use <Leader>s to go to symbol with Unite. This is to replace CtrlP
+  " nnoremap <silent> <Leader>s :NeoCompleteIncludeMakeCache<CR>:Unite
+  "             \ -silent tag/include -start-insert<CR>
+  nnoremap <silent> <Leader>s :Unite tag -no-quit -start-insert<CR>
+
+  " For ack.
+  " Using ack-grep as recursive command.
+  let g:unite_source_rec_async_command = 'find'
+
+  function! MyFileBrowser()
+    if finddir('.git', ';') == ''
+      Unite file_rec/neovim -start-insert
+    else
+      Unite file_rec/git -start-insert
+    endif
+  endfunction
 
 
-" access recently edited files
-nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 -start-insert file_mru<cr>
+  " access recently edited files
+  nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 -start-insert file_mru<cr>
 
-" navigates current open buffers
-nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 -start-insert buffer<cr>
+  " navigates current open buffers
+  nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 -start-insert buffer<cr>
 
-" open Unite file browser
-" nnoremap <Leader>f :Unite file_rec/neovim -start-insert<cr>
-nnoremap <Leader>f :call MyFileBrowser()<cr>
+  " open Unite file browser
+  " nnoremap <Leader>f :Unite file_rec/neovim -start-insert<cr>
+  nnoremap <Leader>f :call MyFileBrowser()<cr>
 
-" open bookmark
-nnoremap <silent> <Leader>a :Unite -buffer-name=bookmarks -start-insert bookmark<CR>
+  " open bookmark
+  nnoremap <silent> <Leader>a :Unite -buffer-name=bookmarks -start-insert bookmark<CR>
 
-" yank history
-nnoremap <Leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
+  " yank history
+  nnoremap <Leader>y :<C-u>Unite -buffer-name=yank history/yank<cr>
 
-" Unite outline (support markdown quite well!)
-nnoremap <Leader>o :Unite outline -start-insert<cr>
+  " Unite outline (support markdown quite well!)
+  nnoremap <Leader>o :Unite outline -start-insert<cr>
 
-" list all window except the current one
-nnoremap <Leader>w :Unite window:no-current:all -start-insert<cr>
+  " list all window except the current one
+  nnoremap <Leader>w :Unite window:no-current:all -start-insert<cr>
 
-nnoremap <Leader>uc :Unite colorscheme -start-insert<cr>
-
-
-" control where the unite buffer will appear
-"let g:unite_split_rule = "botright"
-" let g:unite_split_rule = "top"
-" let g:unite_split_rule = "right"
-
-" open a buffer in new tab or switch to existing tab by default
-" call unite#custom_default_action('file', 'tabopen')
-call unite#custom_default_action('file', 'tabswitch')
-call unite#custom_default_action('buffer', 'tabswitch')
+  nnoremap <Leader>uc :Unite colorscheme -start-insert<cr>
 
 
-"fuzzy search within a file using <Leader>q
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-" call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
-call unite#custom#source('file,file/new,buffer,file_rec', 'matchers', 'matcher_fuzzy')
-" call unite#custom#source('line', 'matchers', 'matcher_default')
-call unite#custom#source('line', 'matchers', 'matcher_glob')
-" nnoremap <C-k> :<C-u>Unite -buffer-name=search -start-insert line<cr>
-nnoremap <Leader>q :<C-u>Unite -buffer-name=search -start-insert line -auto-preview<cr>
-" nnoremap <Leader>q :<C-u>Unite -buffer-name=search -start-insert line -auto-preview -vertical-preview<cr>
+  " control where the unite buffer will appear
+  "let g:unite_split_rule = "botright"
+  " let g:unite_split_rule = "top"
+  " let g:unite_split_rule = "right"
 
-" Use Ctrl+l to refresh the directory listing in file in Unite candidate window
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()"{{{
-  " Overwrite settings.
-  nmap <buffer> <C-l>      <Plug>(unite_redraw)
-
-  " these mapping are used in the Unite candidate window
-  nnoremap <buffer><expr> t unite#do_action('tabswitch')
-  nnoremap <buffer><expr> s unite#do_action('splitswitch')
-  nnoremap <buffer><expr> v unite#do_action('vsplitswitch')
-
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-endfunction"}}}
+  " open a buffer in new tab or switch to existing tab by default
+  " call unite#custom_default_action('file', 'tabopen')
+  call unite#custom_default_action('file', 'tabswitch')
+  call unite#custom_default_action('buffer', 'tabswitch')
 
 
-let g:unite_source_menu_menus = {}
-let g:unite_source_menu_menus.git = {
-    \ 'description' : '            gestionar repositorios git
-        \                            ⌘ [espacio]g',
-    \}
-let g:unite_source_menu_menus.git.command_candidates = [
-    \['▷ tig                                                        ⌘ ,gt',
-        \'normal ,gt'],
-    \['▷ git status       (Fugitive)                                ⌘ ,gs',
-        \'Gstatus'],
-    \['▷ git diff         (Fugitive)                                ⌘ ,gd',
-        \'Gdiff'],
-    \['▷ git commit       (Fugitive)                                ⌘ ,gc',
-        \'Gcommit'],
-    \['▷ git log          (Fugitive)                                ⌘ ,gl',
-        \'exe "silent Glog | Unite quickfix"'],
-    \['▷ git blame        (Fugitive)                                ⌘ ,gb',
-        \'Gblame'],
-    \['▷ git stage        (Fugitive)                                ⌘ ,gw',
-        \'Gwrite'],
-    \['▷ git checkout     (Fugitive)                                ⌘ ,go',
-        \'Gread'],
-    \['▷ git rm           (Fugitive)                                ⌘ ,gr',
-        \'Gremove'],
-    \['▷ git mv           (Fugitive)                                ⌘ ,gm',
-        \'exe "Gmove " input("destino: ")'],
-    \['▷ git push         (Fugitive, salida por buffer)             ⌘ ,gp',
-        \'Git! push'],
-    \['▷ git pull         (Fugitive, salida por buffer)             ⌘ ,gP',
-        \'Git! pull'],
-    \['▷ git prompt       (Fugitive, salida por buffer)             ⌘ ,gi',
-        \'exe "Git! " input("comando git: ")'],
-    \['▷ git cd           (Fugitive)',
-        \'Gcd'],
-    \]
+  "fuzzy search within a file using <Leader>q
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  call unite#filters#sorter_default#use(['sorter_rank'])
+  " call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
+  call unite#custom#source('file,file/new,buffer,file_rec', 'matchers', 'matcher_fuzzy')
+  " call unite#custom#source('line', 'matchers', 'matcher_default')
+  call unite#custom#source('line', 'matchers', 'matcher_glob')
+  " nnoremap <C-k> :<C-u>Unite -buffer-name=search -start-insert line<cr>
+  nnoremap <Leader>q :<C-u>Unite -buffer-name=search -start-insert line -auto-preview<cr>
+  " nnoremap <Leader>q :<C-u>Unite -buffer-name=search -start-insert line -auto-preview -vertical-preview<cr>
 
-" 2015-04-30 below line cause `[m` motion slow
-" nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
+  " Use Ctrl+l to refresh the directory listing in file in Unite candidate window
+  autocmd FileType unite call s:unite_my_settings()
+  function! s:unite_my_settings()"{{{
+    " Overwrite settings.
+    nmap <buffer> <C-l>      <Plug>(unite_redraw)
 
-let g:unite_source_tag_max_name_length=25
-let g:unite_source_tag_max_fname_length=50
-let g:unite_source_tag_relative_fname=1
+    " these mapping are used in the Unite candidate window
+    nnoremap <buffer><expr> t unite#do_action('tabswitch')
+    nnoremap <buffer><expr> s unite#do_action('splitswitch')
+    nnoremap <buffer><expr> v unite#do_action('vsplitswitch')
+
+    " Enable navigation with control-j and control-k in insert mode
+    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  endfunction"}}}
+
+
+  let g:unite_source_menu_menus = {}
+  let g:unite_source_menu_menus.git = {
+      \ 'description' : '            gestionar repositorios git
+          \                            ⌘ [espacio]g',
+      \}
+  let g:unite_source_menu_menus.git.command_candidates = [
+      \['▷ tig                                                        ⌘ ,gt',
+          \'normal ,gt'],
+      \['▷ git status       (Fugitive)                                ⌘ ,gs',
+          \'Gstatus'],
+      \['▷ git diff         (Fugitive)                                ⌘ ,gd',
+          \'Gdiff'],
+      \['▷ git commit       (Fugitive)                                ⌘ ,gc',
+          \'Gcommit'],
+      \['▷ git log          (Fugitive)                                ⌘ ,gl',
+          \'exe "silent Glog | Unite quickfix"'],
+      \['▷ git blame        (Fugitive)                                ⌘ ,gb',
+          \'Gblame'],
+      \['▷ git stage        (Fugitive)                                ⌘ ,gw',
+          \'Gwrite'],
+      \['▷ git checkout     (Fugitive)                                ⌘ ,go',
+          \'Gread'],
+      \['▷ git rm           (Fugitive)                                ⌘ ,gr',
+          \'Gremove'],
+      \['▷ git mv           (Fugitive)                                ⌘ ,gm',
+          \'exe "Gmove " input("destino: ")'],
+      \['▷ git push         (Fugitive, salida por buffer)             ⌘ ,gp',
+          \'Git! push'],
+      \['▷ git pull         (Fugitive, salida por buffer)             ⌘ ,gP',
+          \'Git! pull'],
+      \['▷ git prompt       (Fugitive, salida por buffer)             ⌘ ,gi',
+          \'exe "Git! " input("comando git: ")'],
+      \['▷ git cd           (Fugitive)',
+          \'Gcd'],
+      \]
+
+  " 2015-04-30 below line cause `[m` motion slow
+  " nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
+
+  let g:unite_source_tag_max_name_length=25
+  let g:unite_source_tag_max_fname_length=50
+  let g:unite_source_tag_relative_fname=1
+endif
 
 "---end unite.vim }}}
 "===============================================================================
@@ -463,19 +470,21 @@ let g:airline#extensions#tabline#show_buffers = 0
 "===============================================================================
 "begin indentLine {{{
 
-if has('gui_running')
-    "let g:indentLine_color_gui = '#353833'
-    let g:indentLine_color_gui = '#2E322D'
-else
-    let g:indentLine_color_term = 239
+if !exists('g:vscode')
+  if has('gui_running')
+      "let g:indentLine_color_gui = '#353833'
+      let g:indentLine_color_gui = '#2E322D'
+  else
+      let g:indentLine_color_term = 239
+  endif
+
+  " enable by default
+  let g:indentLine_enabled = 1
+
+  let g:indentLine_char = '┊'
+
+  nmap <leader>il :IndentLinesToggle<cr>
 endif
-
-" enable by default
-let g:indentLine_enabled = 1
-
-let g:indentLine_char = '┊'
-
-nmap <leader>il :IndentLinesToggle<cr>
 "end indentLine }}}
 "===============================================================================
 
@@ -952,45 +961,47 @@ autocmd! FileType qf nnoremap <buffer> <leader><Enter> <C-w>L
 
 "===============================================================================
 "---begin ctrlp {{{
-"Usage:
-"  Once ctrlp appeared: press <c-f> and <c-b> to cycle between modes.
+if !exists('g:vscode')
+  "Usage:
+  "  Once ctrlp appeared: press <c-f> and <c-b> to cycle between modes.
 
-""mimic Ctrl+r go to symbol as in Sublime Text
-"ref: https://github.com/subvim/subvim/blob/master/vim/base/vimrc
-"use C-j and C-k or arrow keys to navigate through the result list
-"<c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+  ""mimic Ctrl+r go to symbol as in Sublime Text
+  "ref: https://github.com/subvim/subvim/blob/master/vim/base/vimrc
+  "use C-j and C-k or arrow keys to navigate through the result list
+  "<c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
 
-" Open goto symbol on current buffer
-" update 2014-09-17: use Unite instead of this
-" nmap <Leader>s :MyCtrlPTag<cr>
+  " Open goto symbol on current buffer
+  " update 2014-09-17: use Unite instead of this
+  " nmap <Leader>s :MyCtrlPTag<cr>
 
-"imap <Leader>s<esc>:MyCtrlPTag<cr>
-
-
-" function MyCtrlPTag()
-"     let g:ctrlp_prompt_mappings = {
-"     \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
-"     \ 'AcceptSelection("t")': ['<c-t>'],
-"     \ }
-"     CtrlPBufTag
-" endfunc
-" com! MyCtrlPTag call MyCtrlPTag()
+  "imap <Leader>s<esc>:MyCtrlPTag<cr>
 
 
-" Open goto symbol on all buffers
-nmap <Leader>S :CtrlPBufTagAll<cr>
-"imap <Leader>S<esc>:CtrlPBufTagAll<cr>
+  " function MyCtrlPTag()
+  "     let g:ctrlp_prompt_mappings = {
+  "     \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+  "     \ 'AcceptSelection("t")': ['<c-t>'],
+  "     \ }
+  "     CtrlPBufTag
+  " endfunc
+  " com! MyCtrlPTag call MyCtrlPTag()
 
-" Exclude files and directories using Vim's wildignore and CtrlP's own
-" g:ctrlp_custom_ignore:
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-" let g:ctrlp_custom_ignore = {
-"    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-"    \ 'file': '\v\.(exe|so|dll)$',
-"    \ 'link': 'some_bad_symbolic_links',
-"    \ }
+
+  " Open goto symbol on all buffers
+  nmap <Leader>S :CtrlPBufTagAll<cr>
+  "imap <Leader>S<esc>:CtrlPBufTagAll<cr>
+
+  " Exclude files and directories using Vim's wildignore and CtrlP's own
+  " g:ctrlp_custom_ignore:
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+  set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+  let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+  " let g:ctrlp_custom_ignore = {
+  "    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  "    \ 'file': '\v\.(exe|so|dll)$',
+  "    \ 'link': 'some_bad_symbolic_links',
+  "    \ }
+endif
 "---end ctrlp }}}
 "===============================================================================
 
@@ -1076,11 +1087,13 @@ let delimitMate_jump_expansion = 1
 
 "===============================================================================
 "---begin vim-session {{{
-" let g:session_directory='~/.vim/data/sessions'
-let g:session_directory='~/dev/mylinux/nogit/vimdata/sessions'
-let g:session_autosave = 'yes'
-let g:session_autoload = 'yes'
-let g:session_default_to_last = 1
+if !exists('g:vscode')
+  " let g:session_directory='~/.vim/data/sessions'
+  let g:session_directory='~/dev/mylinux/nogit/vimdata/sessions'
+  let g:session_autosave = 'yes'
+  let g:session_autoload = 'yes'
+  let g:session_default_to_last = 1
+endif
 "---end vim-session }}}
 "===============================================================================
 
@@ -1287,7 +1300,7 @@ let g:ragtag_global_maps = 1
 let g:vim_json_syntax_conceal = 0
 
 
-if has("nvim")
+if has("nvim") && !exists('g:vscode')
   " ============= NEOVIM ================ {{{
   " makes the cursor a pipe in insert-mode, and a block in normal-mode
   " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -1384,3 +1397,170 @@ let $RUST_SRC_PATH="/usr/src/rust/src/"
 " Fix death slow with Ruby files
 set regexpengine=1
 
+
+"===============================================================================
+"--- begin denite {{{
+
+if !exists('g:vscode')
+
+  " Denite general settings
+  call denite#custom#option('_', {
+    \ 'prompt': '❯',
+    \ 'auto_resume': 1,
+    \ 'start_filter': 1,
+    \ 'statusline': 1,
+    \ 'smartcase': 1,
+    \ 'vertical_preview': 0,
+    \ 'max_dynamic_update_candidates': 50000,
+    \ 'post_action': 'open',
+    \ })
+
+  " Interactive grep search
+  call denite#custom#var('grep', 'min_interactive_pattern', 2)
+  call denite#custom#source('grep', 'args', ['', '', '!'])
+
+  " Use Neovim's floating window
+  if has('nvim')
+    call denite#custom#option('_', {
+      \ 'statusline': 0,
+      \ 'floating_preview': 1,
+      \ 'filter_split_direction': 'floating',
+      \ })
+  endif
+
+  " Denite EVENTS
+  augroup user_plugin_denite
+    autocmd!
+
+    autocmd FileType denite call s:denite_settings()
+    autocmd FileType denite-filter call s:denite_filter_settings()
+    autocmd User denite-preview call s:denite_preview()
+
+    " autocmd VimResized * call s:denite_resize(g:denite_position)
+
+    " Enable Denite special cursor-line highlight
+    " autocmd WinEnter * if &filetype =~# '^denite'
+    " 	\ |   highlight! link CursorLine WildMenu
+    " 	\ | endif
+
+    " " Disable Denite special cursor-line highlight
+    " autocmd WinLeave * if &filetype ==# 'denite'
+    " 	\ |   highlight! link CursorLine NONE
+    " 	\ | endif
+  augroup END
+
+  " Denite main window settings
+  function! s:denite_settings() abort
+    " Window options
+    setlocal signcolumn=no cursorline
+
+    " Denite selection window key mappings
+    nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+    nnoremap <silent><buffer><expr> i    denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> /    denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> dd   denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> p    denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> st   denite#do_map('do_action', 'tabopen')
+    nnoremap <silent><buffer><expr> sg   denite#do_map('do_action', 'vsplit')
+    nnoremap <silent><buffer><expr> sv   denite#do_map('do_action', 'split')
+    nnoremap <silent><buffer><expr> '    denite#do_map('quick_move')
+    nnoremap <silent><buffer><expr> q    denite#do_map('quit')
+    nnoremap <silent><buffer><expr> r    denite#do_map('redraw')
+    nnoremap <silent><buffer><expr> yy   denite#do_map('do_action', 'yank')
+    nnoremap <silent><buffer><expr> <Esc>   denite#do_map('quit')
+    nnoremap <silent><buffer><expr> <Tab>   denite#do_map('choose_action')
+    " nnoremap <silent><buffer><expr><nowait> <Space> denite#do_map('toggle_select').'j'
+  endfunction
+
+  " Denite-preview window settings
+  function! s:denite_preview() abort
+    " Window options
+    setlocal nocursorline colorcolumn= signcolumn=no nonumber nolist nospell
+
+    " if &lines > 35
+    " 	resize +8
+    " endif
+    " let l:pos = win_screenpos(win_getid())
+    " let l:heighten = &lines - l:pos[0]
+    " execute 'resize ' . l:heighten
+
+    " Clear indents
+    if exists('*indent_guides#clear_matches')
+      call indent_guides#clear_matches()
+    endif
+  endfunction
+
+  " Denite-filter window settings
+  function! s:denite_filter_settings() abort
+    " Window options
+    setlocal signcolumn=yes nocursorline nonumber norelativenumber
+
+    " Disable Deoplete auto-completion within Denite filter window
+    if exists('*deoplete#custom#buffer_option')
+      call deoplete#custom#buffer_option('auto_complete', v:false)
+    endif
+
+    " Denite Filter window key mappings
+    imap <silent><buffer> jj          <Plug>(denite_filter_quit)
+    nmap <silent><buffer> <Esc>       <Plug>(denite_filter_quit)
+    imap <silent><buffer> <Esc>       <Plug>(denite_filter_quit)
+    nmap <silent><buffer> <C-c>       <Plug>(denite_filter_quit)
+    imap <silent><buffer> <C-c>       <Plug>(denite_filter_quit)
+    inoremap <silent><buffer> <Tab>
+      \ <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+    inoremap <silent><buffer> <S-Tab>
+      \ <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+  endfunction
+
+  " denite
+
+  " reset 50% winheight on window resize
+  " augroup deniteresize
+  "   autocmd!
+  "   autocmd VimResized,VimEnter * call denite#custom#option('default',
+  "         \'winheight', winheight(0) / 2)
+  " augroup end
+
+  call denite#custom#var('file/rec', 'command',
+        \ ['fd', '-H', '--full-path'])
+  call denite#custom#var('grep', 'command', ['rg'])
+  call denite#custom#var('grep', 'default_opts',
+        \ ['--hidden', '--vimgrep', '--smart-case'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+  call denite#custom#map('insert', '<Esc>', '<denite:enter_mode:normal>',
+        \'noremap')
+  call denite#custom#map('normal', '<Esc>', '<NOP>',
+        \'noremap')
+  call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>',
+        \'noremap')
+  call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>',
+        \'noremap')
+  call denite#custom#map('normal', 'dw', '<denite:delete_word_after_caret>',
+        \'noremap')
+
+  nnoremap <C-p> :<C-u>Denite file/rec<CR>
+  nnoremap <leader>s :<C-u>Denite buffer<CR>
+  nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer<CR>
+  nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+  nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
+  nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
+  " nnoremap <leader>d :<C-u>DeniteBufferDir file_rec<CR>
+  " nnoremap <leader>r :<C-u>Denite -resume -cursor-pos=+1<CR>
+  nnoremap <leader><C-r> :<C-u>Denite register:. -mode=normal<CR>
+  " references source from LanguageClient
+  nnoremap <leader>lr :<C-u>Denite references -mode=normal<CR>
+
+  hi link deniteMatchedChar Special
+
+  nnoremap <space>v :Denite file_rec -default-action=vsplit<cr>
+  nnoremap <space>s :Denite file_rec -default-action=split<cr>
+  nnoremap <space>e :Denite file_rec -winheight=10 <cr>
+  nnoremap <space>m :Denite file_mru -winheight=10 -vertical-preview -auto-preview <cr>
+  nnoremap <space>l :Denite line <cr>
+endif
+
+"--- end denite }}}
+"===============================================================================

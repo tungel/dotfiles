@@ -174,13 +174,14 @@
     ],
     "ruby.format": "rubocop",
     "telemetry.enableCrashReporter": false,
-    "viceroy.config.lastVersion": "0.28.200585",
+    "viceroy.config.lastVersion": "0.31.200710",
     "files.watcherExclude": {
+        "**/build/**": true,
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
-        "**/build/**": true,
-        "**/env/**": true,
         "**/node_modules/**": true,
+        "**/.hg/store/**": true,
+        "**/env/**": true,
         "/": true,
         "build": true
     },
@@ -212,8 +213,8 @@
         "**/bower_components": true,
         "**/*.code-search": true
     },
-    "viceroy.config.internal.lastUpdateTime": "2020-04-07T23:15:44.320Z",
-    "viceroy.config.internal.zeroDowntimeColour": "green",
+    "viceroy.config.internal.lastUpdateTime": "2020-06-24T03:40:12.822Z",
+    "viceroy.config.internal.zeroDowntimeColour": "blue",
     "viceroy.doc.welcome.showAtStartup": false,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
@@ -227,5 +228,9 @@
     "terminal.integrated.inheritEnv": false,
     "ruby.intellisense": "rubyLocate",
     "editor.largeFileOptimizations": false,
-    "plantuml.urlFormat": "svg"
+    "plantuml.urlFormat": "svg",
+    "python.languageServer": "Microsoft",
+    "workbench.tree.indent": 20,
+    "vscode-neovim.neovimPath": "/Users/ttl/.local/bin/nvim",
+    "vscode-neovim.neovimInitPath": "/Users/ttl/.config/nvim/init.vim"
 }
