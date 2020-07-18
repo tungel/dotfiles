@@ -28,66 +28,69 @@ call pathogen#helptags()
 "===============================================================================
 "---begin easy-motion {{{
 
-"let g:EasyMotion_do_mapping = 0 " Disable default mappings
-"map <Leader> <Plug>(easymotion-prefix)
-
-let g:EasyMotion_smartcase = 0
-
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
-
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-
-" These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to
-" EasyMotion.  " Without these mappings, 'n' & 'N' works fine. (These mappings
-" just provide " different highlight method and have some other features )
-" map  n <Plug>(easymotion-next)
-" map  N <Plug>(easymotion-prev)
-
-" https://www.youtube.com/watch?v=aHm36-na4-4&feature=youtu.be
-" This rewires n and N to do the highlighing...
 if !exists('g:vscode')
-  nnoremap <silent> n   n:call HLNext(0.3)<cr>
-  nnoremap <silent> N   N:call HLNext(0.3)<cr>
+
+  "let g:EasyMotion_do_mapping = 0 " Disable default mappings
+  "map <Leader> <Plug>(easymotion-prefix)
+
+  let g:EasyMotion_smartcase = 0
+
+  nmap s <Plug>(easymotion-s2)
+  nmap t <Plug>(easymotion-t2)
+
+  map  / <Plug>(easymotion-sn)
+  omap / <Plug>(easymotion-tn)
+
+  " These 'n' & 'N' mappings are options. You do not have to map 'n' & 'N' to
+  " EasyMotion.  " Without these mappings, 'n' & 'N' works fine. (These mappings
+  " just provide " different highlight method and have some other features )
+  " map  n <Plug>(easymotion-next)
+  " map  N <Plug>(easymotion-prev)
+
+  " https://www.youtube.com/watch?v=aHm36-na4-4&feature=youtu.be
+  " This rewires n and N to do the highlighing...
+  if !exists('g:vscode')
+    nnoremap <silent> n   n:call HLNext(0.3)<cr>
+    nnoremap <silent> N   N:call HLNext(0.3)<cr>
+  endif
+
+  " highlight the match in red...
+  " function! HLNext (blinktime)
+  "     highlight WhiteOnRed ctermfg=white ctermbg=red
+  "     let [bufnum, lnum, col, off] = getpos('.')
+  "     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+  "     let target_pat = '\c\%#\%('.@/.'\)'
+  "     let ring = matchadd('WhiteOnRed', target_pat, 101)
+  "     redraw
+  "     exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  "     call matchdelete(ring)
+  "     redraw
+  " endfunction
+
+  function! HLNext (blinktime)
+    highlight WhiteOnRed ctermfg=white ctermbg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'), col-1),@/))
+    let target_pat = '\c\%#'.@/
+    let blinks = 3
+
+    for n in range(1, blinks)
+      let red = matchadd('WhiteOnRed', target_pat, 101)
+      redraw
+      exec 'sleep ' . float2nr(a:blinktime / (2*blinks) * 1000) . "m"
+      call matchdelete(red)
+      redraw
+      exec 'sleep ' . float2nr(a:blinktime / (2*blinks) * 1000) . "m"
+    endfor
+  endfunction
+
+  "map <Leader>l <Plug>(easymotion-lineforward) "comment this out, interfere with
+  "latex
+  map <Leader>j <Plug>(easymotion-j)
+  map <Leader>k <Plug>(easymotion-k)
+  map <Leader>h <Plug>(easymotion-linebackward)
+  let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 endif
-
-" highlight the match in red...
-" function! HLNext (blinktime)
-"     highlight WhiteOnRed ctermfg=white ctermbg=red
-"     let [bufnum, lnum, col, off] = getpos('.')
-"     let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-"     let target_pat = '\c\%#\%('.@/.'\)'
-"     let ring = matchadd('WhiteOnRed', target_pat, 101)
-"     redraw
-"     exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-"     call matchdelete(ring)
-"     redraw
-" endfunction
-
-function! HLNext (blinktime)
-  highlight WhiteOnRed ctermfg=white ctermbg=red
-  let [bufnum, lnum, col, off] = getpos('.')
-  let matchlen = strlen(matchstr(strpart(getline('.'), col-1),@/))
-  let target_pat = '\c\%#'.@/
-  let blinks = 3
-
-  for n in range(1, blinks)
-    let red = matchadd('WhiteOnRed', target_pat, 101)
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime / (2*blinks) * 1000) . "m"
-    call matchdelete(red)
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime / (2*blinks) * 1000) . "m"
-  endfor
-endfunction
-
-"map <Leader>l <Plug>(easymotion-lineforward) "comment this out, interfere with
-"latex
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
-let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
 "---end easy-motion }}}
 "===============================================================================
