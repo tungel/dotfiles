@@ -207,6 +207,14 @@
         "key": "k",
         "when": "neovim.mode == insert",
         "args": "k"
+    },
+    {
+        "key": "ctrl+pageUp",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "ctrl+pageDown",
+        "command": "workbench.action.previousEditor"
     }
 
 
