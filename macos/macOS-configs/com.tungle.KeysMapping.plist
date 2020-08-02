@@ -7,7 +7,7 @@
     <string>com.tungle.KeysMapping</string>
     <key>ProgramArguments</key>
     <array>
-      <string>~/macOS-configs/login-script.sh</string>
+      <string>USER_HOME_DIR_PLACEHOLDER/macOS-configs/login-script.sh</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
