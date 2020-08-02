@@ -174,7 +174,7 @@
     ],
     "ruby.format": "rubocop",
     "telemetry.enableCrashReporter": false,
-    "viceroy.config.lastVersion": "0.31.200710",
+    "viceroy.config.lastVersion": "0.31.200738",
     "files.watcherExclude": {
         "**/build/**": true,
         "**/.git/objects/**": true,
@@ -213,7 +213,7 @@
         "**/bower_components": true,
         "**/*.code-search": true
     },
-    "viceroy.config.internal.lastUpdateTime": "2020-06-24T03:40:12.822Z",
+    "viceroy.config.internal.lastUpdateTime": "2020-07-25T01:18:00.941Z",
     "viceroy.config.internal.zeroDowntimeColour": "blue",
     "viceroy.doc.welcome.showAtStartup": false,
     "editor.suggestSelection": "first",

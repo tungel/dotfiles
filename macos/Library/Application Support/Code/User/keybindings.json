@@ -13,10 +13,10 @@
         "key": "ctrl+f",
         "command": "workbench.action.quickOpen"
     },
-    {
-        "key": "ctrl+w",
-        "command": "-workbench.action.closeActiveEditor"
-    },
+    // {
+    //     "key": "ctrl+w",
+    //     "command": "-workbench.action.closeActiveEditor"
+    // },
     {
         "key": "ctrl+n",
         "command": "-workbench.action.files.newUntitledFile"
@@ -210,12 +210,13 @@
     },
     {
         "key": "ctrl+pageUp",
-        "command": "workbench.action.nextEditor"
+        "command": "workbench.action.previousEditor"
     },
     {
         "key": "ctrl+pageDown",
-        "command": "workbench.action.previousEditor"
-    }
+        "command": "workbench.action.nextEditor"
+    },
+    { "key": "ctrl+w+w", "command": "workbench.action.navigateEditorGroups" },
 
 
     // for vimStyle extension

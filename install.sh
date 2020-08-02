@@ -74,3 +74,12 @@ else
   stow -v $DOTFILES --target="${TARGET_DIR}"
 fi
 
+# run custom commands after installing dotfiles
+if [[ "${KERNEL}" == "Darwin" ]]; then
+  # Specify the preferences directory
+  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/iterm2"
+
+  # Tell iTerm2 to use the custom preferences
+  defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+fi
+
