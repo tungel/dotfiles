@@ -88,7 +88,7 @@ if [[ "${KERNEL}" == "Darwin" ]]; then
   mkdir -p ~/Library/LaunchAgents
   cp ~/macOS-configs/com.tungle.KeysMapping.plist ~/Library/LaunchAgents/
   # replace the placeholder with real user's home dir
-  sed -e s:USER_HOME_DIR_PLACEHOLDER:$HOME: -i ~/Library/LaunchAgents/com.tungle.KeysMapping.plist
+  sed -i '' s:USER_HOME_DIR_PLACEHOLDER:$HOME: ~/Library/LaunchAgents/com.tungle.KeysMapping.plist
   launchctl load com.tungle.KeysMapping.plist
 fi
 
