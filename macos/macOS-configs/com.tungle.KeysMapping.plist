@@ -4,15 +4,10 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>com.ldaws.CapslockEsc</string>
+    <string>com.tungle.KeysMapping</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/usr/bin/hidutil</string>
-      <string>property</string>
-      <string>--matching</string>
-      <string>{"VendorID":0x5ac}</string>
-      <string>--set</string>
-      <string>{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E0},{"HIDKeyboardModifierMappingSrc":0x7000000E3,"HIDKeyboardModifierMappingDst":0x7000000E2},{"HIDKeyboardModifierMappingSrc":0x7000000E2,"HIDKeyboardModifierMappingDst":0x7000000E3}]}</string>
+      <string>~/macOS-configs/login-script.sh</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
