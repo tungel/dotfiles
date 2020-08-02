@@ -7,7 +7,9 @@
 
 # map caps lock (39) to left control key (E0)
 # swap CMD (E3) and Alt (E2) keys on the left side of the keyboard
-hidutil property --set '{"UserKeyMapping":[
+# only perform keys mapping on the Apple's internal keyboard (VendorID: 0x5ac)
+# to view list of keyboards, run: hidutil list -m keyboard
+hidutil property --matching '{"VendorID":0x5ac}' --set '{"UserKeyMapping":[
 {"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E0},
 {"HIDKeyboardModifierMappingSrc":0x7000000E3,"HIDKeyboardModifierMappingDst":0x7000000E2},
 {"HIDKeyboardModifierMappingSrc":0x7000000E2,"HIDKeyboardModifierMappingDst":0x7000000E3}
