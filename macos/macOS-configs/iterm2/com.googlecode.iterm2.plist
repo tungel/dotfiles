@@ -1144,7 +1144,7 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/dev/iterm</string>
+	<string>~/dev/dotfiles/macos/macOS-configs/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -1189,19 +1189,19 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>0 119 224 275 0 0 1920 1057 </string>
+	<string>0 114 224 275 0 0 1440 877 </string>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>-1426 391 614 269 -2560 0 2560 1417 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>2849 54 400 129 0 0 3440 1417 </string>
+	<string>1137 652 400 129 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1410 767 620 392 0 0 3440 1417 </string>
+	<string>970 776 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 126 606 469 0 0 3440 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>287 250 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1425 31 2010 1386 0 0 3440 1417 </string>
+	<string>788 41 1770 1360 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>176 70 650 477 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -3154,24 +3154,34 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.6</string>
-		<string>3.3.4</string>
-		<string>3.3.8</string>
-		<string>3.3.1</string>
 		<string>3.3.5</string>
-		<string>3.3.7</string>
-		<string>3.3.0</string>
-		<string>3.2.9</string>
+		<string>3.3.1</string>
+		<string>3.3.8</string>
+		<string>3.3.12</string>
+		<string>3.3.6</string>
+		<string>3.3.11</string>
+		<string>3.3.4</string>
 		<string>3.3.2</string>
+		<string>3.3.9</string>
+		<string>3.2.9</string>
+		<string>3.3.0</string>
+		<string>3.3.7</string>
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
+	<key>NoSyncFrame_SessionsPreferences</key>
+	<dict>
+		<key>screenFrame</key>
+		<string>{{0, 0}, {2560, 1440}}</string>
+		<key>topLeft</key>
+		<string>{977, 1199}</string>
+	</dict>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1920, 1080}}</string>
+		<string>{{0, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{285, 786}</string>
+		<string>{329, 851}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
@@ -3180,7 +3190,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>E0CC8124-C2F4-49B0-A58F-BB87F47F80B5</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>24</integer>
+	<integer>50</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4013,7 +4023,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>~/iterm2</string>
+	<string>~/macOS-configs/iterm2</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>SUEnableAutomaticChecks</key>
@@ -4025,9 +4035,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-02-12T10:32:31Z</date>
+	<date>2020-08-01T02:19:53Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
+	<key>SUUpdateGroupIdentifier</key>
+	<integer>2329545183</integer>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
@@ -4059,7 +4071,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.8</string>
+	<string>3.3.12</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

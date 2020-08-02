@@ -77,9 +77,12 @@ fi
 # run custom commands after installing dotfiles
 if [[ "${KERNEL}" == "Darwin" ]]; then
   # Specify the preferences directory
-  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/iterm2"
+  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/macOS-configs/iterm2"
 
   # Tell iTerm2 to use the custom preferences
   defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
+  # setup login hook for key mapping. Note for ansible: this will ask for sudo password
+  sudo defaults write com.apple.loginwindow LoginHook ~/macOS-configs/login-script.sh
 fi
 
