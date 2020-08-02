@@ -83,6 +83,7 @@ if [[ "${KERNEL}" == "Darwin" ]]; then
   defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
   # setup login hook for key mapping. Note for ansible: this will ask for sudo password
+  ~/macOS-configs/login-script.sh
   sudo defaults write com.apple.loginwindow LoginHook ~/macOS-configs/login-script.sh
 fi
 
