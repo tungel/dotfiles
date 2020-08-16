@@ -92,6 +92,13 @@ alias agr="ag -i --hidden -G '.*.rb'" # search only ruby files
 
 alias rg="rg -i --hidden"
 
+# ref: https://exiftool.org/exiftool_pod.html#RENAMING-EXAMPLES
+# %%f: the original file name
+# %%c: adding a copy number with leading '-' if the file already exists (%-c),
+# and preserving the original file extension (%e). Note the extra '%' necessary
+# to escape the filename codes (%c and %e) in the date format string.
+alias exif-rename-by-createdate="exiftool '-FileName<CreateDate' -d %Y%m%d_%H%M%S-%%f%%-c.%%e ."
+
 #for matlab
 # export MATLAB_JAVA=/usr/local/MATLAB/R2014a/sys/java/jre/glnxa64/jre
 export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
@@ -464,3 +471,4 @@ pathAdd $HOME/.local/bin
 # for cloud dev desktop
 pathAdd $HOME/.toolbox/bin
 
+pathAdd $HOME/local-bin/apache-maven-3.6.3/bin
