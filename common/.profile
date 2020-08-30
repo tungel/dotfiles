@@ -17,6 +17,10 @@ if [ -e $CUSTOM_ALIASES ]; then
     source $CUSTOM_ALIASES
 fi
 
+if [ -e /etc/profile ]; then
+    source /etc/profile
+fi
+
 pathAdd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="${PATH:+"$PATH:"}$1"

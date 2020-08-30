@@ -45,7 +45,6 @@
             ]
         }
     ],
-    "vim.enableNeovim": true,
     // "vim.neovimPath": "/usr/bin/nvim",
     // "vim.neovimPath": "/Users/ttl/.local/bin/nvim",
     // https://github.com/VSCodeVim/Vim/issues/3584
