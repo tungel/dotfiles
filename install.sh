@@ -75,6 +75,7 @@ else
 fi
 
 # run custom commands after installing dotfiles
+~/.config/ranger/configure-ranger.sh
 if [[ "${KERNEL}" == "Darwin" ]]; then
   # Specify the preferences directory
   defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/macOS-configs/iterm2"
