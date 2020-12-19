@@ -133,6 +133,16 @@
         "files.trimTrailingWhitespace": true,
         "editor.formatOnSave": true,
     },
+    "[vue]": {
+        "editor.tabSize": 2,
+        "files.trimTrailingWhitespace": true,
+        "editor.formatOnSave": true,
+    },
+    "[typescript]": {
+        "editor.tabSize": 2,
+        "files.trimTrailingWhitespace": true,
+        "editor.formatOnSave": true,
+    },
     "gitlens.keymap": "alternate",
     "breadcrumbs.enabled": true,
     "r.lintr.enabled": false,
@@ -173,7 +183,7 @@
     ],
     "ruby.format": "rubocop",
     "telemetry.enableCrashReporter": false,
-    "viceroy.config.lastVersion": "0.31.200738",
+    "viceroy.config.lastVersion": "0.33.200792",
     "files.watcherExclude": {
         "**/build/**": true,
         "**/.git/objects/**": true,
@@ -212,7 +222,7 @@
         "**/bower_components": true,
         "**/*.code-search": true
     },
-    "viceroy.config.internal.lastUpdateTime": "2020-07-25T01:18:00.941Z",
+    "viceroy.config.internal.lastUpdateTime": "2020-12-04T05:11:43.643Z",
     "viceroy.config.internal.zeroDowntimeColour": "blue",
     "viceroy.doc.welcome.showAtStartup": false,
     "editor.suggestSelection": "first",
@@ -229,7 +239,7 @@
     "editor.largeFileOptimizations": false,
     "plantuml.urlFormat": "svg",
     "python.languageServer": "Microsoft",
-    "workbench.tree.indent": 20,
+    "workbench.tree.indent": 40,
     "vscode-neovim.neovimPath": "/Users/ttl/.local/bin/nvim",
     "vscode-neovim.neovimInitPath": "/Users/ttl/.config/nvim/init.vim"
 }
