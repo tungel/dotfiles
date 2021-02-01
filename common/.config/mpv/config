@@ -33,6 +33,10 @@ save-position-on-quit=yes
 # Always open a video window even with no video
 force-window=yes
 
-# auto repeat by default
-loop=yes
+# auto repeat by default.
+# Note: this option seems to only repeat a single file, it doesn't work for playlist
+# loop=yes
+
+# this works for both playlist and a single file
+loop-playlist=inf
 
