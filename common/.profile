@@ -407,14 +407,14 @@ fi
 alias ssht='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
 # Usage: git-add-subtree https://github.com/path/to-repo.git
-function git-add-subtree {
+git_add_subtree() {
   local url_without_git=$(echo $1 | sed "s/\.git$//")
   local repo_name=$(basename $url_without_git)
   git subtree add --prefix "$repo_name" $1 master --squash
 }
 
 # 1-liner python server
-function python-server {
+python_server() {
   local port=${1:-8000}
   python -m http.server $port
 }
