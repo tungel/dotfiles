@@ -91,6 +91,7 @@ if [[ "${KERNEL}" == "Darwin" ]]; then
   # replace the placeholder with real user's home dir
   # https://stackoverflow.com/questions/4247068/sed-command-with-i-option-failing-on-mac-but-works-on-linux
   sed -i '' s:USER_HOME_DIR_PLACEHOLDER:$HOME: ~/Library/LaunchAgents/com.tungle.KeysMapping.plist
+  cd ~/Library/LaunchAgents/
   launchctl load com.tungle.KeysMapping.plist
 fi
 
