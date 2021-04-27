@@ -33,11 +33,8 @@ fi
 
 gnome-encfs-manager
 
-# for HiDPI display, run this:
-# ~/.config/polybar/launch.sh hidpi
-
-# for low DPI display, run:
-~/.config/polybar/launch.sh
+# don't run polybar from here because it doesn't know the size of the monitor
+# yet. Run it in the bspwmrc, once all the monitor configurations are done.
 
 # launch this last, after merging ~/.Xresources using xrdb
 urxvt &
