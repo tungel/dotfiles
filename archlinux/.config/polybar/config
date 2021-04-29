@@ -268,6 +268,28 @@ label-muted = V -
 
 click-left = pactl set-sink-mute @DEFAULT_SINK@ toggle
 
+[module/volume-alsa]
+type = internal/alsa
+
+; increase/decrease volume interval
+interval = 5
+
+master-soundcard = default
+master-mixer = Master
+
+format-volume-background = ${settings.format-background}
+format-volume-padding = ${settings.format-padding}
+format-muted-background = ${settings.format-background}
+format-muted-padding = ${settings.format-padding}
+
+format-volume = <label-volume>
+format-volume-prefix = "V "
+format-volume-prefix-foreground= ${colors.green}
+label-volume = %percentage%%
+
+label-muted-foreground = ${colors.red}
+label-muted = V -
+
 [module/packages]
 type = custom/script
 exec = ~/.config/polybar/package_update_checker.sh lemonbar

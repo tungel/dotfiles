@@ -25,7 +25,9 @@ Xcursor.size:  22
 URxvt.geometry:100x30
 URxvt.depth:32
 URxvt.background:#1C1C1C
-URxvt.foreground:white
+! polybar has issue with `white` word
+!URxvt.foreground:white
+URxvt.foreground:#ffffff
 
 !URxvt.font:xft:Hack:pixelsize=14:antialias=true:hinting=true
 !URxvt.boldFont:xft:Hack:bold:pixelsize=14:antialias=true:hinting=true
