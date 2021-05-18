@@ -62,7 +62,7 @@ enable-ipc = true
 
 modules-left = bspwm title
 modules-center = date
-modules-right = cpu memory packages volume battery menu0
+modules-right = cpu memory packages volume battery menu0 menu1
 
 tray-position = right
 tray-padding = 10
@@ -178,8 +178,40 @@ menu-0-0 = urxvt
 menu-0-0-exec = urxvt &
 menu-0-1 = Firefox
 menu-0-1-exec = firefox-developer-edition &
+menu-0-2 = dmenu
+menu-0-2-exec = dmenu-recent.sh
 
 label-open = Apps
+label-open-foreground= ${colors.hotpink}
+
+label-close = x
+label-close-foreground= ${colors.red}
+label-separator = |
+label-separator-foreground= ${colors.violet}
+
+[module/menu1]
+type = custom/menu
+
+expand-right = true
+
+format = <label-toggle> <menu>
+;format-underline = ${colors.white}
+format-padding = 1
+
+menu-0-0 = -1-
+menu-0-0-exec = bspc desktop -f 1
+menu-0-1 = -2-
+menu-0-1-exec = bspc desktop -f 2
+menu-0-2 = -3-
+menu-0-2-exec = bspc desktop -f 3
+menu-0-3 = -4-
+menu-0-3-exec = bspc desktop -f 4
+menu-0-4 = -5-
+menu-0-4-exec = bspc desktop -f 5
+menu-0-5 = -6-
+menu-0-5-exec = bspc desktop -f 6
+
+label-open = Desktops
 label-open-foreground= ${colors.hotpink}
 
 label-close = x

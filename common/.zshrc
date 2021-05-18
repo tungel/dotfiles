@@ -1,3 +1,18 @@
+# built-in module for profiling zsh. Run: `zprof`
+zmodload zsh/zprof
+
+# check how long it takes to launch zsh:
+# for i in $(seq 1 10); do time zsh -i -c exit; done
+
+# ref: https://medium.com/@dannysmith/little-thing-2-speeding-up-zsh-f1860390f92
+autoload -Uz compinit promptinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
+
+skip_global_compinit=1
+
 # Lines configured by zsh-newuser-install, use vi mode (-v)
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -6,10 +21,6 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
-
-
-autoload -Uz compinit promptinit
-compinit
 
 # For autocompletion with an arrow-key driven interface:
 # Press tab twice to active the menu
