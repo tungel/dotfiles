@@ -179,7 +179,7 @@ menu-0-0-exec = urxvt &
 menu-0-1 = Firefox
 menu-0-1-exec = firefox-developer-edition &
 menu-0-2 = dmenu
-menu-0-2-exec = dmenu-recent.sh
+menu-0-2-exec = ~/bin/dmenu-recent.sh
 
 label-open = Apps
 label-open-foreground= ${colors.hotpink}
