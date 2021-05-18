@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # -------------------------------------------------------------------------------------------------
-# Copyright (c) 2019 zsh-syntax-highlighting contributors
+# Copyright (c) 2020 zsh-syntax-highlighting contributors
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -28,14 +28,15 @@
 # vim: ft=zsh sw=2 ts=2 et
 # -------------------------------------------------------------------------------------------------
 
-BUFFER=$'a=( foo ; bar )'
+alias a=: b='a $(a)'
+
+BUFFER='b $(b)'
 
 expected_region_highlight=(
-  '1 3 assign' # a=(
-  '3 3 reserved-word' # (
-  '5 7 default' # foo
-  '9 9 unknown-token' # ; (not commandseparator; see highlighter source code)
-  '11 13 default' # bar
-  '15 15 assign' # )
-  '15 15 reserved-word' # )
+  '1 1 alias' # b
+  '3 6 default' # $(b)
+  '3 6 command-substitution-unquoted' # $(b)
+  '3 4 command-substitution-delimiter-unquoted' # $(
+  '5 5 alias' # b
+  '6 6 command-substitution-delimiter-unquoted' # )
 )
