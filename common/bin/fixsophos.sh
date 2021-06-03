@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THRESHOLD=200
+THRESHOLD=5
 
 while true; do
   echo "-----------------------------------------------------------------------"
@@ -13,11 +13,17 @@ while true; do
     echo "Threshold reached!"
     echo "Killing sophos processes..."
     sudo kill -9 `sudo lsof -n -i TCP | grep -i 'com.sopho' | awk '{ print $2 }' | head -1`
+
     echo "Done killing sophos."
+
   else
     echo "We are fine for now"
   fi
 
-  sleep 10
+  echo "Killing Sophos Network Extension..."
+  sudo kill -9 `ps aux | grep 'Sophos Network Extension' | grep '_sophos' | awk '{ print $2 }'`
+  echo "Done killing Sophos Network Extension."
+
+  sleep 1
 done
 
