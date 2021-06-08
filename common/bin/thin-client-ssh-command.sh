@@ -10,6 +10,9 @@ else
   if [ "$SSH_ORIGINAL_COMMAND" = "suspend" ]; then
     echo "Suspending the system..."
     sudo systemctl suspend
+  elif [ "$SSH_ORIGINAL_COMMAND" = "restartnx" ]; then
+    echo "Restarting nomachine..."
+    sudo /etc/NX/nxserver --restart
   fi
 fi
 
