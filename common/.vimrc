@@ -286,7 +286,7 @@ if !exists('g:vscode')
     let g:unite_source_grep_recursive_opt = '-R'
   endif
 
-  nnoremap <F8> :Unite -no-quit -keep-focus -no-empty grep:.<cr>
+  " nnoremap <F8> :Unite -no-quit -keep-focus -no-empty grep:.<cr>
 
   " Use F8 to grep from the root level of the current git repo
   " nnoremap <F8> :Unite -no-quit -keep-focus -no-empty grep/git:/<cr>
@@ -313,11 +313,11 @@ if !exists('g:vscode')
   nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 -start-insert file_mru<cr>
 
   " navigates current open buffers
-  nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 -start-insert buffer<cr>
+  " nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 -start-insert buffer<cr>
 
   " open Unite file browser
   " nnoremap <Leader>f :Unite file_rec/neovim -start-insert<cr>
-  nnoremap <Leader>f :call MyFileBrowser()<cr>
+  " nnoremap <Leader>f :call MyFileBrowser()<cr>
 
   " open bookmark
   nnoremap <silent> <Leader>a :Unite -buffer-name=bookmarks -start-insert bookmark<CR>
@@ -1138,7 +1138,7 @@ let g:simple_todo_map_keys = 0
 " markdown will not work
 
 " Set *.md file to be markdown filetype instead of modula2 as default
-autocmd BufRead,BufNew,BufNewFile *.md set filetype=markdown
+" autocmd BufRead,BufNew,BufNewFile *.md set filetype=markdown
 
 " http://stackoverflow.com/questions/19211839/markdown-lists-in-vim
 autocmd Filetype markdown setlocal com=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,b:-,b:+ | set formatoptions+=tcroqln
@@ -1553,7 +1553,7 @@ if !exists('g:vscode')
         \'noremap')
 
   nnoremap <C-p> :<C-u>Denite file/rec<CR>
-  nnoremap <leader>s :<C-u>Denite buffer<CR>
+  " nnoremap <leader>s :<C-u>Denite buffer<CR>
   nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer<CR>
   nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
   nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
@@ -1601,5 +1601,34 @@ let g:completion_matching_ignore_case = 1
 let g:db_ui_use_nerd_fonts = 1
 
 "--- end vim-dadbod }}}
+"===============================================================================
+
+
+"===============================================================================
+"--- begin fzf {{{
+" Ctrl+t : open in new tab
+" Ctrl+x : open in new split
+" Ctrl+v : open in new vertical split
+
+" git files
+nnoremap <leader>f :GFiles<CR>
+" Open buffers
+nnoremap <leader>b :Buffers<CR>
+" rg search result
+nnoremap <leader>s :Rg<CR>
+" Lines in loaded buffers
+nnoremap <leader>l :Lines<CR>
+" Git commits of the whole project (requires fugitive.vim)
+nnoremap <leader>gc :Commits<CR>
+" Git commits for the current buffer; visual-select lines to track changes in the range
+nnoremap <leader>gb :BCommits<CR>
+" Git files status
+nnoremap <leader>gf :GFiles?<CR>
+" Search vim's commands
+nnoremap <leader>vc :Commands<CR>
+
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
+
+"--- end fzf }}}
 "===============================================================================
 
