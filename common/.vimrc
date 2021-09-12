@@ -382,11 +382,11 @@ if !exists('g:vscode')
       \['▷ tig                                                        ⌘ ,gt',
           \'normal ,gt'],
       \['▷ git status       (Fugitive)                                ⌘ ,gs',
-          \'Gstatus'],
+          \'Git'],
       \['▷ git diff         (Fugitive)                                ⌘ ,gd',
           \'Gdiff'],
       \['▷ git commit       (Fugitive)                                ⌘ ,gc',
-          \'Gcommit'],
+          \'Git commit'],
       \['▷ git log          (Fugitive)                                ⌘ ,gl',
           \'exe "silent Glog | Unite quickfix"'],
       \['▷ git blame        (Fugitive)                                ⌘ ,gb',
@@ -548,11 +548,11 @@ nmap <Leader>1 :call SyncTexForward()<CR>
 "===============================================================================
 "---begin fugitive {{{
 " whow and resize the git status window to be 30% of the screen size
-nmap <leader>gs :Gstatus<cr>:exec 'resize' . string(&lines * 0.3)<cr>
+nmap <leader>gs :Git<cr>:exec 'resize' . string(&lines * 0.3)<cr>
 
-nmap <leader>gc :Gcommit<cr>
+nmap <leader>gc :Git commit<cr>
 nmap <leader>gd :Gdiff<cr>
-nmap <leader>gp :Gpush<cr>
+nmap <leader>gp :Git push<cr>
 nmap <leader>ge :Gedit<cr>
 
 " After analyze :Gdiff we want to just display the current version on disk only,
