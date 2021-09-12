@@ -1567,3 +1567,31 @@ endif
 
 "--- end denite }}}
 "===============================================================================
+
+
+"===============================================================================
+"--- begin vim-dadbod {{{
+
+" let g:dbs = {
+" \  'dev': 'mysql://user:password@host:3306'
+" \ }
+
+" For built in omnifunc
+autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
+
+" Source is automatically added, you just need to include it in the chain complete list
+let g:completion_chain_complete_list = {
+    \   'sql': [
+    \    {'complete_items': ['vim-dadbod-completion']},
+    \   ],
+    \ }
+" Make sure `substring` is part of this list. Other items are optional for this completion source
+let g:completion_matching_strategy_list = ['exact', 'substring']
+" Useful if there's a lot of camel case items
+let g:completion_matching_ignore_case = 1
+
+let g:db_ui_use_nerd_fonts = 1
+
+"--- end vim-dadbod }}}
+"===============================================================================
+

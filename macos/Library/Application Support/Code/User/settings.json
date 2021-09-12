@@ -2,7 +2,6 @@
 {
     // jdk setting on macOS
     "java.home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home",
-
     "editor.formatOnSave": false,
     "editor.rulers": [
         80
@@ -132,6 +131,7 @@
         "editor.tabSize": 4,
         "files.trimTrailingWhitespace": true,
         "editor.formatOnSave": true,
+        // "editor.defaultFormatter": "ms-python.python",
     },
     "[vue]": {
         "editor.tabSize": 2,
@@ -231,18 +231,23 @@
     // Workaround by setting `"python.jediEnabled": true` at workspace level
     "python.jediEnabled": false,
     "java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/Users/ttl/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
-    "plantuml.render": "Local",
-    "plantuml.exportFormat": "svg",
+    // "plantuml.render": "Local",
+    "plantuml.render": "PlantUMLServer",
+    "plantuml.server": "http://localhost:8060",
+    "plantuml.urlFormat": "svg",
+    "plantuml.exportFormat": "png",
     "plantuml.exportSubFolder": false,
     "terminal.integrated.inheritEnv": false,
     "ruby.intellisense": "rubyLocate",
     "editor.largeFileOptimizations": false,
-    "plantuml.urlFormat": "svg",
     "python.languageServer": "Pylance",
     "python.formatting.autopep8Args": [
         "--max-line-length=120"
     ],
-    "python.formatting.blackArgs": ["--line-length", "120"],
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "120"
+    ],
     "workbench.tree.indent": 40,
     "pascal.formatter.engine": "ptop",
     "pascal.formatter.enginePath": "/usr/local/bin/ptop",
@@ -266,6 +271,18 @@
             "eslintIntegration": true,
             "trailingComma": "es5",
             "printWidth": 120
-          }
+        }
+    },
+    "workbench.editor.untitled.hint": "hidden",
+    "security.workspace.trust.untrustedFiles": "open",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "python.formatting.autopep8Path": "",
+    "python.formatting.blackPath": "/Users/ttl/Library/Python/3.9/bin/black",
+    "python.formatting.provider": "black",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
     }
 }
