@@ -572,6 +572,14 @@ nmap <leader>gl :exe "silent Glog \| Unite quickfix -no-quit"<cr>
 if has("autocmd")
     autocmd BufReadPost fugitive://* set bufhidden=delete
 end
+
+" work around recent key binding changes
+" https://github.com/tpope/vim-fugitive/issues/1221
+" https://github.com/tpope/vim-fugitive/commit/a510b3aadf3f39711c113371c18adc48ad54e6ee#commitcomment-35424504
+autocmd FileType fugitiveblame nmap <buffer> q gq
+autocmd FileType fugitiveblame nmap <buffer> D dd
+autocmd FileType fugitive nmap <buffer> q gq
+autocmd FileType fugitive nmap <buffer> D dd
 "---end fugitive }}}
 "===============================================================================
 
