@@ -1629,6 +1629,9 @@ nnoremap <leader>vc :Commands<CR>
 
 inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
 
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
 "--- end fzf }}}
 "===============================================================================
 
