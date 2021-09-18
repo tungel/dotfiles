@@ -23,6 +23,16 @@ font:
 # Send ESC (\x1b) before characters when alt is pressed.
 alt_send_esc: true
 
+# Use custom cursor colors. If true, display the cursor in the cursor.foreground
+# and cursor.background colors, otherwise invert the colors of the cursor.
+custom_cursor_colors: true
+
+colors:
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x000000'
+    cursor: '0x00ff00'
+
 key_bindings:
   # Use Ctrl+[0..9] to select windows in tmux
   - { key: Key1,        mods: Control, chars: "\x1b[27;5;49~"               }
@@ -36,4 +46,14 @@ key_bindings:
   - { key: Key9,        mods: Control, chars: "\x1b[27;5;57~"               }
   - { key: Key0,        mods: Control, chars: "\x1b[27;5;48~"               }
   - { key: Tab,         mods: Control, chars: "\x1b[27;5;9~"                }
+  # Use Alt+[1..9] to select tabs in Vim/NeoVim
+  - { key: Key1,        mods: Alt,     chars: "\x1b1"                       }
+  - { key: Key2,        mods: Alt,     chars: "\x1b2"                       }
+  - { key: Key3,        mods: Alt,     chars: "\x1b3"                       }
+  - { key: Key4,        mods: Alt,     chars: "\x1b4"                       }
+  - { key: Key5,        mods: Alt,     chars: "\x1b5"                       }
+  - { key: Key6,        mods: Alt,     chars: "\x1b6"                       }
+  - { key: Key7,        mods: Alt,     chars: "\x1b7"                       }
+  - { key: Key8,        mods: Alt,     chars: "\x1b8"                       }
+  - { key: Key9,        mods: Alt,     chars: "\x1b9"                       }
 
