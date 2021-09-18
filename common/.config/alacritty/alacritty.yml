@@ -1,6 +1,6 @@
 env:
-  # TERM: xterm-256color
-  TERM: tmux-256color
+  TERM: xterm-256color
+  # TERM: tmux-256color
 font:
   normal:
     family: FantasqueSansMono Nerd Font Mono
