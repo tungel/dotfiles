@@ -1,0 +1,39 @@
+env:
+  # TERM: xterm-256color
+  TERM: tmux-256color
+font:
+  normal:
+    family: FantasqueSansMono Nerd Font Mono
+    style: Regular
+
+  bold:
+    family: FantasqueSansMono Nerd Font Mono
+    style: Bold
+
+  italic:
+    family: FantasqueSansMono Nerd Font Mono
+    style: Italic
+
+  bold_italic:
+    family: FantasqueSansMono Nerd Font Mono
+    style: Bold Italic
+
+  size: 13
+
+# Send ESC (\x1b) before characters when alt is pressed.
+alt_send_esc: true
+
+key_bindings:
+  # Use Ctrl+[0..9] to select windows in tmux
+  - { key: Key1,        mods: Control, chars: "\x1b[27;5;49~"               }
+  - { key: Key2,        mods: Control, chars: "\x1b[27;5;50~"               }
+  - { key: Key3,        mods: Control, chars: "\x1b[27;5;51~"               }
+  - { key: Key4,        mods: Control, chars: "\x1b[27;5;52~"               }
+  - { key: Key5,        mods: Control, chars: "\x1b[27;5;53~"               }
+  - { key: Key6,        mods: Control, chars: "\x1b[27;5;54~"               }
+  - { key: Key7,        mods: Control, chars: "\x1b[27;5;55~"               }
+  - { key: Key8,        mods: Control, chars: "\x1b[27;5;56~"               }
+  - { key: Key9,        mods: Control, chars: "\x1b[27;5;57~"               }
+  - { key: Key0,        mods: Control, chars: "\x1b[27;5;48~"               }
+  - { key: Tab,         mods: Control, chars: "\x1b[27;5;9~"                }
+
