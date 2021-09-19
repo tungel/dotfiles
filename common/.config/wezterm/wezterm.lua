@@ -42,6 +42,7 @@ return {
     brights = {"#666666","#ff3334","#9ec400","#f0c674","#81a2be","#b77ee0","#54ced6","#282a2e"},
   },
 
-  term = "wezterm",
+  -- term = "wezterm",
+  term = "xterm-256color",
 }
 
