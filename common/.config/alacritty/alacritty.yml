@@ -57,6 +57,7 @@ colors:
     text: '0x000000'
     cursor: '0x00ff00'
 
+# CMD + N: SpawnNewInstance
 key_bindings:
   # Use Ctrl+[0..9] to select windows in tmux
   - { key: Key1,        mods: Control, chars: "\x1b[27;5;49~"               }
@@ -80,4 +81,10 @@ key_bindings:
   - { key: Key7,        mods: Alt,     chars: "\x1b7"                       }
   - { key: Key8,        mods: Alt,     chars: "\x1b8"                       }
   - { key: Key9,        mods: Alt,     chars: "\x1b9"                       }
+  # Use Alt+[j,k,h,l] to resize Vim/Neovim windows. Note: these mappings seem
+  # only needed on macOS. Arch Linux doesn't need these mapping
+  - { key: J,           mods: Alt,     chars: "\x1bj"                       }
+  - { key: K,           mods: Alt,     chars: "\x1bk"                       }
+  - { key: H,           mods: Alt,     chars: "\x1bh"                       }
+  - { key: L,           mods: Alt,     chars: "\x1bl"                       }
 
