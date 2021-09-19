@@ -18,7 +18,12 @@ font:
     family: FantasqueSansMono Nerd Font Mono
     style: Bold Italic
 
-  size: 16
+  # on Arch Linux
+  size: 13
+
+  # on macOS
+  # size: 16
+
   use_thin_strokes: true
 
 window:
@@ -26,9 +31,10 @@ window:
   #
   # Specified in number of columns/lines, not pixels. If both are zero this
   # setting is ignored.
-  dimensions:
-    columns: 1000
-    lines: 120
+  # NOTE: this setting causes alacritty not able to start in bspwm
+  # dimensions:
+  #   columns: 1000
+  #   lines: 120
 
   # Window padding (changes require restart)
   #
