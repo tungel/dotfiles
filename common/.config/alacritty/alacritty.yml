@@ -18,7 +18,25 @@ font:
     family: FantasqueSansMono Nerd Font Mono
     style: Bold Italic
 
-  size: 13
+  size: 16
+  use_thin_strokes: true
+
+window:
+  # Window dimensions (changes require restart)
+  #
+  # Specified in number of columns/lines, not pixels. If both are zero this
+  # setting is ignored.
+  dimensions:
+    columns: 1000
+    lines: 120
+
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is not scaled by
+  # DPI and the specified value is always added at both opposing sides.
+  padding:
+    x: 5
+    y: 0
 
 # Send ESC (\x1b) before characters when alt is pressed.
 alt_send_esc: true
