@@ -1,22 +1,38 @@
 local wezterm = require 'wezterm';
 return {
-  font = wezterm.font("FantasqueSansMono Nerd Font Mono"),
-  font_size=16.0,
+  window_padding = {
+    left = 2,
+    -- This will become the scrollbar width if you have enabled the scrollbar!
+    right = 2,
+
+    top = 0,
+    bottom = 0,
+  },
+
+  -- font = wezterm.font("FantasqueSansMono Nerd Font Mono"),
+  -- font_size=16,
+  font = wezterm.font("FiraCode Nerd Font Mono"),
+  -- font = wezterm.font("JetBrains Mono"),
+  font_size=13.5,
+
+  -- font = wezterm.font("Iosevka Nerd Font Mono"),
+  -- font_size=14,
+  -- line_height = 0.9,
 
   -- color_scheme = "MaterialOcean",
 
   keys = {
-    {key='1', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;49~'}},
-    {key='2', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;50~'}},
-    {key='3', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;51~'}},
-    {key='4', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;52~'}},
-    {key='5', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;53~'}},
-    {key='6', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;54~'}},
-    {key='7', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;55~'}},
-    {key='8', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;56~'}},
-    {key='9', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;57~'}},
-    {key='0', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;48~'}},
-    {key='Tab', mods='CTRL',            action=wezterm.action{SendString='\x1b[27;5;9~'}},
+    {key='1',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;49~'}},
+    {key='2',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;50~'}},
+    {key='3',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;51~'}},
+    {key='4',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;52~'}},
+    {key='5',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;53~'}},
+    {key='6',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;54~'}},
+    {key='7',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;55~'}},
+    {key='8',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;56~'}},
+    {key='9',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;57~'}},
+    {key='0',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;48~'}},
+    {key='Tab', mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;9~'}},
   },
 
 
