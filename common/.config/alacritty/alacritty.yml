@@ -5,41 +5,34 @@ font:
   # normal:
   #   family: FantasqueSansMono Nerd Font Mono
   #   style: Regular
-
   # bold:
   #   family: FantasqueSansMono Nerd Font Mono
   #   style: Bold
-
   # italic:
   #   family: FantasqueSansMono Nerd Font Mono
   #   style: Italic
-
   # bold_italic:
   #   family: FantasqueSansMono Nerd Font Mono
   #   style: Bold Italic
+  # FantasqueSansMono Nerd Font Mono
+  # size: 13 # on Arch Linux
+  # size: 16 # on macOS
 
   normal:
     family: FiraCode Nerd Font Mono
     style: Regular
-
   bold:
     family: FiraCode Nerd Font Mono
     style: Bold
-
   italic:
     family: FiraCode Nerd Font Mono
     style: Italic
-
   bold_italic:
     family: FiraCode Nerd Font Mono
     style: Bold Italic
-
-  # on Arch Linux
-  # size: 13
-
-  # on macOS
-  # size: 16 # FantasqueSansMono Nerd Font Mono
-  size: 13
+  # FiraCode Nerd Font Mono
+  # size: 13 # on macOS
+  size: 10.5 # on Arch Linux
 
   use_thin_strokes: true
 
