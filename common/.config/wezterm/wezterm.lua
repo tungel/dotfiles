@@ -11,13 +11,23 @@ return {
 
   -- font = wezterm.font("FantasqueSansMono Nerd Font Mono"),
   -- font_size=16,
-  font = wezterm.font("FiraCode Nerd Font Mono"),
-  -- font = wezterm.font("JetBrains Mono"),
+  -- font = wezterm.font("FiraCode Nerd Font Mono"),
+  -- font_size=13.5,
+
+  font = wezterm.font("JetBrainsMono Nerd Font Mono"),
   font_size=13.5,
 
   -- font = wezterm.font("Iosevka Nerd Font Mono"),
+  -- font_size=13,
+  -- line_height = 0.95,
+
+  -- font = wezterm.font("Menlo"),
+
+  -- font = wezterm.font("CaskaydiaCove Nerd Font Mono"),
   -- font_size=14,
-  -- line_height = 0.9,
+
+  -- font = wezterm.font("Monoid Nerd Font Mono"),
+  -- font_size=13,
 
   -- color_scheme = "MaterialOcean",
 
