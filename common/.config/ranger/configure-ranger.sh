@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# remove existing files
+rm ~/.config/ranger/rc.conf
+rm ~/.config/ranger/rifle.conf
+
 # Copy default config files:
 ranger --copy-config=commands_full
 ranger --copy-config=rifle

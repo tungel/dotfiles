@@ -30,6 +30,11 @@ return {
   -- font_size=13,
 
   -- color_scheme = "MaterialOcean",
+  -- color_scheme = "Obsidian",
+  -- color_scheme = "OceanicMaterial",
+  -- color_scheme = "Overnight Slumber",
+  -- color_scheme = "Tinacious Design (Dark)",
+  -- color_scheme = "Ubuntu",
 
   keys = {
     {key='1',   mods='CTRL',          action=wezterm.action{SendString='\x1b[27;5;49~'}},

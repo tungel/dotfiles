@@ -2,6 +2,8 @@
 # ==============================================================================
 # Section added by me
 
+set colorscheme tung
+
 # Show hidden files? You can toggle this by typing 'zh'
 set show_hidden true
 # Display the directory name in tabs?

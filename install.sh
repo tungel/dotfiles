@@ -10,7 +10,7 @@ OVERWRITE=0
 TARGET_DIR=~
 # create .config/ranger because we only partially symlink ranger
 # for more info, read `common/.config/ranger/note.md`
-mkdir -p $TARGET_DIR/.config/ranger
+mkdir -p $TARGET_DIR/.config/ranger/colorschemes
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
