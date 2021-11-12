@@ -220,6 +220,13 @@ alias dr='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}
 # list docker images
 alias di='docker images'
 
+# export all changed files to an archive
+# to include newly added files, run `git add *` before running this alias
+# ref: https://stackoverflow.com/questions/2997612/how-to-export-all-changed-added-files-from-git
+#      https://stackoverflow.com/questions/1371261/get-current-directory-name-without-full-path-in-a-bash-script
+# this will create a file like `2021-11-12-<current_dir_name>-git-backup.tar.gz`
+alias gitbackup='git diff --diff-filter=ACMRT --name-only HEAD | xargs tar -czf `date +%F`-${PWD##*/}-git-backup.tar.gz'
+
 # remove xcode DerivedData
 alias xcodecleanup='if [[ -e ~/Library/Developer/Xcode/DerivedData ]]; then rm -rf ~/Library/Developer/Xcode/DerivedData/*; fi'
 
