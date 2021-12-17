@@ -167,7 +167,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 --------------------- MY OWN CONFIGS SECTION -----------------------------------
 --------------------------------------------------------------------------------
 
- -- use Shift+q to format a paragraph to do wrapping at 80 chars
+-- use Shift+q to format a paragraph to do wrapping at 80 chars
 vim.opt.tw = 80
 vim.opt.colorcolumn = "+1" -- highlight the 81st column
 
@@ -179,9 +179,35 @@ vim.cmd([[
   noremap <F6> :setlocal spell! spelllang=en_us<CR>
   nnoremap Q gqip
   imap jk <ESC>
+
+
+  " function! CloseSomething()
+  "   if winnr("$") == 1 && tabpagenr("$") > 1 && tabpagenr() > 1 && tabpagenr() < tabpagenr("$")
+  "     q | tabprev
+  "   else
+  "     q
+  "   endif
+
+  "   " try to move the cursor back to Unite candidate window
+  "   " This normally happens when I use Unite grep, then open a candidate in a new
+  "   " tab, analyze it and then close it. Then go back to analyze next candidate...
+  "   let uniteWindow = bufwinnr("unite")
+  "   if uniteWindow > 0
+  "     execute uniteWindow "wincmd w"
+  "   endif
+  " endfunction
+
+  " " Use <leader>c to quickly close the current buffer
+  " " 2 <CR> to auto close the git commit window
+  " " nnoremap <leader>c :q<CR><CR>
+  " " nnoremap <leader>c :call CloseSomething()<CR><CR>
+  " nnoremap ,c :call CloseSomething()<CR><CR>
 ]])
 
 lvim.keys.normal_mode["<C-]>"] = ":Telescope lsp_definitions<CR>"
+
+-- use Ctrl + l to redraw the screen and remove any search highlighs
+lvim.keys.normal_mode["<C-l>"] = ":nohl<CR>"
 
 lvim.keys.normal_mode["<leader>r"] = ":RustRunnables<CR>"
 
@@ -199,11 +225,36 @@ lvim.keys.normal_mode[",f"] = ":Telescope find_files<CR>"
 -- LunarVim switch to previous buffer: <leader>bb
 lvim.keys.normal_mode[",<TAB>"] = ":b#<CR>"
 
+
+lvim.builtin.dap.active = true
 lvim.plugins = {
-  {"simrat39/rust-tools.nvim"},
-  {"mfussenegger/nvim-dap"},
-  {"nvim-lua/plenary.nvim"},
+  {
+    "simrat39/rust-tools.nvim",
+    config = function()
+      require("rust-tools").setup({
+        tools = {
+          autoSetHints = true,
+          hover_with_actions = true,
+          runnables = {
+            use_telescope = true,
+          },
+        },
+        server = {
+          cmd = { vim.fn.stdpath "data" .. "/lsp_servers/rust/rust-analyzer" },
+          on_attach = require("lvim.lsp").common_on_attach,
+          on_init = require("lvim.lsp").common_on_init,
+        },
+        })
+    end,
+    ft = { "rust", "rs" },
+  },
+  -- {"mfussenegger/nvim-dap"},
+  -- {"nvim-lua/plenary.nvim"},
+  { "mfussenegger/nvim-jdtls" },
 }
+
+
+vim.list_extend(lvim.lsp.override, { "java", "jdtls" })
 
 require('rust-tools').setup({})
 
@@ -221,6 +272,7 @@ local components = require("lvim.core.lualine.components")
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
 lvim.builtin.lualine.sections.lualine_a = { "mode" }
+lvim.builtin.lualine.sections.lualine_c = { {"filename", path = 2} } -- show full path to current file
 lvim.builtin.lualine.sections.lualine_y = {
   components.spaces,
   components.location
