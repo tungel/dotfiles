@@ -235,6 +235,11 @@ lvim.plugins = {
         tools = {
           autoSetHints = true,
           hover_with_actions = true,
+
+          hover_actions = {
+            -- whether the hover action window gets automatically focused
+            auto_focus = true
+          },
           runnables = {
             use_telescope = true,
           },
@@ -256,11 +261,8 @@ lvim.plugins = {
 
 vim.list_extend(lvim.lsp.override, { "java", "jdtls" })
 
-require('rust-tools').setup({})
-
-
 -- disable auto_resize to prevent the file tree window size reset after
--- a new file is opened
+-- a new file is opened. Ref: https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/core/nvimtree.lua
 lvim.builtin.nvimtree.setup.view.auto_resize = false
 
 
