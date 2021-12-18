@@ -222,6 +222,8 @@ lvim.keys.normal_mode[",s"] = ":Telescope live_grep<CR>"
 
 lvim.keys.normal_mode[",f"] = ":Telescope find_files<CR>"
 
+lvim.keys.normal_mode[",c"] = ":BufferClose<CR>"
+
 -- LunarVim switch to previous buffer: <leader>bb
 lvim.keys.normal_mode[",<TAB>"] = ":b#<CR>"
 
