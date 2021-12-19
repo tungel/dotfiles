@@ -15,14 +15,8 @@ lvim.colorscheme = "onedarker"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
--- lvim.leader = ","
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-
--- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = false
--- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -74,6 +68,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
+  "vue",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -178,30 +173,22 @@ vim.cmd([[
   nnoremap <M-l> :vertical resize +5<cr>
   noremap <F6> :setlocal spell! spelllang=en_us<CR>
   nnoremap Q gqip
-  imap jk <ESC>
 
+  " Each time you open a git object using fugitive it creates a new buffer. This
+  " means that your buffer listing can quickly become swamped with fugitive buffers.
+  " Here’s an autocommand that prevents this from becomming an issue:
+  " http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
+  if has("autocmd")
+      autocmd BufReadPost fugitive://* set bufhidden=delete
+  end
 
-  " function! CloseSomething()
-  "   if winnr("$") == 1 && tabpagenr("$") > 1 && tabpagenr() > 1 && tabpagenr() < tabpagenr("$")
-  "     q | tabprev
-  "   else
-  "     q
-  "   endif
-
-  "   " try to move the cursor back to Unite candidate window
-  "   " This normally happens when I use Unite grep, then open a candidate in a new
-  "   " tab, analyze it and then close it. Then go back to analyze next candidate...
-  "   let uniteWindow = bufwinnr("unite")
-  "   if uniteWindow > 0
-  "     execute uniteWindow "wincmd w"
-  "   endif
-  " endfunction
-
-  " " Use <leader>c to quickly close the current buffer
-  " " 2 <CR> to auto close the git commit window
-  " " nnoremap <leader>c :q<CR><CR>
-  " " nnoremap <leader>c :call CloseSomething()<CR><CR>
-  " nnoremap ,c :call CloseSomething()<CR><CR>
+  " work around recent key binding changes
+  " https://github.com/tpope/vim-fugitive/issues/1221
+  " https://github.com/tpope/vim-fugitive/commit/a510b3aadf3f39711c113371c18adc48ad54e6ee#commitcomment-35424504
+  autocmd FileType fugitiveblame nmap <buffer> q gq
+  autocmd FileType fugitiveblame nmap <buffer> D dd
+  autocmd FileType fugitive nmap <buffer> q gq
+  autocmd FileType fugitive nmap <buffer> D dd
 ]])
 
 lvim.keys.normal_mode["<C-]>"] = ":Telescope lsp_definitions<CR>"
@@ -226,6 +213,42 @@ lvim.keys.normal_mode[",c"] = ":BufferClose<CR>"
 
 -- LunarVim switch to previous buffer: <leader>bb
 lvim.keys.normal_mode[",<TAB>"] = ":b#<CR>"
+
+
+local Log = require "lvim.core.log"
+Log:debug("----------------- Hello world -------------")
+
+
+-- copy from `lvim.builtin.which_key.opts` https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/core/which-key.lua
+local which_key_opts = {
+      mode = "n", -- NORMAL mode
+      prefix = ",",
+      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true, -- use `silent` when creating keymaps
+      noremap = true, -- use `noremap` when creating keymaps
+      nowait = true, -- use `nowait` when creating keymaps
+    }
+local which_key_mappings = {
+  g = {
+    name = "fugitive",
+
+    -- fugitive: see previous revisions of the current buffer (git history)
+    -- https://www.reddit.com/r/vim/comments/eu71r9/fugitivevim_how_to_see_previous_revisions_of_the/
+    h = { "<cmd>0Gclog<CR>", "History (previous revisions)" },
+
+    p = { "<cmd>Git push<CR>", "Git push" },
+    e = { "<cmd>Gedit<CR>", "Edit a fugitive-object" },
+
+    -- <c-w>K is to move the status window to the top
+    s = { "<cmd>Git<cr><c-w>K:exec 'resize' . string(&lines * 0.3)<cr>", "Git status" },
+  },
+}
+
+-- make use of the `on_config_done` callback to register additional keys
+-- mappings while using a different prefix
+lvim.builtin.which_key.on_config_done = function(which_key)
+  which_key.register(which_key_mappings, which_key_opts)
+end
 
 
 lvim.builtin.dap.active = true
@@ -255,9 +278,8 @@ lvim.plugins = {
     end,
     ft = { "rust", "rs" },
   },
-  -- {"mfussenegger/nvim-dap"},
-  -- {"nvim-lua/plenary.nvim"},
   { "mfussenegger/nvim-jdtls" },
+  { "tpope/vim-fugitive" },
 }
 
 
