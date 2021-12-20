@@ -166,6 +166,13 @@ lvim.builtin.treesitter.highlight.enabled = true
 vim.opt.tw = 80
 vim.opt.colorcolumn = "+1" -- highlight the 81st column
 
+-- Increase timeoutlen to fix issue that causes some keybindings don't work
+-- timeoutlen is the time to wait for a mapped sequence to complete (in milliseconds)
+-- Default value in Vim is 1000; default value in LunarVim is 100 https://github.com/LunarVim/LunarVim/blob/68cdb62f87/lua/lvim/config/settings.lua#L28
+-- To check the current value, run `:set timeoutlen?`
+-- Ref: https://github.com/LunarVim/LunarVim/issues/1979
+vim.opt.timeoutlen = 350
+
 vim.cmd([[
   nnoremap <M-h> :vertical resize -5<cr>
   nnoremap <M-j> :resize +5<cr>
@@ -208,6 +215,9 @@ lvim.keys.normal_mode[",m"] = ":Telescope oldfiles<CR>"
 lvim.keys.normal_mode[",s"] = ":Telescope live_grep<CR>"
 
 lvim.keys.normal_mode[",f"] = ":Telescope find_files<CR>"
+
+-- TODO: to remove this once https://github.com/LunarVim/LunarVim/pull/2089 is merged or there is a better solution
+lvim.keys.normal_mode[",F"] = ":Telescope git_files<CR>"
 
 lvim.keys.normal_mode[",c"] = ":BufferClose<CR>"
 
