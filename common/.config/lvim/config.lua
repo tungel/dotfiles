@@ -171,7 +171,7 @@ vim.opt.colorcolumn = "+1" -- highlight the 81st column
 -- Default value in Vim is 1000; default value in LunarVim is 100 https://github.com/LunarVim/LunarVim/blob/68cdb62f87/lua/lvim/config/settings.lua#L28
 -- To check the current value, run `:set timeoutlen?`
 -- Ref: https://github.com/LunarVim/LunarVim/issues/1979
-vim.opt.timeoutlen = 350
+vim.opt.timeoutlen = 500
 
 vim.cmd([[
   nnoremap <M-h> :vertical resize -5<cr>
