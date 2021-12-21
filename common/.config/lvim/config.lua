@@ -226,6 +226,9 @@ vim.cmd([[
   "===============================================================================
 ]])
 
+lvim.keys.term_mode["<C-h>"] = false -- disable C-h mapping so that it erases left char instead of hiding the term
+lvim.keys.term_mode["<C-[><C-[>"] = "<C-\\><C-N>" -- press C-[ two times to switch to move mod in terminal
+
 lvim.keys.normal_mode["<C-]>"] = ":Telescope lsp_definitions<CR>"
 
 -- use Ctrl + l to redraw the screen and remove any search highlighs
