@@ -206,8 +206,9 @@ vim.cmd([[
   " \  'dev': 'mysql://user:password@host:3306'
   " \ }
 
-  " For built in omnifunc
-  autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
+  " Setup vim-dadbod-completion https://github.com/kristijanhusak/vim-dadbod-completion
+  " For hrsh7th/nvim-cmp
+  autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
 
   " Source is automatically added, you just need to include it in the chain complete list
   let g:completion_chain_complete_list = {
@@ -256,6 +257,8 @@ lvim.keys.normal_mode[",c"] = ":BufferClose<CR>"
 lvim.keys.normal_mode[",<TAB>"] = ":b#<CR>"
 
 
+-- To view the log, press `<Space>Lld` <Cmd>lua require('lvim.core.terminal').toggle_log_view(require('lvim.core.log').get_path())<CR>
+-- The log file location: ~/.cache/nvim/lvim.log
 local Log = require "lvim.core.log"
 Log:debug("----------------- Hello world -------------")
 
@@ -324,6 +327,7 @@ lvim.plugins = {
   { "tpope/vim-rhubarb" }, -- GitHub extension for fugitive.vim
   { "tpope/vim-dadbod" }, -- interacting with databases
   { "kristijanhusak/vim-dadbod-ui" }, -- UI for tpope/vim-dadbod
+  { "kristijanhusak/vim-dadbod-completion" } -- Database autocompletion for vim-dadbod
 }
 
 
@@ -347,4 +351,7 @@ lvim.builtin.lualine.sections.lualine_y = {
   components.spaces,
   components.location
 }
+
+-- disable default auto spell on markdown files. Ref: https://github.com/LunarVim/LunarVim/blob/5663c925ebef0d48732e8794c2335c118ee61e55/lua/lvim/core/autocmds.lua#L49-L52
+lvim.autocommands._markdown = { { "FileType", "markdown", "setlocal wrap" } }
 
