@@ -246,11 +246,6 @@ lvim.keys.normal_mode[",m"] = ":Telescope oldfiles<CR>"
 -- LunarVim search text in current project: <leader>st
 lvim.keys.normal_mode[",s"] = ":Telescope live_grep<CR>"
 
-lvim.keys.normal_mode[",f"] = ":Telescope find_files<CR>"
-
--- TODO: to remove this once https://github.com/LunarVim/LunarVim/pull/2089 is merged or there is a better solution
-lvim.keys.normal_mode[",F"] = ":Telescope git_files<CR>"
-
 lvim.keys.normal_mode[",c"] = ":BufferClose<CR>"
 
 -- LunarVim switch to previous buffer: <leader>bb
@@ -286,6 +281,9 @@ local which_key_mappings = {
     -- <c-w>K is to move the status window to the top
     s = { "<cmd>Git<cr><c-w>K:exec 'resize' . string(&lines * 0.3)<cr>", "Git status" },
   },
+
+  -- https://github.com/LunarVim/LunarVim/pull/2089 - combine ":Telescope find_files<CR>" and ":Telescope git_files<CR>"
+  f = { require("lvim.core.telescope.custom-finders").find_project_files, "Find File" },
 }
 
 -- make use of the `on_config_done` callback to register additional keys
