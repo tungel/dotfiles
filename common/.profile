@@ -271,8 +271,8 @@ alias tmux="tmux -2" # force tmux to use 256 colors
 
 # change system-wide editor
 #export VISUAL="/usr/bin/vim -p -X"
-export VISUAL="$(which nvim)"
-export EDITOR="$(which nvim)"
+export VISUAL="$(which lvim)"
+export EDITOR="$(which lvim)"
 
 # setup ~/.config/nvim for Neovim
 setup_nvim_config() {
