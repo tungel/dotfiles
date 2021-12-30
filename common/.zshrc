@@ -144,18 +144,18 @@ fi
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 
 # PROMPT with git status
-source ~/.zplugins/zsh-git-prompt/zshrc.sh
-PS1=''
-case ${TERM} in
-  xterm*|linux*|rxvt*|tmux*|Eterm|aterm|kterm|gnome*)
-    PS1=$'%{\e[1;34m%}%n %{\e[0m%}at %{\e[0;33m%}%M %{\e[0m%}in %{\e[1;32m%}%~ %b$(git_super_status)
-%{\e[1;30m%}>>> %{\e[0m%}'
-    ;;
-  # for emacs
-  "dumb")
-    PROMPT_COMMAND=
-    PS1="> "
-esac
+# source ~/.zplugins/zsh-git-prompt/zshrc.sh
+# PS1=''
+# case ${TERM} in
+#   xterm*|linux*|rxvt*|tmux*|Eterm|aterm|kterm|gnome*)
+#     PS1=$'%{\e[1;34m%}%n %{\e[0m%}at %{\e[0;33m%}%M %{\e[0m%}in %{\e[1;32m%}%~ %b$(git_super_status)
+# %{\e[1;30m%}>>> %{\e[0m%}'
+#     ;;
+#   # for emacs
+#   "dumb")
+#     PROMPT_COMMAND=
+#     PS1="> "
+# esac
 
 
 
@@ -280,4 +280,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+eval "$(starship init zsh)"
 
