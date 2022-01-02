@@ -325,7 +325,8 @@ lvim.plugins = {
   { "tpope/vim-rhubarb" }, -- GitHub extension for fugitive.vim
   { "tpope/vim-dadbod" }, -- interacting with databases
   { "kristijanhusak/vim-dadbod-ui" }, -- UI for tpope/vim-dadbod
-  { "kristijanhusak/vim-dadbod-completion" } -- Database autocompletion for vim-dadbod
+  { "kristijanhusak/vim-dadbod-completion" }, -- Database autocompletion for vim-dadbod
+  { "mechatroner/rainbow_csv" },
 }
 
 

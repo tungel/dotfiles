@@ -10,6 +10,9 @@
 - `alacritty` terminal emulator
 - `neovim`
 - `LunarVim` https://github.com/LunarVim/LunarVim
+  + Install nvm: https://github.com/nvm-sh/nvm
+  + then, install the latest nodejs version using `nvm`
+  + install rustup: https://rustup.rs/
 - `starship` cross-shell prompt
 
 ## Fonts
