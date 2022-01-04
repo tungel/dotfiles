@@ -355,8 +355,10 @@ export DMENUFONT="Consolas-11"
 # use Oracle Java
 # export JAVA_HOME=/usr/lib/jvm/java-8-jdk
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home
-export JAVA_HOME=$(/usr/libexec/java_home)
 # export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+
+# macOS?
+# export JAVA_HOME=$(/usr/libexec/java_home)
 
 # IntelliJ IDEA, link `current` directory to latest stable release dir
 alias idea="~/dev/tools/idea/current/bin/idea.sh"
