@@ -434,6 +434,7 @@ pathAdd $HOME/.cargo/bin
 # For Rust Racer completion
 # export RUST_SRC_PATH=$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
 export RUST_SRC_PATH=$HOME/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src
+[ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # Add RVM to PATH for scripting
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
@@ -477,13 +478,9 @@ pathAdd $HOME/.node_modules/bin
 pathAdd $HOME/.rvm/bin
 [ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-# for Rust
-pathAdd $HOME/.cargo/bin
-
 pathAdd $HOME/.local/bin
 
 # for cloud dev desktop
 pathAdd $HOME/.toolbox/bin
 
 pathAdd $HOME/local-bin/apache-maven-3.6.3/bin
-. "$HOME/.cargo/env"

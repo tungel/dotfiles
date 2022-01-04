@@ -25,4 +25,4 @@ else
 fi
 unset __conda_setup
 # <<< conda init <<<
-. "$HOME/.cargo/env"
+[ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
