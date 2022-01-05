@@ -174,8 +174,8 @@ format = <label-toggle> <menu>
 ;format-underline = ${colors.white}
 format-padding = 1
 
-menu-0-0 = urxvt
-menu-0-0-exec = urxvt &
+menu-0-0 = alacritty
+menu-0-0-exec = alacritty &
 menu-0-1 = Firefox
 menu-0-1-exec = firefox-developer-edition &
 menu-0-2 = dmenu
@@ -227,7 +227,7 @@ date = %e %b
 time = %H:%M
 
 ; A3: action on right click. Ref: https://github.com/polybar/polybar/wiki/Formatting#action-a
-label = %{A3:urxvt &:}%date%, %time%%{A}
+label = %{A3:alacritty &:}%date%, %time%%{A}
 
 
 [module/battery]

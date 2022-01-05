@@ -37,5 +37,5 @@ gnome-encfs-manager
 # yet. Run it in the bspwmrc, once all the monitor configurations are done.
 
 # launch this last, after merging ~/.Xresources using xrdb
-urxvt &
+alacritty &
 
