@@ -120,7 +120,8 @@ super + {_,shift + }{Left,Right}
 super + Return
 # alt + Return
 # terminology
-    urxvt
+# urxvt
+    alacritty
 
 super + space
 #dmenu_run
