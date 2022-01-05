@@ -237,6 +237,10 @@ lvim.keys.normal_mode["<C-l>"] = ":nohl<CR>"
 
 lvim.keys.normal_mode["<leader>r"] = ":RustRunnables<CR>"
 
+-- Resume previous search result
+-- https://www.reddit.com/r/neovim/comments/phndpv/can_telescope_remember_my_last_search_result/
+lvim.keys.normal_mode[",r"] = ":Telescope resume<CR>"
+
 -- LunarVim find buffers: <leader>bf
 lvim.keys.normal_mode[",b"] = ":Telescope buffers<CR>"
 
