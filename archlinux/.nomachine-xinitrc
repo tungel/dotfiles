@@ -54,7 +54,10 @@ fi
 # locks in 10 minutes of inactivity, or whenever you place the mouse cursor in
 # the bottom right corner for 3 seconds.
 killall xautolock
-xautolock -time 10 -locker slock -nowlocker slock -detectsleep -corners 000+ -cornerdelay 3 &
+# xautolock -time 10 -locker slock -nowlocker slock -detectsleep -corners 000+ -cornerdelay 3 &
+
+# suspend after 10 mins of inactivity
+xautolock -time 10 -locker ~/bin/xautolock-suspend &
 
 
 # http://linuxmafia.com/faq/Admin/release-files.html
