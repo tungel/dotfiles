@@ -331,10 +331,11 @@ lvim.plugins = {
   { "kristijanhusak/vim-dadbod-ui" }, -- UI for tpope/vim-dadbod
   { "kristijanhusak/vim-dadbod-completion" }, -- Database autocompletion for vim-dadbod
   { "mechatroner/rainbow_csv" },
+  { "lukas-reineke/indent-blankline.nvim" }, -- for vertical indentation guide
 }
 
 
-vim.list_extend(lvim.lsp.override, { "java", "jdtls" })
+-- vim.list_extend(lvim.lsp.override, { "java", "jdtls" })
 
 -- disable auto_resize to prevent the file tree window size reset after
 -- a new file is opened. Ref: https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/core/nvimtree.lua
