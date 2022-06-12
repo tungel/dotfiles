@@ -250,7 +250,7 @@ lvim.keys.normal_mode[",m"] = ":Telescope oldfiles<CR>"
 -- LunarVim search text in current project: <leader>st
 lvim.keys.normal_mode[",s"] = ":Telescope live_grep<CR>"
 
-lvim.keys.normal_mode[",c"] = ":BufferClose<CR>"
+lvim.keys.normal_mode[",c"] = ":BufferKill<CR>"
 
 -- LunarVim switch to previous buffer: <leader>bb
 lvim.keys.normal_mode[",<TAB>"] = ":b#<CR>"
