@@ -65,6 +65,10 @@
     },
     // show full path of the current editing file
     "window.title": "${activeEditorLong}",
+    "rust-client.autoStartRls": true,
+    "rust-client.engine": "rls",
+    "rust-client.rustupPath": "rustup",
+    "rust-client.rlsPath": "/Users/ttl/.cargo/bin/rls",
     // "rust.rustup": {
     //     "toolchain": "nightly-x86_64-apple-darwin",
     //     "nightlyToolchain": "nightly-x86_64-apple-darwin"
@@ -148,7 +152,6 @@
     "r.lintr.enabled": false,
     "editor.fontSize": 14,
     "terminal.integrated.fontSize": 14,
-    "window.zoomLevel": 0,
     "cSpell.enabledLanguageIds": [
         "asciidoc",
         "c",
@@ -284,5 +287,9 @@
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
-    }
+    },
+    // "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "JetBrainsMono Nerd Font Mono, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "plantuml.exportOutDir": "plantuml-out"
 }
