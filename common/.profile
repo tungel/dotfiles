@@ -359,6 +359,7 @@ export DMENUFONT="Consolas-11"
 
 # macOS?
 # export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 # IntelliJ IDEA, link `current` directory to latest stable release dir
 alias idea="~/dev/tools/idea/current/bin/idea.sh"
