@@ -11,12 +11,14 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+-- lvim.colorscheme = "onedarker"
+lvim.colorscheme = "lunar"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.insert_mode["jk"] = "<ESC>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -50,7 +52,8 @@ lvim.builtin.which_key.mappings["t"] = {
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
+-- lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 -- lvim.builtin.nvimtree.show_icons.git = 0 -- comment out since it's now an invalid config
@@ -264,13 +267,13 @@ Log:debug("----------------- Hello world -------------")
 
 -- copy from `lvim.builtin.which_key.opts` https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/core/which-key.lua
 local which_key_opts = {
-      mode = "n", -- NORMAL mode
-      prefix = ",",
-      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true, -- use `silent` when creating keymaps
-      noremap = true, -- use `noremap` when creating keymaps
-      nowait = true, -- use `nowait` when creating keymaps
-    }
+  mode = "n", -- NORMAL mode
+  prefix = ",",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
 local which_key_mappings = {
   g = {
     name = "fugitive",
@@ -320,7 +323,7 @@ lvim.plugins = {
           on_attach = require("lvim.lsp").common_on_attach,
           on_init = require("lvim.lsp").common_on_init,
         },
-        })
+      })
     end,
     ft = { "rust", "rs" },
   },
@@ -350,7 +353,7 @@ local components = require("lvim.core.lualine.components")
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
 lvim.builtin.lualine.sections.lualine_a = { "mode" }
-lvim.builtin.lualine.sections.lualine_c = { {"filename", path = 2} } -- show full path to current file
+lvim.builtin.lualine.sections.lualine_c = { { "filename", path = 2 } } -- show full path to current file
 lvim.builtin.lualine.sections.lualine_y = {
   components.spaces,
   components.location
@@ -358,4 +361,3 @@ lvim.builtin.lualine.sections.lualine_y = {
 
 -- disable default auto spell on markdown files. Ref: https://github.com/LunarVim/LunarVim/blob/5663c925ebef0d48732e8794c2335c118ee61e55/lua/lvim/core/autocmds.lua#L49-L52
 lvim.autocommands._markdown = { { "FileType", "markdown", "setlocal wrap" } }
-
