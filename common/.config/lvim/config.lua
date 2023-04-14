@@ -361,3 +361,33 @@ lvim.builtin.lualine.sections.lualine_y = {
 
 -- disable default auto spell on markdown files. Ref: https://github.com/LunarVim/LunarVim/blob/5663c925ebef0d48732e8794c2335c118ee61e55/lua/lvim/core/autocmds.lua#L49-L52
 lvim.autocommands._markdown = { { "FileType", "markdown", "setlocal wrap" } }
+
+-- make the telescope dialog size bigger
+lvim.builtin.telescope.pickers = {
+  find_files = {
+    layout_config = {
+      width = 0.95,
+    },
+  },
+  live_grep = {
+    layout_config = {
+      width = 0.95,
+    },
+  },
+}
+
+-- below settings seem to cause missing items in live_grep
+-- lvim.builtin.telescope = {
+--   active = true,
+--   defaults = {
+--     layout_strategy = "horizontal",
+--   },
+--   pickers = {
+--     git_files = {
+--       hidden = true,
+--     },
+--     live_grep = {
+--       hidden = false,
+--     },
+--   },
+-- }
