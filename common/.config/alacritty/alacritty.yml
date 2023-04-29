@@ -49,8 +49,6 @@ font:
   # size: 13 # on macOS
   size: 11 # on Arch Linux
 
-  use_thin_strokes: true
-
 window:
   # Window dimensions (changes require restart)
   #
@@ -70,7 +68,8 @@ window:
     y: 0
 
 # Send ESC (\x1b) before characters when alt is pressed.
-alt_send_esc: true
+# Update 2023-04-29 comment out as it's always set to true by alacritty
+# alt_send_esc: true
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
