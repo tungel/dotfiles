@@ -73,8 +73,8 @@ alias phoneip='sudo dhcpcd enp0s29f7u2'
 alias jurong='echo "nameserver 165.21.100.88" | sudo tee /etc/resolv.conf'
 
 
-# adjust keyboard speed and reload keyboard mapping
-alias mykb='xset r rate 200 30; xmodmap ~/.Xmodmap'
+# adjust keyboard speed and configure mouse natural scrolling
+alias mykb='configure-keyboard-and-mouse.sh'
 
 # disable synaptics mouse/touch pad mouse
 alias paddis='synclient TouchpadOff=1'

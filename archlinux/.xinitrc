@@ -51,12 +51,16 @@ if [ $(lspci | grep -i VirtualBox | wc -l) -gt 0 ]; then
   /usr/bin/VBoxClient-all
 fi
 
+killall xautolock
+
 # locks in 10 minutes of inactivity, or whenever you place the mouse cursor in
 # the bottom right corner for 3 seconds.
 # xautolock -time 10 -locker slock -nowlocker slock -detectsleep -corners 000+ -cornerdelay 3 &
 # the -corners option seems to cause random lock which is annoying
-killall xautolock
-xautolock -time 10 -locker slock -nowlocker slock -detectsleep &
+# xautolock -time 10 -locker slock -nowlocker slock -detectsleep &
+
+# suspend after 10 mins of inactivity
+xautolock -time 10 -locker ~/bin/xautolock-suspend &
 
 
 # http://linuxmafia.com/faq/Admin/release-files.html
