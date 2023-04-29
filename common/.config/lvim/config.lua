@@ -230,7 +230,7 @@ vim.cmd([[
   "===============================================================================
 ]])
 
-lvim.keys.term_mode["<C-h>"] = false -- disable C-h mapping so that it erases left char instead of hiding the term
+lvim.keys.term_mode["<C-h>"] = false              -- disable C-h mapping so that it erases left char instead of hiding the term
 lvim.keys.term_mode["<C-[><C-[>"] = "<C-\\><C-N>" -- press C-[ two times to switch to move mod in terminal
 
 lvim.keys.normal_mode["<C-]>"] = ":Telescope lsp_definitions<CR>"
@@ -267,12 +267,12 @@ Log:debug("----------------- Hello world -------------")
 
 -- copy from `lvim.builtin.which_key.opts` https://github.com/LunarVim/LunarVim/blob/rolling/lua/lvim/core/which-key.lua
 local which_key_opts = {
-  mode = "n", -- NORMAL mode
+  mode = "n",     -- NORMAL mode
   prefix = ",",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
+  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,  -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
+  nowait = true,  -- use `nowait` when creating keymaps
 }
 local which_key_mappings = {
   g = {
@@ -329,12 +329,12 @@ lvim.plugins = {
   },
   { "mfussenegger/nvim-jdtls" },
   { "tpope/vim-fugitive" },
-  { "tpope/vim-rhubarb" }, -- GitHub extension for fugitive.vim
-  { "tpope/vim-dadbod" }, -- interacting with databases
-  { "kristijanhusak/vim-dadbod-ui" }, -- UI for tpope/vim-dadbod
+  { "tpope/vim-rhubarb" },                    -- GitHub extension for fugitive.vim
+  { "tpope/vim-dadbod" },                     -- interacting with databases
+  { "kristijanhusak/vim-dadbod-ui" },         -- UI for tpope/vim-dadbod
   { "kristijanhusak/vim-dadbod-completion" }, -- Database autocompletion for vim-dadbod
   { "mechatroner/rainbow_csv" },
-  { "lukas-reineke/indent-blankline.nvim" }, -- for vertical indentation guide
+  { "lukas-reineke/indent-blankline.nvim" },  -- for vertical indentation guide
 }
 
 
@@ -363,16 +363,20 @@ lvim.builtin.lualine.sections.lualine_y = {
 lvim.autocommands._markdown = { { "FileType", "markdown", "setlocal wrap" } }
 
 -- make the telescope dialog size bigger
-lvim.builtin.telescope.pickers = {
-  find_files = {
-    layout_config = {
-      width = 0.95,
-    },
+-- ref: https://github.com/LunarVim/LunarVim/issues/3406
+lvim.builtin.telescope.defaults.layout_strategy = "flex"
+lvim.builtin.telescope.defaults.layout_config = {
+  height = 0.8,
+  width = 0.8,
+  horizontal = {
+    preview_cutoff = 120,
+    preview_width = 0.6,
   },
-  live_grep = {
-    layout_config = {
-      width = 0.95,
-    },
+  vertical = {
+    preview_cutoff = 40,
+  },
+  flex = {
+    flip_columns = 150,
   },
 }
 
