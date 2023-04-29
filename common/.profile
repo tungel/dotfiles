@@ -3,9 +3,8 @@
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 export TLPC=~/.tlpc
-NOGIT=~/dev/mylinux/nogit
 
-MOREALIASES=~/dev/mylinux/dotfiles-private/morealiases.sh
+MOREALIASES=~/dev/dotfiles-private/morealiases.sh
 # some more aliases for personal usage
 if [ -e $MOREALIASES ]; then
     source $MOREALIASES
@@ -165,11 +164,6 @@ alias myaudio-internal="pulseaudio -k; pulseaudio --start; pacmd set-card-profil
 # project to external VGA monitor
 alias vga="xrandr --output VGA1 --mode 1920x1080"
 alias vga2="xrandr --output VGA2 --mode 1920x1080"
-
-# delete lock vim's session
-alias rmvim="rm $NOGIT/vimdata/sessions/default.vim.lock ; \
-             rm $NOGIT/vimdata/sessions/default.vim ; \
-             rm $NOGIT/vimdata/sessions/last-session.txt"
 
 # To enable various useful stuff for Arch Linux guest in VirtualBox machine
 alias myvirtualbox="sudo modprobe -a vboxguest vboxsf vboxvideo ; \
