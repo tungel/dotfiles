@@ -228,6 +228,11 @@ vim.cmd([[
 
   "--- end vim-dadbod }}}
   "===============================================================================
+
+  " https://github.com/dhruvasagar/vim-table-mode
+  " To enable table mode for live editing, run: `:TableModeEnable`
+  " for Markdown-compatible tables
+  let g:table_mode_corner='|'
 ]])
 
 lvim.keys.term_mode["<C-h>"] = false              -- disable C-h mapping so that it erases left char instead of hiding the term
@@ -338,6 +343,7 @@ lvim.plugins = {
   { "kristijanhusak/vim-dadbod-completion" }, -- Database autocompletion for vim-dadbod
   { "mechatroner/rainbow_csv" },
   { "lukas-reineke/indent-blankline.nvim" },  -- for vertical indentation guide
+  { "dhruvasagar/vim-table-mode" },           -- VIM Table Mode for instant table creation.
 }
 
 
