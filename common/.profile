@@ -39,9 +39,17 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alht'
+# -A: show all, including dotfiles, except . and ..
+# -v: natural sort of number
+# -1 (one): list (use -l for long version)
+# -h: human-readable sizes
+alias ll='ls -lAv1h --color=always --time-style=long-iso --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
+
+# -I: prompt once before removing more than three files or recursively
+# -v: verbose
+alias rm='command rm -Iv'
 
 # List files only
 # alias lsf="ls -lp | ag -v /" # (or grep -v '^d')
