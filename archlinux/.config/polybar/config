@@ -239,7 +239,7 @@ format-full-background = ${settings.format-background}
 format-full-padding = ${settings.format-padding}
 
 type = internal/battery
-battery = BAT0
+battery = BAT1
 adapter = AC
 
 format-charging = <label-charging>
