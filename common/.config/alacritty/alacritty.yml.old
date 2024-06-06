@@ -49,6 +49,8 @@ font:
   # size: 13 # on macOS
   size: 11 # on Arch Linux
 
+  # use_thin_strokes: true
+
 window:
   # Window dimensions (changes require restart)
   #
