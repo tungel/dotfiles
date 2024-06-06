@@ -40,3 +40,6 @@ force-window=yes
 # this works for both playlist and a single file
 loop-playlist=inf
 
+# Enable Hardware video acceleration https://wiki.archlinux.org/title/mpv
+hwdec=auto
+

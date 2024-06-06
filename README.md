@@ -31,3 +31,13 @@ By default, `.gitignore` file doesn't get symlinked because it is on the default
 ignore list. To workaround, we need to add a `.stow-local-ignore` file to the
 directory that contains the `.gitignore` file.
 
+# Additional tools
+
+[atuin - Magical shell history](https://github.com/ellie/atuin)
+
+```
+bash <(curl https://raw.githubusercontent.com/ellie/atuin/main/install.sh)
+```
+
+Note: history db is stored at `~/.local/share/atuin/history.db`
+

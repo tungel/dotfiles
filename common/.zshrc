@@ -283,3 +283,4 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 eval "$(starship init zsh)"
 
+eval "$(atuin init zsh)"
