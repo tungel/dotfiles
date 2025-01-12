@@ -43,3 +43,5 @@ loop-playlist=inf
 # Enable Hardware video acceleration https://wiki.archlinux.org/title/mpv
 hwdec=auto
 
+screenshot-directory=~/Documents/Pictures/
+
