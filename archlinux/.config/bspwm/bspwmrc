@@ -16,7 +16,15 @@ fi
 #   xrandr --output HDMI1 --mode 1920x1080
 # then run:
 #   ~/.config/bspwm/bspwmrc
-num_mon=$(bspc query -M | wc -l)
+
+INTERNAL_MONITOR=$(xrandr --listmonitors | awk '/eDP/ {print $NF}')
+xrandr --auto
+# num_mon=$(bspc query -M | wc -l)
+
+# use xrandr to determine number of monitors because `bspc query -M` still shows
+# 2 monitors even when the external monitor was disconnected
+num_mon=$(xrandr | awk '/ connected / { print $1 }' | wc -l)
+
 if [ $num_mon -gt 1 ] ; then
     if [[ -e $TLPC ]]; then
         # xrandr --output HDMI-0 --primary
@@ -59,10 +67,21 @@ if [ $num_mon -gt 1 ] ; then
         # bspc monitor HDMI-0 -d 10
         # bspc config -m ^2 top_padding 10
 
-        xrandr --output DP1 --auto --primary
-        xrandr --output LVDS1 --off
-        bspc monitor DP1 --reset-desktops 1 2 3 4 5 6 7 8 9
-        # bspc config -m ^2 top_padding 10
+        # xrandr --output DP1 --auto --primary
+        # xrandr --output LVDS1 --off
+        # bspc monitor DP1 --reset-desktops 1 2 3 4 5 6 7 8 9
+        ## bspc config -m ^2 top_padding 10
+
+        # Find connected monitors, excluding the built-in display (eDP-*), and return the first match
+        EXTERNAL_MONITOR=$(xrandr | awk '/ connected / && $1 !~ /^eDP/ { print $1; exit }')
+        
+        # xrandr --output DP-4.1
+        xrandr --output $EXTERNAL_MONITOR
+        xrandr --output $INTERNAL_MONITOR --right-of $EXTERNAL_MONITOR --primary
+
+        bspc monitor ^1 --reset-desktops 1 2 3 4 5 6 7
+        bspc monitor ^2 --reset-desktops 8 9 10
+        bspc config -m ^2 top_padding 20
     else
         # for VirtualBox at work
         xrandr --output VGA-1 --primary
@@ -77,9 +96,9 @@ if [ $num_mon -gt 1 ] ; then
         bspc config -m ^2 top_padding 10
     fi
 else
-    xrandr --output HDMI-0 --primary
+    xrandr --output $INTERNAL_MONITOR --primary
     bspc monitor ^1 --reset-desktops 1 2 3 4 5 6 7 8 9 10
-    bspc config -m ^1 top_padding 10
+    bspc config -m ^1 top_padding 20
 fi
 
 

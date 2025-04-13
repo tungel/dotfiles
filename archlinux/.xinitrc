@@ -62,6 +62,8 @@ killall xautolock
 # suspend after 10 mins of inactivity
 xautolock -time 10 -locker ~/bin/xautolock-suspend &
 
+~/.config/bspwm/monitor_changes.sh &
+~/bin/configure-keyboard-and-mouse.sh
 
 # http://linuxmafia.com/faq/Admin/release-files.html
 # we can also use file /etc/os-release
