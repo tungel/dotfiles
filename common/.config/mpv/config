@@ -41,7 +41,15 @@ force-window=yes
 loop-playlist=inf
 
 # Enable Hardware video acceleration https://wiki.archlinux.org/title/mpv
-hwdec=auto
+# this seems to use nvidia GPU if available
+# hwdec=auto
+
+# use intel GPU instead of nvidia
+# Note: gpu-api=d3d11 and hwdec=d3d11va-copy are Direct3D 11 options, which are
+# not valid on native Linux builds of mpv. Those configs are for Windows
+hwdec=vaapi
+vo=gpu
+gpu-api=opengl
 
 screenshot-directory=~/Documents/Pictures/
 
