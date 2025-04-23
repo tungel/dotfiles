@@ -109,7 +109,7 @@ alias rg="rg -i --hidden"
 # and preserving the original file extension (%e). Note the extra '%' necessary
 # to escape the filename codes (%c and %e) in the date format string.
 alias exif-rename-by-createdate-jpg="exiftool '-FileName<CreateDate' -d %Y%m%d_%H%M%S-%%f%%-c.%%e -ext jpg ."
-alias exif-rename-by-createdate-mp4="exiftool '-FileName<LastUpdate' -d %Y%m%d_%H%M%S-%%f%%-c.%%e -ext mp4 ."
+# alias exif-rename-by-createdate-mp4="exiftool '-FileName<LastUpdate' -d %Y%m%d_%H%M%S-%%f%%-c.%%e -ext mp4 ."
 
 #for matlab
 # export MATLAB_JAVA=/usr/local/MATLAB/R2014a/sys/java/jre/glnxa64/jre

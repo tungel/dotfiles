@@ -1,0 +1,26 @@
+#!/bin/bash
+
+find . -maxdepth 1 -type f -iname "*.mp4" | while IFS= read -r file; do
+  base="${file##*/}"
+  base_no_ext="${base%.*}"
+
+  # Extract date/time from LastUpdate
+  timestamp=$(exiftool -s -s -s -d "%Y%m%d_%H%M%S" -LastUpdate "$file")
+  if [ -z "$timestamp" ]; then
+    echo "Skipping $file: no LastUpdate timestamp found"
+    continue
+  fi
+
+  newname="${timestamp}-${base_no_ext}.MP4"
+  echo "Renaming: $file → $newname"
+  mv -v -- "$file" "$newname"
+
+  # Check for and rename the associated M01.XML sidecar
+  sidecar="${base_no_ext}M01.XML"
+  if [ -f "$sidecar" ]; then
+    sidecar_new="${newname}.XML"
+    echo "Renaming sidecar: $sidecar → $sidecar_new"
+    mv -v -- "$sidecar" "$sidecar_new"
+  fi
+done
+
