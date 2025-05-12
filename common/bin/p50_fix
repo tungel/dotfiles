@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# fix bspwm issue where windows don't use full screen estate and leave empty
+# blank space on the bottom and right side. This happens when external monitor
+# is plugged in to the laptop
+bspc config right_padding 0
+bspc config bottom_padding 0
+bspc wm -r
+
+# fix touchpad not working
+sudo pacman --noconfirm -S libinput
+
+configure-keyboard-and-mouse.sh
+
