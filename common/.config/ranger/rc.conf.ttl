@@ -18,7 +18,7 @@ set show_cursor true
 # More info: `man ranger` then search for `fm`
 
 # This method works best: Using tmux sendkey
-map ef eval fm.execute_console("shell tmux splitw -h 'lvim \"" + str(fm.thisfile) + "\"'")
+map ef eval fm.execute_console("shell tmux splitw -h 'nvim \"" + str(fm.thisfile) + "\"'")
 map ee eval fm.execute_console("shell tmux selectp -t 2; tmux send-keys -t 2 '" + ":tabe {0}".format(str(fm.thisfile).replace(" ", "\ ")) + "' C-m")
 
 # press `ed` to open a new terminal on the right
