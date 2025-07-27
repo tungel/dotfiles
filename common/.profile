@@ -4,6 +4,9 @@
 
 export TLPC=~/.tlpc
 
+# update DISPLAY var for tmux
+tmux setenv DISPLAY "$DISPLAY" && tmux setenv XAUTHORITY "$XAUTHORITY"
+
 MOREALIASES=~/dev/dotfiles-private/morealiases.sh
 # some more aliases for personal usage
 if [ -e $MOREALIASES ]; then

@@ -262,6 +262,15 @@ source ~/.zplugins/sudo.plugin.zsh
 source ~/.zplugins/tmux.plugin.zsh
 # ==============================================================================
 
+if [ -n "$TMUX" ]; then
+  # export DISPLAY=$(tmux show-environment -g DISPLAY 2>/dev/null | cut -d= -f2)
+  # export XAUTHORITY=$(tmux show-environment -g XAUTHORITY 2>/dev/null | cut -d= -f2)
+
+  # this seems to work, while the above commands didn't work properly
+  export DISPLAY=$(tmux showenv DISPLAY 2>/dev/null | cut -d= -f2)
+  export XAUTHORITY=$(tmux showenv XAUTHORITY 2>/dev/null | cut -d= -f2)
+fi
+
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
