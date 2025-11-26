@@ -5,9 +5,12 @@ from pathlib import Path
 from lxml import etree
 
 def dms_to_exif_decimal(dms_str, ref):
-    """Convert '50:52:31.181' and 'S' into '50,52.518661S' style"""
+    """Convert '50:52:31.181' or '50;52;31.181' and 'S' into '50,52.518661S' style"""
     try:
-        degrees, minutes, seconds = map(float, dms_str.split(':'))
+        # Normalize separators (replace ; with :)
+        normalized = dms_str.replace(';', ':')
+
+        degrees, minutes, seconds = map(float, normalized.split(':'))
         decimal = degrees + minutes / 60 + seconds / 3600
         return f"{int(degrees)},{minutes + seconds/60:.7f}{ref}"
         # return f"{decimal:.7f}{ref}"
