@@ -111,7 +111,7 @@ alias rg="rg -i --hidden"
 # %%c: adding a copy number with leading '-' if the file already exists (%-c),
 # and preserving the original file extension (%e). Note the extra '%' necessary
 # to escape the filename codes (%c and %e) in the date format string.
-alias exif-rename-by-createdate-jpg="exiftool '-FileName<CreateDate' -d %Y%m%d_%H%M%S-%%f%%-c.%%e -ext jpg ."
+alias exif-rename-by-createdate-jpg="exiftool '-FileName<CreateDate' -d %Y%m%d_%H%M%S-%%f%%-c.%%e -ext jpg -ext arw ."
 # alias exif-rename-by-createdate-mp4="exiftool '-FileName<LastUpdate' -d %Y%m%d_%H%M%S-%%f%%-c.%%e -ext mp4 ."
 
 #for matlab
