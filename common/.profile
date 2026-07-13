@@ -484,6 +484,9 @@ unset __conda_setup
 
 pathAdd $HOME/.node_modules/bin
 
+# Pi
+export PATH="$HOME/.local/share/pi-node/node-v22.23.1-linux-x64/bin:$PATH"
+
 pathAdd $HOME/.rvm/bin
 [ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 

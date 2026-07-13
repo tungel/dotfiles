@@ -1,3 +1,9 @@
+# Shift + g: increase subtitle font size
+# Shift + f: decrease subtitle font size
+# r: move subtitle up
+# R: move subtitle down
+# v: toggle subtitle hidden/visible
+
 # sub-text-font-size = 50
 sub-scale = 0.4
 
