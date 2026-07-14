@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# runpi.sh — Enter bubblewrap sandbox (isolated by default, internet by flag)
+# Usage:
+#   ./runpi.sh [command args...]       # no internet (default, isolated)
+#   ./runpi.sh --net                   # enable internet access
+
+MODE="isolated"
+ARGS=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --net|-i)
+      MODE="full"
+      shift
+      ;;
+    *)
+      ARGS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+HERE="$(realpath .)"
+echo "Entering $MODE sandbox for $HERE"
+
+BWRAP_ARGS=(
+  --ro-bind / /
+  --bind ~/.pi ~/.pi
+  --dev-bind /dev/null /dev/null
+  --dev-bind /dev/urandom /dev/urandom
+  --tmpfs /tmp
+  --bind "$HERE" "$HERE"
+  --setenv PS1 "sandbox$ "
+)
+
+exec_cmd() {
+  # Execute a command with the same args passed to this script
+  sh -c "cd $HERE && exec $(which pi) ${ARGS[@]+"${ARGS[@]}"}"
+}
+
+if [[ "$MODE" == "isolated" ]]; then
+  echo "(No internet — routed through pi-isolated group nftables rules)"
+  sg pi-isolated -c "$(printf '%q ' bwrap "${BWRAP_ARGS[@]}" sh -c "cd $HERE && exec $(which pi) ${ARGS[@]+"${ARGS[@]}"}")"
+else
+  echo "(Full internet access)"
+  bwrap "${BWRAP_ARGS[@]}" sh -c "cd $HERE && exec $(which pi) ${ARGS[@]+"${ARGS[@]}"}"
+fi
+
