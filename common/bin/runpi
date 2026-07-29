@@ -28,10 +28,12 @@ echo "Entering $MODE sandbox for $HERE"
 BWRAP_ARGS=(
   --ro-bind / /
   --bind ~/.pi ~/.pi
+  --bind ~/dev/agent-config ~/dev/agent-config
   --dev-bind /dev/null /dev/null
   --dev-bind /dev/urandom /dev/urandom
   --tmpfs /tmp
   --bind "$HERE" "$HERE"
+  --die-with-parent
   --setenv PS1 "sandbox$ "
 )
 
