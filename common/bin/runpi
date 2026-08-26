@@ -31,6 +31,7 @@ BWRAP_ARGS=(
   --bind ~/dev/agent-config ~/dev/agent-config
   --dev-bind /dev/null /dev/null
   --dev-bind /dev/urandom /dev/urandom
+  --dev-bind /dev/fuse /dev/fuse
   --tmpfs /tmp
   --bind "$HERE" "$HERE"
   --die-with-parent
@@ -44,7 +45,7 @@ exec_cmd() {
 
 if [[ "$MODE" == "isolated" ]]; then
   echo "(No internet — routed through pi-isolated group nftables rules)"
-  sg pi-isolated -c "$(printf '%q ' bwrap "${BWRAP_ARGS[@]}" sh -c "cd $HERE && exec $(which pi) ${ARGS[@]+"${ARGS[@]}"}")"
+  newgrp pi-isolated -c "$(printf '%q ' bwrap "${BWRAP_ARGS[@]}" sh -c "cd $HERE && exec $(which pi) ${ARGS[@]+"${ARGS[@]}"}")"
 else
   echo "(Full internet access)"
   bwrap "${BWRAP_ARGS[@]}" sh -c "cd $HERE && exec $(which pi) ${ARGS[@]+"${ARGS[@]}"}"

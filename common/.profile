@@ -225,6 +225,8 @@ alias da='docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Name
 alias dr='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
 # list docker images
 alias di='docker images'
+# silence clipboard warning
+alias alacritty="alacritty -q"
 
 # export all changed files to an archive
 # to include newly added files, run `git add *` before running this alias
